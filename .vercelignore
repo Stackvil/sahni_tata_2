@@ -7,6 +7,10 @@ backend/node_modules/
 # Exclude large media files
 public/videos/
 public/images/
+!public/images/GROUP.png
+!public/images/logo.jpg
+!public/images/old-logo.png
+!public/images/awards/
 public/catalouges/
 *.mp4
 *.zip
