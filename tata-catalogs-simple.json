@@ -1,0 +1,166 @@
+[
+  {
+    "vehicle_name": "Ace EV 1000",
+    "category": "ev",
+    "subcategory": "Ace EV 1000",
+    "catalog": "/catalouges/tata_catalouges/Ace EV 1000/Ace EV 1000 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "ACE CNG 2.0 (Bi-Fuel)",
+    "category": "ace",
+    "subcategory": "ACE CNG 2.0(Bi-Fuel)",
+    "catalog": "/catalouges/tata_catalouges/ACE CNG 2.0/ACE CNG 2.0 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Ace Diesel",
+    "category": "ace",
+    "subcategory": "Ace Diesel",
+    "catalog": "/catalouges/tata_catalouges/Ace Diesel/Ace Diesel - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Ace Gold CNG",
+    "category": "ace",
+    "subcategory": "Ace Gold CNG",
+    "catalog": "/catalouges/tata_catalouges/Ace Gold CNG/Ace Gold CNG - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Ace Gold Diesel",
+    "category": "ace",
+    "subcategory": "Ace Gold Diesel",
+    "catalog": "/catalouges/tata_catalouges/Ace Gold Diesel/Ace Gold Diesel - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Ace Gold Petrol",
+    "category": "ace",
+    "subcategory": "Ace Gold Petrol",
+    "catalog": "/catalouges/tata_catalouges/Ace Gold Petrol/Ace Gold Petrol - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Ace Gold Plus",
+    "category": "ace",
+    "subcategory": "Ace Gold Plus",
+    "catalog": "/catalouges/tata_catalouges/Ace Gold Plus/Ace Gold Plus - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Ace HT+",
+    "category": "ace",
+    "subcategory": "Ace HT+",
+    "catalog": "/catalouges/tata_catalouges/Ace HT+/Ace HT+ - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Ace Pro Bi-fuel",
+    "category": "ace",
+    "subcategory": "Ace Pro Bi-fuel",
+    "catalog": "/catalouges/tata_catalouges/Ace Pro Bi-fuel/Ace Pro Bi-fuel - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Ace Pro Petrol",
+    "category": "ace",
+    "subcategory": "ace_pro_petrol",
+    "catalog": "/catalouges/tata_catalouges/Ace Pro Petrol/Ace Pro Petrol - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Intra V10",
+    "category": "intra",
+    "subcategory": "Intra V10",
+    "catalog": "/catalouges/tata_catalouges/Intra V10/Intra V10 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Intra V20",
+    "category": "intra",
+    "subcategory": "Intra V20",
+    "catalog": "/catalouges/tata_catalouges/Intra V20/Intra V20 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Intra V20 Gold",
+    "category": "intra",
+    "subcategory": "Intra V20 Gold",
+    "catalog": "/catalouges/tata_catalouges/Intra V20 Gold/Intra V20 Gold - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Intra V30 Gold",
+    "category": "intra",
+    "subcategory": "Intra V30 Gold",
+    "catalog": "/catalouges/tata_catalouges/Intra V30 Gold/Intra V30 Gold - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Intra V50 Gold",
+    "category": "intra",
+    "subcategory": "Intra V50 Gold",
+    "catalog": "/catalouges/tata_catalouges/Intra V50 Gold/Intra V50 Gold - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Intra V70 Gold",
+    "category": "intra",
+    "subcategory": "Intra V70 Gold",
+    "catalog": "/catalouges/tata_catalouges/Intra V70 Gold/Intra V70 Gold - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Winger Cargo",
+    "category": "yodha",
+    "subcategory": "Winger cargo",
+    "catalog": "/catalouges/tata_catalouges/Winger Cargo/Winger Cargo - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha 1200",
+    "category": "yodha",
+    "subcategory": "Yodha 1200",
+    "catalog": "/catalouges/tata_catalouges/Yodha 1200/Yodha 1200 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha 1700",
+    "category": "yodha",
+    "subcategory": "Yodha 1700",
+    "catalog": "/catalouges/tata_catalouges/Yodha 1700/Yodha 1700 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha 2.0",
+    "category": "yodha",
+    "subcategory": "Yodha 2.0",
+    "catalog": "/catalouges/tata_catalouges/Yodha 2.0/Yodha 2.0 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha CNG",
+    "category": "yodha",
+    "subcategory": "Yodha CNG",
+    "catalog": "/catalouges/tata_catalouges/Yodha CNG/Yodha CNG - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha Crew Cab",
+    "category": "yodha",
+    "subcategory": "Yodha Crew Cab",
+    "catalog": "/catalouges/tata_catalouges/Yodha Crew Cab/Yodha Crew Cab 4x2 & 4x4 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha Crew Cab 4x2",
+    "category": "yodha",
+    "subcategory": "Yodha Crew Cab 4x2",
+    "catalog": "/catalouges/tata_catalouges/Yodha Crew Cab 4x2/Yodha Crew Cab 4x2 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha Crew Cab 4x4",
+    "category": "yodha",
+    "subcategory": "Yodha Crew Cab 4x4",
+    "catalog": "/catalouges/tata_catalouges/Yodha Crew Cab 4x4/Yodha Crew Cab 4x4 - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha Ex Crew Cab",
+    "category": "yodha",
+    "subcategory": "Yodha Ex Crew Cab",
+    "catalog": "/catalouges/tata_catalouges/Yodha Ex Crew Cab/Yodha Ex Crew Cab - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha Ex Single Cab",
+    "category": "yodha",
+    "subcategory": "Yodha Ex Single Cab",
+    "catalog": "/catalouges/tata_catalouges/Yodha Ex Single Cab/Yodha Ex Single Cab - Brochure.pdf"
+  },
+  {
+    "vehicle_name": "Yodha Single Cab",
+    "category": "yodha",
+    "subcategory": "Yodha Single Cab",
+    "catalog": "/catalouges/tata_catalouges/Yodha Single Cab/Yodha Single Cab - Brochure.pdf"
+  }
+]
+
+

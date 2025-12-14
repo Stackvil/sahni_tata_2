@@ -1,0 +1,373 @@
+{
+  "timestamp": "2025-11-09T07:42:33.899Z",
+  "vehicles": {
+    "successful": [],
+    "failed": [],
+    "skipped": [
+      {
+        "id": 1,
+        "name": "Ace EV 1000"
+      },
+      {
+        "id": 2,
+        "name": "Ace Pro EV"
+      },
+      {
+        "id": 3,
+        "name": "ACE CNG 2.0 (Bi-Fuel)"
+      },
+      {
+        "id": 4,
+        "name": "Ace Diesel"
+      },
+      {
+        "id": 5,
+        "name": "Ace Flex Fuel"
+      },
+      {
+        "id": 6,
+        "name": "Ace Gold CNG"
+      },
+      {
+        "id": 7,
+        "name": "Ace Gold CNG Plus"
+      },
+      {
+        "id": 8,
+        "name": "Ace Gold Diesel"
+      },
+      {
+        "id": 9,
+        "name": "Ace Gold Petrol"
+      },
+      {
+        "id": 10,
+        "name": "Ace Gold Plus"
+      },
+      {
+        "id": 11,
+        "name": "Ace HT+"
+      },
+      {
+        "id": 12,
+        "name": "Ace Pro Bi-fuel"
+      },
+      {
+        "id": 13,
+        "name": "Ace Pro Petrol"
+      },
+      {
+        "id": 14,
+        "name": "Intra V10"
+      },
+      {
+        "id": 15,
+        "name": "Intra V20"
+      },
+      {
+        "id": 16,
+        "name": "Intra V20 Gold"
+      },
+      {
+        "id": 17,
+        "name": "Intra V30 Gold"
+      },
+      {
+        "id": 18,
+        "name": "Intra V50 Gold"
+      },
+      {
+        "id": 19,
+        "name": "Intra V70 Gold"
+      },
+      {
+        "id": 20,
+        "name": "Winger Cargo"
+      },
+      {
+        "id": 21,
+        "name": "Yodha 1200"
+      },
+      {
+        "id": 22,
+        "name": "Yodha 1700"
+      },
+      {
+        "id": 23,
+        "name": "Yodha 2.0"
+      },
+      {
+        "id": 24,
+        "name": "Yodha CNG"
+      },
+      {
+        "id": 25,
+        "name": "Yodha Crew Cab"
+      },
+      {
+        "id": 26,
+        "name": "Yodha Crew Cab 4x2"
+      },
+      {
+        "id": 27,
+        "name": "Yodha Crew Cab 4x4"
+      },
+      {
+        "id": 28,
+        "name": "Yodha Ex Crew Cab"
+      },
+      {
+        "id": 29,
+        "name": "Yodha Ex Single Cab"
+      },
+      {
+        "id": 30,
+        "name": "Yodha Single Cab"
+      },
+      {
+        "id": 100,
+        "name": "Massey Ferguson 241 DI"
+      },
+      {
+        "id": 101,
+        "name": "Massey Ferguson MF 1035 Dost"
+      },
+      {
+        "id": 102,
+        "name": "Massey Ferguson MF 1035 R"
+      },
+      {
+        "id": 103,
+        "name": "Massey Ferguson MF 241 PD PD"
+      },
+      {
+        "id": 104,
+        "name": "Massey Ferguson MF 245"
+      },
+      {
+        "id": 105,
+        "name": "Massey Ferguson MF 30"
+      },
+      {
+        "id": 106,
+        "name": "Massey Ferguson MF 5245"
+      },
+      {
+        "id": 107,
+        "name": "Massey Ferguson MF 6026"
+      },
+      {
+        "id": 108,
+        "name": "Massey Ferguson MF 6036"
+      },
+      {
+        "id": 109,
+        "name": "Massey Ferguson MF 7250"
+      },
+      {
+        "id": 110,
+        "name": "Massey Ferguson Mf1035 Super Plus"
+      },
+      {
+        "id": 111,
+        "name": "Massey Ferguson Mf244"
+      }
+    ]
+  },
+  "products": {
+    "successful": [],
+    "failed": [
+      {
+        "id": 1,
+        "name": "HP Racer 4",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 2,
+        "name": "HP Neosynth Plus",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 3,
+        "name": "HP Milcy Super",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 4,
+        "name": "HP Milcy Turbo Tech",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 5,
+        "name": "HP Powerkool RR",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 6,
+        "name": "HP Gasenol",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 7,
+        "name": "HP Turbinol",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 8,
+        "name": "HP Hytherm",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 9,
+        "name": "HP Metaquench 42",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 10,
+        "name": "HP Metaquench 43",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 11,
+        "name": "HP Rolmet 40",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 12,
+        "name": "HP Rolmet 7",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 13,
+        "name": "HP Hydraulic Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 14,
+        "name": "HP Cutting Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 15,
+        "name": "HP Multi-Purpose Grease",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 16,
+        "name": "HP Wheel Bearing Grease",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 17,
+        "name": "HP Marine Engine Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 18,
+        "name": "HP Marine Gear Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 101,
+        "name": "Mahindra Premium Engine Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 102,
+        "name": "Mahindra Gear Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 103,
+        "name": "Mahindra Hydraulic Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 104,
+        "name": "Mahindra Grease",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 201,
+        "name": "Jio-bp Engine Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 202,
+        "name": "Jio-bp Diesel Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 203,
+        "name": "Jio-bp Synthetic Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 204,
+        "name": "Jio-bp Transmission Fluid",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 301,
+        "name": "SUPERLINE Engine Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 302,
+        "name": "SUPERLINE Gear Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 303,
+        "name": "SUPERLINE Brake Fluid",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 304,
+        "name": "SUPERLINE Coolant",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 401,
+        "name": "Reliance Engine Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 402,
+        "name": "Reliance Industrial Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 403,
+        "name": "Reliance Hydraulic Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 404,
+        "name": "Reliance Compressor Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 501,
+        "name": "Balmerol Industrial Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 502,
+        "name": "Balmerol Turbine Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 503,
+        "name": "Balmerol Gear Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      },
+      {
+        "id": 504,
+        "name": "Balmerol Bearing Oil",
+        "error": "HTTP 403: {\"detail\":\"Not authenticated\"}"
+      }
+    ],
+    "skipped": []
+  }
+}

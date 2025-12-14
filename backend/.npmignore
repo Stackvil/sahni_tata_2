@@ -1,0 +1,21 @@
+# Ignore files that shouldn't be in deployment package
+*.md
+*.log
+*.zip
+.env
+.env.local
+node_modules/.cache
+.DS_Store
+*.test.js
+*.spec.js
+scripts/
+test/
+tests/
+__tests__/
+coverage/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+

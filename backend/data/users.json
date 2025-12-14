@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@sahni.com",
+      "password": "$2a$10$0qPuEkbtyS8qzEwDwou/9OaijFdEmb5UdfHS0U190hYl9iVf64Qxe",
+      "role": "admin",
+      "createdAt": "2025-11-22T03:40:09.685Z"
+    },
+    {
+      "id": 2,
+      "username": "sai",
+      "email": "stackvil@gmail.com",
+      "password": "$2a$10$GPXLhz9.eYk09UgK9owQqOLst38nmgmB69r5BsnytS6u3yrfY9Ugi",
+      "createdAt": "2025-11-22T03:42:20.229Z"
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "companies": {
+    "hp": {
+      "name": "HP Lubricants",
+      "products": [
+        {
+          "id": 1,
+          "name": "HP Racer 4",
+          "image": "/images/sahni_products/hp racer-4.jpeg",
+          "description": "Premium 4-stroke engine oil for motorcycles",
+          "specs": "API SN, JASO MA2",
+          "category": "automotive"
+        },
+        {
+          "id": 2,
+          "name": "HP Neosynth Plus",
+          "image": "/images/sahni_products/HP Neosynth plus.jpeg",
+          "description": "Full synthetic engine oil with fuel efficiency formula",
+          "specs": "API SP, 0W-20",
+          "category": "automotive"
+        },
+        {
+          "id": 3,
+          "name": "HP Milcy Super",
+          "image": "/images/sahni_products/milcy super.jpeg",
+          "description": "Multi-grade diesel engine oil",
+          "specs": "API CF-4, 20W-40",
+          "category": "automotive"
+        },
+        {
+          "id": 4,
+          "name": "HP Milcy Turbo Tech",
+          "image": "/images/sahni_products/milky turbo tech.jpeg",
+          "description": "Advanced turbo diesel engine oil",
+          "specs": "API CH-4, 15W-40",
+          "category": "automotive"
+        },
+        {
+          "id": 5,
+          "name": "HP Powerkool RR",
+          "image": "/images/sahni_products/powerkool rr.jpeg",
+          "description": "Railway diesel locomotive oil",
+          "specs": "Railway Grade",
+          "category": "automotive"
+        },
+        {
+          "id": 6,
+          "name": "HP Gasenol",
+          "image": "/images/sahni_products/gasenol.jpeg",
+          "description": "Petrol engine oil for passenger cars",
+          "specs": "API SG/CD",
+          "category": "automotive"
+        },
+        {
+          "id": 7,
+          "name": "HP Turbinol",
+          "image": "/images/sahni_products/turbinol.jpeg",
+          "description": "Turbine oil for power generation",
+          "specs": "ISO VG 32, 46, 68",
+          "category": "industrial"
+        },
+        {
+          "id": 8,
+          "name": "HP Hytherm",
+          "image": "/images/sahni_products/hytherm.jpeg",
+          "description": "Heat transfer fluid for industrial applications",
+          "specs": "High thermal stability",
+          "category": "industrial"
+        },
+        {
+          "id": 9,
+          "name": "HP Metaquench 42",
+          "image": "/images/sahni_products/mataquench42.jpeg",
+          "description": "Quenching oil for heat treatment",
+          "specs": "Grade 42",
+          "category": "industrial"
+        },
+        {
+          "id": 10,
+          "name": "HP Metaquench 43",
+          "image": "/images/sahni_products/mataquench43.jpeg",
+          "description": "Advanced quenching oil",
+          "specs": "Grade 43",
+          "category": "industrial"
+        }
+      ]
+    },
+    "mahindra": {
+      "name": "Mahindra",
+      "products": [
+        {
+          "id": 101,
+          "name": "Mahindra Premium Engine Oil",
+          "image": "/images/sahni_products/mahindra/Mahindra Premium Engine Oil.jpg",
+          "description": "Premium engine oil for Mahindra vehicles",
+          "specs": "API SP, 5W-30",
+          "category": "automotive"
+        },
+        {
+          "id": 102,
+          "name": "Mahindra Gear Oil",
+          "image": "/images/sahni_products/mahindra/Mahindra Gear Oil.jpg",
+          "description": "High-performance gear oil",
+          "specs": "API GL-4",
+          "category": "automotive"
+        },
+        {
+          "id": 103,
+          "name": "Mahindra Hydraulic Oil",
+          "image": "/images/sahni_products/mahindra/Mahindra Hydraulic Oil.jpeg",
+          "description": "Hydraulic system oil",
+          "specs": "AW Grade",
+          "category": "industrial"
+        },
+        {
+          "id": 104,
+          "name": "Mahindra Grease",
+          "image": "/images/sahni_products/mahindra/Mahindra Grease.jpg",
+          "description": "Multi-purpose grease",
+          "specs": "NLGI 2",
+          "category": "greases"
+        }
+      ]
+    },
+    "jiobp": {
+      "name": "Jio-bp",
+      "products": [
+        {
+          "id": 201,
+          "name": "Jio-bp Engine Oil",
+          "image": "/images/sahni verticals/lubricant_brands/Jio-bp_logo.svg",
+          "description": "Advanced engine oil technology",
+          "specs": "API SP, 5W-30",
+          "category": "automotive"
+        },
+        {
+          "id": 202,
+          "name": "Jio-bp Diesel Oil",
+          "image": "/images/sahni verticals/lubricant_brands/Jio-bp_logo.svg",
+          "description": "Diesel engine oil",
+          "specs": "API CK-4, 15W-40",
+          "category": "automotive"
+        },
+        {
+          "id": 203,
+          "name": "Jio-bp Synthetic Oil",
+          "image": "/images/sahni verticals/lubricant_brands/Jio-bp_logo.svg",
+          "description": "Full synthetic engine oil",
+          "specs": "API SP, 0W-20",
+          "category": "automotive"
+        },
+        {
+          "id": 204,
+          "name": "Jio-bp Transmission Fluid",
+          "image": "/images/sahni verticals/lubricant_brands/Jio-bp_logo.svg",
+          "description": "Automatic transmission fluid",
+          "specs": "ATF Grade",
+          "category": "automotive"
+        }
+      ]
+    },
+    "superline": {
+      "name": "SUPERLINE",
+      "products": [
+        {
+          "id": 301,
+          "name": "SUPERLINE Engine Oil",
+          "image": "/images/sahni verticals/lubricant_brands/superline.png",
+          "description": "Quality engine oil",
+          "specs": "API SN, 10W-40",
+          "category": "automotive"
+        },
+        {
+          "id": 302,
+          "name": "SUPERLINE Gear Oil",
+          "image": "/images/sahni verticals/lubricant_brands/superline.png",
+          "description": "Heavy-duty gear oil",
+          "specs": "API GL-5",
+          "category": "automotive"
+        },
+        {
+          "id": 303,
+          "name": "SUPERLINE Brake Fluid",
+          "image": "/images/sahni verticals/lubricant_brands/superline.png",
+          "description": "DOT 4 brake fluid",
+          "specs": "DOT 4",
+          "category": "automotive"
+        },
+        {
+          "id": 304,
+          "name": "SUPERLINE Coolant",
+          "image": "/images/sahni verticals/lubricant_brands/superline.png",
+          "description": "Engine coolant",
+          "specs": "Long Life",
+          "category": "automotive"
+        }
+      ]
+    },
+    "reliance": {
+      "name": "Reliance Lubricants",
+      "products": [
+        {
+          "id": 401,
+          "name": "20W40 Bike Relstar Alpha 4T Engine Oil",
+          "image": "/images/sahni_products/reliance/20W40 Bike Relstar Alpha 4T Engine Oil.jpg",
+          "description": "Premium 4-stroke engine oil for motorcycles",
+          "specs": "20W-40, API SN",
+          "category": "automotive"
+        },
+        {
+          "id": 402,
+          "name": "Generic Reliance Relstar Engine Oil",
+          "image": "/images/sahni_products/reliance/Generic Reliance relstar Engine Oil.jpg",
+          "description": "Premium Relstar engine oil",
+          "specs": "API SP",
+          "category": "automotive"
+        },
+        {
+          "id": 403,
+          "name": "Reliance 15W40 Relstar Diesel Engine Oil",
+          "image": "/images/sahni_products/reliance/Reliance 15W40 Relstar Diesel Engine Oil.jpg",
+          "description": "Diesel engine oil for commercial vehicles",
+          "specs": "15W-40, API CK-4",
+          "category": "automotive"
+        },
+        {
+          "id": 404,
+          "name": "Reliance 2 Stroke Engine Oil",
+          "image": "/images/sahni_products/reliance/Reliance 2 Stroke Engine Oil.jpeg",
+          "description": "2-stroke engine oil for motorcycles and scooters",
+          "specs": "2-Stroke, JASO FB",
+          "category": "automotive"
+        },
+        {
+          "id": 405,
+          "name": "Reliance Relstar Nova Ultra 15W40 CI-4 Plus Engine Oil",
+          "image": "/images/sahni_products/reliance/reliance-relstar-nova-ultra-15w40-ci-4-plus-engine-oil.jpg",
+          "description": "Advanced CI-4 Plus diesel engine oil",
+          "specs": "15W-40, CI-4 Plus",
+          "category": "automotive"
+        },
+        {
+          "id": 406,
+          "name": "Relstar R001 Synthetic Blend Engine Oil",
+          "image": "/images/sahni_products/reliance/RELSTAR R001 Synthetic Blend Engine.webp",
+          "description": "Synthetic blend engine oil for enhanced performance",
+          "specs": "Synthetic Blend, API SP",
+          "category": "automotive"
+        }
+      ]
+    },
+    "balmerol": {
+      "name": "Balmerol Lubricants",
+      "products": [
+        {
+          "id": 501,
+          "name": "Balmerol Industrial Oil",
+          "image": "/images/sahni verticals/lubricant_brands/balmerol industrial.png",
+          "description": "Industrial grade lubricant",
+          "specs": "ISO VG 32",
+          "category": "industrial"
+        },
+        {
+          "id": 502,
+          "name": "Balmerol Turbine Oil",
+          "image": "/images/sahni verticals/lubricant_brands/balmerol industrial.png",
+          "description": "Turbine oil for power plants",
+          "specs": "ISO VG 46",
+          "category": "industrial"
+        },
+        {
+          "id": 503,
+          "name": "Balmerol Gear Oil",
+          "image": "/images/sahni verticals/lubricant_brands/balmerol industrial.png",
+          "description": "Industrial gear oil",
+          "specs": "ISO VG 68",
+          "category": "industrial"
+        },
+        {
+          "id": 504,
+          "name": "Balmerol Bearing Oil",
+          "image": "/images/sahni verticals/lubricant_brands/balmerol industrial.png",
+          "description": "Bearing lubrication oil",
+          "specs": "ISO VG 100",
+          "category": "industrial"
+        }
+      ]
+    }
+  },
+  "companyNames": {
+    "hp": "HP Lubricants",
+    "mahindra": "Mahindra",
+    "jiobp": "Jio-bp",
+    "superline": "SUPERLINE",
+    "reliance": "Reliance Lubricants",
+    "balmerol": "Balmerol Lubricants"
+  }
+}

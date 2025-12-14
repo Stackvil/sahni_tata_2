@@ -1,0 +1,66 @@
+# ============================================
+# VERCEL ENVIRONMENT VARIABLES
+# ============================================
+# Copy these variables to Vercel Project Settings
+# Go to: Settings → Environment Variables
+# ============================================
+
+# ============================================
+# DATABASE CONFIGURATION (Prisma Postgres)
+# ============================================
+DATABASE_URL=postgres://604d54ca233306cdde0d8b286cfad31bf39b949888948631dd53c2e40971a291:sk_-mZM6KY-ErJx5CRfXxCBn@db.prisma.io:5432/postgres?sslmode=require
+
+POSTGRES_URL=postgres://604d54ca233306cdde0d8b286cfad31bf39b949888948631dd53c2e40971a291:sk_-mZM6KY-ErJx5CRfXxCBn@db.prisma.io:5432/postgres?sslmode=require
+
+PRISMA_DATABASE_URL=prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19QWGoxZGVZck12U253ODFRdGRKNFoiLCJhcGlfa2V5IjoiMDFLQjFOTVQ4UkFTQzA5QVFENzQwSkRGNUMiLCJ0ZW5hbnRfaWQiOiI2MDRkNTRjYTIzMzMwNmNkZGUwZDhiMjg2Y2ZhZDMxYmYzOWI5NDk4ODg5NDg2MzFkZDUzYzJlNDA5NzFhMjkxIiwiaW50ZXJuYWxfc2VjcmV0IjoiM2QzZjcyYjYtZDQ1NC00YTZjLThiNjQtODBlZTA0YTg5MmYzIn0.2z4UcxS0S3SxXcznJE2SaEKf-sGH9V2QaPbkDCD0lCA
+
+# ============================================
+# AWS S3 CONFIGURATION
+# ============================================
+AWS_ACCESS_KEY_ID=your-aws-access-key-id
+AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
+AWS_REGION_NAME=ap-south-1
+AWS_BUCKET_NAME=tata-storagebucket
+AWS_CLOUDFRONT_DOMAIN=https://dh0blbvvlqdiy.cloudfront.net
+
+# ============================================
+# JWT AUTHENTICATION
+# ============================================
+# IMPORTANT: Generate a secure random string for production
+# Run: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+JWT_SECRET=your-secret-key-change-in-production
+
+# ============================================
+# APPLICATION CONFIGURATION
+# ============================================
+NODE_ENV=production
+PORT=3001
+FRONTEND_URL=https://sahni-tata.vercel.app
+
+# ============================================
+# API CONFIGURATION
+# ============================================
+API_STAGE=prod
+
+# ============================================
+# FRONTEND CONFIGURATION (Vite)
+# ============================================
+VITE_API_URL=https://sahni-tata.vercel.app
+VITE_API_PATH=/api
+
+# ============================================
+# DEBUG (Optional - Development only)
+# ============================================
+DEBUG_DB=false
+
+# ============================================
+# NOTES:
+# ============================================
+# 1. Replace "your-aws-access-key-id" and "your-aws-secret-access-key" 
+#    with your actual AWS credentials
+# 2. Replace "your-secret-key-change-in-production" with a secure 
+#    randomly generated string for JWT_SECRET
+# 3. VERCEL and VERCEL_URL are automatically set by Vercel
+# 4. Select "Production", "Preview", and "Development" environments
+#    when adding these variables in Vercel
+

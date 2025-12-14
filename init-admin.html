@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initialize Admin User - Sahni Tata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        .button:active {
+            transform: translateY(0);
+        }
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+        }
+        .result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .result.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .credentials {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        .credentials h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .credentials p {
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .endpoint-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #666;
+        }
+        .endpoint-info code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Initialize Admin User</h1>
+        <p class="subtitle">Create the default admin user for Sahni Tata backend</p>
+        
+        <button id="initBtn" class="button" onclick="initAdmin()">
+            Initialize Admin User
+        </button>
+        
+        <div id="result" class="result"></div>
+        
+        <div class="endpoint-info">
+            <strong>Endpoint:</strong> <code>POST /api/auth/init-admin</code><br>
+            <strong>URL:</strong> <code id="apiUrl">https://sahni-tata.vercel.app/api/auth/init-admin</code>
+        </div>
+    </div>
+
+    <script>
+        // Auto-detect API URL
+        const apiUrl = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3001/api/auth/init-admin'
+            : 'https://sahni-tata.vercel.app/api/auth/init-admin';
+        
+        document.getElementById('apiUrl').textContent = apiUrl;
+
+        async function initAdmin() {
+            const btn = document.getElementById('initBtn');
+            const result = document.getElementById('result');
+            
+            // Disable button and show loading
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span>Initializing...';
+            result.style.display = 'none';
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    result.className = 'result success';
+                    result.innerHTML = `
+                        <strong>✅ Success!</strong><br>
+                        ${data.message}
+                        ${data.credentials ? `
+                            <div class="credentials">
+                                <h3>Admin Credentials:</h3>
+                                <p><strong>Email:</strong> ${data.credentials.email}</p>
+                                <p><strong>Password:</strong> ${data.credentials.password}</p>
+                            </div>
+                        ` : ''}
+                    `;
+                } else {
+                    result.className = 'result error';
+                    result.innerHTML = `
+                        <strong>❌ Error:</strong><br>
+                        ${data.detail || data.message || 'Failed to initialize admin user'}
+                    `;
+                }
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = `
+                    <strong>❌ Network Error:</strong><br>
+                    ${error.message}<br><br>
+                    <small>Make sure the backend is running and accessible.</small>
+                `;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Initialize Admin User';
+                result.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,86 @@
+service: sahni-backend
+
+frameworkVersion: '3'
+
+# Package configuration - package from backend directory
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!src/**'
+    - '!dist/**'
+    - '!public/**'
+    - '!*.md'
+    - '!*.zip'
+    - 'backend/**'
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: ap-south-1
+  stage: ${opt:stage, 'dev'}
+  environment:
+    AWS_CLOUDFRONT_DOMAIN: ${env:AWS_CLOUDFRONT_DOMAIN}
+    AWS_BUCKET_NAME: ${env:AWS_BUCKET_NAME}
+    AWS_REGION_NAME: ${env:AWS_REGION_NAME}
+    AWS_RDS_HOST: ${env:AWS_RDS_HOST}
+    AWS_RDS_PORT: ${env:AWS_RDS_PORT}
+    AWS_RDS_DBNAME: ${env:AWS_RDS_DBNAME}
+    AWS_RDS_USERNAME: ${env:AWS_RDS_USERNAME}
+    AWS_RDS_PASSWORD: ${env:AWS_RDS_PASSWORD}
+    JWT_SECRET: ${env:JWT_SECRET, 'your-secret-key-change-in-production'}
+    NODE_ENV: production
+    API_GATEWAY_URL: https://${self:provider.region}.execute-api.${self:provider.region}.amazonaws.com/${self:provider.stage}
+    API_STAGE: ${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+        - s3:DeleteObject
+      Resource: "arn:aws:s3:::${env:AWS_BUCKET_NAME}/*"
+    - Effect: Allow
+      Action:
+        - rds:*
+      Resource: "*"
+
+functions:
+  api:
+    handler: lambda.handler
+    timeout: 30
+    memorySize: 512
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors:
+            origin: 'https://sahniauto.com,https://www.sahniauto.com,https://sahni-tata.vercel.app,http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+              - Accept
+              - Origin
+              - X-Requested-With
+              - Access-Control-Request-Method
+              - Access-Control-Request-Headers
+            allowCredentials: true
+      - http:
+          path: /
+          method: ANY
+          cors:
+            origin: 'https://sahniauto.com,https://www.sahniauto.com,https://sahni-tata.vercel.app,http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+              - Accept
+              - Origin
+              - X-Requested-With
+            allowCredentials: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3001
+    noPrependStageInUrl: true
+

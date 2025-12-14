@@ -1,0 +1,107 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "Sales Executive",
+      "department": "Sales",
+      "location": "Vijayawada",
+      "description": "We are looking for an experienced Sales Executive to join our team. The ideal candidate will be responsible for promoting and selling our commercial vehicles and services to potential customers. You will build relationships with clients, understand their needs, and provide solutions that meet their requirements.",
+      "requirements": [
+        "Bachelor's degree in Business, Marketing, or related field",
+        "2+ years of experience in sales, preferably in automotive industry",
+        "Excellent communication and negotiation skills",
+        "Strong customer service orientation",
+        "Valid driving license"
+      ],
+      "status": "active",
+      "created_at": "2025-11-20T10:00:00.000Z",
+      "updated_at": "2025-11-20T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Service Technician",
+      "department": "Service",
+      "location": "Guntur",
+      "description": "Join our service team as a Service Technician. You will be responsible for diagnosing, repairing, and maintaining commercial vehicles. This role requires technical expertise, attention to detail, and a commitment to delivering high-quality service to our customers.",
+      "requirements": [
+        "Diploma or ITI in Automobile Engineering",
+        "3+ years of experience in vehicle servicing",
+        "Knowledge of commercial vehicle systems",
+        "Ability to work with diagnostic tools",
+        "Strong problem-solving skills"
+      ],
+      "status": "active",
+      "created_at": "2025-11-21T10:00:00.000Z",
+      "updated_at": "2025-11-21T10:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Parts Manager",
+      "department": "Spare Parts",
+      "location": "Vijayawada",
+      "description": "We are seeking a Parts Manager to oversee our spare parts inventory and operations. The successful candidate will manage inventory levels, coordinate with suppliers, ensure timely delivery of parts, and maintain accurate records. This role requires strong organizational and leadership skills.",
+      "requirements": [
+        "Bachelor's degree in Business Administration or related field",
+        "5+ years of experience in inventory management",
+        "Knowledge of automotive parts and systems",
+        "Proficiency in inventory management software",
+        "Strong analytical and problem-solving abilities"
+      ],
+      "status": "active",
+      "created_at": "2025-11-22T10:00:00.000Z",
+      "updated_at": "2025-11-22T10:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "Customer Service Representative",
+      "department": "Customer Service",
+      "location": "Narasaraopet",
+      "description": "We need a friendly and professional Customer Service Representative to handle customer inquiries, complaints, and provide support. You will be the first point of contact for customers and play a crucial role in maintaining customer satisfaction and building long-term relationships.",
+      "requirements": [
+        "High school diploma or equivalent",
+        "1+ years of experience in customer service",
+        "Excellent verbal and written communication skills",
+        "Proficiency in English and Telugu",
+        "Ability to handle multiple tasks simultaneously"
+      ],
+      "status": "active",
+      "created_at": "2025-11-23T10:00:00.000Z",
+      "updated_at": "2025-11-23T10:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "title": "Accountant",
+      "department": "Finance",
+      "location": "Vijayawada",
+      "description": "Join our finance team as an Accountant. You will be responsible for maintaining financial records, preparing reports, managing accounts payable and receivable, and ensuring compliance with financial regulations. This role requires attention to detail and strong numerical skills.",
+      "requirements": [
+        "Bachelor's degree in Accounting or Finance",
+        "2+ years of accounting experience",
+        "Knowledge of accounting software (Tally, SAP, etc.)",
+        "Strong analytical skills",
+        "Attention to detail and accuracy"
+      ],
+      "status": "active",
+      "created_at": "2025-11-24T10:00:00.000Z",
+      "updated_at": "2025-11-24T10:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "title": "Marketing Executive",
+      "department": "Marketing",
+      "location": "Guntur",
+      "description": "We are looking for a creative Marketing Executive to develop and implement marketing strategies. You will be responsible for creating marketing campaigns, managing social media presence, organizing events, and building brand awareness. This role requires creativity and strong communication skills.",
+      "requirements": [
+        "Bachelor's degree in Marketing, Communications, or related field",
+        "2+ years of marketing experience",
+        "Strong knowledge of digital marketing",
+        "Proficiency in social media platforms",
+        "Creative thinking and problem-solving skills"
+      ],
+      "status": "active",
+      "created_at": "2025-11-25T10:00:00.000Z",
+      "updated_at": "2025-11-25T10:00:00.000Z"
+    }
+  ]
+}
+

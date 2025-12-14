@@ -1,0 +1,62 @@
+# Exclude node_modules from serverless functions
+# Vercel will install dependencies separately, don't bundle them
+**/node_modules/
+node_modules/
+backend/node_modules/
+
+# Exclude large media files
+public/videos/
+public/images/
+public/catalouges/
+*.mp4
+*.zip
+*.pdf
+
+# Exclude build outputs
+dist/
+build/
+.serverless/
+
+# Exclude documentation and scripts
+*.md
+backend/*.md
+backend/scripts/
+backend/*.ps1
+backend/*.sh
+backend/test-*.js
+backend/create-lambda-package.ps1
+backend/package-lambda.json
+
+# Exclude data files (use JSON files from public instead)
+backend/data/
+
+# Exclude AWS/Lambda specific files
+backend/lambda.js
+backend/DEPLOY_LAMBDA.md
+backend/MIGRATE_DATA_GUIDE.md
+backend/UPLOAD_GUIDE.md
+backend/START_AND_UPLOAD.ps1
+backend/RESTART_AND_SETUP.ps1
+
+# Exclude temporary files
+*.tmp
+*.temp
+uploads/
+temp/
+backend/backend.zip
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Exclude OS files
+.DS_Store
+Thumbs.db
+
+# Exclude environment files
+.env
+.env.local
+.env.production
+

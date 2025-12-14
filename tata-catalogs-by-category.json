@@ -1,0 +1,192 @@
+{
+  "EV": {
+    "category": "ev",
+    "catalogs": [
+      {
+        "vehicle_id": 1,
+        "vehicle_name": "Ace EV 1000",
+        "subcategory": "Ace EV 1000",
+        "catalog": "/catalouges/tata_catalouges/Ace EV 1000/Ace EV 1000 - Brochure.pdf"
+      }
+    ]
+  },
+  "Ace": {
+    "category": "ace",
+    "catalogs": [
+      {
+        "vehicle_id": 3,
+        "vehicle_name": "ACE CNG 2.0 (Bi-Fuel)",
+        "subcategory": "ACE CNG 2.0(Bi-Fuel)",
+        "catalog": "/catalouges/tata_catalouges/ACE CNG 2.0/ACE CNG 2.0 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 4,
+        "vehicle_name": "Ace Diesel",
+        "subcategory": "Ace Diesel",
+        "catalog": "/catalouges/tata_catalouges/Ace Diesel/Ace Diesel - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 6,
+        "vehicle_name": "Ace Gold CNG",
+        "subcategory": "Ace Gold CNG",
+        "catalog": "/catalouges/tata_catalouges/Ace Gold CNG/Ace Gold CNG - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 8,
+        "vehicle_name": "Ace Gold Diesel",
+        "subcategory": "Ace Gold Diesel",
+        "catalog": "/catalouges/tata_catalouges/Ace Gold Diesel/Ace Gold Diesel - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 9,
+        "vehicle_name": "Ace Gold Petrol",
+        "subcategory": "Ace Gold Petrol",
+        "catalog": "/catalouges/tata_catalouges/Ace Gold Petrol/Ace Gold Petrol - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 10,
+        "vehicle_name": "Ace Gold Plus",
+        "subcategory": "Ace Gold Plus",
+        "catalog": "/catalouges/tata_catalouges/Ace Gold Plus/Ace Gold Plus - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 11,
+        "vehicle_name": "Ace HT+",
+        "subcategory": "Ace HT+",
+        "catalog": "/catalouges/tata_catalouges/Ace HT+/Ace HT+ - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 12,
+        "vehicle_name": "Ace Pro Bi-fuel",
+        "subcategory": "Ace Pro Bi-fuel",
+        "catalog": "/catalouges/tata_catalouges/Ace Pro Bi-fuel/Ace Pro Bi-fuel - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 13,
+        "vehicle_name": "Ace Pro Petrol",
+        "subcategory": "ace_pro_petrol",
+        "catalog": "/catalouges/tata_catalouges/Ace Pro Petrol/Ace Pro Petrol - Brochure.pdf"
+      }
+    ]
+  },
+  "Intra": {
+    "category": "intra",
+    "catalogs": [
+      {
+        "vehicle_id": 14,
+        "vehicle_name": "Intra V10",
+        "subcategory": "Intra V10",
+        "catalog": "/catalouges/tata_catalouges/Intra V10/Intra V10 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 15,
+        "vehicle_name": "Intra V20",
+        "subcategory": "Intra V20",
+        "catalog": "/catalouges/tata_catalouges/Intra V20/Intra V20 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 16,
+        "vehicle_name": "Intra V20 Gold",
+        "subcategory": "Intra V20 Gold",
+        "catalog": "/catalouges/tata_catalouges/Intra V20 Gold/Intra V20 Gold - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 17,
+        "vehicle_name": "Intra V30 Gold",
+        "subcategory": "Intra V30 Gold",
+        "catalog": "/catalouges/tata_catalouges/Intra V30 Gold/Intra V30 Gold - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 18,
+        "vehicle_name": "Intra V50 Gold",
+        "subcategory": "Intra V50 Gold",
+        "catalog": "/catalouges/tata_catalouges/Intra V50 Gold/Intra V50 Gold - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 19,
+        "vehicle_name": "Intra V70 Gold",
+        "subcategory": "Intra V70 Gold",
+        "catalog": "/catalouges/tata_catalouges/Intra V70 Gold/Intra V70 Gold - Brochure.pdf"
+      }
+    ]
+  },
+  "Yodha": {
+    "category": "yodha",
+    "catalogs": [
+      {
+        "vehicle_id": 20,
+        "vehicle_name": "Winger Cargo",
+        "subcategory": "Winger cargo",
+        "catalog": "/catalouges/tata_catalouges/Winger Cargo/Winger Cargo - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 21,
+        "vehicle_name": "Yodha 1200",
+        "subcategory": "Yodha 1200",
+        "catalog": "/catalouges/tata_catalouges/Yodha 1200/Yodha 1200 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 22,
+        "vehicle_name": "Yodha 1700",
+        "subcategory": "Yodha 1700",
+        "catalog": "/catalouges/tata_catalouges/Yodha 1700/Yodha 1700 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 23,
+        "vehicle_name": "Yodha 2.0",
+        "subcategory": "Yodha 2.0",
+        "catalog": "/catalouges/tata_catalouges/Yodha 2.0/Yodha 2.0 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 24,
+        "vehicle_name": "Yodha CNG",
+        "subcategory": "Yodha CNG",
+        "catalog": "/catalouges/tata_catalouges/Yodha CNG/Yodha CNG - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 25,
+        "vehicle_name": "Yodha Crew Cab",
+        "subcategory": "Yodha Crew Cab",
+        "catalog": "/catalouges/tata_catalouges/Yodha Crew Cab/Yodha Crew Cab 4x2 & 4x4 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 26,
+        "vehicle_name": "Yodha Crew Cab 4x2",
+        "subcategory": "Yodha Crew Cab 4x2",
+        "catalog": "/catalouges/tata_catalouges/Yodha Crew Cab 4x2/Yodha Crew Cab 4x2 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 27,
+        "vehicle_name": "Yodha Crew Cab 4x4",
+        "subcategory": "Yodha Crew Cab 4x4",
+        "catalog": "/catalouges/tata_catalouges/Yodha Crew Cab 4x4/Yodha Crew Cab 4x4 - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 28,
+        "vehicle_name": "Yodha Ex Crew Cab",
+        "subcategory": "Yodha Ex Crew Cab",
+        "catalog": "/catalouges/tata_catalouges/Yodha Ex Crew Cab/Yodha Ex Crew Cab - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 29,
+        "vehicle_name": "Yodha Ex Single Cab",
+        "subcategory": "Yodha Ex Single Cab",
+        "catalog": "/catalouges/tata_catalouges/Yodha Ex Single Cab/Yodha Ex Single Cab - Brochure.pdf"
+      },
+      {
+        "vehicle_id": 30,
+        "vehicle_name": "Yodha Single Cab",
+        "subcategory": "Yodha Single Cab",
+        "catalog": "/catalouges/tata_catalouges/Yodha Single Cab/Yodha Single Cab - Brochure.pdf"
+      }
+    ]
+  },
+  "metadata": {
+    "total_catalogs": 27,
+    "categories": ["EV", "Ace", "Intra", "Yodha"],
+    "last_updated": "2024-01-01T00:00:00Z",
+    "organization": "Tata Vehicle Catalogs by Category"
+  }
+}
+
+

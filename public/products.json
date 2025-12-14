@@ -1,0 +1,526 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "HP Racer 4",
+      "category": "automotive",
+      "image": "/images/sahni_products/hp racer-4.jpeg",
+      "description": "Premium 4-stroke engine oil for motorcycles",
+      "specs": "API SN, JASO MA2",
+      "company": "hp"
+    },
+    {
+      "id": 2,
+      "name": "HP Neosynth Plus",
+      "category": "automotive",
+      "image": "/images/sahni_products/HP Neosynth plus.jpeg",
+      "description": "Full synthetic engine oil with fuel efficiency formula",
+      "specs": "API SP, 0W-20",
+      "company": "hp"
+    },
+    {
+      "id": 3,
+      "name": "HP Milcy Super",
+      "category": "automotive",
+      "image": "/images/sahni_products/milcy super.jpeg",
+      "description": "Multi-grade diesel engine oil",
+      "specs": "API CF-4, 20W-40",
+      "company": "hp"
+    },
+    {
+      "id": 4,
+      "name": "HP Milcy Turbo Tech",
+      "category": "automotive",
+      "image": "/images/sahni_products/milky turbo tech.jpeg",
+      "description": "Advanced turbo diesel engine oil",
+      "specs": "API CH-4, 15W-40",
+      "company": "hp"
+    },
+    {
+      "id": 5,
+      "name": "HP Powerkool RR",
+      "category": "automotive",
+      "image": "/images/sahni_products/powerkool rr.jpeg",
+      "description": "Railway diesel locomotive oil",
+      "specs": "Railway Grade",
+      "company": "hp"
+    },
+    {
+      "id": 6,
+      "name": "HP Gasenol",
+      "category": "automotive",
+      "image": "/images/sahni_products/gasenol.jpeg",
+      "description": "Petrol engine oil for passenger cars",
+      "specs": "API SG/CD",
+      "company": "hp"
+    },
+    {
+      "id": 7,
+      "name": "HP Turbinol",
+      "category": "industrial",
+      "image": "/images/sahni_products/turbinol.jpeg",
+      "description": "Turbine oil for power generation",
+      "specs": "ISO VG 32, 46, 68",
+      "company": "hp"
+    },
+    {
+      "id": 8,
+      "name": "HP Hytherm",
+      "category": "industrial",
+      "image": "/images/sahni_products/hytherm.jpeg",
+      "description": "Heat transfer fluid for industrial applications",
+      "specs": "High thermal stability",
+      "company": "hp"
+    },
+    {
+      "id": 9,
+      "name": "HP Metaquench 42",
+      "category": "industrial",
+      "image": "/images/sahni_products/mataquench42.jpeg",
+      "description": "Quenching oil for heat treatment",
+      "specs": "Grade 42",
+      "company": "hp"
+    },
+    {
+      "id": 10,
+      "name": "HP Metaquench 43",
+      "category": "industrial",
+      "image": "/images/sahni_products/mataquench43.jpeg",
+      "description": "Advanced quenching oil",
+      "specs": "Grade 43",
+      "company": "hp"
+    },
+    {
+      "id": 11,
+      "name": "HP Rolmet 40",
+      "category": "industrial",
+      "image": "/images/sahni_products/HP ROLMET 40.png",
+      "description": "Cold rolling oil for stainless steel",
+      "specs": "Viscosity 40",
+      "company": "hp"
+    },
+    {
+      "id": 12,
+      "name": "HP Rolmet 7",
+      "category": "industrial",
+      "image": "/images/sahni_products/HP ROLMET 7.png",
+      "description": "Light duty rolling oil",
+      "specs": "Viscosity 7",
+      "company": "hp"
+    },
+    {
+      "id": 13,
+      "name": "HP Hydraulic Oil",
+      "category": "specialties",
+      "image": "/images/sahni_products/HP Hydraulic Oil.jpg",
+      "description": "High performance hydraulic fluid",
+      "specs": "AW Grade",
+      "company": "hp"
+    },
+    {
+      "id": 14,
+      "name": "HP Cutting Oil",
+      "category": "specialties",
+      "image": "/images/sahni_products/HP Cutting Oil.webp",
+      "description": "Metalworking cutting fluid",
+      "specs": "Soluble & Straight",
+      "company": "hp"
+    },
+    {
+      "id": 15,
+      "name": "HP Multi-Purpose Grease",
+      "category": "greases",
+      "image": "/images/sahni_products/HP Multi-Purpose Grease.png",
+      "description": "All-purpose industrial grease",
+      "specs": "NLGI 2, 3",
+      "company": "hp"
+    },
+    {
+      "id": 16,
+      "name": "HP Wheel Bearing Grease",
+      "category": "greases",
+      "image": "/images/sahni_products/Wheel-Bearing-Grease-18-kg.png",
+      "description": "High temperature wheel bearing grease",
+      "specs": "NLGI 2",
+      "company": "hp"
+    },
+    {
+      "id": 17,
+      "name": "HP Marine Engine Oil",
+      "category": "marine",
+      "image": "/images/sahni_products/HP Marine Engine Oil.jpg",
+      "description": "Marine diesel engine oil",
+      "specs": "Marine Grade",
+      "company": "hp"
+    },
+    {
+      "id": 18,
+      "name": "HP Marine Gear Oil",
+      "category": "marine",
+      "image": "/images/sahni_products/HP Marine Gear Oil.png",
+      "description": "Marine transmission oil",
+      "specs": "API GL-4",
+      "company": "hp"
+    },
+    {
+      "id": 101,
+      "name": "Mahindra Premium Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/mahindra/Mahindra Premium Engine Oil.jpg",
+      "description": "Premium engine oil for Mahindra vehicles",
+      "specs": "API SP, 5W-30",
+      "company": "mahindra"
+    },
+    {
+      "id": 102,
+      "name": "Mahindra Gear Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/mahindra/Mahindra Gear Oil.jpg",
+      "description": "High-performance gear oil",
+      "specs": "API GL-4",
+      "company": "mahindra"
+    },
+    {
+      "id": 103,
+      "name": "Mahindra Hydraulic Oil",
+      "category": "industrial",
+      "image": "/images/sahni_products/mahindra/Mahindra Hydraulic Oil.jpeg",
+      "description": "Hydraulic system oil",
+      "specs": "AW Grade",
+      "company": "mahindra"
+    },
+    {
+      "id": 104,
+      "name": "Mahindra Grease",
+      "category": "greases",
+      "image": "/images/sahni_products/mahindra/Mahindra Grease.jpg",
+      "description": "Multi-purpose grease",
+      "specs": "NLGI 2",
+      "company": "mahindra"
+    },
+    {
+      "id": 401,
+      "name": "20W40 Bike Relstar Alpha 4T Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/reliance/20W40 Bike Relstar Alpha 4T Engine Oil.jpg",
+      "description": "Premium 4-stroke engine oil for motorcycles",
+      "specs": "20W-40, API SN",
+      "company": "reliance"
+    },
+    {
+      "id": 402,
+      "name": "Generic Reliance Relstar Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/reliance/Generic Reliance relstar Engine Oil.jpg",
+      "description": "Premium Relstar engine oil",
+      "specs": "API SP",
+      "company": "reliance"
+    },
+    {
+      "id": 403,
+      "name": "Reliance 15W40 Relstar Diesel Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/reliance/Reliance 15W40 Relstar Diesel Engine Oil.jpg",
+      "description": "Diesel engine oil for commercial vehicles",
+      "specs": "15W-40, API CK-4",
+      "company": "reliance"
+    },
+    {
+      "id": 404,
+      "name": "Reliance 2 Stroke Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/reliance/Reliance 2 Stroke Engine Oil.jpeg",
+      "description": "2-stroke engine oil for motorcycles and scooters",
+      "specs": "2-Stroke, JASO FB",
+      "company": "reliance"
+    },
+    {
+      "id": 405,
+      "name": "Reliance Relstar Nova Ultra 15W40 CI-4 Plus Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/reliance/reliance-relstar-nova-ultra-15w40-ci-4-plus-engine-oil.jpg",
+      "description": "Advanced CI-4 Plus diesel engine oil",
+      "specs": "15W-40, CI-4 Plus",
+      "company": "reliance"
+    },
+    {
+      "id": 406,
+      "name": "Relstar R001 Synthetic Blend Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/reliance/RELSTAR R001 Synthetic Blend Engine.webp",
+      "description": "Synthetic blend engine oil for enhanced performance",
+      "specs": "Synthetic Blend, API SP",
+      "company": "reliance"
+    },
+    {
+      "id": 501,
+      "name": "Balmerol Agriculture Oil AAL-P",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Agriculture Oil/aal-p.jpg",
+      "description": "Premium agriculture oil for farm equipment and tractors",
+      "specs": "Agriculture Grade",
+      "company": "balmerol"
+    },
+    {
+      "id": 502,
+      "name": "Balmerol Coolant",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Coolant/04.jpg",
+      "description": "High-performance engine coolant for automotive applications",
+      "specs": "Long Life Coolant",
+      "company": "balmerol"
+    },
+    {
+      "id": 503,
+      "name": "Balmerol Diesel Engine Oil 01",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Diesel Engine Oil/01_1.jpg",
+      "description": "Premium diesel engine oil for commercial vehicles",
+      "specs": "API CF-4, 20W-40",
+      "company": "balmerol"
+    },
+    {
+      "id": 504,
+      "name": "Balmerol CPRB Diesel Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Diesel Engine Oil/cprb.jpg",
+      "description": "Advanced CPRB diesel engine oil",
+      "specs": "API CH-4",
+      "company": "balmerol"
+    },
+    {
+      "id": 505,
+      "name": "Balmerol Elite Max Diesel Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Diesel Engine Oil/elite-max.jpg",
+      "description": "Premium elite max diesel engine oil for superior performance",
+      "specs": "API CI-4, 15W-40",
+      "company": "balmerol"
+    },
+    {
+      "id": 506,
+      "name": "Balmerol Excel Turbo Diesel Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Diesel Engine Oil/excel-turbo.jpg",
+      "description": "Turbo diesel engine oil for enhanced engine protection",
+      "specs": "API CH-4, 15W-40",
+      "company": "balmerol"
+    },
+    {
+      "id": 507,
+      "name": "Balmerol PRD Plus Diesel Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Diesel Engine Oil/prd-plus_1.png",
+      "description": "Advanced PRD Plus diesel engine oil",
+      "specs": "API CI-4 Plus",
+      "company": "balmerol"
+    },
+    {
+      "id": 508,
+      "name": "Balmerol Ultima Plus Diesel Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Diesel Engine Oil/ultima-plus.jpg",
+      "description": "Ultra-premium ultima plus diesel engine oil",
+      "specs": "API CK-4, 15W-40",
+      "company": "balmerol"
+    },
+    {
+      "id": 509,
+      "name": "Balmerol Gear Oil AAL-P",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/gear_oils/aal-p.jpg",
+      "description": "Premium gear oil for automotive transmissions",
+      "specs": "API GL-4",
+      "company": "balmerol"
+    },
+    {
+      "id": 510,
+      "name": "Balmerol HP 80W-90 Gear Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/gear_oils/hp80w90.jpg",
+      "description": "High-performance 80W-90 gear oil",
+      "specs": "API GL-5, 80W-90",
+      "company": "balmerol"
+    },
+    {
+      "id": 511,
+      "name": "Balmerol Grease",
+      "category": "greases",
+      "image": "/images/sahni_products/Balmerol/Greases/308058974-188705120305917-7113695238098785865-n.jpg",
+      "description": "Multi-purpose industrial grease",
+      "specs": "NLGI 2",
+      "company": "balmerol"
+    },
+    {
+      "id": 512,
+      "name": "Balmerol Premium Grease",
+      "category": "greases",
+      "image": "/images/sahni_products/Balmerol/Greases/309127584-166324212724943-9095851464698728589-n.jpg",
+      "description": "Premium quality industrial grease",
+      "specs": "NLGI 2, 3",
+      "company": "balmerol"
+    },
+    {
+      "id": 513,
+      "name": "Balmerol Grease AAL-P",
+      "category": "greases",
+      "image": "/images/sahni_products/Balmerol/Greases/aal-p.jpg",
+      "description": "High-performance grease for various applications",
+      "specs": "NLGI 2",
+      "company": "balmerol"
+    },
+    {
+      "id": 514,
+      "name": "Balmerol Autoplex Grease",
+      "category": "greases",
+      "image": "/images/sahni_products/Balmerol/Greases/autoplex.jpg",
+      "description": "Advanced autoplex multi-purpose grease",
+      "specs": "NLGI 2",
+      "company": "balmerol"
+    },
+    {
+      "id": 515,
+      "name": "Balmerol Hydraulic Oil 07",
+      "category": "industrial",
+      "image": "/images/sahni_products/Balmerol/Hydraulic_Oil/07.jpg",
+      "description": "Premium hydraulic oil for industrial machinery",
+      "specs": "AW Grade, ISO VG 46",
+      "company": "balmerol"
+    },
+    {
+      "id": 516,
+      "name": "Balmerol Hydraulic Oil AAL-P",
+      "category": "industrial",
+      "image": "/images/sahni_products/Balmerol/Hydraulic_Oil/aal-p.jpg",
+      "description": "High-performance hydraulic oil",
+      "specs": "AW Grade",
+      "company": "balmerol"
+    },
+    {
+      "id": 517,
+      "name": "Balmerol Passenger Car Motor Oil AAL-P",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Passenger Car Motor Oil/aal-p.jpg",
+      "description": "Premium passenger car motor oil",
+      "specs": "API SP, 5W-30",
+      "company": "balmerol"
+    },
+    {
+      "id": 518,
+      "name": "Balmerol Transmission Oil 05",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Transmission Oil/05.jpg",
+      "description": "High-quality transmission oil",
+      "specs": "ATF Grade",
+      "company": "balmerol"
+    },
+    {
+      "id": 519,
+      "name": "Balmerol Transmission Oil 09",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Transmission Oil/09-1.jpg",
+      "description": "Premium transmission fluid",
+      "specs": "ATF Grade",
+      "company": "balmerol"
+    },
+    {
+      "id": 520,
+      "name": "Balmerol Glider 4T Two Wheeler Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Two Wheeler Oil/glider-4t_1.png",
+      "description": "Premium 4-stroke engine oil for motorcycles",
+      "specs": "JASO MA2, 20W-40",
+      "company": "balmerol"
+    },
+    {
+      "id": 521,
+      "name": "Balmerol Two Wheeler Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Two Wheeler Oil/media.jpg",
+      "description": "High-performance two-wheeler engine oil",
+      "specs": "JASO MA2",
+      "company": "balmerol"
+    },
+    {
+      "id": 522,
+      "name": "Balmerol Race 4T Two Wheeler Oil",
+      "category": "automotive",
+      "image": "/images/sahni_products/Balmerol/Two Wheeler Oil/race-4t-new.jpg",
+      "description": "Racing grade 4-stroke engine oil for motorcycles",
+      "specs": "JASO MA2, 10W-40",
+      "company": "balmerol"
+    },
+    {
+      "id": 201,
+      "name": "Jio-bp Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni verticals/lubricant_brands/Jio-bp_logo.svg",
+      "description": "Advanced engine oil technology",
+      "specs": "API SP, 5W-30",
+      "company": "jiobp"
+    },
+    {
+      "id": 202,
+      "name": "Jio-bp Diesel Oil",
+      "category": "automotive",
+      "image": "/images/sahni verticals/lubricant_brands/Jio-bp_logo.svg",
+      "description": "Diesel engine oil",
+      "specs": "API CK-4, 15W-40",
+      "company": "jiobp"
+    },
+    {
+      "id": 203,
+      "name": "Jio-bp Synthetic Oil",
+      "category": "automotive",
+      "image": "/images/sahni verticals/lubricant_brands/Jio-bp_logo.svg",
+      "description": "Full synthetic engine oil",
+      "specs": "API SP, 0W-20",
+      "company": "jiobp"
+    },
+    {
+      "id": 204,
+      "name": "Jio-bp Transmission Fluid",
+      "category": "automotive",
+      "image": "/images/sahni verticals/lubricant_brands/Jio-bp_logo.svg",
+      "description": "Automatic transmission fluid",
+      "specs": "ATF Grade",
+      "company": "jiobp"
+    },
+    {
+      "id": 301,
+      "name": "SUPERLINE Engine Oil",
+      "category": "automotive",
+      "image": "/images/sahni verticals/lubricant_brands/superline.png",
+      "description": "Quality engine oil",
+      "specs": "API SN, 10W-40",
+      "company": "superline"
+    },
+    {
+      "id": 302,
+      "name": "SUPERLINE Gear Oil",
+      "category": "automotive",
+      "image": "/images/sahni verticals/lubricant_brands/superline.png",
+      "description": "Heavy-duty gear oil",
+      "specs": "API GL-5",
+      "company": "superline"
+    },
+    {
+      "id": 303,
+      "name": "SUPERLINE Brake Fluid",
+      "category": "automotive",
+      "image": "/images/sahni verticals/lubricant_brands/superline.png",
+      "description": "DOT 4 brake fluid",
+      "specs": "DOT 4",
+      "company": "superline"
+    },
+    {
+      "id": 304,
+      "name": "SUPERLINE Coolant",
+      "category": "automotive",
+      "image": "/images/sahni verticals/lubricant_brands/superline.png",
+      "description": "Engine coolant",
+      "specs": "Long Life",
+      "company": "superline"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "applications": [
+    {
+      "id": "1",
+      "jobId": "2",
+      "jobTitle": "Service Technician",
+      "name": "konapala saikiran",
+      "email": "konapalasaikiran200200@gmail.com",
+      "phone": "09492664870",
+      "coverLetter": "",
+      "resume": "/resumes/1764131025005-887101436-ACE_CNG_2.0_-_Brochure.pdf",
+      "status": "pending",
+      "created_at": "2025-11-26T04:23:45.129Z"
+    }
+  ]
+}

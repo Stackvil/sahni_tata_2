@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Database Migration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .loading {
+            display: inline-block;
+            margin-left: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Database Migration Tool</h1>
+        
+        <div class="step">
+            <h3>Step 1: Get Your JWT Token</h3>
+            <p>Make sure you're logged in to the admin dashboard first.</p>
+            <button onclick="getToken()">Get Token from Local Storage</button>
+            <div id="token-display" style="margin-top: 10px; padding: 10px; background: #f4f4f4; border-radius: 4px; display: none;">
+                <strong>Token found:</strong> <span id="token-value"></span>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Run Migration</h3>
+            <p>This will upload all JSON files from <code>backend/data</code> to your PostgreSQL database.</p>
+            <button id="migrate-btn" onclick="runMigration()" disabled>Run Migration</button>
+            <div id="migration-result" class="result"></div>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Verify Migration</h3>
+            <p>After migration, test these endpoints:</p>
+            <button onclick="testEndpoint('/api/products')">Test Products</button>
+            <button onclick="testEndpoint('/api/vehicles')">Test Vehicles</button>
+            <button onclick="testEndpoint('/api/showrooms')">Test Showrooms</button>
+            <div id="test-result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        let authToken = null;
+        const API_BASE = window.location.origin;
+
+        function getToken() {
+            try {
+                authToken = localStorage.getItem('authToken');
+                if (authToken) {
+                    document.getElementById('token-display').style.display = 'block';
+                    document.getElementById('token-value').textContent = authToken.substring(0, 50) + '...';
+                    document.getElementById('migrate-btn').disabled = false;
+                } else {
+                    alert('No token found. Please login to admin dashboard first at /admin');
+                }
+            } catch (error) {
+                alert('Error getting token: ' + error.message);
+            }
+        }
+
+        async function runMigration() {
+            if (!authToken) {
+                alert('Please get your token first!');
+                return;
+            }
+
+            const resultDiv = document.getElementById('migration-result');
+            const btn = document.getElementById('migrate-btn');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '<div class="loading">⏳ Running migration... This may take a few minutes.</div>';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/migrate`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h4>✅ Migration Successful!</h4>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `
+                        <h4>❌ Migration Failed</h4>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h4>❌ Error</h4>
+                    <p>${error.message}</p>
+                `;
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function testEndpoint(endpoint) {
+            const resultDiv = document.getElementById('test-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '<div class="loading">⏳ Testing endpoint...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`);
+                const data = await response.json();
+
+                if (Array.isArray(data) || (data.products && data.products.length > 0) || (data.vehicles && data.vehicles.length > 0)) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h4>✅ ${endpoint} - Data Found!</h4>
+                        <p>Found ${data.length || data.products?.length || data.vehicles?.length || 0} items</p>
+                        <pre>${JSON.stringify(data, null, 2).substring(0, 500)}...</pre>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `
+                        <h4>⚠️ ${endpoint} - Empty Response</h4>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h4>❌ Error</h4>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+
+        // Auto-get token on page load if available
+        window.onload = function() {
+            getToken();
+        };
+    </script>
+</body>
+</html>
+
+

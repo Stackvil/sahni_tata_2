@@ -1,0 +1,118 @@
+{
+  "products": [
+    {
+      "id": 100,
+      "name": "Massey Ferguson 241 DI",
+      "image": "/images/sahni_vehicles/messy_ferguson/241 di/images (3).jpeg",
+      "description": "Massey Ferguson 241 DI tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 101,
+      "name": "Massey Ferguson MF 1035 Dost",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 1035 dost/MF-1035-DI-DOST (1).jpg",
+      "description": "Massey Ferguson MF 1035 Dost tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 102,
+      "name": "Massey Ferguson MF 1035 R",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 1035 R/MF-1035-DI.jpg",
+      "description": "Massey Ferguson MF 1035 R tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 103,
+      "name": "Massey Ferguson MF 241 PD PD",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 241 pd pd/MF-241-DI-TONNER.jpg",
+      "description": "Massey Ferguson MF 241 PD PD tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 104,
+      "name": "Massey Ferguson MF 245",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 245/MF-245-DI-46-HP.jpg",
+      "description": "Massey Ferguson MF 245 tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 105,
+      "name": "Massey Ferguson MF 30",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 30/MF-30-DI-Orchard-Plus.jpg",
+      "description": "Massey Ferguson MF 30 tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 106,
+      "name": "Massey Ferguson MF 5245",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 5245/MF-5245-DI-4WD.jpg",
+      "description": "Massey Ferguson MF 5245 tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 107,
+      "name": "Massey Ferguson MF 6026",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 6026/MF-6026-MaxPro-NT.jpg",
+      "description": "Massey Ferguson MF 6026 tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 108,
+      "name": "Massey Ferguson MF 6036",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 6036/images (3).jpeg",
+      "description": "Massey Ferguson MF 6036 tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 109,
+      "name": "Massey Ferguson MF 7250",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf 7250/41c242519aa545b15ea422f70ab1b784.jpg",
+      "description": "Massey Ferguson MF 7250 tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 110,
+      "name": "Massey Ferguson Mf1035 Super Plus",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf1035 super plus/Massey-Ferguson-1035-DI-Dost1734590980_r1U6UfNPH.jpeg",
+      "description": "Massey Ferguson Mf1035 Super Plus tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    },
+    {
+      "id": 111,
+      "name": "Massey Ferguson Mf244",
+      "image": "/images/sahni_vehicles/messy_ferguson/mf244/244-di-1632210333.webp",
+      "description": "Massey Ferguson Mf244 tractor - Reliable and powerful agricultural equipment for farming operations.",
+      "specs": "Agricultural Tractor - Reliable and powerful",
+      "category": "tractors"
+    }
+  ],
+  "categories": [
+    {
+      "id": "all",
+      "label": "All Products"
+    },
+    {
+      "id": "tractors",
+      "label": "Tractors"
+    },
+    {
+      "id": "equipment",
+      "label": "Agricultural Equipment"
+    },
+    {
+      "id": "parts",
+      "label": "Parts & Accessories"
+    }
+  ]
+}
