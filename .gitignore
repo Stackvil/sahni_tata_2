@@ -41,12 +41,20 @@ temp/
 
 # Media files (stored in S3)
 public/images/
+!public/images/GROUP.png
+!public/images/logo.jpg
+!public/images/old-logo.png
+!public/images/awards/
 public/videos/
 *.jpg
+!public/images/logo.jpg
 *.jpeg
 *.png
+!public/images/GROUP.png
+!public/images/old-logo.png
 *.gif
 *.webp
+!public/images/awards/*.webp
 *.svg
 *.pdf
 *.mp4
