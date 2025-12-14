@@ -16,7 +16,14 @@
     },
     {
       "source": "/((?!api|videos|images|catalouges|assets|.*\\.(mp4|webm|ogg|png|jpg|jpeg|gif|webp|svg|ico|pdf|json|css|js|woff|woff2|ttf|eot)).*)",
-      "destination": "/index.html"
+      "destination": "/index.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/html"
+        }
+      ]
     }
   ],
   "headers": [
