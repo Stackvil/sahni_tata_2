@@ -88,11 +88,12 @@ export const getPool = () => {
       
       pool = new Pool({
         ...config,
-        max: 20,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 30000, // Increased to 30 seconds for migrations
+        max: 5, // Reduced for serverless (Vercel)
+        idleTimeoutMillis: 10000, // Reduced for serverless
+        connectionTimeoutMillis: 10000, // Reduced to 10 seconds for faster failures
         keepAlive: true,
-        keepAliveInitialDelayMillis: 10000,
+        keepAliveInitialDelayMillis: 1000,
+        statement_timeout: 5000, // Query timeout
       });
 
       pool.on('error', (err) => {
