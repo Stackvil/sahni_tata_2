@@ -678,18 +678,17 @@ export async function migrateAllData() {
 }
 
 // Run migration if called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  migrateAllData()
-    .then(() => {
-      console.log('\n📝 Next steps:');
-      console.log('   1. Verify data in your database');
-      console.log('   2. Test API endpoints on Vercel');
-      console.log('   3. Ensure all environment variables are set correctly');
-      process.exit(0);
-    })
-    .catch((error) => {
-      console.error('Stack trace:', error.stack);
-      process.exit(1);
-    });
-}
+// Always run when script is executed directly
+migrateAllData()
+  .then(() => {
+    console.log('\n📝 Next steps:');
+    console.log('   1. Verify data in your database');
+    console.log('   2. Test API endpoints on Vercel');
+    console.log('   3. Ensure all environment variables are set correctly');
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error('Stack trace:', error.stack);
+    process.exit(1);
+  });
 

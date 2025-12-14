@@ -58,7 +58,10 @@ const corsOptions = {
       'http://127.0.0.1:3030'
     ];
     
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    // Allow all Vercel preview deployments (*.vercel.app)
+    const isVercelPreview = origin && origin.match(/^https:\/\/.*\.vercel\.app$/);
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || isVercelPreview) {
       callback(null, true);
     } else {
       // Allow all origins for now (can be restricted later)
@@ -101,8 +104,11 @@ app.options('*', (req, res) => {
     'http://127.0.0.1:3030'
   ];
   
-  // In development, allow any origin; in production, check the list
-  const allowedOrigin = (process.env.NODE_ENV !== 'production' || allowedOrigins.includes(origin)) 
+  // Allow all Vercel preview deployments (*.vercel.app)
+  const isVercelPreview = origin && origin.match(/^https:\/\/.*\.vercel\.app$/);
+  
+  // In development, allow any origin; in production, check the list or Vercel previews
+  const allowedOrigin = (process.env.NODE_ENV !== 'production' || allowedOrigins.includes(origin) || isVercelPreview) 
     ? (origin || allowedOrigins[0]) 
     : allowedOrigins[0];
   
