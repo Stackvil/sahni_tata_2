@@ -46,6 +46,7 @@ public/images/
 !public/images/old-logo.png
 !public/images/awards/
 public/videos/
+!public/videos/KISHORE.mp4
 *.jpg
 !public/images/logo.jpg
 *.jpeg
@@ -58,6 +59,7 @@ public/videos/
 *.svg
 *.pdf
 *.mp4
+!public/videos/KISHORE.mp4
 *.avi
 *.mov
 *.zip

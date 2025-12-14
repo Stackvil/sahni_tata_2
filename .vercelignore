@@ -6,6 +6,7 @@ backend/node_modules/
 
 # Exclude large media files
 public/videos/
+!public/videos/KISHORE.mp4
 # Include only specific images needed for the site
 public/images/*
 !public/images/GROUP.png
@@ -14,6 +15,7 @@ public/images/*
 !public/images/awards/
 public/catalouges/
 *.mp4
+!public/videos/KISHORE.mp4
 *.zip
 *.pdf
 
