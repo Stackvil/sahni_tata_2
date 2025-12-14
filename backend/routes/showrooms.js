@@ -83,7 +83,9 @@ router.get('/', async (req, res) => {
             phone: showroom.phone,
             email: showroom.email,
             is_main: showroom.is_main,
-            image: showroom.image_url ? toCloudFrontUrl(showroom.image_url) : showroom.image_url
+            image: showroom.image_url ? toCloudFrontUrl(showroom.image_url) : showroom.image_url,
+            category: showroom.category || 'tata', // Include category field
+            images: showroom.images || undefined // Include images array if present
           }));
           
           return res.json(showroomsWithCloudFront);

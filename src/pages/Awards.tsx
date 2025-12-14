@@ -161,11 +161,11 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
                   style={{ animationDelay: `${index * 150}ms` }}
                 >
                   {/* Award Image */}
-                  <div className={`w-full lg:w-1/3 relative overflow-hidden`}>
+                  <div className={`w-full lg:w-1/4 relative overflow-hidden`}>
                     <img
                       src={award.image}
                       alt={award.title}
-                      className="w-full h-full min-h-[200px] sm:min-h-[250px] lg:min-h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full min-h-[150px] sm:min-h-[180px] lg:min-h-[220px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                       loading="lazy"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -175,7 +175,7 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
                   </div>
 
                   {/* Award Content */}
-                  <div className={`w-full lg:w-2/3 flex flex-col justify-center p-8 sm:p-12 lg:p-16 ${isLeft ? 'lg:pl-12' : 'lg:pr-12'}`}>
+                  <div className={`w-full lg:w-3/4 flex flex-col justify-center p-8 sm:p-12 lg:p-16 ${isLeft ? 'lg:pl-12' : 'lg:pr-12'}`}>
                     {/* Award Number Badge */}
                     <div className="inline-flex items-center gap-2 text-red-600 px-4 py-2 text-sm font-bold mb-6">
                       <Trophy className="w-4 h-4" />

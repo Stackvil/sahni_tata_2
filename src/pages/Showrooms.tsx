@@ -202,8 +202,8 @@ export default function Showrooms() {
   const tataShowrooms = useMemo(() => {
     return showrooms.filter(s => {
       const category = (s.category || 'tata').toLowerCase().trim();
-      // Only include if category is 'tata' and does NOT contain 'massey'
-      return category === 'tata' && !category.includes('massey');
+      // Only include if category is exactly 'tata' and does NOT contain 'massey'
+      return category === 'tata' && !category.includes('massey') && category !== 'massey ferguson';
     });
   }, [showrooms]);
   
@@ -211,7 +211,12 @@ export default function Showrooms() {
     return showrooms.filter(s => {
       const category = (s.category || '').toLowerCase().trim();
       // Include if category is 'massey', contains 'massey', or is 'massey ferguson'
-      return category === 'massey' || category.includes('massey') || category === 'massey ferguson';
+      // Also check city name for Mylavaram specifically
+      const cityLower = (s.city || '').toLowerCase();
+      return category === 'massey' || 
+             category.includes('massey') || 
+             category === 'massey ferguson' ||
+             cityLower === 'mylavaram';
     });
   }, [showrooms]);
 
