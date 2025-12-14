@@ -1,7 +1,7 @@
 import express from 'express';
 import { authenticateToken } from '../middleware/auth.js';
 import { initDatabase, query } from '../config/database.js';
-import { productsDB, vehiclesDB, masseyProductsDB, showroomsDB, aboutDB, homeVideoDB } from '../utils/dbManager.js';
+import { productsDB, vehiclesDB, masseyProductsDB, showroomsDB, aboutDB, homeVideoDB, fuelStationsDB, awardsDB } from '../utils/dbManager.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -189,10 +189,28 @@ async function migrateShowrooms() {
 
     console.log(`\n🏢 Migrating ${showrooms.length} showrooms...`);
     let migrated = 0;
+    let skipped = 0;
     
     for (const showroom of showrooms) {
+      try {
+        // Check if showroom already exists
+        const existing = await query(
+          'SELECT id FROM showrooms WHERE city = $1 AND address = $2 LIMIT 1',
+          [showroom.city, showroom.address]
+        );
+        if (existing.rows.length > 0) {
+          skipped++;
+          continue;
+        }
+      } catch {
+        // Continue with creation
+      }
+
       // Convert image path to CloudFront URL
       const imageUrl = convertToCloudFrontUrl(showroom.image || '');
+      
+      // Convert images array to CloudFront URLs
+      const images = showroom.images ? convertImageArrayToCloudFront(showroom.images) : [];
       
       await showroomsDB.create({
         city: showroom.city || '',
@@ -201,11 +219,13 @@ async function migrateShowrooms() {
         email: showroom.email || '',
         is_main: showroom.is_main || showroom.isMain || false,
         image_url: imageUrl,
+        category: showroom.category || 'tata',
+        images: images,
       });
       migrated++;
     }
-    console.log(`✅ Migrated ${migrated} showrooms`);
-    return { migrated };
+    console.log(`✅ Migrated ${migrated} showrooms${skipped > 0 ? `, skipped ${skipped} existing` : ''}`);
+    return { migrated, skipped };
   } catch (error) {
     console.error('❌ Error migrating showrooms:', error.message);
     throw error;
@@ -335,6 +355,196 @@ async function migrateCareers() {
   }
 }
 
+async function migrateFuelStations() {
+  try {
+    const filePath = path.join(PUBLIC_DIR, 'fuelStations.json');
+    let data;
+    
+    try {
+      data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+    } catch {
+      console.log('\n⛽ No fuelStations.json found, skipping fuel stations migration');
+      return { migrated: 0 };
+    }
+    
+    const stations = data.fuelStations || data.stations || [];
+    
+    if (stations.length === 0) {
+      console.log('\n⛽ No fuel stations found, skipping...');
+      return { migrated: 0 };
+    }
+    
+    console.log(`\n⛽ Migrating ${stations.length} fuel stations...`);
+    let migrated = 0;
+    let skipped = 0;
+    
+    for (const station of stations) {
+      try {
+        // Check if station already exists by name
+        const existing = await query(
+          'SELECT id FROM fuel_stations WHERE name = $1 LIMIT 1',
+          [station.name]
+        );
+        if (existing.rows.length > 0) {
+          skipped++;
+          continue;
+        }
+      } catch {
+        // Continue with creation
+      }
+      
+      const imageUrl = convertToCloudFrontUrl(station.image || '');
+      
+      await fuelStationsDB.create({
+        name: station.name || '',
+        location: station.location || '',
+        address: station.address || '',
+        phone: station.phone || '',
+        image: imageUrl,
+        mapLink: station.mapLink || station.map_link || '',
+        features: station.features || [],
+        latitude: station.latitude || null,
+        longitude: station.longitude || null
+      });
+      migrated++;
+    }
+    console.log(`✅ Migrated ${migrated} fuel stations${skipped > 0 ? `, skipped ${skipped} existing` : ''}`);
+    return { migrated, skipped };
+  } catch (error) {
+    console.error('❌ Error migrating fuel stations:', error.message);
+    console.warn('⚠️  Continuing with other migrations...');
+    return { migrated: 0, skipped: 0 };
+  }
+}
+
+async function migrateAwards() {
+  try {
+    // Awards from actual award images in public/images/awards
+    console.log('\n🏆 Migrating awards from award images...');
+    
+    const awardImages = [
+      {
+        id: 1,
+        image: '/images/awards/IMG_20251209_124404 - Edited.webp',
+        title: 'Excellence in Commercial Vehicle Sales',
+        description: 'Recognized for outstanding performance in commercial vehicle dealership and exceptional customer service delivery across Andhra Pradesh and Telangana regions.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 2,
+        image: '/images/awards/IMG_20251209_124421 - Edited.webp',
+        title: 'Best Dealer Performance Award',
+        description: 'Awarded for achieving the highest sales targets and maintaining superior customer satisfaction standards in the automotive industry.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 3,
+        image: '/images/awards/IMG_20251209_124431 - Edited.webp',
+        title: 'Outstanding Service Excellence',
+        description: 'Recognized for exceptional after-sales service, customer support, and commitment to maintaining the highest quality standards.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 4,
+        image: '/images/awards/IMG_20251209_124556 - Edited.webp',
+        title: 'Top Distributor Achievement',
+        description: 'Awarded for being the leading distributor in lubricants and automotive products, demonstrating excellence in market penetration and customer reach.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 5,
+        image: '/images/awards/IMG_20251209_124810 - Edited.webp',
+        title: 'Customer Satisfaction Excellence',
+        description: 'Recognized for maintaining the highest levels of customer satisfaction and building long-term relationships with clients.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 6,
+        image: '/images/awards/IMG_20251209_125043 - Edited.webp',
+        title: 'Sales Performance Champion',
+        description: 'Awarded for achieving exceptional sales growth and market leadership in the commercial vehicle and automotive products sector.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 7,
+        image: '/images/awards/IMG_20251209_125136 - Edited.webp',
+        title: 'Innovation in Distribution',
+        description: 'Recognized for innovative approaches in product distribution, supply chain management, and market development strategies.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 8,
+        image: '/images/awards/IMG_20251209_125334 - Edited.webp',
+        title: 'Regional Market Leader',
+        description: 'Awarded for establishing market leadership and expanding business presence across multiple regions with consistent growth.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 9,
+        image: '/images/awards/IMG_20251209_125354 - Edited.webp',
+        title: 'Quality Excellence Award',
+        description: 'Recognized for maintaining the highest quality standards in products and services, ensuring customer trust and satisfaction.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 10,
+        image: '/images/awards/IMG_20251209_125358 - Edited.webp',
+        title: 'Business Growth Achievement',
+        description: 'Awarded for exceptional business growth, strategic expansion, and significant contribution to the automotive industry.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+    ];
+    
+    let migrated = 0;
+    let skipped = 0;
+    
+    for (const award of awardImages) {
+      try {
+        // Check if award already exists
+        const existing = await query(
+          'SELECT id FROM awards WHERE brand = $1 AND award_text = $2 LIMIT 1',
+          [award.brand, award.title]
+        );
+        if (existing.rows.length > 0) {
+          skipped++;
+          continue;
+        }
+      } catch {
+        // Continue with creation
+      }
+      
+      // Convert image path to CloudFront URL
+      const imageUrl = convertToCloudFrontUrl(award.image);
+      
+      await awardsDB.create({
+        brand: award.brand,
+        logo_url: imageUrl, // Use award image as logo
+        award_text: award.title,
+        year: award.year,
+        display_order: award.id - 1
+      });
+      migrated++;
+    }
+    
+    console.log(`✅ Migrated ${migrated} awards${skipped > 0 ? `, skipped ${skipped} existing` : ''}`);
+    return { migrated, skipped };
+  } catch (error) {
+    console.error('❌ Error migrating awards:', error.message);
+    console.warn('⚠️  Continuing with other migrations...');
+    return { migrated: 0, skipped: 0 };
+  }
+}
+
 export async function migrateAllData() {
   console.log('🚀 Starting complete database migration from public/ folder...\n');
   console.log(`📁 Public directory: ${PUBLIC_DIR}`);
@@ -373,6 +583,8 @@ export async function migrateAllData() {
       about: await migrateAbout(),
       homeVideo: await migrateHomeVideo(),
       careers: await migrateCareers(),
+      fuelStations: await migrateFuelStations(),
+      awards: await migrateAwards(),
     };
 
     console.log('\n✨ Migration complete!');

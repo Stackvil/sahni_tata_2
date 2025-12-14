@@ -274,6 +274,8 @@ const createTables = async () => {
       email VARCHAR(255),
       is_main BOOLEAN DEFAULT false,
       image_url TEXT,
+      category VARCHAR(50) DEFAULT 'tata',
+      images TEXT[],
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`,
@@ -370,6 +372,30 @@ const createTables = async () => {
   } catch (error) {
     // Column might already exist, ignore error
     console.log('Note: catalog_url column migration:', error.message);
+  }
+
+  // Add category and images columns to showrooms table if they don't exist (migration)
+  try {
+    await query(`
+      DO $$ 
+      BEGIN
+        IF NOT EXISTS (
+          SELECT 1 FROM information_schema.columns 
+          WHERE table_name = 'showrooms' AND column_name = 'category'
+        ) THEN
+          ALTER TABLE showrooms ADD COLUMN category VARCHAR(50) DEFAULT 'tata';
+        END IF;
+        IF NOT EXISTS (
+          SELECT 1 FROM information_schema.columns 
+          WHERE table_name = 'showrooms' AND column_name = 'images'
+        ) THEN
+          ALTER TABLE showrooms ADD COLUMN images TEXT[];
+        END IF;
+      END $$;
+    `);
+  } catch (error) {
+    // Columns might already exist, ignore error
+    console.log('Note: showrooms category/images columns migration:', error.message);
   }
 };
 

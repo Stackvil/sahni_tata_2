@@ -227,10 +227,28 @@ async function migrateShowrooms() {
 
     console.log(`\n🏢 Migrating ${showrooms.length} showrooms...`);
     let migrated = 0;
+    let skipped = 0;
     
     for (const showroom of showrooms) {
+      try {
+        // Check if showroom already exists
+        const existing = await query(
+          'SELECT id FROM showrooms WHERE city = $1 AND address = $2 LIMIT 1',
+          [showroom.city, showroom.address]
+        );
+        if (existing.rows.length > 0) {
+          skipped++;
+          continue;
+        }
+      } catch {
+        // Continue with creation
+      }
+
       // Convert image path to CloudFront URL
       const imageUrl = convertToCloudFrontUrl(showroom.image || '');
+      
+      // Convert images array to CloudFront URLs
+      const images = showroom.images ? convertImageArrayToCloudFront(showroom.images) : [];
       
       await showroomsDB.create({
         city: showroom.city || '',
@@ -239,10 +257,13 @@ async function migrateShowrooms() {
         email: showroom.email || '',
         is_main: showroom.is_main || showroom.isMain || false,
         image_url: imageUrl,
+        category: showroom.category || 'tata',
+        images: images,
       });
       migrated++;
     }
-    console.log(`✅ Migrated ${migrated} showrooms`);
+    console.log(`✅ Migrated ${migrated} showrooms${skipped > 0 ? `, skipped ${skipped} existing` : ''}`);
+    return { migrated, skipped };
   } catch (error) {
     console.error('❌ Error migrating showrooms:', error.message);
     throw error;
@@ -429,104 +450,129 @@ async function migrateFuelStations() {
 
 async function migrateAwards() {
   try {
-    // Awards are currently hardcoded in frontend, but we can create initial data
-    // from the Awards.tsx component structure
-    console.log('\n🏆 Migrating awards...');
+    // Awards from actual award images in public/images/awards
+    console.log('\n🏆 Migrating awards from award images...');
     
-    const awardsData = [
+    const awardImages = [
       {
-        brand: 'Tata Motors',
-        logo_url: '/images/maxresdefault.jpg',
-        awards: [
-          "BEST COMMERCIAL VEHICLE DEALER - ANDHRA PRADESH & TELANGANA (2022-2023)",
-          "EXCELLENCE IN CUSTOMER SATISFACTION - TATA MOTORS (2021-2022)",
-          "TOP PERFORMING DEALER - COMMERCIAL VEHICLES (2020-2021)",
-          "BEST AFTER-SALES SERVICE DEALER - REGION (2019-2020)",
-          "HIGHEST SALES ACHIEVEMENT - TATA COMMERCIAL VEHICLES (2018-2019)",
-          "OUTSTANDING PERFORMANCE IN SPARE PARTS SALES (2017-2018)",
-          "BEST DEALER FOR TATA GENUINE PARTS DISTRIBUTION (2016-2017)",
-          "EXCELLENCE IN VEHICLE DELIVERY & CUSTOMER SERVICE (2015-2016)",
-          "TOP DEALER FOR TATA ACE & INTRA RANGE (2014-2015)",
-          "BEST DEALER FOR COMMERCIAL VEHICLE SALES - SOUTH ZONE (2013-2014)",
-          "OUTSTANDING CONTRIBUTION TO TATA MOTORS GROWTH (2012-2013)",
-          "CERTIFICATE OF EXCELLENCE - TATA MOTORS DEALERSHIP (2011-2012)",
-        ]
+        id: 1,
+        image: '/images/awards/IMG_20251209_124404 - Edited.webp',
+        title: 'Excellence in Commercial Vehicle Sales',
+        description: 'Recognized for outstanding performance in commercial vehicle dealership and exceptional customer service delivery across Andhra Pradesh and Telangana regions.',
+        year: '2024',
+        brand: 'Tata Motors'
       },
       {
-        brand: 'HP Lubricants',
-        logo_url: '/images/sahni verticals/HP_SULLI5.png',
-        awards: [
-          "INDIA'S NO. 1 HP LUBRICANTS DISTRIBUTOR - ANDHRA PRADESH (2022-2023)",
-          "BEST PERFORMING DISTRIBUTOR - HP LUBRICANTS (2021-2022)",
-          "EXCELLENCE IN MARKET PENETRATION - HP LUBRICANTS (2020-2021)",
-          "TOP DISTRIBUTOR FOR HP LUBRICANTS - SOUTH REGION (2019-2020)",
-          "OUTSTANDING SALES ACHIEVEMENT - HP LUBRICANTS (2018-2019)",
-          "BEST DISTRIBUTOR FOR AUTOMOTIVE LUBRICANTS (2017-2018)",
-          "EXCELLENCE IN CUSTOMER SERVICE - HP LUBRICANTS (2016-2017)",
-          "TOP PERFORMER - HP LUBRICANTS DISTRIBUTION (2015-2016)",
-          "BEST DISTRIBUTOR FOR INDUSTRIAL LUBRICANTS (2014-2015)",
-          "OUTSTANDING CONTRIBUTION TO HP LUBRICANTS GROWTH (2013-2014)",
-          "CERTIFICATE OF APPRECIATION - HP LUBRICANTS (2012-2013)",
-        ]
+        id: 2,
+        image: '/images/awards/IMG_20251209_124421 - Edited.webp',
+        title: 'Best Dealer Performance Award',
+        description: 'Awarded for achieving the highest sales targets and maintaining superior customer satisfaction standards in the automotive industry.',
+        year: '2024',
+        brand: 'Tata Motors'
       },
       {
-        brand: 'Lubricants Distribution',
-        logo_url: '/images/sahni verticals/HP_SULLI5.png',
-        awards: [
-          "BEST LUBRICANT DISTRIBUTOR - MULTI-BRAND (2022-2023)",
-          "EXCELLENCE IN LUBRICANT DISTRIBUTION NETWORK (2021-2022)",
-          "TOP PERFORMER - LUBRICANT SALES & MARKETING (2020-2021)",
-          "OUTSTANDING DISTRIBUTOR FOR AUTOMOTIVE LUBRICANTS (2019-2020)",
-          "BEST DISTRIBUTION NETWORK - LUBRICANTS (2018-2019)",
-          "EXCELLENCE IN CUSTOMER RELATIONSHIP MANAGEMENT (2017-2018)",
-          "TOP DISTRIBUTOR FOR INDUSTRIAL LUBRICANTS (2016-2017)",
-          "BEST PERFORMANCE IN LUBRICANT MARKET PENETRATION (2015-2016)",
-          "OUTSTANDING ACHIEVEMENT IN LUBRICANT SALES (2014-2015)",
-        ]
-      }
+        id: 3,
+        image: '/images/awards/IMG_20251209_124431 - Edited.webp',
+        title: 'Outstanding Service Excellence',
+        description: 'Recognized for exceptional after-sales service, customer support, and commitment to maintaining the highest quality standards.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 4,
+        image: '/images/awards/IMG_20251209_124556 - Edited.webp',
+        title: 'Top Distributor Achievement',
+        description: 'Awarded for being the leading distributor in lubricants and automotive products, demonstrating excellence in market penetration and customer reach.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 5,
+        image: '/images/awards/IMG_20251209_124810 - Edited.webp',
+        title: 'Customer Satisfaction Excellence',
+        description: 'Recognized for maintaining the highest levels of customer satisfaction and building long-term relationships with clients.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 6,
+        image: '/images/awards/IMG_20251209_125043 - Edited.webp',
+        title: 'Sales Performance Champion',
+        description: 'Awarded for achieving exceptional sales growth and market leadership in the commercial vehicle and automotive products sector.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 7,
+        image: '/images/awards/IMG_20251209_125136 - Edited.webp',
+        title: 'Innovation in Distribution',
+        description: 'Recognized for innovative approaches in product distribution, supply chain management, and market development strategies.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 8,
+        image: '/images/awards/IMG_20251209_125334 - Edited.webp',
+        title: 'Regional Market Leader',
+        description: 'Awarded for establishing market leadership and expanding business presence across multiple regions with consistent growth.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 9,
+        image: '/images/awards/IMG_20251209_125354 - Edited.webp',
+        title: 'Quality Excellence Award',
+        description: 'Recognized for maintaining the highest quality standards in products and services, ensuring customer trust and satisfaction.',
+        year: '2024',
+        brand: 'Tata Motors'
+      },
+      {
+        id: 10,
+        image: '/images/awards/IMG_20251209_125358 - Edited.webp',
+        title: 'Business Growth Achievement',
+        description: 'Awarded for exceptional business growth, strategic expansion, and significant contribution to the automotive industry.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
     ];
     
     let migrated = 0;
     let skipped = 0;
     
-    for (const brandData of awardsData) {
-      const logoUrl = convertToCloudFrontUrl(brandData.logo_url);
-      
-      for (let i = 0; i < brandData.awards.length; i++) {
-        const awardText = brandData.awards[i];
-        // Extract year from award text if possible
-        const yearMatch = awardText.match(/\((\d{4})-(\d{4})\)/);
-        const year = yearMatch ? yearMatch[1] : null;
-        
-        try {
-          // Check if award already exists
-          const existing = await query(
-            'SELECT id FROM awards WHERE brand = $1 AND award_text = $2 LIMIT 1',
-            [brandData.brand, awardText]
-          );
-          if (existing.rows.length > 0) {
-            skipped++;
-            continue;
-          }
-        } catch {
-          // Continue with creation
+    for (const award of awardImages) {
+      try {
+        // Check if award already exists
+        const existing = await query(
+          'SELECT id FROM awards WHERE brand = $1 AND award_text = $2 LIMIT 1',
+          [award.brand, award.title]
+        );
+        if (existing.rows.length > 0) {
+          skipped++;
+          continue;
         }
-        
-        await awardsDB.create({
-          brand: brandData.brand,
-          logo_url: i === 0 ? logoUrl : null, // Only set logo for first award of each brand
-          award_text: awardText,
-          year: year,
-          display_order: i
-        });
-        migrated++;
+      } catch {
+        // Continue with creation
       }
+      
+      // Convert image path to CloudFront URL
+      const imageUrl = convertToCloudFrontUrl(award.image);
+      
+      await awardsDB.create({
+        brand: award.brand,
+        logo_url: imageUrl, // Use award image as logo
+        award_text: award.title,
+        year: award.year,
+        display_order: award.id - 1
+      });
+      migrated++;
     }
     
     console.log(`✅ Migrated ${migrated} awards${skipped > 0 ? `, skipped ${skipped} existing` : ''}`);
+    return { migrated, skipped };
   } catch (error) {
     console.error('❌ Error migrating awards:', error.message);
     console.warn('⚠️  Continuing with other migrations...');
+    return { migrated: 0, skipped: 0 };
   }
 }
 

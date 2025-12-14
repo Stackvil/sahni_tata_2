@@ -152,9 +152,18 @@ export const showroomsDB = {
 
   create: async (showroom) => {
     const result = await query(
-      `INSERT INTO showrooms (city, address, phone, email, is_main, image_url)
-       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [showroom.city, showroom.address, showroom.phone, showroom.email, showroom.is_main, showroom.image_url]
+      `INSERT INTO showrooms (city, address, phone, email, is_main, image_url, category, images)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      [
+        showroom.city, 
+        showroom.address, 
+        showroom.phone, 
+        showroom.email, 
+        showroom.is_main, 
+        showroom.image_url,
+        showroom.category || 'tata',
+        showroom.images || []
+      ]
     );
     return result.rows[0];
   },
@@ -162,9 +171,22 @@ export const showroomsDB = {
   update: async (id, showroom) => {
     const result = await query(
       `UPDATE showrooms SET city = $1, address = $2, phone = $3, email = $4, 
-       is_main = $5, image_url = COALESCE($6, image_url), updated_at = CURRENT_TIMESTAMP
-       WHERE id = $7 RETURNING *`,
-      [showroom.city, showroom.address, showroom.phone, showroom.email, showroom.is_main, showroom.image_url, id]
+       is_main = $5, image_url = COALESCE($6, image_url), 
+       category = COALESCE($7, category), 
+       images = COALESCE($8, images),
+       updated_at = CURRENT_TIMESTAMP
+       WHERE id = $9 RETURNING *`,
+      [
+        showroom.city, 
+        showroom.address, 
+        showroom.phone, 
+        showroom.email, 
+        showroom.is_main, 
+        showroom.image_url,
+        showroom.category,
+        showroom.images,
+        id
+      ]
     );
     return result.rows[0];
   },
