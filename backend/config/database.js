@@ -109,7 +109,13 @@ export const getPool = () => {
   return pool;
 };
 
-export const isDatabaseConnected = () => isDatabaseAvailable;
+export const isDatabaseConnected = () => {
+  // Don't trust the flag if pool doesn't exist
+  if (!pool) {
+    return false;
+  }
+  return isDatabaseAvailable;
+};
 
 // Track if initialization has been attempted
 let initAttempted = false;
