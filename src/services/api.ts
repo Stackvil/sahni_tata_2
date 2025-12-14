@@ -1847,7 +1847,7 @@ export const showroomsAPI = {
 export const vehiclesApi = {
   getAll: async () => {
     try {
-      const endpoint = `${API_BASE_ENDPOINT}/api/vehicles/?page=1&limit=100`;
+      const endpoint = `${API_BASE_URL}/vehicles?page=1&limit=100`;
       console.log(`[Legacy Vehicles API] GET ${endpoint}`);
       
       const response = await fetch(endpoint, {
@@ -1870,7 +1870,7 @@ export const vehiclesApi = {
   },
   getById: async (id: number | string) => {
     try {
-      const endpoint = `${API_BASE_ENDPOINT}/api/vehicles/${id}`;
+      const endpoint = `${API_BASE_URL}/vehicles/${id}`;
       console.log(`[Legacy Vehicles API] GET ${endpoint}`);
       
       const response = await fetch(endpoint, {
@@ -1893,7 +1893,7 @@ export const vehiclesApi = {
   },
   getByCategory: async (category: string) => {
     try {
-      const endpoint = `${API_BASE_ENDPOINT}/api/vehicles/?page=1&limit=100`;
+      const endpoint = `${API_BASE_URL}/vehicles?page=1&limit=100`;
       console.log(`[Legacy Vehicles API] GET ${endpoint} (category: ${category})`);
       
       const response = await fetch(endpoint, {

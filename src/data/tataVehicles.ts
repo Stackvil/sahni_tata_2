@@ -1,6 +1,6 @@
 // Tata Vehicles Data - Organized by Category and Subcategory
 // Specs and catalogue details can be added later
-import { API_BASE_ENDPOINT, normalizeImageUrl } from '../services/api';
+import { API_BASE_URL, normalizeImageUrl } from '../services/api';
 
 export interface Vehicle {
   id: number;
@@ -245,15 +245,15 @@ export const loadVehicles = async (): Promise<Vehicle[]> => {
   // Start loading
   vehiclesLoading = (async () => {
     try {
-      // Try backend API
-      const endpoint = `${API_BASE_ENDPOINT}/api/vehicles`;
+      // Try backend API - use API_BASE_URL to avoid double slashes
+      const endpoint = `${API_BASE_URL}/vehicles`;
       
       // Optimize: Fetch first page with large limit to get totalPages, then fetch all pages in parallel
       const limit = 500; // Increased limit to fetch more at once
       let allVehicles: any[] = [];
       
       // Fetch first page to get totalPages
-      const firstPageUrl = `${endpoint}/?page=1&limit=${limit}`;
+      const firstPageUrl = `${endpoint}?page=1&limit=${limit}`;
       console.log(`[Vehicles API] Fetching first page: ${firstPageUrl}`);
       
       const firstResponse = await Promise.race([
@@ -483,8 +483,8 @@ export const getVehicleById = async (id: number | string): Promise<Vehicle | nul
 // Helper function to get vehicles by category
 export const getVehiclesByCategory = async (category: string): Promise<Vehicle[]> => {
   try {
-    // Try backend API - AWS API Gateway endpoint
-    const fullUrl = `${API_BASE_ENDPOINT}/api/vehicles/?page=1&limit=100`;
+    // Try backend API - use API_BASE_URL to avoid double slashes
+    const fullUrl = `${API_BASE_URL}/vehicles?page=1&limit=100`;
     console.log(`[Vehicles API] Fetching vehicles by category: ${fullUrl}`);
     
     const response = await fetch(fullUrl, {
