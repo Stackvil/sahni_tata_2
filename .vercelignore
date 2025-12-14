@@ -6,7 +6,8 @@ backend/node_modules/
 
 # Exclude large media files
 public/videos/
-public/images/
+# Include only specific images needed for the site
+public/images/*
 !public/images/GROUP.png
 !public/images/logo.jpg
 !public/images/old-logo.png
