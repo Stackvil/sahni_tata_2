@@ -33,10 +33,10 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
       if (Array.isArray(data) && data.length > 0) {
         // Map API response to AwardItem format
         const mappedAwards: AwardItem[] = data.map((award: any, index: number) => ({
-          id: award.id || index + 1,
-          image: award.logo ? normalizeImageUrl(award.logo) : `/images/awards/IMG_20251209_124404 - Edited.webp`, // Fallback image
-          title: award.award_text || award.award || `Award ${index + 1}`,
-          description: award.description || `Recognized for ${award.award_text || 'excellence'}`,
+          id: parseInt(award.id) || index + 1,
+          image: award.image || award.logo ? normalizeImageUrl(award.image || award.logo) : normalizeImageUrl(`/images/awards/IMG_20251209_124404 - Edited.webp`),
+          title: award.title || award.award_text || award.award || `Award ${index + 1}`,
+          description: award.description || `Recognized for ${award.award_text || award.award || 'excellence'}`,
           year: award.year || '2024'
         }));
         setAwards(mappedAwards);

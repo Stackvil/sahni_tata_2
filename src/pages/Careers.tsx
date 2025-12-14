@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Briefcase, MapPin, Building, Calendar, Upload, X, CheckCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { careersAPI, applicationsAPI, normalizeImageUrl } from '../services/api';
+import { careersAPI, applicationsAPI } from '../services/api';
 
 interface JobPosting {
   id: string;
@@ -140,9 +140,15 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
           className="w-full h-full object-cover"
           onError={(e) => {
             console.error('Video load error:', e);
+            const target = e.target as HTMLVideoElement;
+            // Try fallback path
+            const source = target.querySelector('source');
+            if (source && !source.src.includes('cloudfront')) {
+              source.src = '/videos/KISHORE.mp4';
+            }
           }}
         >
-          <source src={normalizeImageUrl('/videos/KISHORE.mp4')} type="video/mp4" />
+          <source src="/videos/KISHORE.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </section>

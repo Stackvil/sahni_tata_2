@@ -25,7 +25,8 @@ const getTableName = (filename) => {
     'home': 'home_video',
     'users': 'users',
     'careers': 'careers',
-    'applications': 'applications'
+    'applications': 'applications',
+    'awards': 'awards'
   };
   return tableMap[filename] || filename;
 };
@@ -42,7 +43,8 @@ const getEmptyStructure = (filename) => {
     'home': { video: '', advertisementVideo: '' },
     'users': { users: [] },
     'careers': { jobs: [] },
-    'applications': { applications: [] }
+    'applications': { applications: [] },
+    'awards': { awards: [] }
   };
   return emptyStructures[filename] || {};
 };
@@ -114,6 +116,12 @@ export async function readData(filename) {
         const result = await query('SELECT * FROM applications ORDER BY id');
         if (result.rows && result.rows.length > 0) {
           return { applications: result.rows };
+        }
+        console.log(`[dataManager] Database empty for ${filename}, reading from JSON files`);
+      } else if (filename === 'awards') {
+        const result = await query('SELECT * FROM awards ORDER BY display_order, year DESC, id DESC');
+        if (result.rows && result.rows.length > 0) {
+          return { awards: result.rows };
         }
         console.log(`[dataManager] Database empty for ${filename}, reading from JSON files`);
       }

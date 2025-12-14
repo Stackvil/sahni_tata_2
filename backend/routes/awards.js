@@ -69,11 +69,15 @@ router.get('/', async (req, res) => {
           awards = await awardsDB.getAll();
         }
 
-        // If flat=true, return individual awards (for admin)
+        // If flat=true, return individual awards (for frontend and admin)
         if (flat === 'true') {
           const awardsWithCloudFront = awards.map(award => ({
             ...award,
-            logo: award.logo ? toCloudFrontUrl(award.logo) : award.logo
+            logo: award.logo ? toCloudFrontUrl(award.logo) : award.logo,
+            award_text: award.award || award.award_text, // Ensure award_text is present
+            image: award.logo ? toCloudFrontUrl(award.logo) : award.logo, // Add image alias
+            title: award.award || award.award_text, // Add title alias
+            description: award.description || `Recognized for ${award.award || award.award_text || 'excellence'}`
           }));
           return res.json(awardsWithCloudFront);
         }
@@ -97,12 +101,52 @@ router.get('/', async (req, res) => {
         return res.json(brandAwards);
       } catch (dbError) {
         console.warn('[Awards] Database error:', dbError.message);
-        return res.json([]);
+        // Fall through to JSON fallback
       }
     }
 
-    // Fallback: return empty array if database not available
-    res.json([]);
+    // Fallback: Read from JSON files
+    try {
+      const { readData } = await import('../utils/dataManager.js');
+      const data = await readData('awards');
+      const awards = data.awards || [];
+      
+      if (flat === 'true') {
+        // Return individual awards with CloudFront URLs
+        const awardsWithCloudFront = awards.map((award: any) => ({
+          id: award.id,
+          brand: award.brand,
+          logo: award.logo_url ? toCloudFrontUrl(award.logo_url) : award.logo_url,
+          logo_url: award.logo_url,
+          award: award.award_text,
+          award_text: award.award_text,
+          year: award.year,
+          display_order: award.display_order || 0,
+          image: award.logo_url ? toCloudFrontUrl(award.logo_url) : award.logo_url,
+          title: award.award_text,
+          description: `Recognized for ${award.award_text || 'excellence'}`
+        }));
+        return res.json(awardsWithCloudFront);
+      }
+      
+      // Group by brand for non-flat response
+      const groupedAwards: any = {};
+      awards.forEach((award: any) => {
+        if (!groupedAwards[award.brand]) {
+          groupedAwards[award.brand] = {
+            brand: award.brand,
+            logo: award.logo_url ? toCloudFrontUrl(award.logo_url) : award.logo_url,
+            awards: []
+          };
+        }
+        groupedAwards[award.brand].awards.push(award.award_text);
+      });
+      
+      return res.json(Object.values(groupedAwards));
+    } catch (jsonError) {
+      console.error('[Awards] JSON fallback error:', jsonError);
+      return res.json([]);
+    }
   } catch (error) {
     console.error('[Awards] Unexpected error:', error.message);
     res.json([]);

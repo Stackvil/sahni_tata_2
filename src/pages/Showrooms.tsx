@@ -103,30 +103,33 @@ const normalizeShowrooms = (items: any[]): Showroom[] => {
     }
 
     // Determine category - check multiple indicators for Massey Ferguson
-    let category = item?.category?.toLowerCase() || '';
+    let category = (item?.category || '').toLowerCase().trim();
     const cityLower = city.toLowerCase();
     const addressLower = (item?.address || '').toLowerCase();
     const imagePathLower = (imagePath || '').toLowerCase();
     
     // Check if this is a Massey Ferguson showroom by name, address, image, or category
     // TAFE (Tractors and Farm Equipment Limited) manufactures Massey Ferguson tractors
+    // Also explicitly check for Mylavaram
     const isMassey = 
       category === 'massey' || 
       category === 'massey ferguson' ||
       category.includes('massey') ||
+      cityLower === 'mylavaram' ||
       cityLower.includes('massey') ||
       cityLower.includes('ferguson') ||
       cityLower.includes('tafe') ||
       addressLower.includes('massey') ||
       addressLower.includes('ferguson') ||
       addressLower.includes('tafe') ||
+      addressLower.includes('mylavaram') ||
       imagePathLower.includes('tafe') ||
       (item?.brand && (item.brand.toLowerCase() === 'massey' || item.brand.toLowerCase() === 'massey ferguson' || item.brand.toLowerCase() === 'tafe'));
 
     // Set category based on detection
     if (isMassey) {
       category = 'massey';
-    } else if (!category) {
+    } else if (!category || category === '') {
       // Default to 'tata' only if not Massey and no category specified
       category = 'tata';
     }

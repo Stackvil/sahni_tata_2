@@ -460,7 +460,9 @@ export const awardsDB = {
       id: row.id.toString(),
       brand: row.brand,
       logo: row.logo_url,
+      logo_url: row.logo_url, // Add alias
       award: row.award_text,
+      award_text: row.award_text, // Add award_text field
       year: row.year,
       display_order: row.display_order,
     }));
@@ -475,7 +477,9 @@ export const awardsDB = {
       id: row.id.toString(),
       brand: row.brand,
       logo: row.logo_url,
+      logo_url: row.logo_url, // Add alias
       award: row.award_text,
+      award_text: row.award_text, // Add award_text field
       year: row.year,
       display_order: row.display_order,
     }));
@@ -489,7 +493,9 @@ export const awardsDB = {
         id: row.id.toString(),
         brand: row.brand,
         logo: row.logo_url,
+        logo_url: row.logo_url, // Add alias
         award: row.award_text,
+        award_text: row.award_text, // Add award_text field
         year: row.year,
         display_order: row.display_order,
       };

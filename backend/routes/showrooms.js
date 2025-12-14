@@ -151,6 +151,8 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
           email,
           is_main: is_main === 'true' || is_main === true,
           image_url: imagePath,
+          category: category || 'tata',
+          images: images ? (Array.isArray(images) ? images : [images]) : undefined,
         });
         
         return res.status(201).json({
@@ -161,6 +163,8 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
           email: newShowroom.email,
           is_main: newShowroom.is_main,
           image: newShowroom.image_url ? toCloudFrontUrl(newShowroom.image_url) : newShowroom.image_url,
+          category: newShowroom.category || 'tata',
+          images: newShowroom.images || undefined,
         });
       } catch (dbError) {
         console.error('[Showrooms] Database error:', dbError.message);
@@ -230,13 +234,14 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
 
     if (shouldUseDatabase) {
       try {
-        const updateData = {};
+        const updateData: any = {};
         if (city !== undefined) updateData.city = city;
         if (address !== undefined) updateData.address = address;
         if (phone !== undefined) updateData.phone = phone;
         if (email !== undefined) updateData.email = email;
         if (is_main !== undefined) updateData.is_main = is_main === 'true' || is_main === true;
         if (imagePath !== undefined) updateData.image_url = imagePath;
+        if (category !== undefined) updateData.category = category;
 
         const updatedShowroom = await showroomsDB.update(showroomId, updateData);
         if (!updatedShowroom) {
@@ -251,6 +256,8 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
           email: updatedShowroom.email,
           is_main: updatedShowroom.is_main,
           image: updatedShowroom.image_url ? toCloudFrontUrl(updatedShowroom.image_url) : updatedShowroom.image_url,
+          category: updatedShowroom.category || 'tata',
+          images: updatedShowroom.images || undefined,
         });
       } catch (dbError) {
         console.error('[Showrooms] Database error:', dbError.message);
