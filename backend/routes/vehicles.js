@@ -97,11 +97,10 @@ router.get('/', async (req, res) => {
     
     // Try database first on Vercel, fall back to JSON
     const shouldUseDatabase = () => {
-      if (isVercel) {
-        const pool = getPool();
-        return pool !== null;
-      }
       const pool = getPool();
+      if (isVercel) {
+        return pool !== null && isDatabaseConnected();
+      }
       return pool !== null && isDatabaseConnected();
     };
 
@@ -134,28 +133,34 @@ router.get('/', async (req, res) => {
     }
 
     // Read from JSON files (fallback or primary for local)
-    const data = await readData('vehicles');
-    const vehicles = data.vehicles || [];
+    try {
+      const data = await readData('vehicles');
+      const vehicles = data.vehicles || [];
 
-    const total = vehicles.length;
-    const totalPages = Math.ceil(total / limit);
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
-    const paginatedVehicles = vehicles.slice(startIndex, endIndex);
+      const total = vehicles.length;
+      const totalPages = Math.ceil(total / limit);
+      const startIndex = (page - 1) * limit;
+      const endIndex = startIndex + limit;
+      const paginatedVehicles = vehicles.slice(startIndex, endIndex);
 
-    // Convert image paths to CloudFront URLs
-    const vehiclesWithCloudFront = paginatedVehicles.map(vehicle => ({
-      ...vehicle,
-      images: vehicle.images ? toCloudFrontUrls(vehicle.images) : vehicle.images,
-      catalog: vehicle.catalog ? toCloudFrontUrl(vehicle.catalog) : vehicle.catalog
-    }));
+      // Convert image paths to CloudFront URLs
+      const vehiclesWithCloudFront = paginatedVehicles.map(vehicle => ({
+        ...vehicle,
+        images: vehicle.images ? toCloudFrontUrls(vehicle.images) : vehicle.images,
+        catalog: vehicle.catalog ? toCloudFrontUrl(vehicle.catalog) : vehicle.catalog
+      }));
 
-    res.json({
-      totalPages,
-      vehicles: vehiclesWithCloudFront
-    });
+      return res.json({
+        totalPages,
+        vehicles: vehiclesWithCloudFront
+      });
+    } catch (jsonError) {
+      console.error('[Vehicles] Error reading from JSON:', jsonError.message);
+      return res.json({ totalPages: 0, vehicles: [] }); // Return empty instead of error
+    }
   } catch (error) {
-    res.status(500).json({ detail: error.message });
+    console.error('[Vehicles] Unexpected error:', error.message);
+    return res.json({ totalPages: 0, vehicles: [] }); // Return empty instead of error
   }
 });
 

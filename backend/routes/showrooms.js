@@ -58,11 +58,10 @@ router.get('/', async (req, res) => {
     
     // Try database first on Vercel, fall back to JSON
     const shouldUseDatabase = () => {
-      if (isVercel) {
-        const pool = getPool();
-        return pool !== null;
-      }
       const pool = getPool();
+      if (isVercel) {
+        return pool !== null && isDatabaseConnected();
+      }
       return pool !== null && isDatabaseConnected();
     };
 
@@ -97,17 +96,23 @@ router.get('/', async (req, res) => {
     }
 
     // Read from JSON files (fallback or primary for local)
-    const data = await readData('showrooms');
-    const showrooms = data.showrooms || [];
-    // Ensure category field is included in JSON response
-    const showroomsWithCategory = showrooms.map(showroom => ({
-      ...showroom,
-      category: showroom.category || 'tata',
-      images: showroom.images || undefined
-    }));
-    res.json(showroomsWithCategory);
+    try {
+      const data = await readData('showrooms');
+      const showrooms = data.showrooms || [];
+      // Ensure category field is included in JSON response
+      const showroomsWithCategory = showrooms.map(showroom => ({
+        ...showroom,
+        category: showroom.category || 'tata',
+        images: showroom.images || undefined
+      }));
+      return res.json(showroomsWithCategory);
+    } catch (jsonError) {
+      console.error('[Showrooms] Error reading from JSON:', jsonError.message);
+      return res.json([]); // Return empty array instead of error
+    }
   } catch (error) {
-    res.status(500).json({ detail: error.message });
+    console.error('[Showrooms] Unexpected error:', error.message);
+    return res.json([]); // Return empty array instead of error
   }
 });
 

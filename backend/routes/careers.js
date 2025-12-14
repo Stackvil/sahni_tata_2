@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
   try {
     const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
     const pool = getPool();
-    const shouldUseDatabase = isVercel || (pool !== null && isDatabaseConnected());
+    const shouldUseDatabase = isVercel && pool !== null && isDatabaseConnected();
 
     if (shouldUseDatabase) {
       try {
@@ -76,13 +76,18 @@ router.get('/', async (req, res) => {
     }
 
     // Fallback to JSON files
-    const data = await readData('careers');
-    const jobs = Array.isArray(data.jobs) ? data.jobs : [];
-    const activeJobs = jobs.filter(job => job.status === 'active');
-    res.json(activeJobs);
+    try {
+      const data = await readData('careers');
+      const jobs = Array.isArray(data.jobs) ? data.jobs : [];
+      const activeJobs = jobs.filter(job => job.status === 'active');
+      return res.json(activeJobs);
+    } catch (jsonError) {
+      console.error('[Careers] Error reading from JSON:', jsonError.message);
+      return res.json([]); // Return empty array instead of error
+    }
   } catch (error) {
-    console.error('Error fetching careers:', error);
-    res.status(500).json({ detail: error.message });
+    console.error('[Careers] Unexpected error:', error.message);
+    return res.json([]); // Return empty array instead of error
   }
 });
 

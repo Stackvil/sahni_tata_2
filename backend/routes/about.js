@@ -47,7 +47,7 @@ router.get('/', async (req, res) => {
   try {
     const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
     const pool = getPool();
-    const shouldUseDatabase = isVercel || (pool !== null && isDatabaseConnected());
+    const shouldUseDatabase = isVercel && pool !== null && isDatabaseConnected();
 
     if (shouldUseDatabase) {
       try {
