@@ -99,7 +99,13 @@ router.get('/', async (req, res) => {
     // Read from JSON files (fallback or primary for local)
     const data = await readData('showrooms');
     const showrooms = data.showrooms || [];
-    res.json(showrooms);
+    // Ensure category field is included in JSON response
+    const showroomsWithCategory = showrooms.map(showroom => ({
+      ...showroom,
+      category: showroom.category || 'tata',
+      images: showroom.images || undefined
+    }));
+    res.json(showroomsWithCategory);
   } catch (error) {
     res.status(500).json({ detail: error.message });
   }

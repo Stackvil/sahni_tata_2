@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Briefcase, MapPin, Building, Calendar, Upload, X, CheckCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { careersAPI, applicationsAPI } from '../services/api';
+import { careersAPI, applicationsAPI, normalizeImageUrl } from '../services/api';
 
 interface JobPosting {
   id: string;
@@ -18,7 +18,7 @@ interface CareersProps {
   setCurrentPage?: (page: string) => void;
 }
 
-export default function Careers({ setCurrentPage }: CareersProps) {
+export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProps) {
   const [jobs, setJobs] = useState<JobPosting[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedJob, setSelectedJob] = useState<JobPosting | null>(null);
@@ -138,8 +138,11 @@ export default function Careers({ setCurrentPage }: CareersProps) {
           muted
           playsInline
           className="w-full h-full object-cover"
+          onError={(e) => {
+            console.error('Video load error:', e);
+          }}
         >
-          <source src="/videos/KISHORE.mp4" type="video/mp4" />
+          <source src={normalizeImageUrl('/videos/KISHORE.mp4')} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </section>

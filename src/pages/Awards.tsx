@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Award, Trophy, Star, Sparkles } from 'lucide-react';
+import { awardsAPI } from '../services/api';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { normalizeImageUrl } from '../services/api';
 
 interface AwardsProps {
   setCurrentPage?: (page: string) => void;
@@ -15,84 +18,123 @@ interface AwardItem {
 
 const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
   const [awards, setAwards] = useState<AwardItem[]>([]);
-
-  // Award images from public/images/awards directory
-  const awardImages: AwardItem[] = [
-    {
-      id: 1,
-      image: '/images/awards/IMG_20251209_124404 - Edited.webp',
-      title: 'Excellence in Commercial Vehicle Sales',
-      description: 'Recognized for outstanding performance in commercial vehicle dealership and exceptional customer service delivery across Andhra Pradesh and Telangana regions.',
-      year: '2024'
-    },
-    {
-      id: 2,
-      image: '/images/awards/IMG_20251209_124421 - Edited.webp',
-      title: 'Best Dealer Performance Award',
-      description: 'Awarded for achieving the highest sales targets and maintaining superior customer satisfaction standards in the automotive industry.',
-      year: '2024'
-    },
-    {
-      id: 3,
-      image: '/images/awards/IMG_20251209_124431 - Edited.webp',
-      title: 'Outstanding Service Excellence',
-      description: 'Recognized for exceptional after-sales service, customer support, and commitment to maintaining the highest quality standards.',
-      year: '2024'
-    },
-    {
-      id: 4,
-      image: '/images/awards/IMG_20251209_124556 - Edited.webp',
-      title: 'Top Distributor Achievement',
-      description: 'Awarded for being the leading distributor in lubricants and automotive products, demonstrating excellence in market penetration and customer reach.',
-      year: '2024'
-    },
-    {
-      id: 5,
-      image: '/images/awards/IMG_20251209_124810 - Edited.webp',
-      title: 'Customer Satisfaction Excellence',
-      description: 'Recognized for maintaining the highest levels of customer satisfaction and building long-term relationships with clients.',
-      year: '2024'
-    },
-    {
-      id: 6,
-      image: '/images/awards/IMG_20251209_125043 - Edited.webp',
-      title: 'Sales Performance Champion',
-      description: 'Awarded for achieving exceptional sales growth and market leadership in the commercial vehicle and automotive products sector.',
-      year: '2024'
-    },
-    {
-      id: 7,
-      image: '/images/awards/IMG_20251209_125136 - Edited.webp',
-      title: 'Innovation in Distribution',
-      description: 'Recognized for innovative approaches in product distribution, supply chain management, and market development strategies.',
-      year: '2024'
-    },
-    {
-      id: 8,
-      image: '/images/awards/IMG_20251209_125334 - Edited.webp',
-      title: 'Regional Market Leader',
-      description: 'Awarded for establishing market leadership and expanding business presence across multiple regions with consistent growth.',
-      year: '2024'
-    },
-    {
-      id: 9,
-      image: '/images/awards/IMG_20251209_125354 - Edited.webp',
-      title: 'Quality Excellence Award',
-      description: 'Recognized for maintaining the highest quality standards in products and services, ensuring customer trust and satisfaction.',
-      year: '2024'
-    },
-    {
-      id: 10,
-      image: '/images/awards/IMG_20251209_125358 - Edited.webp',
-      title: 'Business Growth Achievement',
-      description: 'Awarded for exceptional business growth, strategic expansion, and significant contribution to the automotive industry.',
-      year: '2024'
-    },
-  ];
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setAwards(awardImages);
+    loadAwards();
   }, []);
+
+  const loadAwards = async () => {
+    setLoading(true);
+    try {
+      // Fetch awards with flat=true to get individual awards
+      const data = await awardsAPI.getAll(true);
+      
+      if (Array.isArray(data) && data.length > 0) {
+        // Map API response to AwardItem format
+        const mappedAwards: AwardItem[] = data.map((award: any, index: number) => ({
+          id: award.id || index + 1,
+          image: award.logo ? normalizeImageUrl(award.logo) : `/images/awards/IMG_20251209_124404 - Edited.webp`, // Fallback image
+          title: award.award_text || award.award || `Award ${index + 1}`,
+          description: award.description || `Recognized for ${award.award_text || 'excellence'}`,
+          year: award.year || '2024'
+        }));
+        setAwards(mappedAwards);
+      } else {
+        // Fallback to static data if API returns empty
+        setAwards(getFallbackAwards());
+      }
+    } catch (error) {
+      console.error('Failed to load awards:', error);
+      // Fallback to static data on error
+      setAwards(getFallbackAwards());
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getFallbackAwards = (): AwardItem[] => {
+    return [
+      {
+        id: 1,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_124404 - Edited.webp'),
+        title: 'Excellence in Commercial Vehicle Sales',
+        description: 'Recognized for outstanding performance in commercial vehicle dealership and exceptional customer service delivery across Andhra Pradesh and Telangana regions.',
+        year: '2024'
+      },
+      {
+        id: 2,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_124421 - Edited.webp'),
+        title: 'Best Dealer Performance Award',
+        description: 'Awarded for achieving the highest sales targets and maintaining superior customer satisfaction standards in the automotive industry.',
+        year: '2024'
+      },
+      {
+        id: 3,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_124431 - Edited.webp'),
+        title: 'Outstanding Service Excellence',
+        description: 'Recognized for exceptional after-sales service, customer support, and commitment to maintaining the highest quality standards.',
+        year: '2024'
+      },
+      {
+        id: 4,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_124556 - Edited.webp'),
+        title: 'Top Distributor Achievement',
+        description: 'Awarded for being the leading distributor in lubricants and automotive products, demonstrating excellence in market penetration and customer reach.',
+        year: '2024'
+      },
+      {
+        id: 5,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_124810 - Edited.webp'),
+        title: 'Customer Satisfaction Excellence',
+        description: 'Recognized for maintaining the highest levels of customer satisfaction and building long-term relationships with clients.',
+        year: '2024'
+      },
+      {
+        id: 6,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_125043 - Edited.webp'),
+        title: 'Sales Performance Champion',
+        description: 'Awarded for achieving exceptional sales growth and market leadership in the commercial vehicle and automotive products sector.',
+        year: '2024'
+      },
+      {
+        id: 7,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_125136 - Edited.webp'),
+        title: 'Innovation in Distribution',
+        description: 'Recognized for innovative approaches in product distribution, supply chain management, and market development strategies.',
+        year: '2024'
+      },
+      {
+        id: 8,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_125334 - Edited.webp'),
+        title: 'Regional Market Leader',
+        description: 'Awarded for establishing market leadership and expanding business presence across multiple regions with consistent growth.',
+        year: '2024'
+      },
+      {
+        id: 9,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_125354 - Edited.webp'),
+        title: 'Quality Excellence Award',
+        description: 'Recognized for maintaining the highest quality standards in products and services, ensuring customer trust and satisfaction.',
+        year: '2024'
+      },
+      {
+        id: 10,
+        image: normalizeImageUrl('/images/awards/IMG_20251209_125358 - Edited.webp'),
+        title: 'Business Growth Achievement',
+        description: 'Awarded for exceptional business growth, strategic expansion, and significant contribution to the automotive industry.',
+        year: '2024'
+      },
+    ];
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 flex items-center justify-center">
+        <LoadingSpinner message="Loading awards..." fullScreen={false} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50">
