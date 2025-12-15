@@ -287,7 +287,7 @@ export default function Showrooms() {
           {/* Image Indicators Overlay */}
           <div className="absolute bottom-2 sm:bottom-4 left-0 right-0 z-10 flex justify-center">
             <div className="flex gap-2 bg-black/30 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
-              {showroomImages.map((_, index) => (
+              {heroImages.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
