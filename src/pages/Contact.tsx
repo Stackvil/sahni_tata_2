@@ -1,5 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Phone, Mail, MapPin, Send, MessageCircle } from 'lucide-react';
+import { showroomsAPI, normalizeImageUrl } from '../services/api';
+
+interface PrimaryShowroom {
+  city: string;
+  address: string;
+  phone: string;
+  email: string;
+  image?: string;
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,6 +18,43 @@ export default function Contact() {
     subject: '',
     message: '',
   });
+
+  const [primaryShowroom, setPrimaryShowroom] = useState<PrimaryShowroom | null>(null);
+  const [heroImageError, setHeroImageError] = useState(false);
+
+  useEffect(() => {
+    const loadPrimaryShowroom = async () => {
+      try {
+        const response = await showroomsAPI.getAll();
+        const items = Array.isArray(response)
+          ? response
+          : (response as any)?.showrooms || (response as any)?.data || [];
+
+        if (!Array.isArray(items) || items.length === 0) {
+          return;
+        }
+
+        const main =
+          items.find((s: any) => s.is_main === true || s.isMain === true) ||
+          items[0];
+
+        setPrimaryShowroom({
+          city: main.city || 'Vijayawada',
+          address:
+            main.address ||
+            '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008',
+          phone: main.phone || '+91 98485 29755',
+          email: main.email || 'sahniauto@gmail.com',
+          image: main.image || (Array.isArray(main.images) ? main.images[0] : undefined),
+        });
+      } catch (error) {
+        // On error, fall back to static defaults
+        console.warn('[Contact] Failed to load showrooms for contact info:', error);
+      }
+    };
+
+    loadPrimaryShowroom();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,12 +97,17 @@ ${formData.message}`;
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/95cdfeef.jpg"
+            src={
+              heroImageError
+                ? 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=1080&fit=crop'
+                : normalizeImageUrl(
+                    primaryShowroom?.image || '/images/95cdfeef.jpg'
+                  )
+            }
             alt="Contact Us"
             className="w-full h-full object-cover"
             onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=1080&fit=crop';
+              setHeroImageError(true);
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/80"></div>
@@ -94,10 +145,11 @@ ${formData.message}`;
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Phone</h3>
                     <a
-                      href="tel:+919848529755"
+                      href={`tel:${(primaryShowroom?.phone || '+91 98485 29755')
+                        .replace(/\s/g, '')}`}
                       className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block break-all"
                     >
-                      +91 98485 29755
+                      {primaryShowroom?.phone || '+91 98485 29755'}
                     </a>
                     <p className="text-sm sm:text-base text-gray-600 mt-1">Mon - Sat: 9:00 AM - 7:00 PM</p>
                   </div>
@@ -110,10 +162,10 @@ ${formData.message}`;
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Email</h3>
                     <a
-                      href="mailto:sahniauto@gmail.com"
+                      href={`mailto:${primaryShowroom?.email || 'sahniauto@gmail.com'}`}
                       className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block break-all"
                     >
-                      sahniauto@gmail.com
+                      {primaryShowroom?.email || 'sahniauto@gmail.com'}
                     </a>
                     <p className="text-sm sm:text-base text-gray-600 mt-1">We'll respond within 24 hours</p>
                   </div>
@@ -126,14 +178,23 @@ ${formData.message}`;
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Head Office</h3>
                     <a
-                      href="https://www.google.com/maps/search/?api=1&query=48-16-7%2F5A+Mahanadu+Road+Vijayawada+520008"
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                        primaryShowroom?.address ||
+                          '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008'
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-700 text-base sm:text-lg hover:text-red-600 transition-colors block"
                     >
-                      #48-16-7/5A, Mahanadu Road,<br />
-                      Vijayawada - 520008<br />
-                      Andhra Pradesh, India
+                      {(primaryShowroom?.address ||
+                        '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008')
+                        .split('\n')
+                        .map((line, idx) => (
+                          <span key={idx}>
+                            {line}
+                            <br />
+                          </span>
+                        ))}
                     </a>
                   </div>
                 </div>

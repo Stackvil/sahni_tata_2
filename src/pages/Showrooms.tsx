@@ -3,13 +3,6 @@ import { MapPin, Phone, Clock, X, ChevronLeft, ChevronRight } from 'lucide-react
 import LoadingSpinner from '../components/LoadingSpinner';
 import { showroomsAPI, normalizeImageUrl } from '../services/api';
 
-// Showroom carousel images - served directly from frontend public assets
-// Use plain paths so they don't depend on CloudFront/S3
-const showroomImages = [
-  '/images/2.png', // First slide - displays first
-  '/images/1.png', // Second slide - displays after
-];
-
 interface Showroom {
   id: string;
   city: string;
@@ -187,19 +180,45 @@ export default function Showrooms() {
     loadShowrooms();
   }, []);
 
+  // Hero images derived from latest showroom data (from backend / public JSON)
+  const heroImages = useMemo(() => {
+    const images: string[] = [];
+
+    showrooms.forEach((s) => {
+      if (s.image) {
+        images.push(s.image);
+      }
+      if (s.images && s.images.length > 0) {
+        images.push(...s.images);
+      }
+    });
+
+    const unique = Array.from(new Set(images)).filter(Boolean);
+
+    if (unique.length > 0) {
+      return unique;
+    }
+
+    // Fallback to legacy static banners if no data yet
+    return [
+      normalizeImageUrl('/images/2.png'),
+      normalizeImageUrl('/images/1.png'),
+    ];
+  }, [showrooms]);
+
   // Auto-scroll images - Start with Tata (index 0), then Massey (index 1)
   useEffect(() => {
-    // Ensure we start with Tata slide (index 0)
+    // Ensure we start with first slide
     setCurrentImageIndex(0);
-    
-    if (showroomImages.length <= 1) return;
+
+    if (heroImages.length <= 1) return;
 
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % showroomImages.length);
-    }, 5000); // Change image every 5 seconds - Tata (0) -> Massey (1) -> Tata (0)
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [heroImages]);
 
 
   // Filter showrooms by category - exclude Massey from Tata, and vice versa
@@ -230,7 +249,7 @@ export default function Showrooms() {
       <section className="relative w-full bg-white overflow-hidden pb-0 md:pb-8 lg:pb-12">
         {/* Background Image Carousel */}
         <div className="relative w-full" style={{ marginBottom: 0 }}>
-          {showroomImages.map((image, index) => (
+          {heroImages.map((image, index) => (
             <div
               key={index}
               className={`transition-opacity duration-1000 ease-in-out ${
