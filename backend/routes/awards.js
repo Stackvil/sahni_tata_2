@@ -113,7 +113,7 @@ router.get('/', async (req, res) => {
       
       if (flat === 'true') {
         // Return individual awards with CloudFront URLs
-        const awardsWithCloudFront = awards.map((award: any) => ({
+        const awardsWithCloudFront = awards.map((award) => ({
           id: award.id,
           brand: award.brand,
           logo: award.logo_url ? toCloudFrontUrl(award.logo_url) : award.logo_url,
@@ -130,8 +130,8 @@ router.get('/', async (req, res) => {
       }
       
       // Group by brand for non-flat response
-      const groupedAwards: any = {};
-      awards.forEach((award: any) => {
+      const groupedAwards = {};
+      awards.forEach((award) => {
         if (!groupedAwards[award.brand]) {
           groupedAwards[award.brand] = {
             brand: award.brand,

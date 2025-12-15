@@ -119,7 +119,7 @@ router.get('/', async (req, res) => {
 // POST /api/showrooms - Create new showroom (Protected)
 router.post('/', authenticateToken, upload.single('image'), async (req, res) => {
   try {
-    const { city, address, phone, email, is_main, category } = req.body;
+    const { city, address, phone, email, is_main, category, images } = req.body;
     
     if (!city || !address || !phone || !email) {
       return res.status(400).json({ detail: 'City, address, phone, and email are required' });
@@ -239,7 +239,7 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
 
     if (shouldUseDatabase) {
       try {
-        const updateData: any = {};
+        const updateData = {};
         if (city !== undefined) updateData.city = city;
         if (address !== undefined) updateData.address = address;
         if (phone !== undefined) updateData.phone = phone;
