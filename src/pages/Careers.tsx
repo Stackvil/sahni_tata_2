@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Briefcase, MapPin, Building, Calendar, Upload, X, CheckCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { careersAPI, applicationsAPI, normalizeImageUrl } from '../services/api';
+import { careersAPI, applicationsAPI } from '../services/api';
 
 interface JobPosting {
   id: string;
@@ -129,7 +129,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
 
   return (
     <div className="bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-screen">
-      {/* Hero Section - Video Background with robust fallback */}
+      {/* Hero Section - Video Background using public/videos/KISHORE.mp4 */}
       <section className="relative w-full overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] bg-black">
         {/* Video Background */}
         <video
@@ -142,10 +142,10 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
             console.error('Video load error:', e);
             const target = e.target as HTMLVideoElement;
             const source = target.querySelector('source');
-            // Fallback: try alternative local video, then hide video if that also fails
+            // Fallback: try alternative local video from public/, then hide video if that also fails
             if (source && !source.dataset.fallbackTried) {
               source.dataset.fallbackTried = 'true';
-              source.src = normalizeImageUrl('/videos/videoplayback.mp4');
+              source.src = '/videos/videoplayback1.mp4';
               target.load();
               target.play().catch(() => undefined);
             } else {
@@ -153,7 +153,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
             }
           }}
         >
-          <source src={normalizeImageUrl('/videos/KISHORE.mp4')} type="video/mp4" />
+          <source src="/videos/KISHORE.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </section>
