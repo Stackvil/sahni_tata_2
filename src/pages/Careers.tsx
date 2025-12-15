@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Briefcase, MapPin, Building, Calendar, Upload, X, CheckCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { careersAPI, applicationsAPI } from '../services/api';
+import { careersAPI, applicationsAPI, normalizeImageUrl } from '../services/api';
 
 interface JobPosting {
   id: string;
@@ -129,8 +129,8 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
 
   return (
     <div className="bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-screen">
-      {/* Hero Section - Video Background Only */}
-      <section className="relative w-full overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh]">
+      {/* Hero Section - Video Background with robust fallback */}
+      <section className="relative w-full overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] bg-black">
         {/* Video Background */}
         <video
           autoPlay
@@ -141,14 +141,19 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
           onError={(e) => {
             console.error('Video load error:', e);
             const target = e.target as HTMLVideoElement;
-            // Try fallback path
             const source = target.querySelector('source');
-            if (source && !source.src.includes('cloudfront')) {
-              source.src = '/videos/KISHORE.mp4';
+            // Fallback: try alternative local video, then hide video if that also fails
+            if (source && !source.dataset.fallbackTried) {
+              source.dataset.fallbackTried = 'true';
+              source.src = normalizeImageUrl('/videos/videoplayback.mp4');
+              target.load();
+              target.play().catch(() => undefined);
+            } else {
+              target.style.display = 'none';
             }
           }}
         >
-          <source src="/videos/KISHORE.mp4" type="video/mp4" />
+          <source src={normalizeImageUrl('/videos/KISHORE.mp4')} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </section>

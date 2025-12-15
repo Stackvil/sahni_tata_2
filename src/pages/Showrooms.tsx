@@ -3,10 +3,11 @@ import { MapPin, Phone, Clock, X, ChevronLeft, ChevronRight } from 'lucide-react
 import LoadingSpinner from '../components/LoadingSpinner';
 import { showroomsAPI, normalizeImageUrl } from '../services/api';
 
-// Showroom carousel images - 2.png first, then 1.png
+// Showroom carousel images - served directly from frontend public assets
+// Use plain paths so they don't depend on CloudFront/S3
 const showroomImages = [
-  normalizeImageUrl('/images/2.png'), // First slide - displays first
-  normalizeImageUrl('/images/1.png'), // Second slide - displays after
+  '/images/2.png', // First slide - displays first
+  '/images/1.png', // Second slide - displays after
 ];
 
 interface Showroom {
