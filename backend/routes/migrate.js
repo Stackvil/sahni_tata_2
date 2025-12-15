@@ -3,6 +3,7 @@ import { authenticateToken } from '../middleware/auth.js';
 import { initDatabase, query } from '../config/database.js';
 import { productsDB, vehiclesDB, masseyProductsDB, showroomsDB, aboutDB, homeVideoDB, fuelStationsDB, awardsDB } from '../utils/dbManager.js';
 import fs from 'fs/promises';
+import fsSync from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -10,8 +11,18 @@ const router = express.Router();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// Use backend/data folder (JSON files are copied there for Vercel deployment)
-const PUBLIC_DIR = path.join(__dirname, '../data');
+
+// Prefer latest JSONs from root /public, fall back to legacy backend/data copies
+let PUBLIC_DIR = process.env.VERCEL
+  ? path.join(__dirname, '../../../public')  // Vercel: api/backend/routes -> ../../../public
+  : path.join(__dirname, '../../public');    // Local: backend/routes -> ../../public
+
+const DATA_DIR = path.join(__dirname, '../data');
+
+if (!fsSync.existsSync(PUBLIC_DIR)) {
+  // If /public doesn't exist (older deployments), use backend/data as source
+  PUBLIC_DIR = DATA_DIR;
+}
 
 // Get CloudFront domain from environment or use default
 const CLOUDFRONT_DOMAIN = process.env.AWS_CLOUDFRONT_DOMAIN || 'https://dh0blbvvlqdiy.cloudfront.net';

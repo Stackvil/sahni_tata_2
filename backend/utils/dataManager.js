@@ -6,9 +6,10 @@ import { query, isDatabaseConnected, getPool } from '../config/database.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Use backend/data folder for JSON files (accessible on Vercel)
-// Fallback to public folder for local development
+// Use backend/data folder for JSON files (historical copies, accessible on Vercel)
+// Prefer root public folder for latest JSONs when available
 const DATA_DIR = path.join(__dirname, '../data');
+const PUBLIC_DIR = path.join(__dirname, '../../public');
 
 // Check if we're on Vercel (read-only filesystem)
 const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
@@ -136,15 +137,30 @@ export async function readData(filename) {
   
   // Read from JSON files (fallback when database is empty/unavailable, or primary for local)
   try {
-    const filePath = path.join(DATA_DIR, `${filename}.json`);
-    const data = await fs.readFile(filePath, 'utf-8');
-    const parsed = JSON.parse(data);
-    console.log(`[dataManager] Read ${filename} from JSON file: ${Object.keys(parsed).length} keys`);
-    return parsed;
+    // Prefer latest JSONs from root /public when available
+    const publicFilePath = path.join(PUBLIC_DIR, `${filename}.json`);
+    try {
+      const data = await fs.readFile(publicFilePath, 'utf-8');
+      const parsed = JSON.parse(data);
+      console.log(`[dataManager] Read ${filename} from PUBLIC JSON file: ${publicFilePath}`);
+      return parsed;
+    } catch (publicError) {
+      if (publicError.code !== 'ENOENT') {
+        console.warn(`[dataManager] Error reading PUBLIC JSON for ${filename} at ${publicFilePath}:`, publicError.message);
+      }
+      // Fall back to legacy backend/data copies
+      const dataFilePath = path.join(DATA_DIR, `${filename}.json`);
+      const data = await fs.readFile(dataFilePath, 'utf-8');
+      const parsed = JSON.parse(data);
+      console.log(`[dataManager] Read ${filename} from DATA JSON file: ${dataFilePath}`);
+      return parsed;
+    }
   } catch (error) {
-    // If file doesn't exist, return empty structure with proper keys
+    // If file doesn't exist in either location, return empty structure with proper keys
     if (error.code === 'ENOENT') {
-      console.warn(`[dataManager] JSON file not found for ${filename} at ${path.join(DATA_DIR, `${filename}.json`)}, returning empty structure`);
+      console.warn(
+        `[dataManager] JSON file not found for ${filename} in PUBLIC (${PUBLIC_DIR}) or DATA (${DATA_DIR}), returning empty structure`
+      );
       return getEmptyStructure(filename);
     }
     console.error(`[dataManager] Error reading JSON file for ${filename}:`, error.message);
