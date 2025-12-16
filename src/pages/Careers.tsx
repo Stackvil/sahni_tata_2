@@ -129,7 +129,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
 
   return (
     <div className="bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-screen">
-      {/* Hero Section - Video Background using public/videos/KISHORE.mp4 */}
+      {/* Hero Section - Video Background using S3 KISHORE.mp4 */}
       <section className="relative w-full overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] bg-black">
         {/* Video Background */}
         <video
@@ -142,10 +142,10 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
             console.error('Video load error:', e);
             const target = e.target as HTMLVideoElement;
             const source = target.querySelector('source');
-            // Fallback: try alternative local video from public/, then hide video if that also fails
+            // Fallback: try base S3 URL without query params
             if (source && !source.dataset.fallbackTried) {
               source.dataset.fallbackTried = 'true';
-              source.src = '/videos/videoplayback1.mp4';
+              source.src = 'https://tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4';
               target.load();
               target.play().catch(() => undefined);
             } else {
@@ -153,7 +153,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
             }
           }}
         >
-          <source src="/videos/KISHORE.mp4" type="video/mp4" />
+          <source src="https://tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXHHSXNU52MK56QX3%2F20251216%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20251216T064750Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCmFwLXNvdXRoLTEiRjBEAiBzE67nlOjZF3QhGiMIIQN%2FSQrc5lEXIiZWbbCjIzq2kQIgCe34bo6vNK289FA%2F6UI3%2BVTlsd2JMS%2F9ylqVXj224lsq2gIIYBAAGgw0OTY1Nzc3Njg3NjMiDOXodg9IPo%2B0DmMrDiq3Aj2%2FUx9JsuqLYGpWWlKusVIcLVvq7Z1QebUIUo0SKWQiNyycohvVVTHz70SPM77z9yVUenMcWPjFgBsJalTaFAPf6tnN3RSDDeQrVe4TAvV%2FuX%2FUWzEAay1FOZU0K%2BnEgpbYyQwmtjI084JB5Zpun%2FJHAhkW1vZy35VR0tv9shLJb2uEKbAcBIjQxB5WbNo9RQgEvypYtDrgdh5cQXmaG7fpcWgTKyA0aWc%2Fx%2BPzwFIopckTbbl%2BEDaepORAl8QtnBQNT9euE%2Fsylxvicd0EYc8DumkbAD8p1ZACSGTbdBF6qrfAyrm67EQARrm6j%2BqvYX9eqdHRHPiBMB51pSAi9955U8so8n3Yh%2FYGdLIiRr2wvWMJTyUlKTC%2FY0SPmpK%2FDsl3%2BMAfamiApmrX7BZrt8Hcoer%2Bo7t5MLb%2Bg8oGOq4CCxI%2FAX59HeplHiUKTYvjAFSJJk%2BCjHHel8%2BhCqsHJHdwTJRLYQ4LboezGprb1hirxzE%2FFB9ahxT4lDgRXcJfc6xs03PnYIPVPx3odtek5Mp5%2BWzzlEce%2BmTjzJNcBeD8WrG5cm5N4Lp8FvR%2F0kW8SI90DwvkRCchJUqeUloER7kRbohUlNC5%2F5CZyFsf%2Ban%2BZNr5HV7VIqhmArjr%2FdBN6aTHP44tFFHeyh4%2F08nACxOlk7YhWRfP6eQXsLCOQnRPClMtQZ7ejdl%2Bopc9meUbkiZxOkhtqQgKyzpw5xJ4DGRqo1UpkonmJsOcTg3mpLBvM0xHbK3Yv2DnJA6HMnr7E%2BKYaEq7%2FoSYnsHQYpCx7UShhKiHU7W9ogbLuMI3ynM39ms1%2F9b5rREa3QkEvm0%3D&X-Amz-Signature=037fd52a8001260c8f50595f2affebdf3dd44b52033973c370a93e68a98db535&X-Amz-SignedHeaders=host&response-content-disposition=inline" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </section>
