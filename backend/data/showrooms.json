@@ -7,7 +7,7 @@
       "phone": "+91 98485 29755",
       "email": "sahniauto@gmail.com",
       "is_main": true,
-      "image": "/images/showrooms/vijayawada.png",
+      "image": "https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/vijayawada.png",
       "category": "tata"
     },
     {
@@ -17,7 +17,7 @@
       "phone": "+91 98485 29755",
       "email": "sahniauto@gmail.com",
       "is_main": false,
-      "image": "/images/showrooms/guntur.png",
+      "image": "https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/guntur.png",
       "category": "tata"
     },
     {
@@ -27,7 +27,7 @@
       "phone": "+91 98485 29755",
       "email": "sahniauto@gmail.com",
       "is_main": false,
-      "image": "/images/showrooms/NARASARAOPET.png",
+      "image": "https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/NARASARAOPET.png",
       "category": "tata"
     },
     {
