@@ -32,13 +32,19 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
       
       if (Array.isArray(data) && data.length > 0) {
         // Map API response to AwardItem format
-        const mappedAwards: AwardItem[] = data.map((award: any, index: number) => ({
-          id: parseInt(award.id) || index + 1,
-          image: award.image || award.logo ? normalizeImageUrl(award.image || award.logo) : normalizeImageUrl(`/images/awards/IMG_20251209_124404 - Edited.webp`),
-          title: award.title || award.award_text || award.award || `Award ${index + 1}`,
-          description: award.description || `Recognized for ${award.award_text || award.award || 'excellence'}`,
-          year: award.year || '2024'
-        }));
+        const mappedAwards: AwardItem[] = data.map((award: any, index: number) => {
+          // Get image from various possible fields and normalize it
+          const rawImage = award.image || award.logo || award.image_url || award.logo_url || '';
+          const normalizedImage = rawImage ? normalizeImageUrl(rawImage) : normalizeImageUrl(`/images/awards/IMG_20251209_124404 - Edited.webp`);
+          
+          return {
+            id: parseInt(award.id) || index + 1,
+            image: normalizedImage,
+            title: award.title || award.award_text || award.award || `Award ${index + 1}`,
+            description: award.description || `Recognized for ${award.award_text || award.award || 'excellence'}`,
+            year: award.year || '2024'
+          };
+        });
         setAwards(mappedAwards);
       } else {
         // Fallback to static data if API returns empty
@@ -205,13 +211,19 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
                   {/* Award Image */}
                   <div className={`w-full lg:w-1/4 relative overflow-hidden`}>
                     <img
-                      src={award.image}
+                      src={normalizeImageUrl(award.image)}
                       alt={award.title}
                       className="w-full h-full min-h-[150px] sm:min-h-[180px] lg:min-h-[220px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                       loading="lazy"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
+                        // Try fallback image
+                        const fallbackImage = normalizeImageUrl('/images/awards/IMG_20251209_124404 - Edited.webp');
+                        if (target.src !== fallbackImage) {
+                          target.src = fallbackImage;
+                        } else {
+                          target.style.display = 'none';
+                        }
                       }}
                     />
                   </div>

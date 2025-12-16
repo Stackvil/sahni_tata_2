@@ -263,7 +263,7 @@ export default function Showrooms() {
               }}
             >
               <img
-                src={image}
+                src={normalizeImageUrl(image)}
                 alt={`Showroom Background ${index + 1}`}
                 className="w-full h-auto block"
                 style={{ 
@@ -346,7 +346,7 @@ export default function Showrooms() {
                   </div>
                   {showroom.image ? (
                     <img
-                      src={showroom.image}
+                      src={normalizeImageUrl(showroom.image)}
                       alt={showroom.city}
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -462,7 +462,7 @@ export default function Showrooms() {
                   </div>
                   {showroom.image ? (
                     <img
-                      src={showroom.image}
+                      src={normalizeImageUrl(showroom.image)}
                       alt={showroom.city}
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -635,7 +635,7 @@ export default function Showrooms() {
                     }`}
                   >
                     <img
-                      src={image}
+                      src={normalizeImageUrl(image)}
                       alt={`${selectedMasseyShowroom.city} - Image ${idx + 1}`}
                       className="max-w-full max-h-[70vh] object-contain"
                       onError={(e) => {
