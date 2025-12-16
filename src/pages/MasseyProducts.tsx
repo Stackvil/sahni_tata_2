@@ -289,6 +289,77 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
                selectedCat.includes(productCategory);
       });
 
+  // Shared function to find matching vehicle for a Massey product
+  const findMatchingVehicle = async (product: Product) => {
+    try {
+      const { loadVehicles } = await import('../data/tataVehicles');
+      const allVehicles = await loadVehicles();
+      const productNameLower = product.name.toLowerCase();
+      
+      console.log(`[MasseyProducts] Looking for vehicle matching: ${product.name}`);
+      
+      // Find vehicle by matching name (Massey Ferguson vehicles have category='massey')
+      let matchingVehicle = allVehicles.find(v => {
+        const vNameLower = (v.name || '').toLowerCase();
+        const vCategory = (v.category || '').toLowerCase();
+        
+        // Exact match
+        if (vNameLower === productNameLower) {
+          return true;
+        }
+        
+        // Category must be massey
+        if (vCategory !== 'massey' && !vCategory.includes('massey') && !vNameLower.includes('massey')) {
+          return false;
+        }
+        
+        // Check if product name contains vehicle name or vice versa
+        if (productNameLower.includes(vNameLower) || vNameLower.includes(productNameLower)) {
+          return true;
+        }
+        
+        // Try matching by model numbers (e.g., "241 DI", "1035", "MF 30")
+        const productModelMatch = productNameLower.match(/(\d+[a-z]*|\d+\.\d+)/i);
+        const vehicleModelMatch = vNameLower.match(/(\d+[a-z]*|\d+\.\d+)/i);
+        if (productModelMatch && vehicleModelMatch && productModelMatch[0] === vehicleModelMatch[0]) {
+          return true;
+        }
+        
+        return false;
+      });
+      
+      if (matchingVehicle) {
+        console.log(`[MasseyProducts] Found matching vehicle: ${matchingVehicle.name} (ID: ${matchingVehicle.id})`);
+        return matchingVehicle.id;
+      } else {
+        console.warn('[MasseyProducts] Could not find matching vehicle for:', product.name);
+        console.warn('[MasseyProducts] Available Massey vehicles:', 
+          allVehicles
+            .filter(v => {
+              const cat = (v.category || '').toLowerCase();
+              return cat === 'massey' || cat.includes('massey') || (v.name || '').toLowerCase().includes('massey');
+            })
+            .map(v => v.name)
+        );
+        // Fallback: try to find any Massey vehicle
+        const masseyVehicle = allVehicles.find(v => {
+          const cat = (v.category || '').toLowerCase();
+          return cat === 'massey' || cat.includes('massey') || (v.name || '').toLowerCase().includes('massey');
+        });
+        if (masseyVehicle) {
+          console.log(`[MasseyProducts] Using fallback vehicle: ${masseyVehicle.name} (ID: ${masseyVehicle.id})`);
+          return masseyVehicle.id;
+        } else {
+          console.error('[MasseyProducts] No Massey vehicles found at all!');
+          return null;
+        }
+      }
+    } catch (error) {
+      console.error('[MasseyProducts] Error finding vehicle:', error);
+      return null;
+    }
+  };
+
   const handleBack = () => {
     // Clear brand selection and go back to brand selection page
     try {
@@ -384,79 +455,14 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
                 key={product.id}
                 onClick={async () => {
                   // Massey Ferguson products need to be mapped to vehicles
-                  // Load vehicles and find matching vehicle by name
-                  try {
-                    const { loadVehicles } = await import('../data/tataVehicles');
-                    const allVehicles = await loadVehicles();
-                    const productNameLower = product.name.toLowerCase();
-                    
-                    console.log(`[MasseyProducts] Looking for vehicle matching: ${product.name}`);
-                    
-                    // Find vehicle by matching name (Massey Ferguson vehicles have category='massey')
-                    let matchingVehicle = allVehicles.find(v => {
-                      const vNameLower = (v.name || '').toLowerCase();
-                      const vCategory = (v.category || '').toLowerCase();
-                      
-                      // Exact match
-                      if (vNameLower === productNameLower) {
-                        return true;
-                      }
-                      
-                      // Category must be massey
-                      if (vCategory !== 'massey' && !vCategory.includes('massey') && !vNameLower.includes('massey')) {
-                        return false;
-                      }
-                      
-                      // Check if product name contains vehicle name or vice versa
-                      if (productNameLower.includes(vNameLower) || vNameLower.includes(productNameLower)) {
-                        return true;
-                      }
-                      
-                      // Try matching by model numbers (e.g., "241 DI", "1035", "MF 30")
-                      const productModelMatch = productNameLower.match(/(\d+[a-z]*|\d+\.\d+)/i);
-                      const vehicleModelMatch = vNameLower.match(/(\d+[a-z]*|\d+\.\d+)/i);
-                      if (productModelMatch && vehicleModelMatch && productModelMatch[0] === vehicleModelMatch[0]) {
-                        return true;
-                      }
-                      
-                      return false;
-                    });
-                    
-                    if (matchingVehicle && setSelectedVehicleId) {
-                      console.log(`[MasseyProducts] Found matching vehicle: ${matchingVehicle.name} (ID: ${matchingVehicle.id})`);
-                      setSelectedVehicleId(matchingVehicle.id);
-                      if (setCurrentPage) {
-                        setCurrentPage('vehicle-detail');
-                      }
-                    } else {
-                      console.warn('[MasseyProducts] Could not find matching vehicle for:', product.name);
-                      console.warn('[MasseyProducts] Available Massey vehicles:', 
-                        allVehicles
-                          .filter(v => {
-                            const cat = (v.category || '').toLowerCase();
-                            return cat === 'massey' || cat.includes('massey') || (v.name || '').toLowerCase().includes('massey');
-                          })
-                          .map(v => v.name)
-                      );
-                      // Fallback: try to find any Massey vehicle
-                      const masseyVehicle = allVehicles.find(v => {
-                        const cat = (v.category || '').toLowerCase();
-                        return cat === 'massey' || cat.includes('massey') || (v.name || '').toLowerCase().includes('massey');
-                      });
-                      if (masseyVehicle && setSelectedVehicleId) {
-                        console.log(`[MasseyProducts] Using fallback vehicle: ${masseyVehicle.name} (ID: ${masseyVehicle.id})`);
-                        setSelectedVehicleId(masseyVehicle.id);
-                        if (setCurrentPage) {
-                          setCurrentPage('vehicle-detail');
-                        }
-                      } else {
-                        console.error('[MasseyProducts] No Massey vehicles found at all!');
-                        alert(`Vehicle details not available for ${product.name}. Please contact us for more information.`);
-                      }
+                  const vehicleId = await findMatchingVehicle(product);
+                  if (vehicleId && setSelectedVehicleId) {
+                    setSelectedVehicleId(vehicleId);
+                    if (setCurrentPage) {
+                      setCurrentPage('vehicle-detail');
                     }
-                  } catch (error) {
-                    console.error('[MasseyProducts] Error finding vehicle:', error);
-                    alert('Error loading vehicle details. Please try again.');
+                  } else {
+                    alert(`Vehicle details not available for ${product.name}. Please contact us for more information.`);
                   }
                 }}
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 group cursor-pointer flex flex-col h-full"
@@ -504,13 +510,17 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
                   
                   {/* Booking Button */}
                   <button
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.stopPropagation();
-                      if (setSelectedVehicleId) {
-                        setSelectedVehicleId(product.id);
-                      }
-                      if (setCurrentPage) {
-                        setCurrentPage('vehicle-detail');
+                      // Massey Ferguson products need to be mapped to vehicles
+                      const vehicleId = await findMatchingVehicle(product);
+                      if (vehicleId && setSelectedVehicleId) {
+                        setSelectedVehicleId(vehicleId);
+                        if (setCurrentPage) {
+                          setCurrentPage('vehicle-detail');
+                        }
+                      } else {
+                        alert(`Vehicle details not available for ${product.name}. Please contact us for more information.`);
                       }
                     }}
                     className="w-full bg-red-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-red-700 transition-colors mt-auto"
