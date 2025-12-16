@@ -86,14 +86,14 @@ const normalizeShowrooms = (items: any[]): Showroom[] => {
     const id = String(item?.id || item?.detail_id || item?.showroom_id || item?.uuid || index);
     const city = item?.city || item?.name || item?.location || `Showroom ${index + 1}`;
     
-    // Normalize image URL using the shared function
+    // Use image URLs exactly as provided (S3 or CloudFront) without rewriting
     const imagePath = item?.image || item?.banner || item?.photo || '';
-    const imageUrl = normalizeImageUrl(imagePath);
+    const imageUrl = typeof imagePath === 'string' ? imagePath : '';
 
-    // Normalize images array if present
+    // Images array (keep URLs exactly as in JSON/backend)
     let images: string[] | undefined;
     if (item?.images && Array.isArray(item.images)) {
-      images = item.images.map((img: string) => normalizeImageUrl(img));
+      images = item.images.filter((img: string) => typeof img === 'string' && img);
     }
 
     // Determine category - check multiple indicators for Massey Ferguson

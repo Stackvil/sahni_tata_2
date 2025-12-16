@@ -129,7 +129,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
 
   return (
     <div className="bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-screen">
-      {/* Hero Section - Video Background using S3 KISHORE.mp4 */}
+      {/* Hero Section - Video Background using S3 KISHORE.mp4 (exact URL provided) */}
       <section className="relative w-full overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] bg-black">
         {/* Video Background */}
         <video
@@ -139,24 +139,8 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
           playsInline
           className="w-full h-full object-cover"
           onError={(e) => {
-            console.error('Video load error:', e);
-            const target = e.target as HTMLVideoElement;
-            const source = target.querySelector('source');
-            // Fallback: try base S3 URL without query params, then local public video
-            if (source && !source.dataset.fallbackTried) {
-              source.dataset.fallbackTried = 'true';
-              source.src = 'https://tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4';
-              target.load();
-              target.play().catch(() => undefined);
-            } else if (source && source.src.includes('tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4')) {
-              // Second fallback: local public video
-              source.src = '/videos/KISHORE.mp4';
-              target.load();
-              target.play().catch(() => undefined);
-            } else {
-              // Final fallback: hide video if everything fails
-              target.style.display = 'none';
-            }
+            // Don't hide the hero, just log the error so section still shows
+            console.error('Video load error (careers hero):', e);
           }}
         >
           <source src="https://tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXHHSXNU55RJM3NKI%2F20251216%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20251216T070603Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCmFwLXNvdXRoLTEiRjBEAiBXrfi6%2FEaxeCp0SWXpPsiNgIjwdX7qqJXmUhioXivHlgIgdxmckIguU3vfThP0ktoXJp96h47k8Q2GAYpWB6shOlEq2gIIYBAAGgw0OTY1Nzc3Njg3NjMiDFH9FuNRacqpeia6Pyq3AmPU1fL8ik0BKl2xDABQKmOE9HGOOMRdv2hSyR%2FaU2OtFpwLS9FnZ%2FpSSCLr8qp2LhYdBeXW2ZJ2d%2BWUL4ahaVcY4q0UwcasEFPg9H71nSQ3R3J%2F4EVHdmi147I7MPFBUENMgEAQsQxoUx4cCaQdMA9vMQgmF7dG1y5aHS5SJMCu%2BGbmgbvzQ7Dt7JI2SVzV2w96ZqT6h0%2B1J3jcve37LIHUOZ2d%2B05irzFCgwFwBs26t%2FUDG3AzBMxipkLbHhQ1oiAScOnXOgJw6f01TlKFoyaQ1mDZ8Vsoir0NDLCypShx%2FfrdKHYc6cvEyeg4mUOUGvsF7CVA0xQ6eRqN8v1E9PmY74YnmyDd8iUqufoX69QUHQC2X217VjUl%2Bz9FDanLcHWqKvnzFspdocqwjQDQK3gpPbT93gfFMLb%2Bg8oGOq4CLHSRYY%2FfVNtttHYRmLHWGXk%2F0MoUSqC50ySybg60We9jb1b0pcJ%2FhDS2f1BXAHBOGky6RqdyoRSFYqWbIVM9ZIMGNurOreQ11ybIZz6PxHkQYc4CPb1zz91xkeItrb029DGB25%2FX7NXv0DI2vRvkuio9OombmNinGZOO1qaJfU%2F6JG1aeo1fk0i5yMCmGcwzwRwsXT2hhcCCQYcRPn6ZxegtnTYCIUnAdASRpCMfPCah2WipXHPKUD6clOUWn5cg5PQyBN02ePndwAnTil7zX4qJbvAif%2BR632pov9VsdBWwC1p0db%2BuEp01ZYNPm04KcKOb9UUlSbGhjjULf685xoZpaiqZxccq4Vtea8iBFbgueEioUX7ZpsOlEFoUL6LkAu%2FpBjcstqLwAws8gAY%3D&X-Amz-Signature=2fca90845ae1c91ce2626793b8c1d80d1efc36093b52868aa4c073c5979d83f6&X-Amz-SignedHeaders=host&response-content-disposition=inline" type="video/mp4" />
