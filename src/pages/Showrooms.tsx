@@ -22,7 +22,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     address: '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008',
     phone: '+91 98485 29755',
     email: 'sahniauto@gmail.com',
-    image: normalizeImageUrl('/images/showrooms/vijayawada.png'),
+    image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/vijayawada.png'),
     isMain: true,
   },
   {
@@ -40,7 +40,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     address: 'NH 16, Guntur Main Road, Guntur District',
     phone: '+91 98485 29755',
     email: 'sahniauto@gmail.com',
-    image: normalizeImageUrl('/images/showrooms/guntur.png'),
+    image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/guntur.png'),
     isMain: true,
   },
   {
