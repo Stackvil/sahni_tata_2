@@ -35,7 +35,7 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
         const mappedAwards: AwardItem[] = data.map((award: any, index: number) => {
           // Get image from various possible fields and normalize it
           const rawImage = award.image || award.logo || award.image_url || award.logo_url || '';
-          const normalizedImage = rawImage ? normalizeImageUrl(rawImage) : normalizeImageUrl(`/images/awards/IMG_20251209_124404 - Edited.webp`);
+          const normalizedImage = rawImage ? normalizeImageUrl(rawImage) : normalizeImageUrl(`https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/awards/IMG_20251209_124404+-+Edited.webp`);
           
           return {
             id: parseInt(award.id) || index + 1,
@@ -63,7 +63,7 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
     return [
       {
         id: 1,
-        image: normalizeImageUrl('/images/awards/IMG_20251209_124404 - Edited.webp'),
+        image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/awards/IMG_20251209_124404+-+Edited.webp'),
         title: 'Excellence in Commercial Vehicle Sales',
         description: 'Recognized for outstanding performance in commercial vehicle dealership and exceptional customer service delivery across Andhra Pradesh and Telangana regions.',
         year: '2024'
@@ -218,7 +218,7 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         // Try fallback image
-                        const fallbackImage = normalizeImageUrl('/images/awards/IMG_20251209_124404 - Edited.webp');
+                        const fallbackImage = normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/awards/IMG_20251209_124404+-+Edited.webp');
                         if (target.src !== fallbackImage) {
                           target.src = fallbackImage;
                         } else {

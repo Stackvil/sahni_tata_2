@@ -31,7 +31,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     address: 'Palnadu Road, Narasaraopet',
     phone: '+91 98485 29755',
     email: 'sahniauto@gmail.com',
-    image: normalizeImageUrl('/images/showrooms/NARASARAOPET.png'),
+    image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/NARASARAOPET.png'),
     isMain: true,
   },
   {
