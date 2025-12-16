@@ -155,42 +155,23 @@ export default function Showrooms() {
       setLoading(true);
 
       try {
-        // 1) Try to load showrooms from public/showrooms.json (source of truth for latest images)
-        const jsonResponse = await fetch('/showrooms.json');
-        if (!jsonResponse.ok) {
-          throw new Error(`Failed to load public/showrooms.json: ${jsonResponse.status}`);
-        }
-        const jsonData = await jsonResponse.json();
-        const jsonShowrooms = Array.isArray(jsonData)
-          ? jsonData
-          : (jsonData?.showrooms || []);
+        // Backend returns array directly
+        const response = await showroomsAPI.getAll();
+        const backendShowrooms = Array.isArray(response) 
+          ? response 
+          : (response?.showrooms || response?.data || []);
 
-        let normalized: Showroom[] = [];
-        if (Array.isArray(jsonShowrooms) && jsonShowrooms.length > 0) {
-          normalized = normalizeShowrooms(jsonShowrooms);
-        }
+        const normalized = normalizeShowrooms(backendShowrooms);
 
-        // 2) If JSON had no data, fallback to backend API
-        if (!normalized || normalized.length === 0) {
-          // Backend returns array directly
-          const response = await showroomsAPI.getAll();
-          const backendShowrooms = Array.isArray(response) 
-            ? response 
-            : (response?.showrooms || response?.data || []);
-
-          normalized = normalizeShowrooms(backendShowrooms);
-        }
-
-        if (!normalized || normalized.length === 0) {
-          throw new Error('No showrooms returned from JSON or backend.');
+        if (normalized.length === 0) {
+          throw new Error('No showrooms returned from backend.');
         }
 
         setShowrooms(normalized);
       } catch (error: any) {
         console.error('Failed to load showrooms from backend:', error);
-        // Fallback to static in-code showrooms if everything else fails
-        const staticNormalized = normalizeShowrooms(STATIC_SHOWROOMS as any);
-        setShowrooms(staticNormalized);
+        // Show error state - no fallback to static data
+        setShowrooms([]);
       } finally {
         setLoading(false);
       }
