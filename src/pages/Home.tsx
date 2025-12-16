@@ -448,7 +448,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   {/* Top Section - Logo */}
                   <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
                     <img
-                      src="/images/maxresdefault.jpg"
+                      src={normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/maxresdefault.jpg')}
                   alt="Tata Motors"
                       className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
                   onError={(e) => {
@@ -702,7 +702,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
                   <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
                     <img
-                      src="/images/maxresdefault.jpg"
+                      src={normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/maxresdefault.jpg')}
                       alt="Tata Motors"
                       className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
                       onError={(e) => {
