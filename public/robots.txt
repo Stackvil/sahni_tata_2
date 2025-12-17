@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and system paths
+Disallow: /admin
+Disallow: /backend
+Disallow: /api
+
+# Sitemap location
+Sitemap: https://sahniauto.com/sitemap.xml
+
+
