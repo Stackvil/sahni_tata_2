@@ -494,99 +494,109 @@ export default function Showrooms() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {masseyShowrooms.map((showroom, index) => (
-              <div
-                key={`${showroom.id || index}-massey`}
-                className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 cursor-pointer"
-                onClick={() => {
-                  if (showroom.images && showroom.images.length > 0) {
-                    setSelectedMasseyShowroom(showroom);
-                    setMasseyGalleryIndex(0);
-                  }
-                }}
-              >
-                {/* First Image */}
-                <div className="h-64 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute top-4 left-4 bg-green-600 px-4 py-2 rounded-lg z-10">
-                    <span className="text-white font-bold text-sm uppercase">{showroom.city}</span>
-                  </div>
-                  {showroom.image ? (
-                    <img
-                      src={normalizeImageUrl(showroom.image)}
-                      alt={showroom.city}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = 'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=400&h=300&fit=crop';
-                      }}
-                    />
-                  ) : (
-                    <img
-                      src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=400&h=300&fit=crop"
-                      alt={showroom.city}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-green-900/10"></div>
-                  {showroom.images && showroom.images.length > 0 && (
-                    <div className="absolute bottom-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      Click to view {showroom.images.length} photos
+            {masseyShowrooms.map((showroom, index) => {
+              const isBranch = (showroom as any).is_branch === true;
+              return (
+                <div
+                  key={`${showroom.id || index}-massey`}
+                  className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-gray-100"
+                  onClick={() => {
+                    if (!isBranch && showroom.images && showroom.images.length > 0) {
+                      setSelectedMasseyShowroom(showroom);
+                      setMasseyGalleryIndex(0);
+                    }
+                  }}
+                >
+                  {/* Image only for main Massey showroom; branches show info only */}
+                  {!isBranch && (
+                    <div className="h-64 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center relative overflow-hidden">
+                      <div className="absolute top-4 left-4 bg-green-600 px-4 py-2 rounded-lg z-10">
+                        <span className="text-white font-bold text-sm uppercase">{showroom.city}</span>
+                      </div>
+                      {showroom.image ? (
+                        <img
+                          src={normalizeImageUrl(showroom.image)}
+                          alt={showroom.city}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = 'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=400&h=300&fit=crop';
+                          }}
+                        />
+                      ) : (
+                        <img
+                          src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=400&h=300&fit=crop"
+                          alt={showroom.city}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-green-900/10"></div>
+                      {showroom.images && showroom.images.length > 0 && (
+                        <div className="absolute bottom-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                          Click to view {showroom.images.length} photos
+                        </div>
+                      )}
                     </div>
                   )}
-                </div>
 
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <MapPin className="text-green-600 mr-2" size={24} />
-                    {showroom.city}
-                  </h3>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                      <MapPin className="text-green-600 mr-2" size={24} />
+                      {showroom.city}
+                      {isBranch && (
+                        <span className="ml-2 text-xs font-semibold text-green-700 uppercase bg-green-50 px-2 py-1 rounded-full">
+                          Branch
+                        </span>
+                      )}
+                    </h3>
 
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-start">
-                      <MapPin size={20} className="text-gray-500 mr-3 mt-1 flex-shrink-0" />
-                      <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(showroom.address)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-700 text-sm hover:text-green-600 transition-colors"
-                      >
-                        {showroom.address}
-                      </a>
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-start">
+                        <MapPin size={20} className="text-gray-500 mr-3 mt-1 flex-shrink-0" />
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(showroom.address)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-700 text-sm hover:text-green-600 transition-colors"
+                        >
+                          {showroom.address}
+                        </a>
+                      </div>
+
+                      <div className="flex items-center">
+                        <Phone size={20} className="text-gray-500 mr-3 flex-shrink-0" />
+                        <a
+                          href={`tel:${showroom.phone.replace(/\s/g, '')}`}
+                          className="text-green-600 hover:underline font-semibold"
+                        >
+                          {showroom.phone}
+                        </a>
+                      </div>
+
+                      <div className="flex items-center">
+                        <Clock size={20} className="text-gray-500 mr-3 flex-shrink-0" />
+                        <p className="text-gray-700 text-sm">Mon - Sat: 9:00 AM - 7:00 PM</p>
+                      </div>
                     </div>
 
-                    <div className="flex items-center">
-                      <Phone size={20} className="text-gray-500 mr-3 flex-shrink-0" />
-                      <a
-                        href={`tel:${showroom.phone.replace(/\s/g, '')}`}
-                        className="text-green-600 hover:underline font-semibold"
-                      >
-                        {showroom.phone}
-                      </a>
-                    </div>
-
-                    <div className="flex items-center">
-                      <Clock size={20} className="text-gray-500 mr-3 flex-shrink-0" />
-                      <p className="text-gray-700 text-sm">Mon - Sat: 9:00 AM - 7:00 PM</p>
+                    <div className="bg-green-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-green-900 mb-2">Services Available:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs font-medium">
+                          Sales
+                        </span>
+                        <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs font-medium">
+                          Service
+                        </span>
+                        <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs font-medium">
+                          Spare Parts
+                        </span>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-green-900 mb-2">Services Available:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs font-medium">
-                        Sales
-                      </span>
-                      <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs font-medium">
-                        Service
-                      </span>
-                      <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs font-medium">
-                        Spare Parts
-                      </span>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
