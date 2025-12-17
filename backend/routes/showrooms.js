@@ -54,53 +54,10 @@ const router = express.Router();
  */
 router.get('/', async (req, res) => {
   try {
-    const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
+    // FORCE JSON AS PRIMARY SOURCE - Skip database entirely to ensure latest data
+    console.log('[Showrooms] 📂 Reading showrooms from JSON file (primary source)');
     
-    // FORCE JSON FIRST - Database might have old data
-    // Try database first on Vercel, fall back to JSON
-    const shouldUseDatabase = () => {
-      const pool = getPool();
-      if (isVercel) {
-        return pool !== null && isDatabaseConnected();
-      }
-      return pool !== null && isDatabaseConnected();
-    };
-
-    // Always try JSON first to ensure latest data
-    let useJSON = true;
-    
-    if (shouldUseDatabase()) {
-      try {
-        const showrooms = await showroomsDB.getAll();
-        
-        // Only use database if it has data AND we're not forcing JSON
-        // For now, prioritize JSON to ensure latest data
-        if (showrooms.length > 0 && !useJSON) {
-          console.log(`[Showrooms] Using ${showrooms.length} showrooms from database`);
-          // Convert image paths to CloudFront URLs
-          const showroomsWithCloudFront = showrooms.map(showroom => ({
-            id: showroom.id.toString(),
-            city: showroom.city,
-            address: showroom.address,
-            phone: showroom.phone,
-            email: showroom.email,
-            is_main: showroom.is_main,
-            image: showroom.image_url ? toCloudFrontUrl(showroom.image_url) : showroom.image_url,
-            category: showroom.category || 'tata',
-            images: showroom.images || undefined,
-            is_branch: showroom.is_branch || false
-          }));
-          
-          return res.json(showroomsWithCloudFront);
-        } else {
-          console.log('[Showrooms] Database empty or forcing JSON, using JSON files');
-        }
-      } catch (dbError) {
-        console.warn('[Showrooms] Database error, using JSON:', dbError.message);
-      }
-    }
-
-    // Read from JSON files (fallback or primary for local)
+    // Read from JSON files (PRIMARY SOURCE - database skipped)
     try {
       const data = await readData('showrooms');
       const showrooms = data.showrooms || [];
