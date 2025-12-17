@@ -44,8 +44,28 @@ function convertToCloudFrontUrl(imagePath) {
     return '';
   }
 
-  // If already a full URL (http/https), return as-is
+  // If already a full URL (http/https)
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    // If it's an S3 URL, convert to CloudFront
+    if (imagePath.includes('s3.amazonaws.com') || imagePath.includes('tata-storagebucket.s3')) {
+      // Extract the path/key from S3 URL
+      let s3Key = '';
+      if (imagePath.includes('tata-storagebucket.s3.ap-south-1.amazonaws.com/')) {
+        s3Key = imagePath.split('tata-storagebucket.s3.ap-south-1.amazonaws.com/')[1];
+      } else if (imagePath.includes('.s3.amazonaws.com/')) {
+        s3Key = imagePath.split('.s3.amazonaws.com/')[1];
+      } else {
+        // Try to extract from any S3 URL pattern
+        const match = imagePath.match(/\.s3[^/]*\/(.+)$/);
+        s3Key = match ? match[1] : '';
+      }
+      
+      // Convert to CloudFront URL
+      if (s3Key) {
+        return `${CLOUDFRONT_DOMAIN}/${s3Key}`;
+      }
+    }
+    // If already CloudFront or other URL, return as-is
     return imagePath;
   }
 
@@ -231,36 +251,42 @@ async function migrateShowrooms() {
     
     for (const showroom of showrooms) {
       try {
-        // Check if showroom already exists
+        // Check if showroom already exists by city
         const existing = await query(
-          'SELECT id FROM showrooms WHERE city = $1 AND address = $2 LIMIT 1',
-          [showroom.city, showroom.address]
+          'SELECT id FROM showrooms WHERE city = $1 LIMIT 1',
+          [showroom.city]
         );
+        
+        // Convert image path to CloudFront URL (keep S3 URLs as-is if they're already full URLs)
+        const imageUrl = convertToCloudFrontUrl(showroom.image || '');
+        
+        // Convert images array to CloudFront URLs
+        const images = showroom.images ? convertImageArrayToCloudFront(showroom.images) : [];
+        
+        const showroomData = {
+          city: showroom.city || '',
+          address: showroom.address || '',
+          phone: showroom.phone || '',
+          email: showroom.email || '',
+          is_main: showroom.is_main || showroom.isMain || false,
+          image_url: imageUrl,
+          category: showroom.category || 'tata',
+          images: images,
+        };
+        
         if (existing.rows.length > 0) {
-          skipped++;
-          continue;
+          // Update existing showroom
+          await showroomsDB.update(existing.rows[0].id, showroomData);
+          migrated++;
+        } else {
+          // Create new showroom
+          await showroomsDB.create(showroomData);
+          migrated++;
         }
-      } catch {
-        // Continue with creation
+      } catch (error) {
+        console.error(`Error processing showroom ${showroom.city}:`, error.message);
+        // Continue with next showroom
       }
-
-      // Convert image path to CloudFront URL
-      const imageUrl = convertToCloudFrontUrl(showroom.image || '');
-      
-      // Convert images array to CloudFront URLs
-      const images = showroom.images ? convertImageArrayToCloudFront(showroom.images) : [];
-      
-      await showroomsDB.create({
-        city: showroom.city || '',
-        address: showroom.address || '',
-        phone: showroom.phone || '',
-        email: showroom.email || '',
-        is_main: showroom.is_main || showroom.isMain || false,
-        image_url: imageUrl,
-        category: showroom.category || 'tata',
-        images: images,
-      });
-      migrated++;
     }
     console.log(`✅ Migrated ${migrated} showrooms${skipped > 0 ? `, skipped ${skipped} existing` : ''}`);
     return { migrated, skipped };
