@@ -129,7 +129,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
 
   return (
     <div className="bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-screen">
-      {/* Hero Section - Video Background using local KISHORE.mp4 from public/videos */}
+      {/* Hero Section - Video Background using S3 KISHORE.mp4 */}
       <section className="relative w-full overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] bg-black">
         {/* Video Background */}
         <video
@@ -143,6 +143,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
             console.error('Video load error (careers hero):', e);
           }}
         >
+          <source src="https://tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4" type="video/mp4" />
           <source src="/videos/KISHORE.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
