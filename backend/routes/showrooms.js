@@ -56,6 +56,7 @@ router.get('/', async (req, res) => {
   try {
     const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
     
+    // FORCE JSON FIRST - Database might have old data
     // Try database first on Vercel, fall back to JSON
     const shouldUseDatabase = () => {
       const pool = getPool();
@@ -65,15 +66,17 @@ router.get('/', async (req, res) => {
       return pool !== null && isDatabaseConnected();
     };
 
+    // Always try JSON first to ensure latest data
+    let useJSON = true;
+    
     if (shouldUseDatabase()) {
       try {
         const showrooms = await showroomsDB.getAll();
         
-        // If database is empty, fall back to JSON files
-        if (showrooms.length === 0) {
-          console.warn('[Showrooms] Database is empty, falling back to JSON files');
-          // Continue to JSON file reading below
-        } else {
+        // Only use database if it has data AND we're not forcing JSON
+        // For now, prioritize JSON to ensure latest data
+        if (showrooms.length > 0 && !useJSON) {
+          console.log(`[Showrooms] Using ${showrooms.length} showrooms from database`);
           // Convert image paths to CloudFront URLs
           const showroomsWithCloudFront = showrooms.map(showroom => ({
             id: showroom.id.toString(),
@@ -83,16 +86,17 @@ router.get('/', async (req, res) => {
             email: showroom.email,
             is_main: showroom.is_main,
             image: showroom.image_url ? toCloudFrontUrl(showroom.image_url) : showroom.image_url,
-            category: showroom.category || 'tata', // Include category field
-            images: showroom.images || undefined, // Include images array if present
-            is_branch: showroom.is_branch || false // Include is_branch field
+            category: showroom.category || 'tata',
+            images: showroom.images || undefined,
+            is_branch: showroom.is_branch || false
           }));
           
           return res.json(showroomsWithCloudFront);
+        } else {
+          console.log('[Showrooms] Database empty or forcing JSON, using JSON files');
         }
       } catch (dbError) {
-        console.warn('[Showrooms] Database error, falling back to JSON:', dbError.message);
-        // Continue to JSON file reading below
+        console.warn('[Showrooms] Database error, using JSON:', dbError.message);
       }
     }
 
