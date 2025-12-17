@@ -194,31 +194,14 @@ export default function Showrooms() {
     loadShowrooms();
   }, []);
 
-  // Hero images derived from latest showroom data (from backend / public JSON)
+  // Hero images - Use only the two specified images
   const heroImages = useMemo(() => {
-    const images: string[] = [];
-
-    showrooms.forEach((s) => {
-      if (s.image) {
-        images.push(s.image);
-      }
-      if (s.images && s.images.length > 0) {
-        images.push(...s.images);
-      }
-    });
-
-    const unique = Array.from(new Set(images)).filter(Boolean);
-
-    if (unique.length > 0) {
-      return unique;
-    }
-
-    // Fallback to legacy static banners if no data yet
+    // Use only these two images: 2.png first, then 1.png
     return [
-      normalizeImageUrl('/images/2.png'),
-      normalizeImageUrl('/images/1.png'),
+      normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/2.png'),
+      normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/1.png'),
     ];
-  }, [showrooms]);
+  }, []);
 
   // Auto-scroll images - Start with Tata (index 0), then Massey (index 1)
   useEffect(() => {
