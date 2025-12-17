@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Briefcase, MapPin, Building, Calendar, Upload, X, CheckCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { careersAPI, applicationsAPI } from '../services/api';
+import { careersAPI, applicationsAPI, normalizeImageUrl } from '../services/api';
 
 interface JobPosting {
   id: string;
@@ -30,10 +30,10 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
   const [videoLoading, setVideoLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   
-  // Video sources in order of preference
+  // Video sources in order of preference - use CloudFront for S3 videos
   const videoSources = [
-    'https://tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4',
-    '/videos/KISHORE.mp4'
+    normalizeImageUrl('videos/KISHORE.mp4'), // CloudFront URL: https://dh0blbvvlqdiy.cloudfront.net/videos/KISHORE.mp4
+    '/videos/KISHORE.mp4' // Local fallback
   ];
   const [currentSourceIndex, setCurrentSourceIndex] = useState(0);
   const [currentVideoSrc, setCurrentVideoSrc] = useState<string>(videoSources[0]);
