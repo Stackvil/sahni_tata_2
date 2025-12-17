@@ -101,7 +101,7 @@ ${formData.message}`;
               heroImageError
                 ? 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=1080&fit=crop'
                 : normalizeImageUrl(
-                    primaryShowroom?.image || '/images/95cdfeef.jpg'
+                    'https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/95cdfeef.jpg'
                   )
             }
             alt="Contact Us"
