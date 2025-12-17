@@ -31,6 +31,50 @@
       "category": "tata"
     },
     {
+      "id": "5",
+      "city": "Kaikaluru",
+      "address": "Kaikaluru, Krishna District, Andhra Pradesh",
+      "phone": "+91 98485 29755",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "tata",
+      "is_branch": true
+    },
+    {
+      "id": "6",
+      "city": "Nuziveedu",
+      "address": "Nuziveedu, Krishna District, Andhra Pradesh",
+      "phone": "+91 98485 29755",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "tata",
+      "is_branch": true
+    },
+    {
+      "id": "7",
+      "city": "Nandiagama",
+      "address": "Nandiagama, Krishna District, Andhra Pradesh",
+      "phone": "+91 98485 29755",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "tata",
+      "is_branch": true
+    },
+    {
+      "id": "8",
+      "city": "Piduguralla",
+      "address": "Piduguralla, Guntur District, Andhra Pradesh",
+      "phone": "+91 98485 29755",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "tata",
+      "is_branch": true
+    },
+    {
       "id": "4",
       "city": "Mylavaram",
       "address": "MYLAVARAM, KUNTAMUKKALA X ROAD, D.NO.130/11, NTR DISTRICT, PIN 521230, AP",
@@ -46,4 +90,3 @@
     }
   ]
 }
-
