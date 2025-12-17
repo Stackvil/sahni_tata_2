@@ -101,14 +101,39 @@ router.get('/', async (req, res) => {
       const data = await readData('showrooms');
       const showrooms = data.showrooms || [];
       console.log(`[Showrooms] Loaded ${showrooms.length} showrooms from JSON`);
-      // Ensure all fields are included in JSON response, including is_branch
-      const showroomsWithCategory = showrooms.map(showroom => ({
-        ...showroom,
-        category: showroom.category || 'tata',
-        images: showroom.images || undefined,
-        is_branch: showroom.is_branch || false // Preserve is_branch field
-      }));
-      return res.json(showroomsWithCategory);
+      // Convert S3 URLs to CloudFront URLs and ensure all fields are included
+      const showroomsWithCloudFront = showrooms.map(showroom => {
+        // Convert image URL from S3 to CloudFront if needed
+        let imageUrl = showroom.image || '';
+        if (imageUrl && (imageUrl.includes('s3.amazonaws.com') || imageUrl.includes('tata-storagebucket.s3'))) {
+          imageUrl = toCloudFrontUrl(imageUrl);
+        } else if (imageUrl && !imageUrl.startsWith('http')) {
+          // If it's a relative path, convert to CloudFront
+          imageUrl = toCloudFrontUrl(imageUrl);
+        }
+        
+        // Convert images array URLs
+        let images = showroom.images || undefined;
+        if (images && Array.isArray(images)) {
+          images = images.map(img => {
+            if (img && (img.includes('s3.amazonaws.com') || img.includes('tata-storagebucket.s3'))) {
+              return toCloudFrontUrl(img);
+            } else if (img && !img.startsWith('http')) {
+              return toCloudFrontUrl(img);
+            }
+            return img;
+          });
+        }
+        
+        return {
+          ...showroom,
+          image: imageUrl,
+          images: images,
+          category: showroom.category || 'tata',
+          is_branch: showroom.is_branch || false // Preserve is_branch field
+        };
+      });
+      return res.json(showroomsWithCloudFront);
     } catch (jsonError) {
       console.error('[Showrooms] Error reading from JSON:', jsonError.message);
       return res.json([]); // Return empty array instead of error

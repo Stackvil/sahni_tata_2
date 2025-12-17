@@ -20,7 +20,30 @@ export const toCloudFrontUrl = (imagePath) => {
     return imagePath;
   }
   
-  // If already a full URL (but not CloudFront), return as-is
+  // If it's an S3 URL, convert to CloudFront
+  if (imagePath.includes('s3.amazonaws.com') || imagePath.includes('tata-storagebucket.s3')) {
+    // Extract the path/key from S3 URL
+    let s3Key = '';
+    if (imagePath.includes('tata-storagebucket.s3.ap-south-1.amazonaws.com/')) {
+      s3Key = imagePath.split('tata-storagebucket.s3.ap-south-1.amazonaws.com/')[1];
+      // Remove query parameters if present
+      s3Key = s3Key.split('?')[0];
+    } else if (imagePath.includes('.s3.amazonaws.com/')) {
+      s3Key = imagePath.split('.s3.amazonaws.com/')[1];
+      s3Key = s3Key.split('?')[0];
+    } else {
+      // Try to extract from any S3 URL pattern
+      const match = imagePath.match(/\.s3[^/]*\/(.+?)(?:\?|$)/);
+      s3Key = match ? match[1] : '';
+    }
+    
+    // Convert to CloudFront URL
+    if (s3Key) {
+      return `${CLOUDFRONT_DOMAIN}/${s3Key}`;
+    }
+  }
+  
+  // If already a full URL (but not CloudFront or S3), return as-is
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
     return imagePath;
   }

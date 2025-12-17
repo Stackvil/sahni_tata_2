@@ -86,14 +86,21 @@ const normalizeShowrooms = (items: any[]): Showroom[] => {
     const id = String(item?.id || item?.detail_id || item?.showroom_id || item?.uuid || index);
     const city = item?.city || item?.name || item?.location || `Showroom ${index + 1}`;
     
-    // Use image URLs exactly as provided (S3 or CloudFront) without rewriting
+    // Normalize image URLs - convert S3 to CloudFront if needed, or use normalizeImageUrl
     const imagePath = item?.image || item?.banner || item?.photo || '';
-    const imageUrl = typeof imagePath === 'string' ? imagePath : '';
+    let imageUrl = typeof imagePath === 'string' ? imagePath : '';
+    
+    // Convert S3 URLs to CloudFront using normalizeImageUrl
+    if (imageUrl) {
+      imageUrl = normalizeImageUrl(imageUrl);
+    }
 
-    // Images array (keep URLs exactly as in JSON/backend)
+    // Images array - normalize each URL
     let images: string[] | undefined;
     if (item?.images && Array.isArray(item.images)) {
-      images = item.images.filter((img: string) => typeof img === 'string' && img);
+      images = item.images
+        .filter((img: string) => typeof img === 'string' && img)
+        .map((img: string) => normalizeImageUrl(img));
     }
 
     // Determine category - check multiple indicators for Massey Ferguson
@@ -138,6 +145,7 @@ const normalizeShowrooms = (items: any[]): Showroom[] => {
       images: images,
       isMain: Boolean(item?.is_main ?? item?.isMain ?? item?.is_primary ?? false),
       category: category,
+      is_branch: item?.is_branch || false, // Preserve is_branch field
     };
   });
 };
