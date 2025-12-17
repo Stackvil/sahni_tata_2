@@ -99,11 +99,13 @@ router.get('/', async (req, res) => {
     try {
       const data = await readData('showrooms');
       const showrooms = data.showrooms || [];
-      // Ensure category field is included in JSON response
+      console.log(`[Showrooms] Loaded ${showrooms.length} showrooms from JSON`);
+      // Ensure all fields are included in JSON response, including is_branch
       const showroomsWithCategory = showrooms.map(showroom => ({
         ...showroom,
         category: showroom.category || 'tata',
-        images: showroom.images || undefined
+        images: showroom.images || undefined,
+        is_branch: showroom.is_branch || false // Preserve is_branch field
       }));
       return res.json(showroomsWithCategory);
     } catch (jsonError) {
