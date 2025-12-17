@@ -54,54 +54,88 @@ const router = express.Router();
  */
 router.get('/', async (req, res) => {
   try {
-    // FORCE JSON AS PRIMARY SOURCE - Skip database entirely to ensure latest data
-    console.log('[Showrooms] 📂 Reading showrooms from JSON file (primary source)');
+    // FORCE JSON AS PRIMARY SOURCE - Read directly from file, skip database entirely
+    console.log('[Showrooms] 📂 Reading showrooms directly from JSON file');
     
-    // Read from JSON files (PRIMARY SOURCE - database skipped)
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    const { fileURLToPath } = await import('url');
+    
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    
+    // Read directly from public/showrooms.json
+    const publicJsonPath = path.join(__dirname, '../../public/showrooms.json');
+    const backendJsonPath = path.join(__dirname, '../data/showrooms.json');
+    
+    let jsonPath = publicJsonPath;
+    let jsonData = null;
+    
     try {
-      const data = await readData('showrooms');
-      const showrooms = data.showrooms || [];
-      console.log(`[Showrooms] Loaded ${showrooms.length} showrooms from JSON`);
-      // Convert S3 URLs to CloudFront URLs and ensure all fields are included
-      const showroomsWithCloudFront = showrooms.map(showroom => {
-        // Convert image URL from S3 to CloudFront if needed
-        let imageUrl = showroom.image || '';
-        if (imageUrl && (imageUrl.includes('s3.amazonaws.com') || imageUrl.includes('tata-storagebucket.s3'))) {
+      // Try public folder first
+      jsonData = await fs.readFile(publicJsonPath, 'utf-8');
+      console.log(`[Showrooms] ✅ Read from ${publicJsonPath}`);
+    } catch (publicError) {
+      // Fallback to backend/data folder
+      try {
+        jsonData = await fs.readFile(backendJsonPath, 'utf-8');
+        console.log(`[Showrooms] ✅ Read from ${backendJsonPath}`);
+      } catch (backendError) {
+        console.error('[Showrooms] ❌ Could not read JSON from either location');
+        return res.json([]);
+      }
+    }
+    
+    const data = JSON.parse(jsonData);
+    const showrooms = data.showrooms || [];
+    console.log(`[Showrooms] ✅ Loaded ${showrooms.length} showrooms from JSON`);
+    
+    // Convert S3 URLs to CloudFront URLs and ensure all fields are included
+    const showroomsWithCloudFront = showrooms.map(showroom => {
+      // Convert image URL from S3 to CloudFront if needed
+      let imageUrl = showroom.image || '';
+      if (imageUrl) {
+        if (imageUrl.includes('s3.amazonaws.com') || imageUrl.includes('tata-storagebucket.s3')) {
           imageUrl = toCloudFrontUrl(imageUrl);
         } else if (imageUrl && !imageUrl.startsWith('http')) {
           // If it's a relative path, convert to CloudFront
           imageUrl = toCloudFrontUrl(imageUrl);
         }
-        
-        // Convert images array URLs
-        let images = showroom.images || undefined;
-        if (images && Array.isArray(images)) {
-          images = images.map(img => {
-            if (img && (img.includes('s3.amazonaws.com') || img.includes('tata-storagebucket.s3'))) {
-              return toCloudFrontUrl(img);
-            } else if (img && !img.startsWith('http')) {
-              return toCloudFrontUrl(img);
-            }
-            return img;
-          });
-        }
-        
-        return {
-          ...showroom,
-          image: imageUrl,
-          images: images,
-          category: showroom.category || 'tata',
-          is_branch: showroom.is_branch || false // Preserve is_branch field
-        };
-      });
-      return res.json(showroomsWithCloudFront);
-    } catch (jsonError) {
-      console.error('[Showrooms] Error reading from JSON:', jsonError.message);
-      return res.json([]); // Return empty array instead of error
-    }
+      }
+      
+      // Convert images array URLs
+      let images = showroom.images || undefined;
+      if (images && Array.isArray(images)) {
+        images = images.map(img => {
+          if (img && (img.includes('s3.amazonaws.com') || img.includes('tata-storagebucket.s3'))) {
+            return toCloudFrontUrl(img);
+          } else if (img && !img.startsWith('http')) {
+            return toCloudFrontUrl(img);
+          }
+          return img;
+        });
+      }
+      
+      return {
+        id: showroom.id || '',
+        city: showroom.city || '',
+        address: showroom.address || '',
+        phone: showroom.phone || '',
+        email: showroom.email || '',
+        is_main: showroom.is_main || false,
+        image: imageUrl,
+        images: images,
+        category: showroom.category || 'tata',
+        is_branch: showroom.is_branch || false
+      };
+    });
+    
+    console.log(`[Showrooms] ✅ Returning ${showroomsWithCloudFront.length} showrooms with CloudFront URLs`);
+    return res.json(showroomsWithCloudFront);
   } catch (error) {
-    console.error('[Showrooms] Unexpected error:', error.message);
-    return res.json([]); // Return empty array instead of error
+    console.error('[Showrooms] ❌ Unexpected error:', error.message);
+    console.error('[Showrooms] Stack:', error.stack);
+    return res.json([]);
   }
 });
 

@@ -164,22 +164,27 @@ export default function Showrooms() {
       setLoading(true);
 
       try {
+        console.log('[Showrooms] Fetching showrooms from API...');
         // Backend returns array directly
         const response = await showroomsAPI.getAll();
+        console.log('[Showrooms] API Response:', response);
+        
         const backendShowrooms = Array.isArray(response) 
           ? response 
           : (response?.showrooms || response?.data || []);
 
+        console.log(`[Showrooms] Processing ${backendShowrooms.length} showrooms`);
         const normalized = normalizeShowrooms(backendShowrooms);
+        console.log(`[Showrooms] Normalized ${normalized.length} showrooms`);
 
         if (normalized.length === 0) {
-          throw new Error('No showrooms returned from backend.');
+          console.warn('[Showrooms] No showrooms returned from backend, using empty array');
+          setShowrooms([]);
+        } else {
+          setShowrooms(normalized);
         }
-
-        setShowrooms(normalized);
       } catch (error: any) {
-        console.error('Failed to load showrooms from backend:', error);
-        // Show error state - no fallback to static data
+        console.error('[Showrooms] Failed to load showrooms from backend:', error);
         setShowrooms([]);
       } finally {
         setLoading(false);
@@ -232,21 +237,26 @@ export default function Showrooms() {
 
   // Filter showrooms by category - exclude Massey from Tata, and vice versa
   const tataShowrooms = useMemo(() => {
-    return showrooms.filter(s => {
+    const filtered = showrooms.filter(s => {
       const category = (s.category || 'tata').toLowerCase().trim();
-      const isBranch = (s as any).is_branch === true;
       // Include all Tata showrooms (main and branches), exclude Massey
       return category === 'tata' && !category.includes('massey') && category !== 'massey ferguson';
     });
+    console.log(`[Showrooms] Found ${filtered.length} Tata showrooms`);
+    return filtered;
   }, [showrooms]);
   
   // Separate main showrooms from branches
   const mainTataShowrooms = useMemo(() => {
-    return tataShowrooms.filter(s => !(s as any).is_branch);
+    const main = tataShowrooms.filter(s => !(s as any).is_branch);
+    console.log(`[Showrooms] Found ${main.length} main Tata showrooms`);
+    return main;
   }, [tataShowrooms]);
   
   const branchShowrooms = useMemo(() => {
-    return tataShowrooms.filter(s => (s as any).is_branch === true);
+    const branches = tataShowrooms.filter(s => (s as any).is_branch === true);
+    console.log(`[Showrooms] Found ${branches.length} branch showrooms`);
+    return branches;
   }, [tataShowrooms]);
   
   const masseyShowrooms = useMemo(() => {
