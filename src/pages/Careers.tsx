@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Briefcase, MapPin, Building, Calendar, Upload, X, CheckCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { careersAPI, applicationsAPI } from '../services/api';
@@ -26,6 +26,17 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [videoError, setVideoError] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Video sources in order of preference
+  const videoSources = [
+    'https://tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4',
+    '/videos/KISHORE.mp4'
+  ];
+  const [currentSourceIndex, setCurrentSourceIndex] = useState(0);
+  const [currentVideoSrc, setCurrentVideoSrc] = useState<string>(videoSources[0]);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -38,6 +49,38 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
   useEffect(() => {
     loadJobs();
   }, []);
+
+  // Handle video source switching on error
+  const handleVideoError = () => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    const error = videoElement.error;
+    console.error('[Careers] Video load error:', {
+      errorCode: error?.code,
+      errorMessage: error?.message,
+      networkState: videoElement.networkState,
+      readyState: videoElement.readyState,
+      src: videoElement.src,
+      currentSrc: videoElement.currentSrc,
+      currentSourceIndex
+    });
+
+    // Try next source if available
+    const nextIndex = currentSourceIndex + 1;
+    if (nextIndex < videoSources.length) {
+      console.log(`[Careers] Trying next video source (${nextIndex + 1}/${videoSources.length}):`, videoSources[nextIndex]);
+      setCurrentSourceIndex(nextIndex);
+      setCurrentVideoSrc(videoSources[nextIndex]);
+      setVideoError(false); // Reset error to try next source
+      setVideoLoading(true);
+    } else {
+      // All sources failed
+      console.error('[Careers] All video sources failed');
+      setVideoError(true);
+      setVideoLoading(false);
+    }
+  };
 
   const loadJobs = async () => {
     setLoading(true);
@@ -132,19 +175,45 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
       {/* Hero Section - Video Background using S3 KISHORE.mp4 */}
       <section className="relative w-full overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] bg-black">
         {/* Video Background */}
+        {videoLoading && !videoError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black z-10">
+            <div className="text-white text-lg">Loading video...</div>
+          </div>
+        )}
+        {videoError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-black z-10">
+            <div className="text-white text-center px-4">
+              <p className="text-lg mb-2">Video unavailable</p>
+              <p className="text-sm text-gray-400">Please check your connection</p>
+            </div>
+          </div>
+        )}
         <video
+          ref={videoRef}
+          key={currentVideoSrc}
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
           className="w-full h-full object-cover"
-          onError={(e) => {
-            // Don't hide the hero, just log the error so section still shows
-            console.error('Video load error (careers hero):', e);
+          src={currentVideoSrc}
+          onLoadedData={() => {
+            console.log('[Careers] Video loaded successfully from:', currentVideoSrc);
+            setVideoLoading(false);
+            setVideoError(false);
+          }}
+          onCanPlay={() => {
+            console.log('[Careers] Video can play');
+            setVideoLoading(false);
+          }}
+          onError={handleVideoError}
+          onLoadStart={() => {
+            console.log('[Careers] Video load started from:', currentVideoSrc);
+            setVideoLoading(true);
+            setVideoError(false);
           }}
         >
-          <source src="https://tata-storagebucket.s3.ap-south-1.amazonaws.com/videos/KISHORE.mp4" type="video/mp4" />
-          <source src="/videos/KISHORE.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </section>
