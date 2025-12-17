@@ -1,4 +1,5 @@
 import { Droplet, ArrowLeft } from 'lucide-react';
+import { normalizeImageUrl } from '../services/api';
 
 interface LubricantsCompaniesProps {
   setCurrentPage?: (page: string) => void;
@@ -110,17 +111,21 @@ export default function LubricantsCompanies({ setCurrentPage, setSelectedCompany
                 onClick={() => handleCompanyClick(company.id)}
                 className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 text-left"
               >
-                <div className="relative h-48 bg-gray-100 overflow-hidden">
+                <div className="relative h-48 sm:h-56 md:h-64 bg-gray-100 overflow-hidden">
                   <img
-                    src={company.image}
+                    src={normalizeImageUrl(company.image)}
                     alt={company.name}
-                    className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-contain p-4 sm:p-6 group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
                       const parent = target.parentElement;
-                      if (parent) {
-                        parent.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-lg font-bold">${company.name}</div>`;
+                      if (parent && !parent.querySelector('.company-fallback')) {
+                        const fallback = document.createElement('div');
+                        fallback.className = 'company-fallback w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-base sm:text-lg font-bold';
+                        fallback.textContent = company.name;
+                        parent.appendChild(fallback);
                       }
                     }}
                   />

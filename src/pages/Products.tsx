@@ -507,6 +507,8 @@ export default function Products({ setCurrentPage, setSelectedProductId }: Produ
                               alt="HP Lubricants"
                               className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                               style={{ maxWidth: '100%', maxHeight: '100%' }}
+                              loading="eager"
+                              fetchPriority="high"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
@@ -563,6 +565,7 @@ export default function Products({ setCurrentPage, setSelectedProductId }: Produ
                               alt={brand.name}
                               className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                               style={{ maxWidth: '100%', maxHeight: '100%' }}
+                              loading="lazy"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
@@ -618,6 +621,8 @@ export default function Products({ setCurrentPage, setSelectedProductId }: Produ
               src={normalizeImageUrl('/images/prdcts_hero.jpg')}
               alt="HP Lubricants - India's Largest Lube Marketer"
               className="w-full h-auto object-contain"
+              loading="eager"
+              fetchPriority="high"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.src = `data:image/svg+xml,${encodeURIComponent(`<svg width="1920" height="600" xmlns="http://www.w3.org/2000/svg"><rect width="1920" height="600" fill="#1e3a8a"/><text x="50%" y="50%" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">HP LUBRICANTS</text></svg>`)}`;
@@ -747,7 +752,7 @@ export default function Products({ setCurrentPage, setSelectedProductId }: Produ
                   >
                     {company.image && (
                       <img
-                        src={company.image}
+                        src={normalizeImageUrl(company.image)}
                         alt={company.name}
                         className="h-4 w-auto object-contain"
                         onError={(e) => {
@@ -942,14 +947,16 @@ export default function Products({ setCurrentPage, setSelectedProductId }: Produ
                       className="group bg-white rounded-xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-red-300 cursor-pointer relative scroll-reveal flex flex-col"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      {/* Product Image Container */}
-                      <div className="relative w-full h-64 sm:h-72 md:h-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden flex items-center justify-center p-6 sm:p-8">
+                      {/* Product Image Container - Mobile Optimized */}
+                      <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-8">
                         {product.image ? (
                           <img
                             src={normalizeImageUrl(product.image)}
                             alt={product.name}
                             className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
                             style={{ maxWidth: '100%', maxHeight: '100%' }}
+                            loading={index < 8 ? "eager" : "lazy"}
+                            fetchPriority={index < 4 ? "high" : "auto"}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
                               if (!imageErrors.has(product.id.toString())) {

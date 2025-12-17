@@ -278,6 +278,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   src={normalizeImageUrl('/images/sahni verticals/HP_SULLI5.png')}
                   alt="HP Lubricants"
                       className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
@@ -540,6 +541,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   src={normalizeImageUrl('/images/sahni verticals/HP_SULLI5.png')}
                   alt="HP Lubricants"
                       className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
