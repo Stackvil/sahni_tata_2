@@ -35,7 +35,7 @@ JWT_SECRET=your-secret-key-change-in-production
 # ============================================
 NODE_ENV=production
 PORT=3001
-FRONTEND_URL=https://sahni-tata.vercel.app
+FRONTEND_URL=https://sahni-tata-2.vercel.app
 
 # ============================================
 # API CONFIGURATION
@@ -45,7 +45,7 @@ API_STAGE=prod
 # ============================================
 # FRONTEND CONFIGURATION (Vite)
 # ============================================
-VITE_API_URL=https://sahni-tata.vercel.app
+VITE_API_URL=https://sahni-tata-2.vercel.app
 VITE_API_PATH=/api
 
 # ============================================

@@ -36,8 +36,12 @@ const options = {
         description: 'Local development server (port 3030)'
       },
       {
-        url: 'https://sahni-tata.vercel.app',
+        url: 'https://sahni-tata-2.vercel.app',
         description: 'Vercel Production'
+      },
+      {
+        url: 'https://sahni-tata.vercel.app',
+        description: 'Vercel Production (Legacy)'
       }
     ],
     components: {

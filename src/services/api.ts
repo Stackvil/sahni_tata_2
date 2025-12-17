@@ -1,6 +1,6 @@
 // API service for backend communication
 // Default: Local development (http://localhost:3001)
-// Override: Set VITE_API_URL environment variable (e.g., for production: https://sahni-tata.vercel.app)
+// Override: Set VITE_API_URL environment variable (e.g., for production: https://sahni-tata-2.vercel.app)
 const getApiBaseEndpoint = () => {
   // If VITE_API_URL is explicitly set, use it (allows production override)
   if (import.meta.env.VITE_API_URL) {
@@ -13,7 +13,7 @@ const getApiBaseEndpoint = () => {
     const hostname = window.location.hostname;
     // If accessing from Vercel domain or production, use Vercel backend
     if (hostname.includes('vercel.app') || hostname.includes('sahni-tata')) {
-      return 'https://sahni-tata.vercel.app';
+      return 'https://sahni-tata-2.vercel.app';
     }
   }
   
