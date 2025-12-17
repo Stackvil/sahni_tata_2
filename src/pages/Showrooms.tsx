@@ -13,6 +13,7 @@ interface Showroom {
   images?: string[];
   isMain: boolean;
   category?: string;
+  is_branch?: boolean;
 }
 
 const STATIC_SHOWROOMS: Showroom[] = [
