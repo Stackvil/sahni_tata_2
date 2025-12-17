@@ -225,10 +225,20 @@ export default function Showrooms() {
   const tataShowrooms = useMemo(() => {
     return showrooms.filter(s => {
       const category = (s.category || 'tata').toLowerCase().trim();
-      // Only include if category is exactly 'tata' and does NOT contain 'massey'
+      const isBranch = (s as any).is_branch === true;
+      // Include all Tata showrooms (main and branches), exclude Massey
       return category === 'tata' && !category.includes('massey') && category !== 'massey ferguson';
     });
   }, [showrooms]);
+  
+  // Separate main showrooms from branches
+  const mainTataShowrooms = useMemo(() => {
+    return tataShowrooms.filter(s => !(s as any).is_branch);
+  }, [tataShowrooms]);
+  
+  const branchShowrooms = useMemo(() => {
+    return tataShowrooms.filter(s => (s as any).is_branch === true);
+  }, [tataShowrooms]);
   
   const masseyShowrooms = useMemo(() => {
     return showrooms.filter(s => {
@@ -334,7 +344,7 @@ export default function Showrooms() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10 md:mb-12">
-            {tataShowrooms.map((showroom, index) => (
+            {mainTataShowrooms.map((showroom, index) => (
               <div
                 key={`${showroom.id || index}-main`}
                 className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-gray-100"
@@ -417,6 +427,44 @@ export default function Showrooms() {
               </div>
             ))}
           </div>
+          
+          {/* Branches Section */}
+          {branchShowrooms.length > 0 && (
+            <div className="mt-12">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Our Branches</h3>
+                <p className="text-gray-600">Additional service locations across Andhra Pradesh</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                {branchShowrooms.map((showroom, index) => (
+                  <div
+                    key={`${showroom.id || index}-branch`}
+                    className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200 p-4"
+                  >
+                    <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                      <MapPin className="text-red-600 mr-2" size={20} />
+                      {showroom.city}
+                    </h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-start">
+                        <MapPin size={16} className="text-gray-500 mr-2 mt-0.5 flex-shrink-0" />
+                        <p className="text-gray-700">{showroom.address}</p>
+                      </div>
+                      <div className="flex items-center">
+                        <Phone size={16} className="text-gray-500 mr-2 flex-shrink-0" />
+                        <a
+                          href={`tel:${showroom.phone.replace(/\s/g, '')}`}
+                          className="text-red-600 hover:underline font-semibold"
+                        >
+                          {showroom.phone}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
