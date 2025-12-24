@@ -42,7 +42,7 @@ export default function Contact() {
           city: main.city || 'Vijayawada',
           address:
             main.address ||
-            '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008',
+            'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007',
           phone: main.phone || '+91 92810 29456',
           email: main.email || 'sahniauto@gmail.com',
           image: main.image || (Array.isArray(main.images) ? main.images[0] : undefined),
@@ -180,14 +180,14 @@ ${formData.message}`;
                     <a
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                         primaryShowroom?.address ||
-                          '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008'
+                          'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007'
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-700 text-base sm:text-lg hover:text-red-600 transition-colors block"
                     >
                       {(primaryShowroom?.address ||
-                        '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008')
+                        'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007')
                         .split('\n')
                         .map((line, idx) => (
                           <span key={idx}>

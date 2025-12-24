@@ -1523,14 +1523,14 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 uppercase tracking-wide">ADDRESS</h3>
                 </div>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=48-16-7%2F5A+Mahanadu+Road+Vijayawada+520008"
+                  href="https://www.google.com/maps/dir//Sahni+Complex,+2nd+Cross+Rd,+Auto+Nagar,+Vijayawada,+Andhra+Pradesh+520007/@16.4984631,80.675735,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3a35fad90b21e801:0x8433da71029209b3!2m2!1d80.675735!2d16.4984631?entry=ttu"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm sm:text-base md:text-lg text-gray-700 hover:text-red-600 transition-colors leading-relaxed block"
                 >
-                  #48-16-7/5A, Mahanadu Road,<br />
-                  Vijayawada - 520008,<br />
-                  Andhra Pradesh, India
+                  Sahni Complex, 2nd Cross Rd,<br />
+                  Auto Nagar, Vijayawada,<br />
+                  Andhra Pradesh 520007, India
                 </a>
               </div>
               

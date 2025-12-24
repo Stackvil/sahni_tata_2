@@ -227,8 +227,8 @@ export default function TermsAndConditions() {
             </p>
             <div className="text-gray-700 space-y-2">
               <p><strong>Sahni Group</strong></p>
-              <p>#48-16-7/5A, Mahanadu Road</p>
-              <p>Vijayawada - 520008, Andhra Pradesh, India</p>
+              <p>Sahni Complex, 2nd Cross Rd, Auto Nagar</p>
+              <p>Vijayawada, Andhra Pradesh 520007, India</p>
               <p>Phone: <a href="tel:+919281029456" className="text-red-500 hover:underline">+91 92810 29456</a></p>
               <p>Email: <a href="mailto:sahniauto@gmail.com" className="text-red-500 hover:underline">sahniauto@gmail.com</a></p>
             </div>

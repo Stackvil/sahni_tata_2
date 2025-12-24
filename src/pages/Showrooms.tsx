@@ -20,7 +20,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
   {
     id: 'vijayawada',
     city: 'Vijayawada',
-    address: '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008',
+    address: 'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007',
     phone: '+91 92810 29456',
     email: 'sahniauto@gmail.com',
     image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/vijayawada.png'),
