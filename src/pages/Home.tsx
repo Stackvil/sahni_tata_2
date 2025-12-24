@@ -1181,7 +1181,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
             id: 'institutional',
             icon: Building2,
             title: 'Institutional & Government Sales',
-            description: 'Sole distributors for Andhra Pradesh and Telangana for Tata Motors CV Spare Parts (Institutional). We serve major government and institutional clients with customized solutions.',
+            description: 'Distributors for Andhra Pradesh and Telangana for Tata Motors CV Spare Parts Institutional Govenance. We serve major government and institutional clients with customized solutions.',
             clients: [
               { name: 'APSRTC', fullName: 'Andhra Pradesh State Road Transport Corporation' },
               { name: 'TGSRTC', fullName: 'Telangana State Road Transport Corporation' },
@@ -1334,7 +1334,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     <h2 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase">INSTITUTIONAL SALES</h2>
                   </div>
                   <p className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 px-2">
-                    Sole distributors for Andhra & Telangana for Tata Motors CV Spare Parts (Institutional)
+                    Distributors for Andhra & Telangana for Tata Motors CV Spare Parts Institutional Govenance
                   </p>
                   <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto px-2">
                     {verticals.find(v => v.id === 'institutional')?.description}
