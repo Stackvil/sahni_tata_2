@@ -163,7 +163,7 @@ router.post('/', upload.single('resume'), async (req, res) => {
         console.warn('Email credentials not configured. Skipping email send.');
         console.warn('Please set EMAIL_USER and EMAIL_PASSWORD in .env file');
       } else {
-        const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+        const adminEmail = 'hrtatasahnigroup@gmail.com';
         
         const mailOptions = {
           from: process.env.EMAIL_USER,
