@@ -202,10 +202,10 @@ export default function Showrooms() {
 
   // Hero images - Use only the two specified images
   const heroImages = useMemo(() => {
-    // Use only these two images: 2.png first, then 1.png
+    // Use only these two images: frooti.png first, then frooti2.png
     return [
-      normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/2.png'),
-      normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/1.png'),
+      normalizeImageUrl('/images/showrooms/frooti.png'),
+      normalizeImageUrl('/images/showrooms/frooti2.png'),
     ];
   }, []);
 
