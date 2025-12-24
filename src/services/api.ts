@@ -55,10 +55,28 @@ console.log('[API Config] API Base URL:', API_BASE_URL);
 // CloudFront domain for S3 files
 const CLOUDFRONT_DOMAIN = 'https://dh0blbvvlqdiy.cloudfront.net';
 
+// Cache busting version - update this when images are modified
+const IMAGE_CACHE_VERSION = 'v2.0.1';
+
+// Helper function to add cache busting to URLs
+const addCacheBusting = (url: string): string => {
+  // Don't add cache busting if URL already has query parameters
+  if (url.includes('?')) {
+    // Check if it already has a version parameter
+    if (url.includes('v=') || url.includes('version=') || url.includes('cache=')) {
+      return url;
+    }
+    return `${url}&v=${IMAGE_CACHE_VERSION}`;
+  }
+  return `${url}?v=${IMAGE_CACHE_VERSION}`;
+};
+
 // Helper function to normalize image URLs from backend
 // Converts S3 URLs to CloudFront URLs and handles relative paths
 export const normalizeImageUrl = (imagePath: string | null | undefined): string => {
   if (!imagePath) return '';
+  
+  let finalUrl = '';
   
   // If already a full URL (http/https)
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
@@ -71,57 +89,61 @@ export const normalizeImageUrl = (imagePath: string | null | undefined): string 
       if (imagePath.includes('tata-storagebucket.s3')) {
         // Format: https://tata-storagebucket.s3.ap-south-1.amazonaws.com/path/to/file
         const urlParts = imagePath.split('tata-storagebucket.s3.ap-south-1.amazonaws.com/');
-        s3Key = urlParts.length > 1 ? urlParts[1] : '';
+        s3Key = urlParts.length > 1 ? urlParts[1].split('?')[0] : ''; // Remove existing query params
       } else if (imagePath.includes('s3.amazonaws.com')) {
         // Format: https://bucket-name.s3.amazonaws.com/path/to/file
         const urlParts = imagePath.split('.s3.amazonaws.com/');
-        s3Key = urlParts.length > 1 ? urlParts[1] : '';
+        s3Key = urlParts.length > 1 ? urlParts[1].split('?')[0] : ''; // Remove existing query params
       } else {
         // Try to extract from any S3 URL pattern
-        const match = imagePath.match(/\.s3[^/]*\/(.+)$/);
+        const match = imagePath.match(/\.s3[^/]*\/(.+?)(?:\?|$)/);
         s3Key = match ? match[1] : '';
       }
       
       // Convert to CloudFront URL
       if (s3Key) {
-        return `${CLOUDFRONT_DOMAIN}/${s3Key}`;
+        finalUrl = `${CLOUDFRONT_DOMAIN}/${s3Key}`;
+      } else {
+        finalUrl = imagePath;
       }
+    } else if (imagePath.includes('cloudfront.net')) {
+      // If it's already a CloudFront URL, remove existing query params and add cache busting
+      const urlWithoutQuery = imagePath.split('?')[0];
+      finalUrl = urlWithoutQuery;
+    } else {
+      // Other full URLs (non-S3), return as-is but add cache busting
+      finalUrl = imagePath;
     }
-    
-    // If it's already a CloudFront URL, return as-is
-    if (imagePath.includes('cloudfront.net')) {
-      return imagePath;
-    }
-    
-    // Other full URLs (non-S3), return as-is
-    return imagePath;
-  }
-  
-  // If path starts with /, check if it's an S3 path pattern
-  if (imagePath.startsWith('/')) {
+  } else if (imagePath.startsWith('/')) {
     // Special case: Local files in public folder should be served directly in development
     // In development mode, Vite serves files from public/ directly, so return as-is
     if (import.meta.env.DEV && imagePath.startsWith('/images/')) {
-      return imagePath;
+      return addCacheBusting(imagePath);
     }
     
     // If it looks like an S3 key (starts with images/, videos/, catalouges/, vehicles/)
     if (imagePath.match(/^\/(images|videos|catalouges|vehicles|resumes)\//)) {
       // Remove leading slash and use CloudFront
-      return `${CLOUDFRONT_DOMAIN}${imagePath}`;
+      finalUrl = `${CLOUDFRONT_DOMAIN}${imagePath}`;
+    } else {
+      // Otherwise, serve from backend root
+      finalUrl = `${API_BASE_ENDPOINT}${imagePath}`;
     }
-    // Otherwise, serve from backend root
-    return `${API_BASE_ENDPOINT}${imagePath}`;
-  }
-  
-  // For paths without leading slash, check if it's an S3 key pattern
-  if (imagePath.match(/^(images|videos|catalouges|vehicles|resumes)\//)) {
+  } else if (imagePath.match(/^(images|videos|catalouges|vehicles|resumes)\//)) {
+    // For paths without leading slash, check if it's an S3 key pattern
     // It's an S3 key, use CloudFront
-    return `${CLOUDFRONT_DOMAIN}/${imagePath}`;
+    finalUrl = `${CLOUDFRONT_DOMAIN}/${imagePath}`;
+  } else {
+    // For other relative paths, prepend API endpoint
+    finalUrl = `${API_BASE_ENDPOINT}/${imagePath}`;
   }
   
-  // For other relative paths, prepend API endpoint
-  return `${API_BASE_ENDPOINT}/${imagePath}`;
+  // Add cache busting to all image URLs (except in development for local files)
+  if (finalUrl && !(import.meta.env.DEV && finalUrl.startsWith('/images/'))) {
+    return addCacheBusting(finalUrl);
+  }
+  
+  return finalUrl || imagePath;
 };
 
 // Token management
