@@ -4,7 +4,7 @@ interface ManagementProps {
   setCurrentPage?: (page: string) => void;
 }
 
-const Management = ({ setCurrentPage }: ManagementProps) => {
+const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
