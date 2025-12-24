@@ -40,25 +40,17 @@ uploads/
 temp/
 
 # Media files (stored in S3)
-public/images/
-!public/images/GROUP.png
-!public/images/GROUP (1).png
-!public/images/logo.jpg
-!public/images/old-logo.png
-!public/images/awards/
+# Allow all images in public/images/
+!public/images/
+public/images/**/*
+!public/images/**/*.png
+!public/images/**/*.jpg
+!public/images/**/*.jpeg
+!public/images/**/*.webp
+!public/images/**/*.svg
+!public/images/**/*.gif
 public/videos/
 !public/videos/KISHORE.mp4
-*.jpg
-!public/images/logo.jpg
-*.jpeg
-*.png
-!public/images/GROUP.png
-!public/images/GROUP (1).png
-!public/images/old-logo.png
-*.gif
-*.webp
-!public/images/awards/*.webp
-*.svg
 *.pdf
 *.mp4
 !public/videos/KISHORE.mp4
