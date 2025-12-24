@@ -10,7 +10,8 @@
       "email": "sahniauto@gmail.com",
       "is_main": true,
       "image": "https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/vijayawada.png",
-      "category": "tata"
+      "category": "tata",
+      "map_link": "https://maps.app.goo.gl/mid2kBwaZyoeyWAEA"
     },
     {
       "id": "2",
@@ -22,7 +23,8 @@
       "email": "sahniauto@gmail.com",
       "is_main": false,
       "image": "https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/guntur.png",
-      "category": "tata"
+      "category": "tata",
+      "map_link": "https://maps.app.goo.gl/H1uPWY44QvRd5KHd7"
     },
     {
       "id": "3",
@@ -34,7 +36,8 @@
       "email": "sahniauto@gmail.com",
       "is_main": false,
       "image": "https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/NARASARAOPET.png",
-      "category": "tata"
+      "category": "tata",
+      "map_link": "https://maps.app.goo.gl/TrirPQhi1Y6wCEef9"
     },
     {
       "id": "5",
@@ -45,7 +48,8 @@
       "is_main": false,
       "image": "",
       "category": "tata",
-      "is_branch": true
+      "is_branch": true,
+      "map_link": "https://maps.app.goo.gl/cUSjhVrfUj4Rg6tA9"
     },
     {
       "id": "6",
@@ -56,7 +60,8 @@
       "is_main": false,
       "image": "",
       "category": "tata",
-      "is_branch": true
+      "is_branch": true,
+      "map_link": "https://maps.app.goo.gl/C46hamu8CRdAkptR6"
     },
     {
       "id": "7",
@@ -78,7 +83,8 @@
       "is_main": false,
       "image": "",
       "category": "tata",
-      "is_branch": true
+      "is_branch": true,
+      "map_link": "https://maps.app.goo.gl/3Je6LBcd7oQXM72F7"
     },
     {
       "id": "4",

@@ -8,6 +8,7 @@ interface PrimaryShowroom {
   phone: string;
   email: string;
   image?: string;
+  map_link?: string;
 }
 
 export default function Contact() {
@@ -46,6 +47,7 @@ export default function Contact() {
           phone: main.phone || '+91 92810 29456',
           email: main.email || 'sahniauto@gmail.com',
           image: main.image || (Array.isArray(main.images) ? main.images[0] : undefined),
+          map_link: main.map_link || undefined,
         });
       } catch (error) {
         // On error, fall back to static defaults
@@ -178,7 +180,7 @@ ${formData.message}`;
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Head Office</h3>
                     <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                      href={primaryShowroom?.map_link || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                         primaryShowroom?.address ||
                           'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007'
                       )}`}

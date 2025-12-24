@@ -128,7 +128,8 @@ router.get('/', async (req, res) => {
         image: imageUrl,
         images: images,
         category: showroom.category || 'tata',
-        is_branch: showroom.is_branch || false
+        is_branch: showroom.is_branch || false,
+        map_link: showroom.map_link || undefined
       };
     });
     

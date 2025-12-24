@@ -16,6 +16,7 @@ interface Showroom {
   isMain: boolean;
   category?: string;
   isBranch?: boolean;
+  map_link?: string;
 }
 
 const STATIC_SHOWROOMS: Showroom[] = [
@@ -151,6 +152,7 @@ const normalizeShowrooms = (items: any[]): Showroom[] => {
       isMain: Boolean(item?.is_main ?? item?.isMain ?? item?.is_primary ?? false),
       category,
       isBranch: item?.is_branch || item?.isBranch || false,
+      map_link: item?.map_link || undefined,
     };
   });
 };
@@ -390,7 +392,7 @@ export default function Showrooms() {
                     <div className="flex items-start">
                       <MapPin size={20} className="text-gray-500 mr-3 mt-1 flex-shrink-0" />
                       <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(showroom.address)}`}
+                        href={showroom.map_link || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(showroom.address)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-700 text-sm hover:text-red-600 transition-colors"
@@ -578,7 +580,7 @@ export default function Showrooms() {
                       <div className="flex items-start">
                         <MapPin size={20} className="text-gray-500 mr-3 mt-1 flex-shrink-0" />
                         <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(showroom.address)}`}
+                          href={showroom.map_link || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(showroom.address)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-700 text-sm hover:text-green-600 transition-colors"
