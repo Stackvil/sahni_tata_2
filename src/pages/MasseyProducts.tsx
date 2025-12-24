@@ -20,9 +20,7 @@ interface Product {
 }
 
 export default function MasseyProducts({ setCurrentPage, setSelectedProductId, setSelectedVehicleId, onBack }: MasseyProductsProps) {
-  const [selectedCategory, setSelectedCategory] = useState('all');
   const [masseyProducts, setMasseyProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<{ id: string; label: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,10 +29,9 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
       try {
         console.log('[MasseyProducts] Loading Massey Ferguson products from dedicated API...');
         
-        // Load products, categories, and vehicles (for image fallback)
-        const [productsResponse, categoriesData, vehiclesData] = await Promise.all([
+        // Load products and vehicles (for image fallback)
+        const [productsResponse, vehiclesData] = await Promise.all([
           masseyAPI.getAllProducts(),
-          masseyAPI.getAllCategories(),
           // Also load vehicles to get images for Massey products
           import('../data/tataVehicles').then(m => m.loadVehicles()).catch(() => []),
         ]);
@@ -51,7 +48,6 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
           current_page: productsResponse?.current_page,
           per_page: productsResponse?.per_page
         });
-        console.log('[MasseyProducts] Categories loaded:', categoriesData?.length || 0);
         console.log('[MasseyProducts] Vehicles loaded for image fallback:', vehiclesData?.length || 0);
         
         // Create a map of vehicle images by name for fallback
@@ -90,59 +86,22 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
           console.log('[MasseyProducts] Vehicle image map created:', Object.keys(vehicleImageMap).length, 'entries');
         }
         
-        // Transform categories first to create a mapping
-        let transformedCategories: { id: string; label: string }[] = [];
-        const categoryMap: { [key: string]: string } = {}; // Maps category ID to label
-        
-        if (Array.isArray(categoriesData) && categoriesData.length > 0) {
-          transformedCategories = categoriesData.map((cat: any) => {
-            // Handle category as object (e.g., {ID, NAME, LABEL})
-            let catId = '';
-            let catLabel = '';
-            
-            if (cat && typeof cat === 'object') {
-              catId = cat.ID || cat.id || cat.NAME || cat.name || String(cat.LABEL || cat.label || '');
-              catLabel = cat.LABEL || cat.label || cat.NAME || cat.name || 'Category';
-            } else {
-              catId = cat.id || cat.category_id || String(cat.label || cat || '');
-              catLabel = cat.label || cat.name || String(cat || 'Category');
-            }
-            
-            // Normalize to lowercase for matching
-            const normalizedId = catId.toLowerCase();
-            categoryMap[normalizedId] = catLabel;
-            categoryMap[catId] = catLabel; // Also map original ID
-            
-            return {
-              id: normalizedId,
-              label: catLabel,
-            };
-          });
-        }
-        
         // Transform products to match expected format
         const products: Product[] = Array.isArray(productsData) 
           ? productsData.map((p: any) => {
               // Get category ID from product (could be ID or category object)
               let categoryId = '';
-              let categoryName = '';
               
               // Handle category as object (e.g., {ID, NAME, LABEL})
               if (p.category && typeof p.category === 'object') {
                 categoryId = p.category.ID || p.category.id || p.category.NAME || p.category.name || '';
-                categoryName = p.category.LABEL || p.category.label || p.category.NAME || p.category.name || '';
               } else if (p.category && typeof p.category === 'string') {
                 categoryId = p.category;
-                categoryName = p.category;
               } else if (p.category_id) {
                 categoryId = p.category_id;
-                categoryName = p.category_id;
               }
               
-              // If category ID exists in our map, use the mapped label; otherwise use the extracted name
-              // Try both normalized and original ID
-              const normalizedCategoryId = categoryId.toLowerCase();
-              const finalCategory = categoryMap[normalizedCategoryId] || categoryMap[categoryId] || categoryName || categoryId || 'tractors';
+              const finalCategory = categoryId || 'tractors';
               
               // Handle image - could be string, array, or object
               let productImage = '';
@@ -223,31 +182,7 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
             })
           : [];
         
-        // If no categories from API but we have products, extract from products
-        if (transformedCategories.length === 0 && products.length > 0) {
-          const categorySet = new Set<string>();
-          products.forEach((p) => {
-            const cat = p.category;
-            if (cat && typeof cat === 'string' && cat.trim() !== '') {
-              categorySet.add(cat.toLowerCase().trim());
-            }
-          });
-          
-          transformedCategories = Array.from(categorySet).map(cat => ({
-            id: cat,
-            label: cat.charAt(0).toUpperCase() + cat.slice(1).replace(/_/g, ' '),
-          }));
-        }
-        
-        // Always add "All Products" option at the beginning
-        if (transformedCategories.length > 0 && transformedCategories[0].id !== 'all') {
-          transformedCategories = [{ id: 'all', label: 'All Products' }, ...transformedCategories];
-        } else if (transformedCategories.length === 0) {
-          transformedCategories = [{ id: 'all', label: 'All Products' }];
-        }
-        
         console.log(`[MasseyProducts] Transformed ${products.length} products`);
-        console.log(`[MasseyProducts] Transformed ${transformedCategories.length} categories:`, transformedCategories);
         if (products.length > 0) {
           console.log('[MasseyProducts] Sample products:', products.slice(0, 3).map(p => ({
             id: p.id,
@@ -259,17 +194,14 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
         }
         
         setMasseyProducts(products);
-        setCategories(transformedCategories);
         
         if (products.length === 0) {
           console.warn('[MasseyProducts] No products found from Massey API');
           console.warn('[MasseyProducts] Raw productsData:', productsData);
-          console.warn('[MasseyProducts] Raw categoriesData:', categoriesData);
         }
       } catch (err: any) {
         console.error('[MasseyProducts] Error loading massey products:', err);
         setMasseyProducts([]);
-        setCategories([{ id: 'all', label: 'All Products' }]);
       } finally {
         setLoading(false);
       }
@@ -278,16 +210,8 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
     loadMasseyProducts();
   }, []);
 
-  const filteredProducts = selectedCategory === 'all' 
-    ? masseyProducts 
-    : masseyProducts.filter(p => {
-        // Case-insensitive category matching
-        const productCategory = (p.category || '').toLowerCase();
-        const selectedCat = selectedCategory.toLowerCase();
-        return productCategory === selectedCat || 
-               productCategory.includes(selectedCat) ||
-               selectedCat.includes(productCategory);
-      });
+  // Display all products without filtering
+  const filteredProducts = masseyProducts;
 
   // Shared function to find matching vehicle for a Massey product
   const findMatchingVehicle = async (product: Product) => {
@@ -421,27 +345,6 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Explore our complete range of Massey Ferguson tractors and agricultural equipment
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Category Filter */}
-      <section className="py-8 bg-gray-50 sticky top-[73px] z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                  selectedCategory === category.id
-                    ? 'bg-red-600 text-white shadow-lg scale-105'
-                    : 'bg-white text-gray-900 hover:bg-gray-100 border-2 border-gray-200'
-                }`}
-              >
-                {category.label}
-              </button>
-            ))}
           </div>
         </div>
       </section>
