@@ -99,6 +99,12 @@ export const normalizeImageUrl = (imagePath: string | null | undefined): string 
   
   // If path starts with /, check if it's an S3 path pattern
   if (imagePath.startsWith('/')) {
+    // Special case: Local files in public folder should be served directly in development
+    // In development mode, Vite serves files from public/ directly, so return as-is
+    if (import.meta.env.DEV && imagePath.startsWith('/images/')) {
+      return imagePath;
+    }
+    
     // If it looks like an S3 key (starts with images/, videos/, catalouges/, vehicles/)
     if (imagePath.match(/^\/(images|videos|catalouges|vehicles|resumes)\//)) {
       // Remove leading slash and use CloudFront

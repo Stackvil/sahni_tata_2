@@ -554,7 +554,7 @@ export default function Vehicles({ setCurrentPage, setSelectedVehicleId }: Vehic
                     <div className="mb-4">
                       {!brandImageErrors.tata ? (
                         <img
-                          src={normalizeImageUrl('/images/konda.png')}
+                          src={normalizeImageUrl('/images/new-logo.png')}
                           alt="Tata Motors"
                           className="h-32 w-auto mx-auto object-contain"
                           onError={() => {
@@ -651,7 +651,7 @@ export default function Vehicles({ setCurrentPage, setSelectedVehicleId }: Vehic
             Back to Brand Selection
           </button>
           <div className="flex items-center gap-2">
-            <img src={normalizeImageUrl('/images/konda.png')} alt="Tata" className="h-6 w-auto" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+            <img src={normalizeImageUrl('/images/new-logo.png')} alt="Tata" className="h-6 w-auto" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
             <span className="text-sm font-semibold">Tata Motors Vehicles</span>
           </div>
         </div>

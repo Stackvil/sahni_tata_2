@@ -53,7 +53,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="https://wa.me/919848529755"
+                  href="https://wa.me/919281029456"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-red-500 transition-colors text-left block py-2 min-h-[44px] flex items-center"
@@ -134,7 +134,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li className="flex items-center min-h-[44px]">
                 <Phone size={20} className="mr-3 flex-shrink-0" />
-                <a href="tel:+919848529755" className="text-gray-300 hover:text-red-500 transition-colors text-sm">+91 98485 29755</a>
+                <a href="tel:+919281029456" className="text-gray-300 hover:text-red-500 transition-colors text-sm">+91 92810 29456</a>
               </li>
               <li className="flex items-start">
                 <Mail size={20} className="mr-3 mt-1 flex-shrink-0" />
@@ -148,7 +148,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
 
         <div className="border-t border-gray-700 mt-6 pt-6 text-center text-gray-300 text-sm">
           <p>&copy; {new Date().getFullYear()} by Sahni Group. All rights reserved.</p>
-          <p className="mt-2">Founded in 1965 by Late Harvinder Singh Sahni</p>
+          <p className="mt-2">Founded in 1965 by Late Shri Harvinder Singh Sahni</p>
           <div className="mt-4 flex flex-wrap justify-center gap-4">
             <button
               onClick={() => { setCurrentPage('privacy-policy'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}

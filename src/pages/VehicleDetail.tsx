@@ -103,7 +103,7 @@ export default function VehicleDetail({ vehicleId, onBack }: VehicleDetailProps)
 
   // Handle WhatsApp redirect for test drive
   const handleScheduleTestDrive = () => {
-    const phoneNumber = '919848529755'; // WhatsApp number without + sign
+    const phoneNumber = '919281029456'; // WhatsApp number without + sign
     const message = `Hi, I'm interested in scheduling a test drive for ${vehicle?.name || 'this vehicle'}. Please provide more information.`;
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');

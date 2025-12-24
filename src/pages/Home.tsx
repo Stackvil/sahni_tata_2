@@ -392,49 +392,6 @@ export default function Home({ setCurrentPage }: HomeProps) {
               </div>
             </button>
 
-            {/* Showrooms Card */}
-            <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('showrooms');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  {/* Top Section - Image */}
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
-                <img
-                  src={normalizeImageUrl('/images/showrooms/vijayawada.png')}
-                  alt="Showrooms"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent && !parent.querySelector('.showroom-fallback')) {
-                      const fallback = document.createElement('div');
-                          fallback.className = 'showroom-fallback w-full h-full flex items-center justify-center bg-gray-800 text-white text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'SHOWROOMS';
-                      parent.appendChild(fallback);
-                    }
-                  }}
-                />
-            </div>
-                  {/* Bottom Section - Text */}
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Showrooms</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                  Authorized showrooms and service centers providing sales, service, and genuine spare parts across multiple locations.
-                </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>VISIT SHOWROOMS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
-              </div>
-            </div>
-              </div>
-              </button>
-              
             {/* Tata Motors Card */}
                     <button
                 className="flex-shrink-0 group cursor-pointer text-left"
@@ -449,7 +406,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   {/* Top Section - Logo */}
                   <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
                     <img
-                      src={normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/maxresdefault.jpg')}
+                      src={normalizeImageUrl('/images/new-logo.png')}
                   alt="Tata Motors"
                       className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
                   onError={(e) => {
@@ -479,7 +436,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               </div>
             </button>
 
-            {/* Massey Ferguson Card */}
+            {/* TAFE Card */}
                     <button
                 className="flex-shrink-0 group cursor-pointer text-left"
               onClick={() => {
@@ -492,17 +449,17 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   {/* Top Section - Logo */}
                   <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
                 <img
-                  src={normalizeImageUrl('/images/sahni_vehicles/messy_ferguson/mf 1035 dost/massey-ferguson-tractors.png')}
-                  alt="Massey Ferguson"
+                  src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
+                  alt="TAFE"
                       className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
                         const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.massey-logo-fallback')) {
+                        if (parent && !parent.querySelector('.tafe-logo-fallback')) {
                           const fallback = document.createElement('div');
-                          fallback.className = 'massey-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'MASSEY FERGUSON';
+                          fallback.className = 'tafe-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-lg sm:text-xl font-bold';
+                          fallback.textContent = 'TAFE';
                           parent.appendChild(fallback);
                         }
                       }}
@@ -510,7 +467,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   </div>
                   {/* Bottom Section - Text */}
                   <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Massey Ferguson</h3>
+                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">TAFE</h3>
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
                       Premium tractors and agricultural machinery designed for superior performance, durability, and efficiency in farming operations.
                     </p>
@@ -650,47 +607,6 @@ export default function Home({ setCurrentPage }: HomeProps) {
               </div>
             </button>
 
-            {/* Showrooms Card */}
-            <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('showrooms');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
-                <img
-                  src={normalizeImageUrl('/images/showrooms/vijayawada.png')}
-                  alt="Showrooms"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent && !parent.querySelector('.showroom-fallback')) {
-                      const fallback = document.createElement('div');
-                          fallback.className = 'showroom-fallback w-full h-full flex items-center justify-center bg-gray-800 text-white text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'SHOWROOMS';
-                      parent.appendChild(fallback);
-                    }
-                  }}
-                />
-                  </div>
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Showrooms</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                      Authorized showrooms and service centers providing sales, service, and genuine spare parts across multiple locations.
-                    </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>VISIT SHOWROOMS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
-                    </div>
-                  </div>
-                </div>
-              </button>
-
               {/* Tata Motors Card */}
               <button
                 className="flex-shrink-0 group cursor-pointer text-left"
@@ -704,7 +620,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
                   <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
                     <img
-                      src={normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/maxresdefault.jpg')}
+                      src={normalizeImageUrl('/images/new-logo.png')}
                       alt="Tata Motors"
                       className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
                       onError={(e) => {
@@ -733,7 +649,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 </div>
               </button>
 
-              {/* Massey Ferguson Card */}
+              {/* TAFE Card */}
               <button
                 className="flex-shrink-0 group cursor-pointer text-left"
                 onClick={() => {
@@ -745,24 +661,24 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
                   <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
                     <img
-                      src={normalizeImageUrl('/images/sahni_vehicles/messy_ferguson/mf 1035 dost/massey-ferguson-tractors.png')}
-                      alt="Massey Ferguson"
+                      src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
+                      alt="TAFE"
                       className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
                         const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.massey-logo-fallback')) {
+                        if (parent && !parent.querySelector('.tafe-logo-fallback')) {
                           const fallback = document.createElement('div');
-                          fallback.className = 'massey-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'MASSEY FERGUSON';
+                          fallback.className = 'tafe-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-lg sm:text-xl font-bold';
+                          fallback.textContent = 'TAFE';
                           parent.appendChild(fallback);
                         }
                       }}
                     />
                 </div>
                   <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Massey Ferguson</h3>
+                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">TAFE</h3>
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
                       Premium tractors and agricultural machinery designed for superior performance, durability, and efficiency in farming operations.
                     </p>
@@ -970,11 +886,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               })}
               </div>
             </>
-          ) : (
-            <div className="text-center py-8">
-              <p className="text-gray-600">No highlights available at the moment.</p>
-            </div>
-          )}
+          ) : null}
         </div>
       </section>
 
@@ -1146,28 +1058,23 @@ export default function Home({ setCurrentPage }: HomeProps) {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
-            {/* Late Harvinder Singh Sahni */}
+            {/* Late Shri Harvinder Singh Sahni */}
             <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-lg scroll-reveal-left scroll-reveal-delay-1">
               <div className="text-center mb-4 sm:mb-6">
                 <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-yellow-400 shadow-xl">
                   <img
                     src={normalizeImageUrl('/images/founder.png')}
-                    alt="Late Harvinder Singh Sahni"
+                    alt="Late Shri Harvinder Singh Sahni"
                     className="w-full h-full object-cover"
                   />
                 </div>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold mb-2 text-center">
-                Late Harvinder Singh Sahni
+                Late Shri Harvinder Singh Sahni
               </h3>
               <p className="text-lg sm:text-xl mb-3 sm:mb-4 text-center text-gray-300">
                 Founder (1965)
               </p>
-              <div className="bg-yellow-400 px-4 py-2 sm:px-6 sm:py-3 rounded-lg mb-4 sm:mb-6 text-center">
-                <span className="text-gray-900 font-bold uppercase text-xs sm:text-sm md:text-base">
-                  FOUNDER LATE HARVINDER SINGH SAHNI
-                </span>
-              </div>
               <p className="text-base sm:text-lg leading-relaxed text-center mb-3 sm:mb-4">
                 A visionary entrepreneur who established Sahni Group in
                 1965 with a clear mission: Building Businesses, Creating
@@ -1221,20 +1128,11 @@ export default function Home({ setCurrentPage }: HomeProps) {
               </div>
               <p className="text-base sm:text-lg leading-relaxed text-center mb-4 sm:mb-6">
                 Leading Sahni Group into a new era while honoring the
-                vision of founder Late Harvinder Singh Sahni. Under his
+                vision of founder Late Shri Harvinder Singh Sahni. Under his
                 leadership, the group continues to expand its presence
                 across multiple sectors, creating opportunities and
                 building lasting value for the community.
               </p>
-              <div className="mt-4 sm:mt-6 bg-white/20 p-3 sm:p-4 rounded-lg text-center">
-                <a
-                  href="tel:+919848529755"
-                  className="text-white font-bold text-base sm:text-lg flex items-center justify-center break-all"
-                >
-                  <Phone className="w-5 h-5 sm:w-6 sm:h-6 mr-2 flex-shrink-0" />
-                  +91 98485 29755
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -1317,10 +1215,10 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                  {/* Retail Market */}
+                  {/* Industrial Lubricants */}
                   <div className="bg-white p-8 rounded-xl shadow-xl scroll-reveal-left scroll-reveal-delay-1">
-                    <h3 className="text-2xl font-bold text-blue-900 mb-2">RETAIL MARKET</h3>
-                    <p className="text-blue-900 mb-6">Brands We Deal</p>
+                    <h3 className="text-2xl font-bold text-blue-900 mb-2">INDUSTRIAL LUBRICANTS</h3>
+                    <p className="text-blue-900 mb-6">AUTOMOTIVE LUBRICANTS</p>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                       {verticals.find(v => v.id === 'lubricants')?.retailBrands?.map((brand, index) => (
                         <div key={index} className="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
@@ -1349,9 +1247,9 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     </div>
                   </div>
 
-                  {/* Industrial Market */}
+                  {/* Automotive Lubricants */}
                   <div className="bg-white p-8 rounded-xl shadow-xl scroll-reveal-right scroll-reveal-delay-2">
-                    <h3 className="text-2xl font-bold text-blue-900 mb-2">INDUSTRIAL MARKET</h3>
+                    <h3 className="text-2xl font-bold text-blue-900 mb-2">AUTOMOTIVE LUBRICANTS</h3>
                     <p className="text-blue-900 mb-6">Brands We Deal</p>
                     <div className="grid grid-cols-2 gap-6">
                       {verticals.find(v => v.id === 'lubricants')?.industrialBrands?.map((brand, index) => (
@@ -1459,30 +1357,6 @@ export default function Home({ setCurrentPage }: HomeProps) {
       })()}
 
 
-      {/* The Sahni Difference Section */}
-      <section className="py-6 sm:py-8 md:py-10 lg:py-12 bg-white">
-        <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
-          <div className="mb-6 sm:mb-8 md:mb-10 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black uppercase tracking-tight">THE SAHNI DIFFERENCE</h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {[
-              { icon: '✓', title: 'A.S.E Certified', description: 'Professional certification' },
-              { icon: '★', title: '60+ Years of Excellence', description: 'Decades of experience' },
-              { icon: '🛡️', title: '3 Year Warranty', description: 'Comprehensive coverage' },
-              { icon: '✓', title: '35-Point Inspection', description: 'Quality assurance' },
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl sm:text-4xl md:text-5xl mb-3 sm:mb-4">{item.icon}</div>
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-1 sm:mb-2">{item.title}</h3>
-                <p className="text-sm sm:text-base text-gray-600">{item.description}</p>
-                    </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Stats Section */}
       <section className="py-6 sm:py-8 md:py-10 lg:py-12 bg-white">
         <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
@@ -1542,8 +1416,8 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   // Encode message for URL
                   const encodedMessage = encodeURIComponent(message);
                   
-                  // WhatsApp number: +919848529755
-                  const whatsappUrl = `https://wa.me/919848529755?text=${encodedMessage}`;
+                  // WhatsApp number: +919281029456
+                  const whatsappUrl = `https://wa.me/919281029456?text=${encodedMessage}`;
                   
                   // Open WhatsApp in new tab
                   window.open(whatsappUrl, '_blank');
@@ -1670,11 +1544,11 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 </div>
                 <div className="space-y-2 sm:space-y-3">
                   <a
-                    href="tel:+919848529755"
+                    href="tel:+919281029456"
                     className="flex items-center text-sm sm:text-base md:text-lg text-gray-700 hover:text-blue-600 transition-colors"
                   >
                     <Phone size={18} className="mr-2 sm:mr-3 text-gray-400 flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5" />
-                    +91 98485 29755
+                    +91 92810 29456
                   </a>
                   <a
                     href="mailto:sahniauto@gmail.com"

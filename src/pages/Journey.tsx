@@ -4,7 +4,7 @@ export default function Journey() {
   const milestones = [
     {
       year: '1965',
-      event: 'Founded at Vijayawada by Late Harvinder Singh Sahni',
+      event: 'Founded at Vijayawada by Late Shri Harvinder Singh Sahni',
       color: 'bg-yellow-400',
       textColor: 'text-blue-900',
     },

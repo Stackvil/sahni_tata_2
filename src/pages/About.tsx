@@ -293,17 +293,7 @@ export default function About({ setCurrentPage, setSelectedAboutEntryId }: About
             </div>
           )}
 
-          {!loadingEntries && !entriesError && entries.length === 0 && (
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4 sm:p-6 md:p-8 text-center">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
-                No highlights yet
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600">
-                We're preparing new updates for this section. Check back
-                soon for the latest news from Sahni Group.
-              </p>
-            </div>
-          )}
+          {!loadingEntries && !entriesError && entries.length === 0 && null}
         </div>
       </section>
 
@@ -523,56 +513,30 @@ export default function About({ setCurrentPage, setSelectedAboutEntryId }: About
               </div>
               <p className="text-base sm:text-lg leading-relaxed text-center mb-4 sm:mb-6">
                 Leading Sahni Group into a new era while honoring the
-                vision of founder Late Harvinder Singh Sahni. Under his
+                vision of founder Late Shri Harvinder Singh Sahni. Under his
                 leadership, the group continues to expand its presence
                 across multiple sectors, creating opportunities and
                 building lasting value for the community.
               </p>
-              <div className="mt-4 sm:mt-6 bg-white/20 p-3 sm:p-4 rounded-lg text-center">
-                <a
-                  href="tel:+919848529755"
-                  className="text-white font-bold text-base sm:text-lg flex items-center justify-center break-all"
-                >
-                  <svg
-                    className="w-5 h-5 sm:w-6 sm:h-6 mr-2 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    />
-                  </svg>
-                  +91 98485 29755
-                </a>
-              </div>
             </div>
 
-            {/* Late Harvinder Singh Sahni */}
+            {/* Late Shri Harvinder Singh Sahni */}
             <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-lg">
               <div className="text-center mb-4 sm:mb-6">
                 <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-yellow-400 shadow-xl">
                   <img
                     src={normalizeImageUrl('/images/founder.png')}
-                    alt="Late Harvinder Singh Sahni"
+                    alt="Late Shri Harvinder Singh Sahni"
                     className="w-full h-full object-cover"
                   />
                 </div>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold mb-2 text-center">
-                Late Harvinder Singh Sahni
+                Late Shri Harvinder Singh Sahni
               </h3>
               <p className="text-lg sm:text-xl mb-3 sm:mb-4 text-center text-gray-300">
                 Founder (1965)
               </p>
-              <div className="bg-yellow-400 px-4 py-2 sm:px-6 sm:py-3 rounded-lg mb-4 sm:mb-6 text-center">
-                <span className="text-gray-900 font-bold uppercase text-xs sm:text-sm md:text-base">
-                  FOUNDER LATE HARVINDER SINGH SAHNI
-                </span>
-              </div>
               <p className="text-base sm:text-lg leading-relaxed text-center mb-3 sm:mb-4">
                 A visionary entrepreneur who established Sahni Group in
                 1965 with a clear mission: Building Businesses, Creating

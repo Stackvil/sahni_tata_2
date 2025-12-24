@@ -970,7 +970,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
 
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gradient-to-r from-gray-50 to-white">
             <a
-              href="tel:+919848529755"
+              href="tel:+919281029456"
               className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-3.5 px-4 rounded-lg font-semibold text-sm uppercase tracking-wide transition-all duration-300 flex items-center justify-center shadow-md"
             >
               <Phone size={18} className="mr-2" />

@@ -415,7 +415,7 @@ export default function ProductDetail({ productId, onBack }: ProductDetailProps)
               {/* CTA Buttons */}
               <div className="space-y-3 sm:space-y-4">
                 <a
-                  href="https://wa.me/919848529755"
+                  href="https://wa.me/919281029456"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-red-600 text-white py-3 sm:py-4 px-4 sm:px-8 rounded-lg font-bold text-base sm:text-lg hover:bg-red-700 transition-colors flex items-center justify-center group min-h-[44px]"
@@ -428,10 +428,10 @@ export default function ProductDetail({ productId, onBack }: ProductDetailProps)
                   Contact Us
                 </button>
                 <a
-                  href="tel:+919848529755"
+                  href="tel:+919281029456"
                   className="block w-full bg-green-600 text-white py-3 sm:py-4 px-4 sm:px-8 rounded-lg font-bold text-base sm:text-lg hover:bg-green-700 transition-colors text-center min-h-[44px] flex items-center justify-center"
                 >
-                  Call: +91 98485 29755
+                  Call: +91 92810 29456
                 </a>
               </div>
 
@@ -441,8 +441,8 @@ export default function ProductDetail({ productId, onBack }: ProductDetailProps)
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <Phone size={18} className="text-red-600 mr-3" />
-                    <a href="tel:+919848529755" className="text-gray-700 hover:text-red-600">
-                      +91 98485 29755
+                    <a href="tel:+919281029456" className="text-gray-700 hover:text-red-600">
+                      +91 92810 29456
                     </a>
                   </div>
                   <div className="flex items-center">

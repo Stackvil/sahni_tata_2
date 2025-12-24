@@ -62,7 +62,7 @@ export default function AdminShowrooms({ isDarkMode = false }: AdminShowroomsPro
           id: s.id || s.showroom_id,
           city: s.city || s.name || s.location || 'Unknown',
           address: s.address || '',
-          phone: s.phone || '+91 98485 29755',
+          phone: s.phone || '+91 92810 29456',
           email: s.email || 'sahniauto@gmail.com',
           image: imageUrl, // Normalized image URL
           isMain: s.isMain || s.is_main || false,

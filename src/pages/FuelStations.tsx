@@ -84,7 +84,7 @@ const normalizeStations = (stations: any[]): FuelStation[] => {
       name,
       location,
       address: station?.address || station?.full_address || 'Address coming soon',
-      phone: station?.phone || station?.contact || station?.phone_number || '+91 98485 29755',
+      phone: station?.phone || station?.contact || station?.phone_number || '+91 93918 20529',
       image: station?.image || station?.banner || station?.photo || station?.image_url || '',
       mapLink,
       features: features.length > 0 ? features : DEFAULT_FEATURES,

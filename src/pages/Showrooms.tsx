@@ -21,7 +21,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     id: 'vijayawada',
     city: 'Vijayawada',
     address: '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008',
-    phone: '+91 98485 29755',
+    phone: '+91 92810 29456',
     email: 'sahniauto@gmail.com',
     image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/vijayawada.png'),
     isMain: true,
@@ -30,7 +30,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     id: 'narasaraopet',
     city: 'Narasaraopet',
     address: 'Palnadu Road, Narasaraopet',
-    phone: '+91 98485 29755',
+    phone: '+91 92810 29456',
     email: 'sahniauto@gmail.com',
     image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/NARASARAOPET.png'),
     isMain: true,
@@ -39,7 +39,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     id: 'guntur',
     city: 'Guntur',
     address: 'NH 16, Guntur Main Road, Guntur District',
-    phone: '+91 98485 29755',
+    phone: '+91 92810 29456',
     email: 'sahniauto@gmail.com',
     image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/guntur.png'),
     isMain: true,
@@ -48,7 +48,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     id: 'kaikaluru',
     city: 'Kaikaluru',
     address: 'Main Road, Kaikaluru',
-    phone: '+91 98485 29755',
+    phone: '+91 92810 29456',
     email: 'sahniauto@gmail.com',
     isMain: false,
   },
@@ -56,7 +56,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     id: 'nuziveedu',
     city: 'Nuziveedu',
     address: 'Eluru Road, Nuziveedu',
-    phone: '+91 98485 29755',
+    phone: '+91 92810 29456',
     email: 'sahniauto@gmail.com',
     isMain: false,
   },
@@ -64,7 +64,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     id: 'nandiagama',
     city: 'Nandiagama',
     address: 'Krishna District, Nandiagama',
-    phone: '+91 98485 29755',
+    phone: '+91 92810 29456',
     email: 'sahniauto@gmail.com',
     isMain: false,
   },
@@ -72,7 +72,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     id: 'piduguralla',
     city: 'Piduguralla',
     address: 'Guntur District, Piduguralla',
-    phone: '+91 98485 29755',
+    phone: '+91 92810 29456',
     email: 'sahniauto@gmail.com',
     isMain: false,
   },
@@ -140,7 +140,7 @@ const normalizeShowrooms = (items: any[]): Showroom[] => {
       id,
       city,
       address: item?.address || 'Address coming soon',
-      phone: item?.phone || '+91 98485 29755',
+      phone: item?.phone || '+91 92810 29456',
       email: item?.email || 'sahniauto@gmail.com',
       image: imageUrl,
       images: images,
@@ -329,7 +329,7 @@ export default function Showrooms() {
             <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6 gap-3 sm:gap-4">
               <div className="bg-white p-2 rounded-lg shadow-md border-2 border-gray-200">
                 <img
-                  src={normalizeImageUrl('/images/konda.png')}
+                  src={normalizeImageUrl('/images/new-logo.png')}
                   alt="Tata Motors Logo"
                   className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                   onError={(e) => {
@@ -651,10 +651,10 @@ export default function Showrooms() {
             Experience the Sahni Group difference at any of our locations. Our team is ready to assist you with sales, service, and genuine spare parts.
           </p>
           <a
-            href="tel:+919848529755"
+            href="tel:+919281029456"
             className="inline-block bg-red-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-red-700 transition-colors"
           >
-            Call Us: +91 98485 29755
+            Call Us: +91 92810 29456
           </a>
         </div>
       </section>

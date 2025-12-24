@@ -43,7 +43,7 @@ export default function Contact() {
           address:
             main.address ||
             '#48-16-7/5A, Mahanadu Road, Vijayawada - 520008',
-          phone: main.phone || '+91 98485 29755',
+          phone: main.phone || '+91 92810 29456',
           email: main.email || 'sahniauto@gmail.com',
           image: main.image || (Array.isArray(main.images) ? main.images[0] : undefined),
         });
@@ -74,7 +74,7 @@ ${formData.message}`;
     const encodedMessage = encodeURIComponent(whatsappMessage);
     
     // Redirect to WhatsApp with pre-filled message
-    const whatsappUrl = `https://wa.me/919848529755?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/919281029456?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
     
     // Reset form after a short delay
@@ -145,11 +145,11 @@ ${formData.message}`;
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Phone</h3>
                     <a
-                      href={`tel:${(primaryShowroom?.phone || '+91 98485 29755')
+                      href={`tel:${(primaryShowroom?.phone || '+91 92810 29456')
                         .replace(/\s/g, '')}`}
                       className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block break-all"
                     >
-                      {primaryShowroom?.phone || '+91 98485 29755'}
+                      {primaryShowroom?.phone || '+91 92810 29456'}
                     </a>
                     <p className="text-sm sm:text-base text-gray-600 mt-1">Mon - Sat: 9:00 AM - 7:00 PM</p>
                   </div>
@@ -206,7 +206,7 @@ ${formData.message}`;
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">WhatsApp</h3>
                     <a
-                      href="https://wa.me/919848529755"
+                      href="https://wa.me/919281029456"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block"
@@ -349,7 +349,7 @@ ${formData.message}`;
 
           <div className="mt-4 sm:mt-6 text-center">
             <a
-              href="https://wa.me/919848529755?text=Hi,%20I%20need%20directions%20to%20your%20location"
+              href="https://wa.me/919281029456?text=Hi,%20I%20need%20directions%20to%20your%20location"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 sm:px-8 rounded-lg transition-colors shadow-lg hover:shadow-xl min-h-[44px] text-sm sm:text-base"
@@ -371,14 +371,14 @@ ${formData.message}`;
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <a
-              href="tel:+919848529755"
+              href="tel:+919281029456"
               className="bg-red-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-red-700 transition-colors inline-flex items-center justify-center min-h-[44px]"
             >
               <Phone className="mr-2" size={20} />
               Call Now
             </a>
             <a
-              href="https://wa.me/919848529755"
+              href="https://wa.me/919281029456"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-green-600 transition-colors inline-flex items-center justify-center min-h-[44px]"

@@ -198,7 +198,7 @@ export default function PrivacyPolicy() {
               <p><strong>Sahni Group</strong></p>
               <p>#48-16-7/5A, Mahanadu Road</p>
               <p>Vijayawada - 520008, Andhra Pradesh, India</p>
-              <p>Phone: <a href="tel:+919848529755" className="text-red-500 hover:underline">+91 98485 29755</a></p>
+              <p>Phone: <a href="tel:+919281029456" className="text-red-500 hover:underline">+91 92810 29456</a></p>
               <p>Email: <a href="mailto:sahniauto@gmail.com" className="text-red-500 hover:underline">sahniauto@gmail.com</a></p>
             </div>
           </div>
