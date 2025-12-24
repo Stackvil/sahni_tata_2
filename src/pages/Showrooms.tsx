@@ -8,12 +8,14 @@ interface Showroom {
   city: string;
   address: string;
   phone: string;
+  sales_phone?: string;
+  service_phone?: string;
   email: string;
   image?: string;
   images?: string[];
   isMain: boolean;
   category?: string;
-  is_branch?: boolean;
+  isBranch?: boolean;
 }
 
 const STATIC_SHOWROOMS: Showroom[] = [
@@ -140,13 +142,15 @@ const normalizeShowrooms = (items: any[]): Showroom[] => {
       id,
       city,
       address: item?.address || 'Address coming soon',
-      phone: item?.phone || '+91 92810 29456',
+      phone: item?.phone || '',
+      sales_phone: item?.sales_phone || item?.phone || '',
+      service_phone: item?.service_phone || item?.phone || '',
       email: item?.email || 'sahniauto@gmail.com',
       image: imageUrl,
       images: images,
       isMain: Boolean(item?.is_main ?? item?.isMain ?? item?.is_primary ?? false),
-      category: category,
-      is_branch: item?.is_branch || false, // Preserve is_branch field
+      category,
+      isBranch: item?.is_branch || item?.isBranch || false,
     };
   });
 };
@@ -231,13 +235,13 @@ export default function Showrooms() {
   
   // Separate main showrooms from branches
   const mainTataShowrooms = useMemo(() => {
-    const main = tataShowrooms.filter(s => !(s as any).is_branch);
+    const main = tataShowrooms.filter(s => !s.isBranch);
     console.log(`[Showrooms] Found ${main.length} main Tata showrooms`);
     return main;
   }, [tataShowrooms]);
   
   const branchShowrooms = useMemo(() => {
-    const branches = tataShowrooms.filter(s => (s as any).is_branch === true);
+    const branches = tataShowrooms.filter(s => s.isBranch === true);
     console.log(`[Showrooms] Found ${branches.length} branch showrooms`);
     return branches;
   }, [tataShowrooms]);
@@ -395,15 +399,33 @@ export default function Showrooms() {
                       </a>
                     </div>
 
-                    <div className="flex items-center">
-                      <Phone size={20} className="text-gray-500 mr-3 flex-shrink-0" />
-                    <a
-                      href={`tel:${showroom.phone.replace(/\s/g, '')}`}
-                      className="text-red-600 hover:underline font-semibold"
-                    >
-                      {showroom.phone}
-                    </a>
-                    </div>
+                    {showroom.sales_phone && (
+                      <div className="flex items-start">
+                        <Phone size={20} className="text-gray-500 mr-3 mt-0.5 flex-shrink-0" />
+                        <div className="flex flex-col">
+                          <div>
+                            <span className="text-gray-600 text-sm font-medium">Sales: </span>
+                            <a
+                              href={`tel:${showroom.sales_phone.replace(/\s/g, '')}`}
+                              className="text-red-600 hover:underline font-semibold"
+                            >
+                              {showroom.sales_phone}
+                            </a>
+                          </div>
+                          {showroom.service_phone && showroom.service_phone !== showroom.sales_phone && (
+                            <div className="mt-1">
+                              <span className="text-gray-600 text-sm font-medium">Service: </span>
+                              <a
+                                href={`tel:${showroom.service_phone.replace(/\s/g, '')}`}
+                                className="text-red-600 hover:underline font-semibold"
+                              >
+                                {showroom.service_phone}
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
 
                     <div className="flex items-center">
                       <Clock size={20} className="text-gray-500 mr-3 flex-shrink-0" />
@@ -452,15 +474,17 @@ export default function Showrooms() {
                         <MapPin size={16} className="text-gray-500 mr-2 mt-0.5 flex-shrink-0" />
                         <p className="text-gray-700">{showroom.address}</p>
                       </div>
-                      <div className="flex items-center">
-                        <Phone size={16} className="text-gray-500 mr-2 flex-shrink-0" />
-                        <a
-                          href={`tel:${showroom.phone.replace(/\s/g, '')}`}
-                          className="text-red-600 hover:underline font-semibold"
-                        >
-                          {showroom.phone}
-                        </a>
-                      </div>
+                      {showroom.phone && (
+                        <div className="flex items-center">
+                          <Phone size={16} className="text-gray-500 mr-2 flex-shrink-0" />
+                          <a
+                            href={`tel:${showroom.phone.replace(/\s/g, '')}`}
+                            className="text-red-600 hover:underline font-semibold"
+                          >
+                            {showroom.phone}
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
