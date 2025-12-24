@@ -994,8 +994,8 @@ export default function Products({ setCurrentPage, setSelectedProductId }: Produ
                         
                         {/* Category Badge */}
                         <div className="absolute top-3 right-3 z-10">
-                          <span className="bg-red-600 text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold uppercase shadow-lg">
-                            {typeof product.category === 'string' ? product.category.substring(0, 10) : (product.category_name || 'Product').substring(0, 10)}
+                          <span className="bg-red-600 text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold uppercase shadow-lg whitespace-nowrap">
+                            {typeof product.category === 'string' ? product.category : (product.category_name || 'Product')}
                           </span>
                         </div>
                       </div>
