@@ -121,6 +121,8 @@ router.get('/', async (req, res) => {
         city: showroom.city || '',
         address: showroom.address || '',
         phone: showroom.phone || '',
+        sales_phone: showroom.sales_phone || showroom.phone || '',
+        service_phone: showroom.service_phone || showroom.phone || '',
         email: showroom.email || '',
         is_main: showroom.is_main || false,
         image: imageUrl,
@@ -142,7 +144,7 @@ router.get('/', async (req, res) => {
 // POST /api/showrooms - Create new showroom (Protected)
 router.post('/', authenticateToken, upload.single('image'), async (req, res) => {
   try {
-    const { city, address, phone, email, is_main, category, images } = req.body;
+    const { city, address, phone, sales_phone, service_phone, email, is_main, category, images } = req.body;
     
     if (!city || !address || !phone || !email) {
       return res.status(400).json({ detail: 'City, address, phone, and email are required' });
@@ -176,6 +178,8 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
           city,
           address,
           phone,
+          sales_phone,
+          service_phone,
           email,
           is_main: is_main === 'true' || is_main === true,
           image_url: imagePath,
@@ -188,6 +192,8 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
           city: newShowroom.city,
           address: newShowroom.address,
           phone: newShowroom.phone,
+          sales_phone: newShowroom.sales_phone,
+          service_phone: newShowroom.service_phone,
           email: newShowroom.email,
           is_main: newShowroom.is_main,
           image: newShowroom.image_url ? toCloudFrontUrl(newShowroom.image_url) : newShowroom.image_url,
@@ -217,6 +223,8 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
       city,
       address,
       phone,
+      sales_phone,
+      service_phone,
       email,
       is_main: is_main === 'true' || is_main === true,
       image: imagePath,
@@ -235,7 +243,7 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
 // PUT /api/showrooms/:id - Update showroom (Protected)
 router.put('/:id', authenticateToken, upload.single('image'), async (req, res) => {
   try {
-    const { city, address, phone, email, is_main, category } = req.body;
+    const { city, address, phone, sales_phone, service_phone, email, is_main, category } = req.body;
     const showroomId = parseInt(req.params.id);
 
     const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
@@ -266,6 +274,8 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
         if (city !== undefined) updateData.city = city;
         if (address !== undefined) updateData.address = address;
         if (phone !== undefined) updateData.phone = phone;
+        if (sales_phone !== undefined) updateData.sales_phone = sales_phone;
+        if (service_phone !== undefined) updateData.service_phone = service_phone;
         if (email !== undefined) updateData.email = email;
         if (is_main !== undefined) updateData.is_main = is_main === 'true' || is_main === true;
         if (imagePath !== undefined) updateData.image_url = imagePath;
@@ -281,6 +291,8 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
           city: updatedShowroom.city,
           address: updatedShowroom.address,
           phone: updatedShowroom.phone,
+          sales_phone: updatedShowroom.sales_phone,
+          service_phone: updatedShowroom.service_phone,
           email: updatedShowroom.email,
           is_main: updatedShowroom.is_main,
           image: updatedShowroom.image_url ? toCloudFrontUrl(updatedShowroom.image_url) : updatedShowroom.image_url,
@@ -312,6 +324,8 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
     if (city !== undefined) showrooms[showroomIndex].city = city;
     if (address !== undefined) showrooms[showroomIndex].address = address;
     if (phone !== undefined) showrooms[showroomIndex].phone = phone;
+    if (sales_phone !== undefined) showrooms[showroomIndex].sales_phone = sales_phone;
+    if (service_phone !== undefined) showrooms[showroomIndex].service_phone = service_phone;
     if (email !== undefined) showrooms[showroomIndex].email = email;
     if (is_main !== undefined) showrooms[showroomIndex].is_main = is_main === 'true' || is_main === true;
     if (category !== undefined) showrooms[showroomIndex].category = category;

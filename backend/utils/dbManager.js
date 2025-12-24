@@ -152,12 +152,14 @@ export const showroomsDB = {
 
   create: async (showroom) => {
     const result = await query(
-      `INSERT INTO showrooms (city, address, phone, email, is_main, image_url, category, images)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      `INSERT INTO showrooms (city, address, phone, sales_phone, service_phone, email, is_main, image_url, category, images)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
       [
         showroom.city, 
         showroom.address, 
         showroom.phone, 
+        showroom.sales_phone || null,
+        showroom.service_phone || null,
         showroom.email, 
         showroom.is_main, 
         showroom.image_url,
@@ -170,16 +172,18 @@ export const showroomsDB = {
 
   update: async (id, showroom) => {
     const result = await query(
-      `UPDATE showrooms SET city = $1, address = $2, phone = $3, email = $4, 
-       is_main = $5, image_url = COALESCE($6, image_url), 
-       category = COALESCE($7, category), 
-       images = COALESCE($8, images),
+      `UPDATE showrooms SET city = $1, address = $2, phone = $3, sales_phone = $4, service_phone = $5, email = $6, 
+       is_main = $7, image_url = COALESCE($8, image_url), 
+       category = COALESCE($9, category), 
+       images = COALESCE($10, images),
        updated_at = CURRENT_TIMESTAMP
-       WHERE id = $9 RETURNING *`,
+       WHERE id = $11 RETURNING *`,
       [
         showroom.city, 
         showroom.address, 
         showroom.phone, 
+        showroom.sales_phone !== undefined ? showroom.sales_phone : null,
+        showroom.service_phone !== undefined ? showroom.service_phone : null,
         showroom.email, 
         showroom.is_main, 
         showroom.image_url,

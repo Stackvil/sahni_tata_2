@@ -278,6 +278,8 @@ const createTables = async () => {
       city VARCHAR(255) NOT NULL,
       address TEXT NOT NULL,
       phone VARCHAR(50),
+      sales_phone VARCHAR(50),
+      service_phone VARCHAR(50),
       email VARCHAR(255),
       is_main BOOLEAN DEFAULT false,
       image_url TEXT,

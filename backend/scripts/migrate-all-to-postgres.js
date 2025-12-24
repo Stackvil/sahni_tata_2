@@ -267,6 +267,8 @@ async function migrateShowrooms() {
           city: showroom.city || '',
           address: showroom.address || '',
           phone: showroom.phone || '',
+          sales_phone: showroom.sales_phone || showroom.phone || null,
+          service_phone: showroom.service_phone || showroom.phone || null,
           email: showroom.email || '',
           is_main: showroom.is_main || showroom.isMain || false,
           image_url: imageUrl,
