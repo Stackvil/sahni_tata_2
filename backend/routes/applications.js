@@ -4,6 +4,8 @@ import nodemailer from 'nodemailer';
 import { readData, writeData } from '../utils/dataManager.js';
 import { authenticateToken } from '../middleware/auth.js';
 import { uploadFileToS3 } from '../middleware/multer-s3.js';
+import { careersDB } from '../utils/dbManager.js';
+import { getPool, isDatabaseConnected } from '../config/database.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -108,10 +110,34 @@ router.post('/', upload.single('resume'), async (req, res) => {
       return res.status(400).json({ detail: 'Invalid email format' });
     }
 
-    // Get job details
-    const careersData = await readData('careers');
-    const jobs = careersData.jobs || [];
-    const job = jobs.find(j => j.id === jobId);
+    // Get job details - check database first, then JSON file
+    let job = null;
+    const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
+    const pool = getPool();
+    const shouldUseDatabase = isVercel || (pool !== null && isDatabaseConnected());
+
+    if (shouldUseDatabase) {
+      try {
+        const allJobs = await careersDB.getAll();
+        // Try to find job by matching ID (handle both string and number comparisons)
+        job = allJobs.find(j => String(j.id) === String(jobId) || j.id === jobId);
+      } catch (dbError) {
+        console.warn('[Applications] Database error when fetching job, falling back to JSON:', dbError.message);
+        // Fall through to JSON file reading
+      }
+    }
+
+    // Fallback to JSON files if database didn't have the job
+    if (!job) {
+      try {
+        const careersData = await readData('careers');
+        const jobs = careersData.jobs || [];
+        // Try to find job by matching ID (handle both string and number comparisons)
+        job = jobs.find(j => String(j.id) === String(jobId) || j.id === jobId);
+      } catch (jsonError) {
+        console.error('[Applications] Error reading careers from JSON:', jsonError.message);
+      }
+    }
 
     if (!job) {
       return res.status(404).json({ detail: 'Job posting not found' });
