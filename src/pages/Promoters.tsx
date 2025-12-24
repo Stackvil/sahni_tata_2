@@ -47,8 +47,8 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                 <div className="relative mb-6">
                   <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                     <img
-                      src={normalizeImageUrl('/images/promoters/founder-1.jpg')}
-                      alt="Promoter"
+                      src={normalizeImageUrl('/images/promoters/gurjeeth.png')}
+                      alt="Gurjeet Singh Sahni"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -58,7 +58,7 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                   </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
-                  Founder Name
+                  Gurjeet Singh Sahni
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
                   Chairman & Managing Director
@@ -75,8 +75,8 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                 <div className="relative mb-6">
                   <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                     <img
-                      src={normalizeImageUrl('/images/promoters/founder-2.jpg')}
-                      alt="Promoter"
+                      src={normalizeImageUrl('/images/promoters/madam.jpeg')}
+                      alt="madam"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -86,7 +86,7 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                   </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
-                  Co-Founder Name
+                  madam
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
                   Director
@@ -103,8 +103,8 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                 <div className="relative mb-6">
                   <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                     <img
-                      src={normalizeImageUrl('/images/promoters/founder-3.jpg')}
-                      alt="Promoter"
+                      src={normalizeImageUrl('/images/promoters/madam1.jpeg')}
+                      alt="madam2"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -114,7 +114,7 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                   </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
-                  Promoter Name
+                  madam2
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
                   Director
