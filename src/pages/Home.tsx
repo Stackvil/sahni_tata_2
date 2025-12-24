@@ -137,37 +137,13 @@ export default function Home({ setCurrentPage }: HomeProps) {
 
   // Load advertisement video
   useEffect(() => {
-    const loadAdVideo = async () => {
-      try {
-        setAdVideoLoading(true);
-        // Try to get advertisement video from API
-        const adUrl = await homeAPI.getAdvertisementVideo();
-        console.log('[Home] Advertisement video URL from API:', adUrl);
-        // Normalize the URL - if it's a relative path, prepend API base URL for Vercel
-        // Videos are served from the backend, so we need the full URL
-        let normalizedUrl = adUrl;
-        if (!adUrl.startsWith('http')) {
-          // Get the API base endpoint (already handles Vercel detection)
-          const API_BASE = import.meta.env.VITE_API_URL || 'https://qqhxxgscjc.execute-api.ap-south-1.amazonaws.com/prod';
-          normalizedUrl = `${API_BASE}${adUrl.startsWith('/') ? adUrl : '/' + adUrl}`;
-        }
-        console.log('[Home] Normalized advertisement video URL:', normalizedUrl);
-        setAdVideoUrl(normalizedUrl);
-        setAdVideoError(false);
-      } catch (error) {
-        console.error('Failed to load advertisement video:', error);
-        // Fallback to default video path (use CloudFront)
-        const fallbackUrl = normalizeImageUrl('/videos/advertisement.mp4');
-        const normalizedFallback = fallbackUrl;
-        console.log('[Home] Using fallback advertisement video URL:', normalizedFallback);
-        setAdVideoUrl(normalizedFallback);
-        setAdVideoError(false); // Don't show error, just use fallback
-      } finally {
-        setAdVideoLoading(false);
-      }
-    };
-
-    loadAdVideo();
+    // Use the adver1.mp4 video directly from public folder
+    const adVideoPath = '/videos/adver1.mp4';
+    const normalizedUrl = normalizeImageUrl(adVideoPath);
+    console.log('[Home] Setting advertisement video URL:', normalizedUrl);
+    setAdVideoUrl(normalizedUrl);
+    setAdVideoError(false);
+    setAdVideoLoading(false);
   }, []);
 
   // Fetch About entries
