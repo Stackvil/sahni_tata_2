@@ -477,7 +477,7 @@ export default function Showrooms() {
             <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6 gap-3 sm:gap-4">
               <div className="bg-white p-2 rounded-lg shadow-md border-2 border-gray-200">
                 <img
-                  src={normalizeImageUrl('/images/kishore.png')}
+                  src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
                   alt="Massey Ferguson Logo"
                   className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                   onError={(e) => {

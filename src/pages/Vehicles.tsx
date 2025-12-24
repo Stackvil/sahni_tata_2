@@ -599,7 +599,7 @@ export default function Vehicles({ setCurrentPage, setSelectedVehicleId }: Vehic
                     <div className="mb-4">
                       {!brandImageErrors.massey ? (
                         <img
-                          src={normalizeImageUrl('/images/kishore.png')}
+                          src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
                           alt="Massey Ferguson"
                           className="h-32 w-auto mx-auto object-contain"
                           onError={() => {

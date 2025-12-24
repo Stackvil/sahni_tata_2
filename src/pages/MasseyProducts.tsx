@@ -396,7 +396,7 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
             Back to Brand Selection
           </button>
           <div className="flex items-center gap-2">
-            <img src={normalizeImageUrl('/images/kishore.png')} alt="Massey Ferguson" className="h-6 w-auto" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+            <img src={normalizeImageUrl('/images/TAFE_Logo.jpg')} alt="Massey Ferguson" className="h-6 w-auto" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
             <span className="text-sm font-semibold">Massey Ferguson Products</span>
           </div>
         </div>
@@ -407,7 +407,7 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-8">
             <img
-              src={normalizeImageUrl('/images/kishore.png')}
+              src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
               alt="Massey Ferguson"
               className="h-32 w-auto mx-auto mb-6 object-contain"
               onError={(e) => {

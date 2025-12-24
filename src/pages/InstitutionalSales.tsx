@@ -63,7 +63,8 @@ const InstitutionalSales = ({ setCurrentPage }: InstitutionalSalesProps) => {
           {/* Heading Section */}
           <div className="mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 sm:mb-8 leading-tight max-w-5xl">
-              Distributors for Andhra & Telangana for Tata Motors CV Spare Parts Institutional Govenance
+              <span className="block">Distributors for Andhra & Telangana</span>
+              <span className="block">for Tata Motors CV Spare Parts Institutional Govenance</span>
             </h2>
             
             <p className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl">

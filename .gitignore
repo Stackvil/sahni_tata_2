@@ -42,6 +42,7 @@ temp/
 # Media files (stored in S3)
 public/images/
 !public/images/GROUP.png
+!public/images/GROUP (1).png
 !public/images/logo.jpg
 !public/images/old-logo.png
 !public/images/awards/
@@ -52,6 +53,7 @@ public/videos/
 *.jpeg
 *.png
 !public/images/GROUP.png
+!public/images/GROUP (1).png
 !public/images/old-logo.png
 *.gif
 *.webp
