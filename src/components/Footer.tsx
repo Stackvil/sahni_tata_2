@@ -15,15 +15,15 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               <img
                 src={normalizeImageUrl('/images/GROUP (1).png')}
                 alt="Sahni Group Logo"
-                className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-lg flex-shrink-0"
-                style={{ maxHeight: '56px', maxWidth: '56px' }}
+                className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-lg flex-shrink-0"
+                style={{ maxHeight: '48px', maxWidth: '48px' }}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.style.display = 'none';
                   const parent = target.parentElement;
                   if (parent && !parent.querySelector('.fallback-logo-footer')) {
                     const fallback = document.createElement('div');
-                    fallback.className = 'fallback-logo-footer bg-red-600 text-white h-12 w-12 sm:h-14 sm:w-14 rounded-lg flex items-center justify-center font-black text-xl sm:text-2xl';
+                    fallback.className = 'fallback-logo-footer bg-red-600 text-white h-10 w-10 sm:h-12 sm:w-12 rounded-lg flex items-center justify-center font-black text-lg sm:text-xl';
                     fallback.textContent = 'S';
                     parent.appendChild(fallback);
                   }
