@@ -12,23 +12,25 @@ export default function Footer({ setCurrentPage }: FooterProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           <div>
             <div className="flex items-center mb-4 space-x-3">
-              <img
-                src={normalizeImageUrl('/images/GROUP (1).png')}
-                alt="Sahni Group Logo"
-                className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-lg flex-shrink-0"
-                style={{ maxHeight: '48px', maxWidth: '48px' }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const parent = target.parentElement;
-                  if (parent && !parent.querySelector('.fallback-logo-footer')) {
-                    const fallback = document.createElement('div');
-                    fallback.className = 'fallback-logo-footer bg-red-600 text-white h-10 w-10 sm:h-12 sm:w-12 rounded-lg flex items-center justify-center font-black text-lg sm:text-xl';
-                    fallback.textContent = 'S';
-                    parent.appendChild(fallback);
-                  }
-                }}
-              />
+              <div className="bg-white p-2 rounded-lg shadow-md flex-shrink-0">
+                <img
+                  src={normalizeImageUrl('/images/GROUP (1).png')}
+                  alt="Sahni Group Logo"
+                  className="h-14 w-14 sm:h-16 sm:w-16 md:h-18 md:w-18 object-contain"
+                  style={{ maxHeight: '72px', maxWidth: '72px' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const parent = target.parentElement;
+                    if (parent && !parent.querySelector('.fallback-logo-footer')) {
+                      const fallback = document.createElement('div');
+                      fallback.className = 'fallback-logo-footer bg-red-600 text-white h-14 w-14 sm:h-16 sm:w-16 rounded-lg flex items-center justify-center font-black text-xl sm:text-2xl';
+                      fallback.textContent = 'S';
+                      parent.appendChild(fallback);
+                    }
+                  }}
+                />
+              </div>
               <div className="flex flex-col">
                 <div className="text-lg sm:text-xl font-black text-white leading-tight brand-name">SAHNI</div>
               </div>
@@ -90,30 +92,30 @@ export default function Footer({ setCurrentPage }: FooterProps) {
           </div>
 
           <div>
-            <h4 className="text-base font-semibold mb-4 uppercase">Products</h4>
+            <h4 className="text-base font-semibold mb-4 uppercase">Services</h4>
             <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => { setCurrentPage('products'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  onClick={() => { setCurrentPage('fuel-stations'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-gray-300 hover:text-red-500 transition-colors text-left block py-2 min-h-[44px] w-full text-left"
                 >
-                  Lubricants
+                  Fuel Stations
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentPage('vehicles'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  onClick={() => { setCurrentPage('institutional-sales'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-gray-300 hover:text-red-500 transition-colors text-left block py-2 min-h-[44px] w-full text-left"
                 >
-                  Vehicles
+                  Institutional Sales
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentPage('showrooms'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  onClick={() => { setCurrentPage('careers'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-gray-300 hover:text-red-500 transition-colors text-left block py-2 min-h-[44px] w-full text-left"
                 >
-                  Service Centers
+                  Careers
                 </button>
               </li>
             </ul>
