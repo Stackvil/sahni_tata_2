@@ -31,7 +31,7 @@ const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
                   <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                     <img
                       src={normalizeImageUrl('/images/Management Team/uio.JPG')}
-                      alt="Shaik Jakker Basha"
+                      alt="Shaik Jakeer Basha"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -41,7 +41,7 @@ const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
                   </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
-                  Shaik Jakker Basha
+                  Shaik Jakeer Basha
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
                   G.M. Tata Vehicles & Institutional Sales
