@@ -1,12 +1,31 @@
 User-agent: *
 Allow: /
+Allow: /images/
+Allow: /videos/
+Allow: /catalouges/
 
 # Disallow admin and system paths
 Disallow: /admin
 Disallow: /backend
 Disallow: /api
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /scripts/
+
+# Crawl delay (optional, helps with server load)
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://sahniauto.com/sitemap.xml
+
+# Allow Googlebot specifically
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Allow Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
 
 

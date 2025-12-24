@@ -44,21 +44,22 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
     <>
       {/* VARUN STYLE STICKY HEADER */}
         <header className="sticky top-0 z-[100] bg-[#2368a8]">
-         {/* adjusted height for requested logo dimensions */}
-         <div className="flex w-full h-[140px]">
-           {/* LEFT: WHITE CAPSULE WITH FULL-SIZE LOGO (no inner padding) */}
+         {/* adjusted height for requested logo dimensions - responsive */}
+         <div className="flex w-full h-20 sm:h-24 md:h-28 lg:h-[140px]">
+           {/* LEFT: WHITE CAPSULE WITH FULL-SIZE LOGO (no inner padding) - responsive */}
            <div className="flex items-center">
-             <div className="h-full w-[250px] bg-white rounded-br-[80px] shadow-md flex items-center justify-center overflow-hidden p-1">
+             <div className="h-full w-32 sm:w-40 md:w-48 lg:w-[250px] bg-white rounded-br-[40px] sm:rounded-br-[60px] lg:rounded-br-[80px] shadow-md flex items-center justify-center overflow-hidden p-0.5 sm:p-1">
                <img
                  src={normalizeImageUrl('/images/GROUP (1).png')}
-                 alt="Sahni Group Logo"
-                 className="cursor-pointer transition-transform duration-300 hover:scale-105"
+                 alt="Sahni Group Logo - Navigate to Home"
+                 className="cursor-pointer transition-transform duration-300 hover:scale-105 touch-manipulation"
                  style={{
-                   height: '135px',
+                   height: 'calc(100% - 4px)',
                    width: '100%',
                    objectFit: 'contain',
                  }}
                  onClick={() => handleNavClick('home')}
+                 loading="eager"
                  onError={(e) => {
                    const target = e.target as HTMLImageElement;
                    target.style.display = 'none';

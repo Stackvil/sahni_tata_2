@@ -3,17 +3,64 @@
 @tailwind utilities;
 
 @layer base {
+  /* Mobile-first responsive base */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  
   body {
     @apply bg-white text-gray-900;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     line-height: 1.5;
     font-size: 0.9rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    width: 100%;
   }
   
   html {
     scroll-behavior: smooth;
     font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Ensure all interactive elements are touch-friendly */
+  button, a, input, select, textarea, [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Minimum touch target size (44x44px) */
+  button, a[href], input[type="button"], input[type="submit"], [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve focus visibility for accessibility */
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #DC2626;
+    outline-offset: 2px;
+  }
+  
+  /* Better image rendering on mobile */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Prevent horizontal scroll */
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
   }
 
   /* Headings - Inter font - Reduced sizes */
@@ -670,5 +717,103 @@
   .hover-lift:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Mobile Responsiveness Enhancements */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+    
+    body {
+      font-size: 0.875rem;
+    }
+    
+    /* Improve touch targets on mobile */
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Prevent zoom on input focus (iOS) */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="password"],
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+    
+    /* Better spacing on mobile */
+    .container, .max-w-7xl, .max-w-6xl {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    html {
+      font-size: 13px;
+    }
+    
+    /* Ensure text is readable on small screens */
+    p, span, div, li {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    /* Better button sizing on very small screens */
+    button, a[href] {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+  
+  /* Tablet optimizations */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    html {
+      font-size: 15px;
+    }
+  }
+  
+  /* Desktop optimizations */
+  @media (min-width: 1025px) {
+    html {
+      font-size: 16px;
+    }
+  }
+  
+  /* High DPI displays */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    img {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Dark mode support (if needed in future) */
+  @media (prefers-color-scheme: dark) {
+    /* Can add dark mode styles here if needed */
+  }
+  
+  /* Landscape mobile optimizations */
+  @media (max-width: 896px) and (orientation: landscape) {
+    .min-h-screen {
+      min-height: auto;
+    }
   }
 }
