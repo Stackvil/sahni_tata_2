@@ -335,7 +335,7 @@ ${formData.message}`;
 
           <div className="rounded-lg overflow-hidden shadow-xl border-2 sm:border-4 border-red-600">
             <iframe
-              src="https://www.google.com/maps?q=16.5128133,80.6725531&hl=en&z=16&output=embed"
+              src="https://www.google.com/maps?q=Sahni+Complex,+2nd+Cross+Rd,+Auto+Nagar,+Vijayawada,+Andhra+Pradesh+520007&output=embed&hl=en&z=17&ll=16.4984631,80.675735"
               width="100%"
               height="300"
               className="sm:h-[400px] md:h-[450px]"
