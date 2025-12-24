@@ -84,7 +84,7 @@
       "id": "4",
       "city": "Mylavaram",
       "address": "MYLAVARAM, KUNTAMUKKALA X ROAD, D.NO.130/11, NTR DISTRICT, PIN 521230, AP",
-      "phone": "+91 93918205",
+      "phone": "+91 92810 29456",
       "email": "sahniauto@gmail.com",
       "is_main": false,
       "image": "/images/showrooms/WhatsApp Image 2025-11-25 at 15.08.22_22abf389.jpg",
@@ -93,6 +93,61 @@
         "/images/showrooms/WhatsApp Image 2025-11-25 at 15.08.22_22abf389.jpg",
         "/images/showrooms/WhatsApp Image 2025-11-25 at 15.08.22_256e98b3.jpg"
       ]
+    },
+    {
+      "id": "9",
+      "city": "Nuziveedu",
+      "address": "Nuziveedu, Krishna District, Andhra Pradesh",
+      "phone": "+91 92810 29456",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "massey",
+      "is_branch": true
+    },
+    {
+      "id": "10",
+      "city": "Vijayawada",
+      "address": "Vijayawada, Andhra Pradesh",
+      "phone": "+91 92810 29456",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "massey",
+      "is_branch": true
+    },
+    {
+      "id": "11",
+      "city": "Nandiagama",
+      "address": "Nandiagama, Krishna District, Andhra Pradesh",
+      "phone": "+91 92810 29456",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "massey",
+      "is_branch": true
+    },
+    {
+      "id": "12",
+      "city": "Jangareddy Gudem",
+      "address": "Jangareddy Gudem, Andhra Pradesh",
+      "phone": "+91 92810 29456",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "massey",
+      "is_branch": true
+    },
+    {
+      "id": "13",
+      "city": "Chintalapudi",
+      "address": "Chintalapudi, Andhra Pradesh",
+      "phone": "+91 92810 29456",
+      "email": "sahniauto@gmail.com",
+      "is_main": false,
+      "image": "",
+      "category": "massey",
+      "is_branch": true
     }
   ]
 }

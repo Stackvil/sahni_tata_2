@@ -519,7 +519,7 @@ export default function Showrooms() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {masseyShowrooms.map((showroom, index) => {
-              const isBranch = (showroom as any).is_branch === true;
+              const isBranch = showroom.isBranch === true || (showroom as any).is_branch === true;
               return (
                 <div
                   key={`${showroom.id || index}-massey`}
@@ -532,7 +532,7 @@ export default function Showrooms() {
                   }}
                 >
                   {/* Image only for main Massey showroom; branches show info only */}
-                  {!isBranch && (
+                  {!isBranch && showroom.image && (
                     <div className="h-64 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center relative overflow-hidden">
                       <div className="absolute top-4 left-4 bg-green-600 px-4 py-2 rounded-lg z-10">
                         <span className="text-white font-bold text-sm uppercase">{showroom.city}</span>
