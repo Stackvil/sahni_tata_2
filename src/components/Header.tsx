@@ -1,5 +1,6 @@
 import { X, Phone } from 'lucide-react';
 import { useState } from 'react';
+import { normalizeImageUrl } from '../services/api';
 
 interface HeaderProps {
   currentPage: string;
@@ -49,7 +50,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
            <div className="flex items-center">
              <div className="h-full w-[250px] bg-white rounded-br-[80px] shadow-md flex items-center justify-center overflow-hidden p-1">
                <img
-                 src="/images/GROUP (1).png"
+                 src={normalizeImageUrl('/images/GROUP (1).png')}
                  alt="Sahni Group Logo"
                  className="cursor-pointer transition-transform duration-300 hover:scale-105"
                  style={{
@@ -582,7 +583,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
           <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
             <div className="flex items-center space-x-3">
               <img
-                src="/images/GROUP (1).png"
+                src={normalizeImageUrl('/images/GROUP (1).png')}
                 alt="Sahni Group Logo"
                 className="h-12 w-auto object-contain"
                 onError={(e) => {

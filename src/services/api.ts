@@ -123,8 +123,12 @@ export const normalizeImageUrl = (imagePath: string | null | undefined): string 
     
     // If it looks like an S3 key (starts with images/, videos/, catalouges/, vehicles/)
     if (imagePath.match(/^\/(images|videos|catalouges|vehicles|resumes)\//)) {
-      // Remove leading slash and use CloudFront
-      finalUrl = `${CLOUDFRONT_DOMAIN}${imagePath}`;
+      // Remove leading slash and encode the path properly for CloudFront
+      // S3 stores files with spaces as +, so we need to handle that
+      const pathWithoutSlash = imagePath.substring(1);
+      // Replace spaces with + for S3 compatibility (S3 uses + for spaces in URLs)
+      const s3Path = pathWithoutSlash.replace(/ /g, '+');
+      finalUrl = `${CLOUDFRONT_DOMAIN}/${s3Path}`;
     } else {
       // Otherwise, serve from backend root
       finalUrl = `${API_BASE_ENDPOINT}${imagePath}`;
@@ -132,7 +136,9 @@ export const normalizeImageUrl = (imagePath: string | null | undefined): string 
   } else if (imagePath.match(/^(images|videos|catalouges|vehicles|resumes)\//)) {
     // For paths without leading slash, check if it's an S3 key pattern
     // It's an S3 key, use CloudFront
-    finalUrl = `${CLOUDFRONT_DOMAIN}/${imagePath}`;
+    // Replace spaces with + for S3 compatibility
+    const s3Path = imagePath.replace(/ /g, '+');
+    finalUrl = `${CLOUDFRONT_DOMAIN}/${s3Path}`;
   } else {
     // For other relative paths, prepend API endpoint
     finalUrl = `${API_BASE_ENDPOINT}/${imagePath}`;

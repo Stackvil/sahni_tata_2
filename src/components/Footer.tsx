@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { normalizeImageUrl } from '../services/api';
 
 interface FooterProps {
   setCurrentPage: (page: string) => void;
@@ -12,7 +13,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
           <div>
             <div className="flex items-center mb-4 space-x-3">
               <img
-                src="/images/GROUP (1).png"
+                src={normalizeImageUrl('/images/GROUP (1).png')}
                 alt="Sahni Group Logo"
                 className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-lg flex-shrink-0"
                 style={{ maxHeight: '56px', maxWidth: '56px' }}
