@@ -303,7 +303,7 @@ export default function About({ setCurrentPage, setSelectedAboutEntryId }: About
               </p>
               <p className="text-xl md:text-2xl text-gray-700 mb-4 leading-relaxed">
                 With operations across Andhra Pradesh and Telangana, the
-                group employs 250+ people and partners with leading global
+                group employs 300+ people and partners with leading global
                 brands.
               </p>
               <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
@@ -330,7 +330,7 @@ export default function About({ setCurrentPage, setSelectedAboutEntryId }: About
                     </div>
                   </div>
                   <div className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-lg text-center border border-white/30">
-                    <div className="text-2xl font-bold mb-1">250+</div>
+                    <div className="text-2xl font-bold mb-1">300+</div>
                     <div className="text-xs text-gray-200">
                       Skilled Professionals
                     </div>

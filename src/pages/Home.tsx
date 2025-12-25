@@ -971,7 +971,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               </p>
               <p className="text-xl md:text-2xl text-gray-700 mb-4 leading-relaxed">
                 With operations across Andhra Pradesh and Telangana, the
-                group employs 250+ people and partners with leading global
+                group employs 300+ people and partners with leading global
                 brands.
               </p>
               <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
@@ -998,7 +998,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     </div>
                   </div>
                   <div className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-lg text-center border border-white/30">
-                    <div className="text-2xl font-bold mb-1">250+</div>
+                    <div className="text-2xl font-bold mb-1">300+</div>
                     <div className="text-xs text-gray-200">
                       Skilled Professionals
                     </div>
@@ -1236,7 +1236,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               { name: 'SRMT', image: normalizeImageUrl('/images/sahni verticals/srmt-road-transport-anantapur-ho-anantapur-transporters-zvt2qmx.webp') },
               { name: 'SBP (SRI BHAVANI CASTINGS PVT LTD)', image: normalizeImageUrl('/images/sahni verticals/SRI-BHAVANI-CASTINGS-LTD-2.jpg') },
               { name: 'GAJRA GEARS', image: normalizeImageUrl('/images/sahni verticals/images.jpg') },
-              { name: 'EMBROSS', image: normalizeImageUrl('/images/sahni verticals/1631321137936.jpg') },
+              { name: 'EMBROSS', image: normalizeImageUrl('/images/sahni verticals/2.jpg') },
               { name: 'ZF WABCO', image: normalizeImageUrl('/images/sahni verticals/f3e5b04c-bcb1-459a-8c47-9535ae88f974.avif')},
               { name: 'SPICER SELECT', image: normalizeImageUrl('/images/sahni verticals/1.jpg') },
               { name: 'SVL', image: normalizeImageUrl('/images/sahni verticals/dn.jpg') },

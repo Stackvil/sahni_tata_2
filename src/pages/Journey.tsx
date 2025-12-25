@@ -176,7 +176,7 @@ export default function Journey() {
             </div>
 
             <div className="bg-yellow-400 text-blue-900 p-8 rounded-lg shadow-xl text-center">
-              <div className="text-5xl font-bold mb-3">250+</div>
+              <div className="text-5xl font-bold mb-3">300+</div>
               <div className="text-xl">Team Members</div>
             </div>
           </div>
