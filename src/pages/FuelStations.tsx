@@ -262,14 +262,14 @@ export default function FuelStations({ setCurrentPage }: FuelStationsProps) {
           )}
 
           {!loading && !error && stationsToDisplay.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 max-w-4xl mx-auto">
               {stationsToDisplay.map((station) => (
                 <div
                   key={station.id}
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                 >
                   {/* Station Image */}
-                  <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+                  <div className="relative w-full h-80 sm:h-96 md:h-[450px] overflow-hidden">
                     <img
                       src={station.image ? normalizeImageUrl(station.image) : 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop'}
                       alt={station.name}
@@ -285,14 +285,14 @@ export default function FuelStations({ setCurrentPage }: FuelStationsProps) {
                   </div>
 
                   {/* Station Details */}
-                  <div className="p-4 sm:p-6">
+                  <div className="p-5 sm:p-6">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">{station.name}</h3>
 
                     {/* Address */}
                     <div className="flex items-start mb-4">
                       <MapPin size={20} className="text-red-600 mr-3 flex-shrink-0 mt-1" />
                       <div className="flex-1">
-                        <p className="text-gray-700 text-sm leading-relaxed mb-2">{station.address}</p>
+                        <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-2">{station.address}</p>
                         {station.mapLink && (
                           <a
                             href={station.mapLink}

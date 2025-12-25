@@ -454,6 +454,51 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 </div>
               </div>
             </button>
+
+            {/* Auto Components Card */}
+            <button
+              className="flex-shrink-0 group cursor-pointer text-left"
+              onClick={() => {
+                // Scroll to aftermarket section
+                const aftermarketSection = document.getElementById('aftermarket');
+                if (aftermarketSection) {
+                  aftermarketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
+              <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                {/* Top Section - Image */}
+                <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
+                  <img
+                    src={normalizeImageUrl('/images/AUTO.jpeg')}
+                    alt="Auto Components"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent && !parent.querySelector('.auto-components-fallback')) {
+                        const fallback = document.createElement('div');
+                        fallback.className = 'auto-components-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
+                        fallback.textContent = 'AUTO COMPONENTS';
+                        parent.appendChild(fallback);
+                      }
+                    }}
+                  />
+                </div>
+                {/* Bottom Section - Text */}
+                <div className="bg-white p-4 sm:p-5">
+                  <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Auto Components</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                    We are proud partners of world-renowned automotive component manufacturers, supplying genuine parts and accessories to the aftermarket.
+                  </p>
+                  <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                    <span>EXPLORE COMPONENTS</span>
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                  </div>
+                </div>
+              </div>
+            </button>
               </div>
 
               {/* Duplicate Set for Seamless Loop */}
@@ -664,6 +709,51 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     </div>
               </div>
             </div>
+            </button>
+
+            {/* Auto Components Card */}
+            <button
+              className="flex-shrink-0 group cursor-pointer text-left"
+              onClick={() => {
+                // Scroll to aftermarket section
+                const aftermarketSection = document.getElementById('aftermarket');
+                if (aftermarketSection) {
+                  aftermarketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
+              <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                {/* Top Section - Image */}
+                <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
+                  <img
+                    src={normalizeImageUrl('/images/AUTO.jpeg')}
+                    alt="Auto Components"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent && !parent.querySelector('.auto-components-fallback')) {
+                        const fallback = document.createElement('div');
+                        fallback.className = 'auto-components-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
+                        fallback.textContent = 'AUTO COMPONENTS';
+                        parent.appendChild(fallback);
+                      }
+                    }}
+                  />
+                </div>
+                {/* Bottom Section - Text */}
+                <div className="bg-white p-4 sm:p-5">
+                  <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Auto Components</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                    We are proud partners of world-renowned automotive component manufacturers, supplying genuine parts and accessories to the aftermarket.
+                  </p>
+                  <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                    <span>EXPLORE COMPONENTS</span>
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                  </div>
+                </div>
+              </div>
             </button>
               </div>
             </div>
@@ -1175,32 +1265,48 @@ export default function Home({ setCurrentPage }: HomeProps) {
         return (
           <>
             {/* Lubricants Distribution */}
-            <section id="lubricants" className="py-8 sm:py-12 md:py-16 bg-gray-50">
+            <section id="lubricants" className="py-8 sm:py-12 md:py-16 bg-white">
               <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
                 <div className="text-center mb-8 sm:mb-10 md:mb-12 scroll-reveal">
-                        <div className="bg-yellow-400 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg mb-4 sm:mb-6 inline-block">
+                  <div className="bg-yellow-400 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg mb-4 sm:mb-6 inline-block">
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 uppercase">LUBRICANTS</h2>
                   </div>
-                  <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6 gap-3 sm:gap-4">
-                    <div className="bg-blue-900 p-3 sm:p-4 rounded-full">
-                      <Droplet size={30} className="sm:w-10 sm:h-10 text-yellow-400" />
-                    </div>
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900">Lubricants Distribution</h2>
-                  </div>
-                  <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto px-2">
+                  <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-4">
                     {verticals.find(v => v.id === 'lubricants')?.description}
                   </p>
+                  <div className="flex items-center justify-center gap-3">
+                    <svg className="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <a
+                      href="tel:+919346699555"
+                      className="text-xl sm:text-2xl font-bold text-blue-900 hover:text-red-600 transition-colors"
+                    >
+                      +91 93466 99555
+                    </a>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                  {/* Industrial Lubricants */}
-                  <div className="bg-white p-8 rounded-xl shadow-xl scroll-reveal-left scroll-reveal-delay-1">
-                    <h3 className="text-2xl font-bold text-blue-900 mb-2">INDUSTRIAL LUBRICANTS</h3>
-                    <p className="text-blue-900 mb-6">AUTOMOTIVE LUBRICANTS</p>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                      {verticals.find(v => v.id === 'lubricants')?.retailBrands?.map((brand, index) => (
-                        <div key={index} className="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
-                          <div className="h-32 md:h-40 bg-white rounded-lg mb-4 flex items-center justify-center p-4">
+                {/* All Lubricant Brands Grid */}
+                <div className="max-w-4xl mx-auto">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                    {(() => {
+                      const lubricantsData = verticals.find(v => v.id === 'lubricants');
+                      const retailBrands = lubricantsData?.retailBrands || [];
+                      const industrialBrands = lubricantsData?.industrialBrands || [];
+                      
+                      // Combine all brands, avoiding duplicates (HP Lubricants appears in both)
+                      const allBrands = [...retailBrands];
+                      industrialBrands.forEach(brand => {
+                        // Only add if it's not already in the list
+                        if (!allBrands.find(b => b.name === brand.name)) {
+                          allBrands.push(brand);
+                        }
+                      });
+                      
+                      return allBrands.map((brand, index) => (
+                        <div key={index} className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                          <div className="h-32 sm:h-36 md:h-40 bg-white flex items-center justify-center p-3 sm:p-4">
                             {brand.image ? (
                               <img
                                 src={brand.image}
@@ -1210,51 +1316,24 @@ export default function Home({ setCurrentPage }: HomeProps) {
                                   const target = e.target as HTMLImageElement;
                                   target.style.display = 'none';
                                   const parent = target.parentElement;
-                                  if (parent) {
-                                    parent.innerHTML = `<span class="text-base font-bold text-blue-900">${brand.name}</span>`;
+                                  if (parent && !parent.querySelector('.brand-fallback')) {
+                                    const fallback = document.createElement('div');
+                                    fallback.className = 'brand-fallback w-full h-full flex items-center justify-center text-gray-600 text-sm font-bold';
+                                    fallback.textContent = brand.name.toUpperCase();
+                                    parent.appendChild(fallback);
                                   }
                                 }}
                               />
                             ) : (
-                              <span className="text-base font-bold text-blue-900">{brand.name}</span>
+                              <span className="text-sm font-bold text-gray-900">{brand.name}</span>
                             )}
                           </div>
-                          <p className="text-base font-semibold text-blue-900">{brand.name}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Automotive Lubricants */}
-                  <div className="bg-white p-8 rounded-xl shadow-xl scroll-reveal-right scroll-reveal-delay-2">
-                    <h3 className="text-2xl font-bold text-blue-900 mb-2">AUTOMOTIVE LUBRICANTS</h3>
-                    <p className="text-blue-900 mb-6">Brands We Deal</p>
-                    <div className="grid grid-cols-2 gap-6">
-                      {verticals.find(v => v.id === 'lubricants')?.industrialBrands?.map((brand, index) => (
-                        <div key={index} className="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
-                          <div className="h-32 md:h-40 bg-white rounded-lg mb-4 flex items-center justify-center p-4">
-                            {brand.image ? (
-                              <img
-                                src={brand.image}
-                                alt={brand.name}
-                                className="max-h-full max-w-full object-contain"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.style.display = 'none';
-                                  const parent = target.parentElement;
-                                  if (parent) {
-                                    parent.innerHTML = `<span class="text-base font-bold text-blue-900">${brand.name}</span>`;
-                                  }
-                                }}
-                              />
-                            ) : (
-                              <span className="text-base font-bold text-blue-900">{brand.name}</span>
-                            )}
+                          <div className="p-3 sm:p-4 text-center">
+                            <p className="text-sm sm:text-base font-semibold text-gray-900">{brand.name}</p>
                           </div>
-                          <p className="text-base font-semibold text-blue-900">{brand.name}</p>
                         </div>
-                      ))}
-                    </div>
+                      ));
+                    })()}
                   </div>
                 </div>
               </div>
