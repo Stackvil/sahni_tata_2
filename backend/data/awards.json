@@ -1,0 +1,141 @@
+{
+  "awards": [
+    {
+      "id": "1",
+      "brand": "Tata Motors",
+      "logo_url": "/images/awards/IMG_20251209_124404 - Edited.webp",
+      "award_text": "Excellence in Commercial Vehicle Sales",
+      "year": "2024",
+      "display_order": 0
+    },
+    {
+      "id": "2",
+      "brand": "Tata Motors",
+      "logo_url": "/images/awards/IMG_20251209_124421 - Edited.webp",
+      "award_text": "Best Dealer Performance Award",
+      "year": "2024",
+      "display_order": 1
+    },
+    {
+      "id": "3",
+      "brand": "Tata Motors",
+      "logo_url": "/images/awards/IMG_20251209_124431 - Edited.webp",
+      "award_text": "Outstanding Service Excellence",
+      "year": "2024",
+      "display_order": 2
+    },
+    {
+      "id": "4",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/IMG_20251209_124556 - Edited.webp",
+      "award_text": "Top Distributor Achievement",
+      "year": "2024",
+      "display_order": 3
+    },
+    {
+      "id": "5",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/IMG_20251209_124810 - Edited.webp",
+      "award_text": "Customer Satisfaction Excellence",
+      "year": "2024",
+      "display_order": 4
+    },
+    {
+      "id": "6",
+      "brand": "Tata Motors",
+      "logo_url": "/images/awards/IMG_20251209_125043 - Edited.webp",
+      "award_text": "Sales Performance Champion",
+      "year": "2024",
+      "display_order": 5
+    },
+    {
+      "id": "7",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/IMG_20251209_125136 - Edited.webp",
+      "award_text": "Innovation in Distribution",
+      "year": "2024",
+      "display_order": 6
+    },
+    {
+      "id": "8",
+      "brand": "Tata Motors",
+      "logo_url": "/images/awards/IMG_20251209_125334 - Edited.webp",
+      "award_text": "Regional Market Leader",
+      "year": "2024",
+      "display_order": 7
+    },
+    {
+      "id": "9",
+      "brand": "Tata Motors",
+      "logo_url": "/images/awards/IMG_20251209_125354 - Edited.webp",
+      "award_text": "Quality Excellence Award",
+      "year": "2024",
+      "display_order": 8
+    },
+    {
+      "id": "10",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/IMG_20251209_125358 - Edited.webp",
+      "award_text": "Business Growth Achievement",
+      "year": "2024",
+      "display_order": 9
+    },
+    {
+      "id": "11",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/lubricants/1__1_-removebg-preview.png",
+      "award_text": "Excellence in Lubricants Distribution",
+      "year": "2024",
+      "display_order": 10
+    },
+    {
+      "id": "12",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/lubricants/1__2_-removebg-preview.png",
+      "award_text": "Outstanding Distributor Performance",
+      "year": "2024",
+      "display_order": 11
+    },
+    {
+      "id": "13",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/lubricants/1__3_-removebg-preview.png",
+      "award_text": "Top Sales Achievement Award",
+      "year": "2024",
+      "display_order": 12
+    },
+    {
+      "id": "14",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/lubricants/1__4_-removebg-preview.png",
+      "award_text": "Market Leadership Excellence",
+      "year": "2024",
+      "display_order": 13
+    },
+    {
+      "id": "15",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/lubricants/1__5_-removebg-preview.png",
+      "award_text": "Customer Service Excellence",
+      "year": "2024",
+      "display_order": 14
+    },
+    {
+      "id": "16",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/lubricants/1__6_-removebg-preview.png",
+      "award_text": "Sales Growth Champion",
+      "year": "2024",
+      "display_order": 15
+    },
+    {
+      "id": "17",
+      "brand": "HP Lubricants",
+      "logo_url": "/images/awards/lubricants/1__7_-removebg-preview.png",
+      "award_text": "Distribution Excellence Award",
+      "year": "2024",
+      "display_order": 16
+    }
+  ]
+}
+
