@@ -123,7 +123,7 @@ export default function About({ setCurrentPage, setSelectedAboutEntryId }: About
               </span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-2 sm:mb-4 text-white px-2">
-              Our Story
+              OUR STORY
             </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto px-2">
               60+ Years of Excellence and Innovation
@@ -136,18 +136,6 @@ export default function About({ setCurrentPage, setSelectedAboutEntryId }: About
       {/* Dynamic Highlights Section */}
       <section className="py-6 sm:py-8 md:py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-10 md:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
-              OUR STORY
-            </h2>
-            {entries.length === 0 && !loadingEntries && !entriesError && (
-              <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-2">
-                We have launched Messy Ferguson tractors — go through our
-                Vehicles page to explore every model.
-              </p>
-            )}
-          </div>
-
           {loadingEntries && (
             <div className="py-8">
               <LoadingSpinner

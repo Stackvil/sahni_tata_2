@@ -73,19 +73,23 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
             <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-2 border-gray-100 overflow-hidden">
               <div className="flex flex-col items-center p-6 sm:p-8">
                 <div className="relative mb-6">
-                  <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                  <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-gray-100">
                     <img
                       src={normalizeImageUrl('/images/promoters/ybbcas.jpeg')}
-                      alt="madam"
+                      alt="Amandeep Kaur Sahni"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        target.src = `data:image/svg+xml,${encodeURIComponent(`<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg"><circle cx="150" cy="150" r="150" fill="#DC2626"/><text x="50%" y="50%" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">Sahni Group</text></svg>`)}`;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-red-600 text-white text-sm font-bold">A.K.S</div>';
+                        }
                       }}
                     />
                   </div>
                 </div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
+                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-2 text-center" style={{ lineHeight: '1.2' }}>
                   Amandeep Kaur Sahni
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
