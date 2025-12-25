@@ -68,23 +68,28 @@ function App() {
   useEffect(() => {
     const checkLaunchTime = () => {
       const now = new Date();
+      
+      // Calculate launch time: tomorrow at 12:30 PM (local time)
+      // Always set to tomorrow at 12:30 PM regardless of current time
       const launchTime = new Date();
       launchTime.setDate(now.getDate() + 1);
-      launchTime.setHours(12, 30, 0, 0); // Tomorrow at 12:30 PM
+      launchTime.setHours(12, 30, 0, 0);
+      launchTime.setSeconds(0);
+      launchTime.setMilliseconds(0);
 
+      // Check if launch time has passed
       if (now.getTime() >= launchTime.getTime()) {
         setIsLaunched(true);
         localStorage.setItem('sahni_launched', 'true');
-      } else {
-        // Check if user has manually bypassed (for testing)
-        // Only allow bypass if we're close to launch time (within 1 hour) or explicitly set
-        const launched = localStorage.getItem('sahni_launched');
-        const timeUntilLaunch = launchTime.getTime() - now.getTime();
-        const oneHour = 60 * 60 * 1000;
-        
-        if (launched === 'true' && timeUntilLaunch <= oneHour) {
-          setIsLaunched(true);
-        }
+        return;
+      }
+
+      // Don't allow localStorage bypass - always respect the actual launch time
+      // Remove any existing bypass flags
+      const storedLaunch = localStorage.getItem('sahni_launched');
+      if (storedLaunch === 'true' && now.getTime() < launchTime.getTime()) {
+        // If stored but launch time hasn't passed, clear it
+        localStorage.removeItem('sahni_launched');
       }
     };
 

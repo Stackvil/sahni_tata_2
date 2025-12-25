@@ -20,9 +20,11 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
       const now = new Date();
       const launchTime = new Date();
       
-      // Set launch time to tomorrow at 12:30 PM
+      // Always set launch time to tomorrow at 12:30 PM (local time)
       launchTime.setDate(now.getDate() + 1);
-      launchTime.setHours(12, 30, 0, 0); // 12:30 PM
+      launchTime.setHours(12, 30, 0, 0);
+      launchTime.setSeconds(0);
+      launchTime.setMilliseconds(0);
 
       const difference = launchTime.getTime() - now.getTime();
 
@@ -73,14 +75,14 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
             <img
               src={normalizeImageUrl('/images/GROUP (1).png')}
               alt="Sahni Group Logo"
-              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
+              className="h-24 sm:h-32 md:h-40 lg:h-48 xl:h-56 w-auto object-contain"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';
                 const parent = target.parentElement;
                 if (parent && !parent.querySelector('.fallback-logo-countdown')) {
                   const fallback = document.createElement('div');
-                  fallback.className = 'fallback-logo-countdown bg-red-600 text-white h-16 sm:h-20 md:h-24 lg:h-28 w-16 sm:w-20 md:w-24 lg:w-28 rounded-lg flex items-center justify-center font-black text-2xl sm:text-3xl md:text-4xl shadow-xl';
+                  fallback.className = 'fallback-logo-countdown bg-red-600 text-white h-24 sm:h-32 md:h-40 lg:h-48 xl:h-56 w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56 rounded-lg flex items-center justify-center font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl shadow-xl';
                   fallback.textContent = 'S';
                   parent.appendChild(fallback);
                 }
@@ -88,7 +90,7 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
             />
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 uppercase tracking-tight">
-            Sahni Tata
+            Sahni Group
           </h1>
           <div className="w-32 sm:w-40 md:w-48 h-1 bg-red-600 mx-auto mb-6"></div>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-normal">
