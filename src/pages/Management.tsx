@@ -30,7 +30,7 @@ const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
                 <div className="relative mb-6">
                   <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                     <img
-                      src={normalizeImageUrl('/images/Management Team/tana.png')}
+                      src={normalizeImageUrl('/images/Management Team/tana.jpeg')}
                       alt="Shaik Jakeer Basha"
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -66,7 +66,7 @@ const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
                   </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
-                  Shaik Kareem
+                  Syed Shahid Karim
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
                   GM - Automotive & Industrial Lubricants Distribution
@@ -94,7 +94,7 @@ const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
                   Venu Gopi K
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
-                  Manager - Accounts & Admin
+                  GM - Finance 
                 </p>
               </div>
             </div>
