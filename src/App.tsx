@@ -26,6 +26,7 @@ import Awards from './pages/Awards';
 import Promoters from './pages/Promoters';
 import InstitutionalSales from './pages/InstitutionalSales';
 import BackendStatus from './components/BackendStatus';
+import LaunchCountdown from './components/LaunchCountdown';
 
 function App() {
   // Initialize state from URL hash or default to 'home'
@@ -61,6 +62,37 @@ function App() {
     initial.aboutEntryId || null
   );
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [isLaunched, setIsLaunched] = useState(false);
+
+  // Check if launch time has passed
+  useEffect(() => {
+    const checkLaunchTime = () => {
+      const now = new Date();
+      const launchTime = new Date();
+      launchTime.setDate(now.getDate() + 1);
+      launchTime.setHours(12, 30, 0, 0); // Tomorrow at 12:30 PM
+
+      if (now.getTime() >= launchTime.getTime()) {
+        setIsLaunched(true);
+        localStorage.setItem('sahni_launched', 'true');
+      } else {
+        // Check if user has manually bypassed (for testing)
+        // Only allow bypass if we're close to launch time (within 1 hour) or explicitly set
+        const launched = localStorage.getItem('sahni_launched');
+        const timeUntilLaunch = launchTime.getTime() - now.getTime();
+        const oneHour = 60 * 60 * 1000;
+        
+        if (launched === 'true' && timeUntilLaunch <= oneHour) {
+          setIsLaunched(true);
+        }
+      }
+    };
+
+    checkLaunchTime();
+    // Check every second to catch the launch time accurately
+    const interval = setInterval(checkLaunchTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Check admin authentication
   useEffect(() => {
@@ -323,14 +355,22 @@ function App() {
     return <>{renderPage()}</>;
   }
 
+  // Show countdown if launch time hasn't passed (but allow admin to bypass)
+  const showCountdown = !isLaunched && !isAdminAuthenticated;
+
   return (
-    <div className="min-h-screen bg-white flex flex-col w-full overflow-x-hidden">
-      <Header currentPage={currentPage} setCurrentPage={handlePageChange} />
-      <main className="flex-grow w-full">
-        {renderPage()}
-      </main>
-      <Footer setCurrentPage={handlePageChange} />
-    </div>
+    <>
+      {showCountdown && (
+        <LaunchCountdown onLaunch={() => setIsLaunched(true)} />
+      )}
+      <div className={`min-h-screen bg-white flex flex-col w-full overflow-x-hidden ${showCountdown ? 'hidden' : ''}`}>
+        <Header currentPage={currentPage} setCurrentPage={handlePageChange} />
+        <main className="flex-grow w-full">
+          {renderPage()}
+        </main>
+        <Footer setCurrentPage={handlePageChange} />
+      </div>
+    </>
   );
 }
 
