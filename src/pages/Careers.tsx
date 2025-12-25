@@ -32,8 +32,8 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
   
   // Video sources in order of preference - use CloudFront for S3 videos
   const videoSources = [
-    normalizeImageUrl('videos/KISHORE.mp4'), // CloudFront URL: https://dh0blbvvlqdiy.cloudfront.net/videos/KISHORE.mp4
-    '/videos/KISHORE.mp4' // Local fallback
+    normalizeImageUrl('videos/carrer.mp4'), // CloudFront URL: https://dh0blbvvlqdiy.cloudfront.net/videos/carrer.mp4
+    '/videos/carrer.mp4' // Local fallback
   ];
   const [currentSourceIndex, setCurrentSourceIndex] = useState(0);
   const [currentVideoSrc, setCurrentVideoSrc] = useState<string>(videoSources[0]);
@@ -178,6 +178,8 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
         {videoLoading && !videoError && (
           <div className="absolute inset-0 flex items-center justify-center bg-black z-10">
             <div className="text-white text-lg">Loading video...</div>
+
+
           </div>
         )}
         {videoError && (
