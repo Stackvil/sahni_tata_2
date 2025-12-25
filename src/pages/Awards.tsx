@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Award, Trophy, Star, Sparkles } from 'lucide-react';
-import { awardsAPI } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { normalizeImageUrl } from '../services/api';
 
@@ -27,27 +26,32 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
   const loadAwards = async () => {
     setLoading(true);
     try {
-      // Fetch awards with flat=true to get individual awards
-      const data = await awardsAPI.getAll(true);
+      // Load awards directly from JSON file
+      const response = await fetch('/awards.json');
+      if (!response.ok) {
+        throw new Error('Failed to load awards.json');
+      }
+      const data = await response.json();
+      const awardsData = data.awards || [];
       
-      if (Array.isArray(data) && data.length > 0) {
-        // Map API response to AwardItem format
-        const mappedAwards: AwardItem[] = data.map((award: any, index: number) => {
-          // Get image from various possible fields and normalize it
-          const rawImage = award.image || award.logo || award.image_url || award.logo_url || '';
-          const normalizedImage = rawImage ? normalizeImageUrl(rawImage) : normalizeImageUrl(`https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/awards/IMG_20251209_124404+-+Edited.webp`);
+      if (awardsData.length > 0) {
+        // Map JSON data to AwardItem format with CloudFront URLs
+        const mappedAwards: AwardItem[] = awardsData.map((award: any, index: number) => {
+          // Convert image URL to CloudFront URL
+          const imagePath = award.logo_url || award.image || '';
+          const normalizedImage = imagePath ? normalizeImageUrl(imagePath) : '';
           
           return {
             id: parseInt(award.id) || index + 1,
             image: normalizedImage,
-            title: award.title || award.award_text || award.award || `Award ${index + 1}`,
-            description: award.description || `Recognized for ${award.award_text || award.award || 'excellence'}`,
+            title: award.award_text || award.title || `Award ${index + 1}`,
+            description: `Recognized for ${award.award_text || 'excellence'} in ${award.brand || 'the industry'}.`,
             year: award.year || '2024'
           };
         });
         setAwards(mappedAwards);
       } else {
-        // Fallback to static data if API returns empty
+        // Fallback to static data if JSON is empty
         setAwards(getFallbackAwards());
       }
     } catch (error) {
@@ -60,10 +64,11 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
   };
 
   const getFallbackAwards = (): AwardItem[] => {
+    // Fallback awards with CloudFront URLs
     return [
       {
         id: 1,
-        image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/awards/IMG_20251209_124404+-+Edited.webp'),
+        image: normalizeImageUrl('/images/awards/IMG_20251209_124404 - Edited.webp'),
         title: 'Excellence in Commercial Vehicle Sales',
         description: 'Recognized for outstanding performance in commercial vehicle dealership and exceptional customer service delivery across Andhra Pradesh and Telangana regions.',
         year: '2024'
@@ -129,6 +134,48 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
         image: normalizeImageUrl('/images/awards/IMG_20251209_125358 - Edited.webp'),
         title: 'Business Growth Achievement',
         description: 'Awarded for exceptional business growth, strategic expansion, and significant contribution to the automotive industry.',
+        year: '2024'
+      },
+      {
+        id: 11,
+        image: normalizeImageUrl('/images/awards/lubricants/1__2_-removebg-preview.png'),
+        title: 'Outstanding Distributor Performance',
+        description: 'Awarded for achieving exceptional distributor performance and maintaining superior standards in lubricants distribution.',
+        year: '2024'
+      },
+      {
+        id: 12,
+        image: normalizeImageUrl('/images/awards/lubricants/1__3_-removebg-preview.png'),
+        title: 'Top Sales Achievement Award',
+        description: 'Recognized for achieving top sales performance and market leadership in lubricants distribution.',
+        year: '2024'
+      },
+      {
+        id: 13,
+        image: normalizeImageUrl('/images/awards/lubricants/1__4_-removebg-preview.png'),
+        title: 'Market Leadership Excellence',
+        description: 'Awarded for establishing market leadership and demonstrating excellence in lubricants distribution.',
+        year: '2024'
+      },
+      {
+        id: 14,
+        image: normalizeImageUrl('/images/awards/lubricants/1__5_-removebg-preview.png'),
+        title: 'Customer Service Excellence',
+        description: 'Recognized for maintaining the highest levels of customer service and satisfaction in lubricants distribution.',
+        year: '2024'
+      },
+      {
+        id: 15,
+        image: normalizeImageUrl('/images/awards/lubricants/1__6_-removebg-preview.png'),
+        title: 'Sales Growth Champion',
+        description: 'Awarded for achieving exceptional sales growth and demonstrating outstanding performance in lubricants distribution.',
+        year: '2024'
+      },
+      {
+        id: 16,
+        image: normalizeImageUrl('/images/awards/lubricants/1__7_-removebg-preview.png'),
+        title: 'Distribution Excellence Award',
+        description: 'Recognized for excellence in distribution, supply chain management, and market development in lubricants.',
         year: '2024'
       },
     ];
@@ -218,7 +265,7 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         // Try fallback image
-                        const fallbackImage = normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/awards/IMG_20251209_124404+-+Edited.webp');
+                        const fallbackImage = normalizeImageUrl('/images/awards/IMG_20251209_124404 - Edited.webp');
                         if (target.src !== fallbackImage) {
                           target.src = fallbackImage;
                         } else {
