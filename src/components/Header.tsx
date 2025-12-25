@@ -27,11 +27,25 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
   ];
 
   const handleNavClick = (pageId: string) => {
-    setCurrentPage(pageId);
     setMobileMenuOpen(false);
     setAboutDropdownOpen(false);
     setVehiclesDropdownOpen(false);
     setBusinessesDropdownOpen(false);
+    
+    // Special handling for autocomponents - navigate to home and scroll to aftermarket section
+    if (pageId === 'autocomponents') {
+      setCurrentPage('home');
+      // Wait for page to render, then scroll to aftermarket section
+      setTimeout(() => {
+        const aftermarketSection = document.getElementById('aftermarket');
+        if (aftermarketSection) {
+          aftermarketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      return;
+    }
+    
+    setCurrentPage(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -500,6 +514,20 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                               >
                                 Sahni Lubricants
                               </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleNavClick('autocomponents');
+                                  setBusinessesDropdownOpen(false);
+                                }}
+                                className={`w-full text-left px-4 py-2.5 text-sm font-semibold uppercase tracking-wide transition-colors block whitespace-nowrap cursor-pointer ${
+                                  currentPage === 'home'
+                                    ? 'text-gray-900 bg-yellow-50'
+                                    : 'text-gray-900 hover:bg-gray-50 hover:text-[#ffd54a]'
+                                }`}
+                              >
+                                Sahni Auto Components
+                              </button>
                             </div>
                           </div>
                         )}
@@ -750,6 +778,19 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                           }`}
                         >
                           Sahni HP Lubricants
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleNavClick('autocomponents');
+                            setBusinessesDropdownOpen(false);
+                          }}
+                          className={`w-full text-left py-3 px-4 rounded-lg font-medium uppercase tracking-wide text-sm transition-all ${
+                            currentPage === 'home'
+                              ? 'text-gray-900 bg-yellow-50 border-l-2 border-[#ffd54a]'
+                              : 'text-gray-700 hover:bg-gray-50 hover:text-[#ffd54a]'
+                          }`}
+                        >
+                          Sahni Auto Components
                         </button>
                       </div>
                     )}
