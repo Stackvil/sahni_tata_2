@@ -30,7 +30,7 @@ const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
                 <div className="relative mb-6">
                   <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                     <img
-                      src={normalizeImageUrl('/images/Management Team/uio.JPG')}
+                      src={normalizeImageUrl('/images/Management Team/tana.png')}
                       alt="Shaik Jakeer Basha"
                       className="w-full h-full object-cover"
                       onError={(e) => {
