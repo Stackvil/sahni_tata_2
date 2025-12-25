@@ -1404,7 +1404,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     <h2 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase">INSTITUTIONAL & GOVERNMENT SALES</h2>
                   </div>
                   <p className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 px-2">
-                    Distributors for Andhra & Telangana for Tata Motors CV Spare Parts
+                    
                   </p>
                   <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto px-2 mb-4">
                     {verticals.find(v => v.id === 'institutional')?.description}
