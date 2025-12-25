@@ -45,7 +45,7 @@ export default function Contact() {
             main.address ||
             'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007',
           phone: main.phone || '+91 92810 29456',
-          email: main.email || 'sahniauto@gmail.com',
+          email: main.email || 'info.sahniauto@gmail.com',
           image: main.image || (Array.isArray(main.images) ? main.images[0] : undefined),
           map_link: main.map_link || undefined,
         });
@@ -164,10 +164,10 @@ ${formData.message}`;
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Email</h3>
                     <a
-                      href={`mailto:${primaryShowroom?.email || 'sahniauto@gmail.com'}`}
+                      href={`mailto:${primaryShowroom?.email || 'info.sahniauto@gmail.com'}`}
                       className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block break-all"
                     >
-                      {primaryShowroom?.email || 'sahniauto@gmail.com'}
+                      {primaryShowroom?.email || 'info.sahniauto@gmail.com'}
                     </a>
                     <p className="text-sm sm:text-base text-gray-600 mt-1">We'll respond within 24 hours</p>
                   </div>

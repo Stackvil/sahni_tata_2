@@ -704,7 +704,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
         <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 scroll-reveal">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
-              Experience Our Story
+               Our Journey
             </h2>
             <div className="w-16 sm:w-20 md:w-24 h-1 bg-red-600 mx-auto"></div>
             <p className="text-lg sm:text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
@@ -1121,7 +1121,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
             id: 'lubricants',
             icon: Droplet,
             title: 'Lubricants Distribution',
-            description: 'As authorized distributors for leading lubricant brands, we supply high-quality engine oils and lubricants to both retail and industrial markets.',
+            description: 'As authorized distributors for leading lubricant brands, we supply high-quality  lubricants to both Automotive and Industrial markets.',
             retailBrands: [
               { name: 'HP Lubricants', image: normalizeImageUrl('/images/sahni verticals/HP_SULLI5.png') },
               { name: 'Mahindra', image: normalizeImageUrl('/images/sahni verticals/lubricant_brands/Mahindra1.png') },
@@ -1138,7 +1138,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
           {
             id: 'aftermarket',
             icon: Package,
-            title: 'Spare Parts',
+            title: 'Auto Components',
             description: 'We are proud partners of world-renowned automotive component manufacturers, supplying genuine parts and accessories to the aftermarket.',
             phone: '+91 93905 02406',
             brands: [
@@ -1158,7 +1158,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
             id: 'institutional',
             icon: Building2,
             title: 'Institutional & Government Sales',
-            description: 'Distributors for Andhra Pradesh and Telangana for Tata Motors CV Spare Parts Institutional Govenance. We serve major government and institutional clients with customized solutions.',
+            description: 'Distributors for Andhra Pradesh and Telangana for Tata Motors CV Spare Parts  for Institutional and Government Sales. We serve major government and institutional clients with customized solutions.',
             phone: '+91 93933 47788',
             clients: [
               { name: 'APSRTC', fullName: 'Andhra Pradesh State Road Transport Corporation' },
@@ -1265,7 +1265,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
                 <div className="text-center mb-8 sm:mb-10 md:mb-12 scroll-reveal">
                   <div className="bg-yellow-400 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg mb-4 sm:mb-6 inline-block">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase whitespace-nowrap">SPARE PARTS</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase whitespace-nowrap">Auto Components</h2>
                   </div>
                   <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-4">
                     {verticals.find(v => v.id === 'aftermarket')?.description}
@@ -1322,10 +1322,10 @@ export default function Home({ setCurrentPage }: HomeProps) {
               <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
                 <div className="text-center mb-8 sm:mb-10 md:mb-12 scroll-reveal">
                   <div className="bg-yellow-400 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg mb-4 sm:mb-6 inline-block">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase">INSTITUTIONAL SALES</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase">INSTITUTIONAL & GOVERNMENT SALES</h2>
                   </div>
                   <p className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 px-2">
-                    Distributors for Andhra & Telangana for Tata Motors CV Spare Parts Institutional Govenance
+                    Distributors for Andhra & Telangana for Tata Motors CV Spare Parts
                   </p>
                   <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto px-2 mb-4">
                     {verticals.find(v => v.id === 'institutional')?.description}
@@ -1366,8 +1366,8 @@ export default function Home({ setCurrentPage }: HomeProps) {
         <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {[
-              { number: '60+', label: 'Years Experience', delay: '0s' },
-              { number: '300+', label: 'Skilled Professionals', delay: '0.2s' },
+              // { number: '60+', label: 'Years Experience', delay: '0s' },
+              // { number: '300+', label: 'Skilled Professionals', delay: '0.2s' },
             ].map((stat, index) => (
                 <div
                   key={index}
@@ -1555,11 +1555,11 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     +91 92810 29456
                   </a>
                   <a
-                    href="mailto:sahniauto@gmail.com"
+                    href="mailto:info.sahniauto@gmail.com"
                     className="flex items-center text-sm sm:text-base md:text-lg text-gray-700 hover:text-blue-600 transition-colors break-all"
                   >
                     <Mail size={18} className="mr-2 sm:mr-3 text-gray-400 flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5" />
-                    sahniauto@gmail.com
+                    info.sahniauto@gmail.com
                   </a>
                 </div>
               </div>
@@ -1574,7 +1574,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 </div>
                 <div className="space-y-1 sm:space-y-2 text-sm sm:text-base md:text-lg text-gray-700">
                   <p className="font-semibold">Monday - Saturday</p>
-                  <p className="text-gray-600">9:00 AM - 7:00 PM</p>
+                  <p className="text-gray-600">9:30 AM - 7:00 PM</p>
                   <p className="font-semibold mt-3 sm:mt-4">Sunday</p>
                   <p className="text-gray-600">Closed</p>
                 </div>

@@ -230,7 +230,7 @@ export default function TermsAndConditions() {
               <p>Sahni Complex, 2nd Cross Rd, Auto Nagar</p>
               <p>Vijayawada, Andhra Pradesh 520007, India</p>
               <p>Phone: <a href="tel:+919281029456" className="text-red-500 hover:underline">+91 92810 29456</a></p>
-              <p>Email: <a href="mailto:sahniauto@gmail.com" className="text-red-500 hover:underline">sahniauto@gmail.com</a></p>
+              <p>Email: <a href="mailto:info.sahniauto@gmail.com" className="text-red-500 hover:underline">info.sahniauto@gmail.com</a></p>
             </div>
           </div>
 

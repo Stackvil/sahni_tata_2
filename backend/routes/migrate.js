@@ -516,6 +516,62 @@ async function migrateAwards() {
         year: '2024',
         brand: 'HP Lubricants'
       },
+      {
+        id: 11,
+        image: '/images/awards/lubricants/1__1_-removebg-preview.png',
+        title: 'Excellence in Lubricants Distribution',
+        description: 'Recognized for outstanding performance in lubricants distribution and exceptional service delivery.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 12,
+        image: '/images/awards/lubricants/1__2_-removebg-preview.png',
+        title: 'Outstanding Distributor Performance',
+        description: 'Awarded for achieving exceptional distributor performance and maintaining superior standards in lubricants distribution.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 13,
+        image: '/images/awards/lubricants/1__3_-removebg-preview.png',
+        title: 'Top Sales Achievement Award',
+        description: 'Recognized for achieving top sales performance and market leadership in lubricants distribution.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 14,
+        image: '/images/awards/lubricants/1__4_-removebg-preview.png',
+        title: 'Market Leadership Excellence',
+        description: 'Awarded for establishing market leadership and demonstrating excellence in lubricants distribution.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 15,
+        image: '/images/awards/lubricants/1__5_-removebg-preview.png',
+        title: 'Customer Service Excellence',
+        description: 'Recognized for maintaining the highest levels of customer service and satisfaction in lubricants distribution.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 16,
+        image: '/images/awards/lubricants/1__6_-removebg-preview.png',
+        title: 'Sales Growth Champion',
+        description: 'Awarded for achieving exceptional sales growth and demonstrating outstanding performance in lubricants distribution.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
+      {
+        id: 17,
+        image: '/images/awards/lubricants/1__7_-removebg-preview.png',
+        title: 'Distribution Excellence Award',
+        description: 'Recognized for excellence in distribution, supply chain management, and market development in lubricants.',
+        year: '2024',
+        brand: 'HP Lubricants'
+      },
     ];
     
     let migrated = 0;

@@ -25,7 +25,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     city: 'Vijayawada',
     address: 'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007',
     phone: '+91 92810 29456',
-    email: 'sahniauto@gmail.com',
+    email: 'info.sahniauto@gmail.com',
     image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/vijayawada.png'),
     isMain: true,
   },
@@ -34,7 +34,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     city: 'Narasaraopet',
     address: 'Palnadu Road, Narasaraopet',
     phone: '+91 92810 29456',
-    email: 'sahniauto@gmail.com',
+    email: 'info.sahniauto@gmail.com',
     image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/NARASARAOPET.png'),
     isMain: true,
   },
@@ -43,7 +43,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     city: 'Guntur',
     address: 'NH 16, Guntur Main Road, Guntur District',
     phone: '+91 92810 29456',
-    email: 'sahniauto@gmail.com',
+    email: 'info.sahniauto@gmail.com',
     image: normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/showrooms/guntur.png'),
     isMain: true,
   },
@@ -52,7 +52,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     city: 'Kaikaluru',
     address: 'Main Road, Kaikaluru',
     phone: '+91 92810 29456',
-    email: 'sahniauto@gmail.com',
+    email: 'info.sahniauto@gmail.com',
     isMain: false,
   },
   {
@@ -60,7 +60,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     city: 'Nuziveedu',
     address: 'Eluru Road, Nuziveedu',
     phone: '+91 92810 29456',
-    email: 'sahniauto@gmail.com',
+    email: 'info.sahniauto@gmail.com',
     isMain: false,
   },
   {
@@ -68,7 +68,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     city: 'Nandiagama',
     address: 'Krishna District, Nandiagama',
     phone: '+91 92810 29456',
-    email: 'sahniauto@gmail.com',
+    email: 'info.sahniauto@gmail.com',
     isMain: false,
   },
   {
@@ -76,7 +76,7 @@ const STATIC_SHOWROOMS: Showroom[] = [
     city: 'Piduguralla',
     address: 'Guntur District, Piduguralla',
     phone: '+91 92810 29456',
-    email: 'sahniauto@gmail.com',
+    email: 'info.sahniauto@gmail.com',
     isMain: false,
   },
 ];
@@ -146,7 +146,7 @@ const normalizeShowrooms = (items: any[]): Showroom[] => {
       phone: item?.phone || '',
       sales_phone: item?.sales_phone || item?.phone || '',
       service_phone: item?.service_phone || item?.phone || '',
-      email: item?.email || 'sahniauto@gmail.com',
+      email: item?.email || 'info.sahniauto@gmail.com',
       image: imageUrl,
       images: images,
       isMain: Boolean(item?.is_main ?? item?.isMain ?? item?.is_primary ?? false),
@@ -347,7 +347,7 @@ export default function Showrooms() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Tata Motors Showrooms</h2>
             </div>
             <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto px-2">
-              Our strategically located showrooms provide complete sales, service, and spare parts support for Tata Motors Small Commercial Vehicles across key cities in Andhra Pradesh.
+              Our strategically located showrooms provide complete sales, service, and spare parts support for Tata Motors Small Commercial Vehicles across Krishna & Guntur Districts.
             </p>
           </div>
 

@@ -141,8 +141,8 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li className="flex items-start">
                 <Mail size={20} className="mr-3 mt-1 flex-shrink-0" />
-                <a href="mailto:sahniauto@gmail.com" className="text-gray-300 hover:text-red-500 transition-colors text-sm break-all">
-                  sahniauto@gmail.com
+                <a href="mailto:info.sahniauto@gmail.com" className="text-gray-300 hover:text-red-500 transition-colors text-sm break-all">
+                  info.sahniauto@gmail.com
                 </a>
               </li>
             </ul>

@@ -69,7 +69,7 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
       {
         id: 1,
         image: normalizeImageUrl('/images/awards/IMG_20251209_124404 - Edited.webp'),
-        title: 'TATA MOTORS CORAL VAés Alwags TATA CUSTOMER SUPPORT WINNER (LIMITED RANGE) FY 25-26 SAHNI AUTO VIJAYAWADA',
+        title: 'TATA MOTORS , TATA CUSTOMER SUPPORT WINNER (LIMITED RANGE) FY 25-26 SAHNI AUTO VIJAYAWADA',
         description: 'Recognized for outstanding customer support performance in the limited range category.',
         year: '2025'
       },

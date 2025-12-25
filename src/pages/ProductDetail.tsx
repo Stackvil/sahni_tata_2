@@ -447,8 +447,8 @@ export default function ProductDetail({ productId, onBack }: ProductDetailProps)
                   </div>
                   <div className="flex items-center">
                     <Mail size={18} className="text-red-600 mr-3" />
-                    <a href="mailto:sahniauto@gmail.com" className="text-gray-700 hover:text-red-600">
-                      sahniauto@gmail.com
+                    <a href="mailto:info.sahniauto@gmail.com" className="text-gray-700 hover:text-red-600">
+                      info.sahniauto@gmail.com
                     </a>
                   </div>
                 </div>

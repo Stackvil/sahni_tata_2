@@ -44,7 +44,7 @@ const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
                   Shaik Jakeer Basha
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
-                  G.M. Tata Vehicles & Institutional Sales
+                  GM - Tata Motors Commercial Vehicles & Institutional Parts
                 </p>
               </div>
             </div>
@@ -69,7 +69,7 @@ const Management = ({ setCurrentPage: _setCurrentPage }: ManagementProps) => {
                   Shaik Kareem
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
-                  G.M. Lubricants Distribution
+                  GM - Automotive & Industrial Lubricants Distribution
                 </p>
               </div>
             </div>

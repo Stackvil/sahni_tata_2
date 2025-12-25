@@ -468,7 +468,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                               >
                                 Sahni Tata Genuine Parts
                               </button>
-                              <button
+                              {/* <button
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleNavClick('showrooms');
@@ -481,7 +481,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                                 }`}
                               >
                                 Sahni Showrooms
-                              </button>
+                              </button> */}
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -498,7 +498,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                                     : 'text-gray-900 hover:bg-gray-50 hover:text-[#ffd54a]'
                                 }`}
                               >
-                                Sahni HP Lubricants
+                                Sahni Lubricants
                               </button>
                             </div>
                           </div>

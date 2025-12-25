@@ -1215,7 +1215,7 @@ export default function VehicleDetail({ vehicleId, onBack }: VehicleDetailProps)
               Schedule Test Drive
             </button>
             <button
-              onClick={() => window.location.href = 'mailto:sahniauto@gmail.com'}
+              onClick={() => window.location.href = 'mailto:info.sahniauto@gmail.com'}
               className="px-8 py-4 bg-gray-100 hover:bg-gray-200 rounded-lg font-semibold transition-colors border border-gray-300 flex items-center text-gray-900"
             >
               <Mail className="mr-2" size={20} />

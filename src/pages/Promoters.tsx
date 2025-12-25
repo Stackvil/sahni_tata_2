@@ -61,10 +61,10 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                   Gurjeet Singh Sahni
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
-                  Chairman & Managing Director
+                <b>  Chairman & Managing Director </b>
                 </p>
                 <p className="text-sm sm:text-base text-gray-500 text-center mt-3 leading-relaxed">
-                  Visionary leader who established Sahni Group in 1965 and guided its growth across multiple business verticals.
+                  Visionary leader who is Leading Sahni Group and guiding its growth across multiple business verticals.
                 </p>
               </div>
             </div>
@@ -75,7 +75,7 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                 <div className="relative mb-6">
                   <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-red-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                     <img
-                      src={normalizeImageUrl('/images/promoters/madam.jpeg')}
+                      src={normalizeImageUrl('/images/promoters/ybbcas.jpeg')}
                       alt="madam"
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -86,13 +86,13 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                   </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
-                  madam
+                  Amandeep Kaur Sahni
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
-                  Director
+                 <b> Director </b>
                 </p>
                 <p className="text-sm sm:text-base text-gray-500 text-center mt-3 leading-relaxed">
-                  Strategic partner in the Group's expansion and diversification into new business areas.
+                Strategic Partner Driving Group Backend Management and Operational Excellence
                 </p>
               </div>
             </div>
@@ -114,13 +114,13 @@ const Promoters = ({ setCurrentPage }: PromotersProps) => {
                   </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
-                  madam2
+                  Bhupinder Kaur Sahni
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 text-center leading-relaxed">
-                  Director
+                 <b> Director </b>
                 </p>
                 <p className="text-sm sm:text-base text-gray-500 text-center mt-3 leading-relaxed">
-                  Key contributor to the Group's success in commercial vehicle dealership and lubricants distribution.
+                Key Contributor in the Group’s Petroleum Operations and Philanthropic Activities.
                 </p>
               </div>
             </div>
