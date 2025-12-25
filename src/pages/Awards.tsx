@@ -69,113 +69,106 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
       {
         id: 1,
         image: normalizeImageUrl('/images/awards/IMG_20251209_124404 - Edited.webp'),
-        title: 'Excellence in Commercial Vehicle Sales',
-        description: 'Recognized for outstanding performance in commercial vehicle dealership and exceptional customer service delivery across Andhra Pradesh and Telangana regions.',
-        year: '2024'
+        title: 'TATA MOTORS CORAL VAés Alwags TATA CUSTOMER SUPPORT WINNER (LIMITED RANGE) FY 25-26 SAHNI AUTO VIJAYAWADA',
+        description: 'Recognized for outstanding customer support performance in the limited range category.',
+        year: '2025'
       },
       {
         id: 2,
         image: normalizeImageUrl('/images/awards/IMG_20251209_124421 - Edited.webp'),
-        title: 'Best Dealer Performance Award',
-        description: 'Awarded for achieving the highest sales targets and maintaining superior customer satisfaction standards in the automotive industry.',
-        year: '2024'
+        title: 'TATA MOTORS TATA CUSTOMER SUPPORT WINNER (LIMITED RANGE) FY 25-26 SAHNI AUTO VIJAYAWADA',
+        description: 'Awarded for achieving excellence in customer support in the limited range segment.',
+        year: '2025'
       },
       {
         id: 3,
         image: normalizeImageUrl('/images/awards/IMG_20251209_124431 - Edited.webp'),
-        title: 'Outstanding Service Excellence',
-        description: 'Recognized for exceptional after-sales service, customer support, and commitment to maintaining the highest quality standards.',
-        year: '2024'
+        title: 'TATA MOTORS TATA MD AWARD TATA INTRA FY 25-26 SAHNI AUTO VIJAYAWADA',
+        description: 'Recognized with the MD Award for outstanding performance in TATA INTRA segment.',
+        year: '2025'
       },
       {
         id: 4,
         image: normalizeImageUrl('/images/awards/IMG_20251209_124556 - Edited.webp'),
-        title: 'Top Distributor Achievement',
-        description: 'Awarded for being the leading distributor in lubricants and automotive products, demonstrating excellence in market penetration and customer reach.',
-        year: '2024'
+        title: 'TATA MOTORS BEST INTRA DEALER CHAMPION For the Month of October 2023 SAHNI AUTO PVT LTD.',
+        description: 'Awarded as Best INTRA Dealer Champion for outstanding performance in October 2023.',
+        year: '2023'
       },
       {
         id: 5,
         image: normalizeImageUrl('/images/awards/IMG_20251209_124810 - Edited.webp'),
-        title: 'Customer Satisfaction Excellence',
-        description: 'Recognized for maintaining the highest levels of customer satisfaction and building long-term relationships with clients.',
-        year: '2024'
+        title: 'TATA MOTORS TATA 13K PROJECT-WINNER TATA INTRA FY 22-23 SAHNI AUTO PVT LTD VIJAYAWADA',
+        description: 'Recognized as winner of the 13K Project in TATA INTRA segment for FY 22-23.',
+        year: '2023'
       },
       {
         id: 6,
         image: normalizeImageUrl('/images/awards/IMG_20251209_125043 - Edited.webp'),
-        title: 'Sales Performance Champion',
-        description: 'Awarded for achieving exceptional sales growth and market leadership in the commercial vehicle and automotive products sector.',
+        title: 'CERTIFICATE OF APPRECIATION TATA FY24-25 July-Sept',
+        description: 'This certificate is proudly presented to SAHNI AUTO PVT. LTD. In recognition of the outstanding performance for New Business in Commercial Vehicle Segment (SCV) in the South region',
         year: '2024'
       },
       {
         id: 7,
         image: normalizeImageUrl('/images/awards/IMG_20251209_125136 - Edited.webp'),
-        title: 'Innovation in Distribution',
-        description: 'Recognized for innovative approaches in product distribution, supply chain management, and market development strategies.',
+        title: 'CERTIFICATE OF APPRECIATION TATA FY24-25 July-Sept',
+        description: 'This certificate is proudly presented to SAHNI AUTO PVT. LTD. In recognition of the outstanding performance for New Business in Commercial Vehicle Segment (SCV) in the South region',
         year: '2024'
       },
       {
         id: 8,
         image: normalizeImageUrl('/images/awards/IMG_20251209_125334 - Edited.webp'),
-        title: 'Regional Market Leader',
-        description: 'Awarded for establishing market leadership and expanding business presence across multiple regions with consistent growth.',
-        year: '2024'
+        title: 'INTRA V50 CHAMPIONS FY 2025 SAHNI TEAM',
+        description: 'Recognized as INTRA V50 Champions for the financial year 2025.',
+        year: '2025'
       },
       {
         id: 9,
         image: normalizeImageUrl('/images/awards/IMG_20251209_125354 - Edited.webp'),
-        title: 'Quality Excellence Award',
-        description: 'Recognized for maintaining the highest quality standards in products and services, ensuring customer trust and satisfaction.',
-        year: '2024'
-      },
-      {
-        id: 10,
-        image: normalizeImageUrl('/images/awards/IMG_20251209_125358 - Edited.webp'),
-        title: 'Business Growth Achievement',
-        description: 'Awarded for exceptional business growth, strategic expansion, and significant contribution to the automotive industry.',
+        title: 'TATA INTRA Micro Market ODO Champion Winner Mr. JAKEER Sahni Auto Pvt Ltd',
+        description: 'Recognized as Micro Market ODO Champion Winner for outstanding performance.',
         year: '2024'
       },
       {
         id: 11,
         image: normalizeImageUrl('/images/awards/lubricants/1__2_-removebg-preview.png'),
-        title: 'Outstanding Distributor Performance',
-        description: 'Awarded for achieving exceptional distributor performance and maintaining superior standards in lubricants distribution.',
-        year: '2024'
+        title: 'HIGHEST VOLUME- MCO APR 24-FEB 25 M/S SAHNI AUTO AGENCIES VISAKH LUBE RO',
+        description: 'Awarded for achieving highest volume in MCO category from April 2024 to February 2025.',
+        year: '2025'
       },
       {
         id: 12,
         image: normalizeImageUrl('/images/awards/lubricants/1__3_-removebg-preview.png'),
-        title: 'Top Sales Achievement Award',
-        description: 'Recognized for achieving top sales performance and market leadership in lubricants distribution.',
-        year: '2024'
+        title: 'Automobile Mechanics Association President GANDHAM VENKATESWARAO (Konda) Garu 10-07-2025',
+        description: 'Recognition from Automobile Mechanics Association.',
+        year: '2025'
       },
       {
         id: 13,
         image: normalizeImageUrl('/images/awards/lubricants/1__4_-removebg-preview.png'),
-        title: 'Market Leadership Excellence',
-        description: 'Awarded for establishing market leadership and demonstrating excellence in lubricants distribution.',
+        title: 'M/s Sahni Auto Agencies Visakh Lubes Region Performance Champion FY 2023-24',
+        description: 'Silver Jubilee Channel Partners Meet December 15th-16th, 2024 Goa',
         year: '2024'
       },
       {
         id: 14,
         image: normalizeImageUrl('/images/awards/lubricants/1__5_-removebg-preview.png'),
-        title: 'Customer Service Excellence',
-        description: 'Recognized for maintaining the highest levels of customer service and satisfaction in lubricants distribution.',
-        year: '2024'
+        title: 'Award For Outstanding Performance - 16 YEARS as Lube Distributor',
+        description: 'Presented to M/s. SAHNI AUTO AGENCIES VIJAYAWADA in Recognition of completing (16 YEARS) as Lube Distributor of HP Lubricants 23.05.22',
+        year: '2022'
       },
       {
         id: 15,
         image: normalizeImageUrl('/images/awards/lubricants/1__6_-removebg-preview.png'),
-        title: 'Sales Growth Champion',
-        description: 'Awarded for achieving exceptional sales growth and demonstrating outstanding performance in lubricants distribution.',
-        year: '2024'
+        title: 'HP LUBRICANTS Award For Outstanding Performance - 16 YEARS',
+        description: 'Presented to M/s. SAHNI AUTO AGENCIES VIJAYAWADA in Recognition of completing 16 YEARS Lube Distributor of HP Lubricants',
+        year: '2022'
       },
       {
         id: 16,
         image: normalizeImageUrl('/images/awards/lubricants/1__7_-removebg-preview.png'),
-        title: 'Distribution Excellence Award',
-        description: 'Recognized for excellence in distribution, supply chain management, and market development in lubricants.',
+        title: 'HP LUBRICANTS SECUNDERABAD LUBE RO Excellence Award BLD Channel 2023-24',
+        description: 'Gear Oils Series Sama Trading',
         year: '2024'
       },
     ];
