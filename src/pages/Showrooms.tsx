@@ -204,7 +204,7 @@ export default function Showrooms() {
   const heroImages = useMemo(() => {
     // Use only these two images: frooti.png first, then frooti2.png
     return [
-      normalizeImageUrl('/images/showrooms/frooti.png'),
+      normalizeImageUrl('/images/showrooms/RAVI.png'),
       normalizeImageUrl('/images/showrooms/frooti2.png'),
     ];
   }, []);

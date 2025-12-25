@@ -138,7 +138,7 @@ export default function About({ setCurrentPage, setSelectedAboutEntryId }: About
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
-              LATEST HIGHLIGHTS
+              OUR STORY
             </h2>
             {entries.length === 0 && !loadingEntries && !entriesError && (
               <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-2">
