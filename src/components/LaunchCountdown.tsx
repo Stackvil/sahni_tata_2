@@ -54,13 +54,8 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
         } else {
           // Stored time has passed, calculate new one
           launchTime = new Date();
-          if (isLocalhost) {
-            // For localhost: 12:43 PM
-            launchTime.setHours(12, 43, 0, 0);
-          } else {
-            // For production: 12:34 PM
-            launchTime.setHours(12, 34, 0, 0);
-          }
+          // Set launch time to 12:50 PM (same for localhost and production)
+          launchTime.setHours(12, 50, 0, 0);
           launchTime.setSeconds(0);
           launchTime.setMilliseconds(0);
           
@@ -73,13 +68,8 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
       } else {
         // No stored time, calculate new one
         launchTime = new Date();
-        if (isLocalhost) {
-          // For localhost: 12:43 PM
-          launchTime.setHours(12, 43, 0, 0);
-        } else {
-          // For production: 12:34 PM
-          launchTime.setHours(12, 34, 0, 0);
-        }
+        // Set launch time to 12:50 PM (same for localhost and production)
+        launchTime.setHours(12, 50, 0, 0);
         launchTime.setSeconds(0);
         launchTime.setMilliseconds(0);
         
@@ -267,7 +257,7 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
         <div className="flex items-center justify-center gap-2 text-gray-600 mb-6">
           <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
           <p className="text-sm sm:text-base md:text-lg font-normal">
-            Launching at {isLocalhost ? '12:43 PM' : '12:34 PM'}
+            Launching at 12:50 PM
           </p>
         </div>
 
