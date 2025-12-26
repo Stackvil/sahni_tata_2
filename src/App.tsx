@@ -69,13 +69,31 @@ function App() {
     const checkLaunchTime = () => {
       const now = new Date();
       
-      // Calculate launch time: today at 12:30 PM (local time)
+      // Check if running on localhost
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      
+      if (isLocalhost) {
+        // For localhost, we'll let the countdown component handle it (3 seconds)
+        // Just check if it's already launched
+        const storedLaunch = localStorage.getItem('sahni_launched');
+        if (storedLaunch === 'true') {
+          setIsLaunched(true);
+        }
+        return;
+      }
+      
+      // Production: Calculate launch time: 12:30 PM (today or tomorrow)
       const launchTime = new Date();
       launchTime.setHours(12, 30, 0, 0);
       launchTime.setSeconds(0);
       launchTime.setMilliseconds(0);
 
-      // If it's already past 12:30 PM today, launch time has passed
+      // If it's already past 12:30 PM today, set to tomorrow at 12:30 PM
+      if (now.getTime() >= launchTime.getTime()) {
+        launchTime.setDate(launchTime.getDate() + 1);
+      }
+
+      // If launch time has passed, mark as launched
       if (now.getTime() >= launchTime.getTime()) {
         setIsLaunched(true);
         localStorage.setItem('sahni_launched', 'true');

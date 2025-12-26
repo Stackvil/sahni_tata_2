@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Clock } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Clock, Play } from 'lucide-react';
 import { normalizeImageUrl } from '../services/api';
 
 interface LaunchCountdownProps {
@@ -14,22 +14,55 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
     seconds: 0,
   });
   const [isLaunched, setIsLaunched] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const launchTimeRef = useRef<Date | null>(null);
+  
+  // Check if running on localhost
+  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+  const handleLaunch = useCallback(() => {
+    setIsLaunched(true);
+    setShowVideo(true);
+    // Play video when it's ready
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(console.error);
+      }
+    }, 100);
+  }, []);
+
+  const handleVideoEnd = () => {
+    setShowVideo(false);
+    onLaunch();
+  };
 
   useEffect(() => {
-    const calculateTimeLeft = () => {
+    // Set launch time once when component mounts
+    if (!launchTimeRef.current) {
       const now = new Date();
       const launchTime = new Date();
       
-      // Set launch time to today at 12:30 PM (local time)
+      // Set launch time to 12:30 PM (same for localhost and production)
       launchTime.setHours(12, 30, 0, 0);
       launchTime.setSeconds(0);
       launchTime.setMilliseconds(0);
+      
+      // If current time is past 12:30 PM today, set to tomorrow
+      if (now.getTime() >= launchTime.getTime()) {
+        launchTime.setDate(launchTime.getDate() + 1);
+      }
+      
+      launchTimeRef.current = launchTime;
+    }
 
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const launchTime = launchTimeRef.current!;
       const difference = launchTime.getTime() - now.getTime();
 
       if (difference <= 0) {
-        setIsLaunched(true);
-        onLaunch();
+        // Timer reached 0, stop countdown and show button (don't auto-launch)
         return { days: 0, hours: 0, minutes: 0, seconds: 0 };
       }
 
@@ -49,23 +82,57 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
       const newTimeLeft = calculateTimeLeft();
       setTimeLeft(newTimeLeft);
       
+      // When timer reaches 0, stop the interval (button will appear)
       if (newTimeLeft.days === 0 && newTimeLeft.hours === 0 && 
           newTimeLeft.minutes === 0 && newTimeLeft.seconds === 0) {
         clearInterval(interval);
-        setIsLaunched(true);
-        onLaunch();
+        // Don't auto-launch, just stop the timer
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [onLaunch]);
+  }, [isLocalhost]);
 
-  if (isLaunched) {
+  const handleLaunchNow = () => {
+    handleLaunch();
+  };
+
+  // Show video if launched
+  if (showVideo) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-black flex items-center justify-center">
+        <video
+          ref={videoRef}
+          className="w-full h-full object-contain"
+          onEnded={handleVideoEnd}
+          onError={(e) => {
+            console.error('Video error:', e);
+            // If video fails, proceed to website
+            handleVideoEnd();
+          }}
+          onLoadedData={() => {
+            // Auto-play when video is loaded
+            if (videoRef.current) {
+              videoRef.current.play().catch(console.error);
+            }
+          }}
+          playsInline
+          autoPlay
+        >
+          <source src="/videos/Product Launch Video.mp4" type="video/mp4" />
+          <source src={normalizeImageUrl('/videos/Product Launch Video.mp4')} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    );
+  }
+
+  if (isLaunched && !showVideo) {
     return null;
   }
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-white flex items-center justify-center">
+    <div className="fixed inset-0 z-[9999] bg-white flex items-center justify-center overflow-y-auto py-4 sm:py-6 md:py-8">
       <div className="text-center px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
         {/* Logo/Brand Section */}
         <div className="mb-12 sm:mb-16 md:mb-20">
@@ -152,12 +219,25 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
         </div>
 
         {/* Launch Time Info */}
-        <div className="flex items-center justify-center gap-2 text-gray-600">
+        <div className="flex items-center justify-center gap-2 text-gray-600 mb-6">
           <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
           <p className="text-sm sm:text-base md:text-lg font-normal">
-            Launching today at 12:30 PM
+            Launching at 12:30 PM
           </p>
         </div>
+
+        {/* Launch Now Button - Only show when timer reaches 0 */}
+        {timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0 && (
+          <div className="mt-6 mb-6 animate-fadeIn">
+            <button
+              onClick={handleLaunchNow}
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 sm:py-4 sm:px-12 rounded-lg text-base sm:text-lg md:text-xl uppercase tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 mx-auto"
+            >
+              <Play className="w-5 h-5 sm:w-6 sm:h-6" />
+              Launch Now
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
