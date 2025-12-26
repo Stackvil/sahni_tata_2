@@ -43,43 +43,22 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
       const now = new Date();
       let launchTime: Date;
       
-      // Check if we have a stored launch time (to persist across refreshes)
-      const storedLaunchTime = localStorage.getItem('sahni_launch_time');
-      if (storedLaunchTime) {
-        const storedTime = parseInt(storedLaunchTime, 10);
-        const storedDate = new Date(storedTime);
-        // Only use stored time if it's in the future
-        if (storedDate.getTime() > now.getTime()) {
-          launchTime = storedDate;
-        } else {
-          // Stored time has passed, calculate new one
-          launchTime = new Date();
-          // Set launch time to 12:50 PM (same for localhost and production)
-          launchTime.setHours(12, 50, 0, 0);
-          launchTime.setSeconds(0);
-          launchTime.setMilliseconds(0);
-          
-          // If current time is past launch time today, set to tomorrow
-          if (now.getTime() >= launchTime.getTime()) {
-            launchTime.setDate(launchTime.getDate() + 1);
-          }
-          localStorage.setItem('sahni_launch_time', launchTime.getTime().toString());
-        }
-      } else {
-        // No stored time, calculate new one
-        launchTime = new Date();
-        // Set launch time to 12:50 PM (same for localhost and production)
-        launchTime.setHours(12, 50, 0, 0);
-        launchTime.setSeconds(0);
-        launchTime.setMilliseconds(0);
-        
-        // If current time is past launch time today, set to tomorrow
-        if (now.getTime() >= launchTime.getTime()) {
-          launchTime.setDate(launchTime.getDate() + 1);
-        }
-        localStorage.setItem('sahni_launch_time', launchTime.getTime().toString());
+      // Clear old stored launch time to force recalculation
+      localStorage.removeItem('sahni_launch_time');
+      
+      // Calculate new launch time: 12:52 PM today
+      launchTime = new Date();
+      launchTime.setHours(12, 52, 0, 0);
+      launchTime.setSeconds(0);
+      launchTime.setMilliseconds(0);
+      
+      // If current time is past 12:52 PM today, set to tomorrow
+      if (now.getTime() >= launchTime.getTime()) {
+        launchTime.setDate(launchTime.getDate() + 1);
       }
       
+      // Store the new launch time
+      localStorage.setItem('sahni_launch_time', launchTime.getTime().toString());
       launchTimeRef.current = launchTime;
     }
 
@@ -257,7 +236,7 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
         <div className="flex items-center justify-center gap-2 text-gray-600 mb-6">
           <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
           <p className="text-sm sm:text-base md:text-lg font-normal">
-            Launching at 12:50 PM
+            Launching at 12:52 PM
           </p>
         </div>
 
