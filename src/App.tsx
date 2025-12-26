@@ -82,13 +82,13 @@ function App() {
         return;
       }
       
-      // Production: Calculate launch time: 12:30 PM (today or tomorrow)
+      // Production: Calculate launch time: 12:34 PM (today or tomorrow)
       const launchTime = new Date();
-      launchTime.setHours(12, 30, 0, 0);
+      launchTime.setHours(12, 34, 0, 0);
       launchTime.setSeconds(0);
       launchTime.setMilliseconds(0);
 
-      // If it's already past 12:30 PM today, set to tomorrow at 12:30 PM
+      // If it's already past 12:34 PM today, set to tomorrow at 12:34 PM
       if (now.getTime() >= launchTime.getTime()) {
         launchTime.setDate(launchTime.getDate() + 1);
       }
