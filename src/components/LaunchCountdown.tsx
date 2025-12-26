@@ -54,11 +54,17 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
         } else {
           // Stored time has passed, calculate new one
           launchTime = new Date();
-          launchTime.setHours(12, 34, 0, 0);
+          if (isLocalhost) {
+            // For localhost: 12:43 PM
+            launchTime.setHours(12, 43, 0, 0);
+          } else {
+            // For production: 12:34 PM
+            launchTime.setHours(12, 34, 0, 0);
+          }
           launchTime.setSeconds(0);
           launchTime.setMilliseconds(0);
           
-          // If current time is past 12:34 PM today, set to tomorrow
+          // If current time is past launch time today, set to tomorrow
           if (now.getTime() >= launchTime.getTime()) {
             launchTime.setDate(launchTime.getDate() + 1);
           }
@@ -67,11 +73,17 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
       } else {
         // No stored time, calculate new one
         launchTime = new Date();
-        launchTime.setHours(12, 34, 0, 0);
+        if (isLocalhost) {
+          // For localhost: 12:43 PM
+          launchTime.setHours(12, 43, 0, 0);
+        } else {
+          // For production: 12:34 PM
+          launchTime.setHours(12, 34, 0, 0);
+        }
         launchTime.setSeconds(0);
         launchTime.setMilliseconds(0);
         
-        // If current time is past 12:34 PM today, set to tomorrow
+        // If current time is past launch time today, set to tomorrow
         if (now.getTime() >= launchTime.getTime()) {
           launchTime.setDate(launchTime.getDate() + 1);
         }
@@ -135,8 +147,16 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
             // If video fails, proceed to website
             handleVideoEnd();
           }}
-          onLoadedData={() => {
-            // Auto-play when video is loaded
+          onCanPlay={() => {
+            // Auto-play when video can play
+            if (videoRef.current) {
+              videoRef.current.play().catch((error) => {
+                console.error('Video play error:', error);
+              });
+            }
+          }}
+          onLoadedMetadata={() => {
+            // Try to play when metadata is loaded
             if (videoRef.current) {
               videoRef.current.play().catch(console.error);
             }
@@ -144,8 +164,8 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
           playsInline
           autoPlay
         >
-          <source src="/videos/Product Launch Video.mp4" type="video/mp4" />
           <source src={normalizeImageUrl('/videos/Product Launch Video.mp4')} type="video/mp4" />
+          <source src="/videos/Product Launch Video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
@@ -247,7 +267,7 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
         <div className="flex items-center justify-center gap-2 text-gray-600 mb-6">
           <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
           <p className="text-sm sm:text-base md:text-lg font-normal">
-            Launching at 12:34 PM
+            Launching at {isLocalhost ? '12:43 PM' : '12:34 PM'}
           </p>
         </div>
 
