@@ -717,61 +717,6 @@ export default function Home({ setCurrentPage }: HomeProps) {
         </div>
       </section>
 
-      {/* Advertisement Video Section */}
-      <section className="relative w-full bg-gradient-to-br from-gray-50 to-white py-8 sm:py-10 md:py-12 lg:py-14 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
-          <div className="text-center mb-6 sm:mb-8 md:mb-10 scroll-reveal">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
-               Our Journey
-            </h2>
-            <div className="w-16 sm:w-20 md:w-24 h-1 bg-red-600 mx-auto"></div>
-            <p className="text-lg sm:text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
-              Discover what makes us different and how we serve our customers with excellence
-            </p>
-          </div>
-          
-          <div className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-xl bg-gray-900 scroll-reveal">
-            {adVideoLoading ? (
-              <div className="w-full aspect-video flex items-center justify-center bg-gray-800">
-                <div className="text-gray-400 text-lg">Loading advertisement...</div>
-              </div>
-            ) : adVideoError ? (
-              <div className="w-full aspect-video flex items-center justify-center bg-gray-800">
-                <div className="text-gray-400 text-lg">Advertisement video not available</div>
-              </div>
-            ) : adVideoUrl ? (
-              <video
-                src={adVideoUrl}
-                controls
-                autoPlay={false}
-                loop={false}
-                muted={false}
-                playsInline
-                className="w-full h-auto object-contain"
-                onError={(e) => {
-                  setAdVideoError(true);
-                  const videoElement = e.target as HTMLVideoElement;
-                  console.error('Failed to load advertisement video:', {
-                    videoSrc: videoElement.src,
-                    networkState: videoElement.networkState,
-                    error: videoElement.error
-                  });
-                }}
-                poster={normalizeImageUrl('/images/aboutus.png')} // Optional: Add a poster image
-              >
-                Your browser does not support the video tag.
-              </video>
-            ) : (
-              <div className="w-full aspect-video flex items-center justify-center bg-gray-800">
-                <div className="text-gray-400 text-lg">No advertisement video available</div>
-              </div>
-            )}
-            {/* Decorative gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-900/10 pointer-events-none"></div>
-          </div>
-        </div>
-      </section>
-
       {/* Our Story Section - Centered */}
       <section className="py-6 sm:py-8 md:py-10 bg-white">
         <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
