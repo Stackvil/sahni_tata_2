@@ -26,7 +26,6 @@ import Awards from './pages/Awards';
 import Promoters from './pages/Promoters';
 import InstitutionalSales from './pages/InstitutionalSales';
 import BackendStatus from './components/BackendStatus';
-import LaunchCountdown from './components/LaunchCountdown';
 
 function App() {
   // Initialize state from URL hash or default to 'home'
@@ -62,58 +61,6 @@ function App() {
     initial.aboutEntryId || null
   );
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
-  const [isLaunched, setIsLaunched] = useState(false);
-
-  // Check if launch time has passed
-  useEffect(() => {
-    const checkLaunchTime = () => {
-      const now = new Date();
-      
-      // Check if running on localhost
-      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      
-      if (isLocalhost) {
-        // For localhost, we'll let the countdown component handle it (3 seconds)
-        // Just check if it's already launched
-        const storedLaunch = localStorage.getItem('sahni_launched');
-        if (storedLaunch === 'true') {
-          setIsLaunched(true);
-        }
-        return;
-      }
-      
-      // Production: Calculate launch time: 2:00 PM (today or tomorrow)
-      const launchTime = new Date();
-      launchTime.setHours(14, 0, 0, 0);
-      launchTime.setSeconds(0);
-      launchTime.setMilliseconds(0);
-
-      // If it's already past 2:00 PM today, set to tomorrow at 2:00 PM
-      if (now.getTime() >= launchTime.getTime()) {
-        launchTime.setDate(launchTime.getDate() + 1);
-      }
-
-      // If launch time has passed, mark as launched
-      if (now.getTime() >= launchTime.getTime()) {
-        setIsLaunched(true);
-        localStorage.setItem('sahni_launched', 'true');
-        return;
-      }
-
-      // Don't allow localStorage bypass - always respect the actual launch time
-      // Remove any existing bypass flags
-      const storedLaunch = localStorage.getItem('sahni_launched');
-      if (storedLaunch === 'true' && now.getTime() < launchTime.getTime()) {
-        // If stored but launch time hasn't passed, clear it
-        localStorage.removeItem('sahni_launched');
-      }
-    };
-
-    checkLaunchTime();
-    // Check every second to catch the launch time accurately
-    const interval = setInterval(checkLaunchTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Check admin authentication
   useEffect(() => {
@@ -376,15 +323,9 @@ function App() {
     return <>{renderPage()}</>;
   }
 
-  // Show countdown if launch time hasn't passed (but allow admin to bypass)
-  const showCountdown = !isLaunched && !isAdminAuthenticated;
-
   return (
     <>
-      {showCountdown && (
-        <LaunchCountdown onLaunch={() => setIsLaunched(true)} />
-      )}
-      <div className={`min-h-screen bg-white flex flex-col w-full overflow-x-hidden ${showCountdown ? 'hidden' : ''}`}>
+      <div className="min-h-screen bg-white flex flex-col w-full overflow-x-hidden">
         <Header currentPage={currentPage} setCurrentPage={handlePageChange} />
         <main className="flex-grow w-full">
           {renderPage()}

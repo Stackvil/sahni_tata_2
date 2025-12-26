@@ -52,12 +52,6 @@ const normalizeAboutEntries = (items: any[]): AboutEntry[] => {
 
 export default function Home({ setCurrentPage }: HomeProps) {
   const scrollRevealRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoUrl, setVideoUrl] = useState<string>('');
-  const [videoLoading, setVideoLoading] = useState(true);
-  const [adVideoUrl, setAdVideoUrl] = useState<string>('');
-  const [adVideoLoading, setAdVideoLoading] = useState(true);
-  const [adVideoError, setAdVideoError] = useState(false);
   const [aboutEntries, setAboutEntries] = useState<AboutEntry[]>([]);
   const [loadingAboutEntries, setLoadingAboutEntries] = useState<boolean>(true);
   const [imageError, setImageError] = useState(false);
@@ -106,44 +100,6 @@ export default function Home({ setCurrentPage }: HomeProps) {
         if (ref) observer.unobserve(ref);
       });
     };
-  }, []);
-
-  // Fetch video from API
-  useEffect(() => {
-    const loadVideo = async () => {
-      try {
-        setVideoLoading(true);
-        console.log('[Home] Fetching video from Vercel backend...');
-        const url = await homeAPI.getVideo();
-        console.log('[Home] Video URL received from backend:', url);
-        if (url) {
-          setVideoUrl(url);
-        } else {
-          // Fallback to default video if no video is set
-          console.log('[Home] No video URL from backend, using BACKGROUND.mp4');
-          setVideoUrl(normalizeImageUrl('/videos/BACKGROUND.mp4'));
-        }
-      } catch (error) {
-        console.error('[Home] Failed to load home video from backend:', error);
-        // Fallback to default video on error
-        setVideoUrl(normalizeImageUrl('/videos/BACKGROUND.mp4'));
-      } finally {
-        setVideoLoading(false);
-      }
-    };
-
-    loadVideo();
-  }, []);
-
-  // Load advertisement video
-  useEffect(() => {
-    // Use the adver1.mp4 video directly from public folder
-    const adVideoPath = '/videos/adver1.mp4';
-    const normalizedUrl = normalizeImageUrl(adVideoPath);
-    console.log('[Home] Setting advertisement video URL:', normalizedUrl);
-    setAdVideoUrl(normalizedUrl);
-    setAdVideoError(false);
-    setAdVideoLoading(false);
   }, []);
 
   // Fetch About entries
@@ -758,34 +714,6 @@ export default function Home({ setCurrentPage }: HomeProps) {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Video Section */}
-      <section className="relative w-full bg-gray-900 overflow-hidden">
-        <div className="relative w-full">
-          {videoLoading ? (
-            <div className="w-full h-64 sm:h-96 md:h-[500px] flex items-center justify-center bg-gray-800">
-              <div className="text-gray-400">Loading video...</div>
-            </div>
-          ) : videoUrl ? (
-            <video
-              ref={videoRef}
-              src={videoUrl}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-auto object-contain"
-            >
-              Your browser does not support the video tag.
-            </video>
-          ) : (
-            <div className="w-full h-64 sm:h-96 md:h-[500px] flex items-center justify-center bg-gray-800">
-              <div className="text-gray-400">No video available</div>
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-900/20"></div>
         </div>
       </section>
 

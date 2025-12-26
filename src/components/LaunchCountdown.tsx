@@ -46,13 +46,13 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
       // Clear old stored launch time to force recalculation
       localStorage.removeItem('sahni_launch_time');
       
-      // Calculate new launch time: 2:20 PM today
+      // Calculate new launch time: 2:40 PM today
       launchTime = new Date();
-      launchTime.setHours(14, 20, 0, 0);
+      launchTime.setHours(14, 40, 0, 0);
       launchTime.setSeconds(0);
       launchTime.setMilliseconds(0);
       
-      // If current time is past 2:00 PM today, set to tomorrow
+      // If current time is past 2:40 PM today, set to tomorrow
       if (now.getTime() >= launchTime.getTime()) {
         launchTime.setDate(launchTime.getDate() + 1);
       }
