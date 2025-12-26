@@ -20,8 +20,7 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
       const now = new Date();
       const launchTime = new Date();
       
-      // Always set launch time to tomorrow at 12:30 PM (local time)
-      launchTime.setDate(now.getDate() + 1);
+      // Set launch time to today at 12:30 PM (local time)
       launchTime.setHours(12, 30, 0, 0);
       launchTime.setSeconds(0);
       launchTime.setMilliseconds(0);
@@ -156,16 +155,7 @@ export default function LaunchCountdown({ onLaunch }: LaunchCountdownProps) {
         <div className="flex items-center justify-center gap-2 text-gray-600">
           <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
           <p className="text-sm sm:text-base md:text-lg font-normal">
-            Launching on {(() => {
-              const launchDate = new Date();
-              launchDate.setDate(launchDate.getDate() + 1);
-              return launchDate.toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              });
-            })()} at 12:30 PM
+            Launching today at 12:30 PM
           </p>
         </div>
       </div>

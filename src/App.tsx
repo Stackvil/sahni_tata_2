@@ -69,15 +69,13 @@ function App() {
     const checkLaunchTime = () => {
       const now = new Date();
       
-      // Calculate launch time: tomorrow at 12:30 PM (local time)
-      // Always set to tomorrow at 12:30 PM regardless of current time
+      // Calculate launch time: today at 12:30 PM (local time)
       const launchTime = new Date();
-      launchTime.setDate(now.getDate() + 1);
       launchTime.setHours(12, 30, 0, 0);
       launchTime.setSeconds(0);
       launchTime.setMilliseconds(0);
 
-      // Check if launch time has passed
+      // If it's already past 12:30 PM today, launch time has passed
       if (now.getTime() >= launchTime.getTime()) {
         setIsLaunched(true);
         localStorage.setItem('sahni_launched', 'true');
