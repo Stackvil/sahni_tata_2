@@ -148,7 +148,8 @@ ${formData.message}`;
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Phone</h3>
                     <a
                       href={`tel:+91${(primaryShowroom?.phone || '92810 29456')
-                        .replace(/\s/g, '')}`}
+                        .replace(/\s/g, '')
+                        .replace('+91', '')}`}
                       className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block break-all"
                     >
                       {primaryShowroom?.phone || '92810 29456'}
