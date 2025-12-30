@@ -486,6 +486,85 @@
   .scroll-reveal-delay-4 {
     transition-delay: 0.4s;
   }
+
+  /* Enhanced Vehicle Card Animations */
+  .vehicle-card-reveal {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .vehicle-card-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Staggered animation delays - override transition delay */
+  .vehicle-card-reveal.vehicle-card-reveal-delay-1,
+  .vehicle-card-reveal-delay-1.vehicle-card-reveal {
+    transition-delay: 0.05s;
+  }
+
+  .vehicle-card-reveal.vehicle-card-reveal-delay-2,
+  .vehicle-card-reveal-delay-2.vehicle-card-reveal {
+    transition-delay: 0.1s;
+  }
+
+  .vehicle-card-reveal.vehicle-card-reveal-delay-3,
+  .vehicle-card-reveal-delay-3.vehicle-card-reveal {
+    transition-delay: 0.15s;
+  }
+
+  .vehicle-card-reveal.vehicle-card-reveal-delay-4,
+  .vehicle-card-reveal-delay-4.vehicle-card-reveal {
+    transition-delay: 0.2s;
+  }
+
+  .vehicle-card-reveal.vehicle-card-reveal-delay-5,
+  .vehicle-card-reveal-delay-5.vehicle-card-reveal {
+    transition-delay: 0.25s;
+  }
+
+  .vehicle-card-reveal.vehicle-card-reveal-delay-6,
+  .vehicle-card-reveal-delay-6.vehicle-card-reveal {
+    transition-delay: 0.3s;
+  }
+
+  /* Smooth scale animation */
+  @keyframes vehicleFadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-vehicle-in {
+    animation: vehicleFadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Enhanced card hover with smooth transitions */
+  .vehicle-card-enhanced {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .vehicle-card-enhanced:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .vehicle-card-enhanced .vehicle-image {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .vehicle-card-enhanced:hover .vehicle-image {
+    transform: scale(1.1);
+  }
   
   /* Gradient Text */
   .gradient-text {
