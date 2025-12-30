@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Briefcase, MapPin, Building, Calendar, Upload, X, CheckCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { careersAPI, applicationsAPI, normalizeImageUrl } from '../services/api';
+import { careersAPI, normalizeImageUrl } from '../services/api';
 
 interface JobPosting {
   id: string;
@@ -23,7 +23,6 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
   const [loading, setLoading] = useState(true);
   const [selectedJob, setSelectedJob] = useState<JobPosting | null>(null);
   const [showApplicationForm, setShowApplicationForm] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [videoError, setVideoError] = useState(false);
@@ -127,47 +126,60 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!selectedJob || !formData.resume) {
-      setSubmitError('Please fill all required fields and upload your resume');
+    if (!selectedJob) {
+      setSubmitError('Please select a job position');
       return;
     }
 
-    setSubmitting(true);
-    setSubmitError(null);
-
-    try {
-      await applicationsAPI.submit({
-        jobId: selectedJob.id,
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        coverLetter: formData.coverLetter,
-        resume: formData.resume,
-      });
-
-      setSubmitSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        coverLetter: '',
-        resume: null,
-      });
-
-      // Reset form after 5 seconds
-      setTimeout(() => {
-        setShowApplicationForm(false);
-        setSubmitSuccess(false);
-        setSelectedJob(null);
-      }, 5000);
-    } catch (error: any) {
-      setSubmitError(error.message || 'Failed to submit application. Please try again.');
-    } finally {
-      setSubmitting(false);
+    if (!formData.name || !formData.email || !formData.phone) {
+      setSubmitError('Please fill all required fields');
+      return;
     }
+
+    // Build email body with form data
+    const emailBody = `Job Application: ${selectedJob.title}
+
+Applicant Details:
+- Name: ${formData.name}
+- Email: ${formData.email}
+- Phone: ${formData.phone}
+${formData.coverLetter ? `\nCover Letter:\n${formData.coverLetter}` : ''}
+
+${formData.resume ? `Note: Please attach your resume file (${formData.resume.name})` : 'Note: Please attach your resume file'}
+
+---
+This application was submitted through the Sahni Auto Group careers page.`;
+
+    // Create Gmail compose URL
+    const subject = encodeURIComponent(`Job Application: ${selectedJob.title}`);
+    const body = encodeURIComponent(emailBody);
+    const to = encodeURIComponent('info.sahniauto@gmail.com');
+    
+    // Gmail compose URL
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
+    
+    // Open Gmail in new tab
+    window.open(gmailUrl, '_blank');
+    
+    // Show success message
+    setSubmitSuccess(true);
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      coverLetter: '',
+      resume: null,
+    });
+
+    // Reset form after 5 seconds
+    setTimeout(() => {
+      setShowApplicationForm(false);
+      setSubmitSuccess(false);
+      setSelectedJob(null);
+    }, 5000);
   };
 
   return (
@@ -424,7 +436,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
                     </div>
                     <h3 className="text-3xl font-black text-gray-900 mb-4">Application Submitted Successfully!</h3>
                     <p className="text-gray-600 text-lg max-w-md mx-auto leading-relaxed">
-                      Thank you for your interest in joining our team. We've received your application and will review it shortly. We'll be in touch soon!
+                      Thank you for your interest in joining our team. Gmail has been opened with your application details. Please attach your resume and send the email. We'll review your application shortly and be in touch soon!
                     </p>
                   </div>
                 ) : (
@@ -490,14 +502,13 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
 
                     <div>
                       <label className="block text-sm font-bold text-gray-800 mb-2.5">
-                        Resume <span className="text-red-500">*</span>
+                        Resume <span className="text-gray-400 font-normal text-xs">(Please attach in the email that will open)</span>
                       </label>
                       <div className="relative border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-blue-500 hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 bg-gray-50/50 group cursor-pointer">
                         <input
                           type="file"
                           accept=".pdf,.doc,.docx,.txt"
                           onChange={handleFileChange}
-                          required
                           className="hidden"
                           id="resume-upload"
                         />
@@ -548,28 +559,14 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
                       </button>
                       <button
                         type="submit"
-                        disabled={submitting}
-                        className="flex-1 relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white py-3.5 px-6 rounded-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg group"
+                        className="flex-1 relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white py-3.5 px-6 rounded-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group"
                       >
                         <span className="relative z-10 flex items-center justify-center">
-                          {submitting ? (
-                            <>
-                              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                              </svg>
-                              Submitting...
-                            </>
-                          ) : (
-                            <>
-                              Submit Application
-                              <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
-                            </>
-                          )}
+                          <Briefcase size={20} className="mr-2" />
+                          Open Gmail to Send Application
+                          <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
                         </span>
-                        {!submitting && (
-                          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        )}
+                        <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </button>
                     </div>
                   </form>

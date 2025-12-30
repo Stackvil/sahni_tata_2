@@ -44,7 +44,7 @@ export default function Contact() {
           address:
             main.address ||
             'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007',
-          phone: main.phone || '+91 92810 29456',
+          phone: main.phone || '92810 29456',
           email: main.email || 'info.sahniauto@gmail.com',
           image: main.image || (Array.isArray(main.images) ? main.images[0] : undefined),
           map_link: main.map_link || undefined,
@@ -147,11 +147,11 @@ ${formData.message}`;
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Phone</h3>
                     <a
-                      href={`tel:${(primaryShowroom?.phone || '+91 92810 29456')
+                      href={`tel:+91${(primaryShowroom?.phone || '92810 29456')
                         .replace(/\s/g, '')}`}
                       className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block break-all"
                     >
-                      {primaryShowroom?.phone || '+91 92810 29456'}
+                      {primaryShowroom?.phone || '92810 29456'}
                     </a>
                     <p className="text-sm sm:text-base text-gray-600 mt-1">Mon - Sat: 9:00 AM - 7:00 PM</p>
                   </div>
