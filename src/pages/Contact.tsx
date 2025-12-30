@@ -95,7 +95,7 @@ ${formData.message}`;
   return (
     <div className="bg-white pattern-diamond">
       {/* Header Section */}
-      <section className="relative h-[300px] sm:h-[400px] md:h-[500px] bg-gray-900 text-white overflow-hidden">
+      <section className="relative h-[300px] sm:h-[400px] md:h-[500px] bg-gray-900 text-white overflow-hidden" style={{ zIndex: 1 }}>
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img

@@ -264,7 +264,7 @@ export default function Showrooms() {
   return (
     <div className="bg-white pattern-diamond">
       {/* Header Section - Full Poster Hero */}
-      <section className="relative w-full bg-white overflow-hidden pb-0 md:pb-8 lg:pb-12">
+      <section className="relative w-full bg-white overflow-hidden pb-0 md:pb-8 lg:pb-12" style={{ zIndex: 1 }}>
         {/* Background Image Carousel */}
         <div className="relative w-full" style={{ marginBottom: 0 }}>
           {heroImages.map((image, index) => (

@@ -127,7 +127,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
   return (
     <div className="bg-white">
       {/* Hero Section - Professional Full-Width Design */}
-      <section className="relative min-h-[90vh] sm:min-h-[95vh] overflow-hidden w-full">
+      <section className="relative min-h-[90vh] sm:min-h-[95vh] overflow-hidden w-full" style={{ zIndex: 1 }}>
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
           <img

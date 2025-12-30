@@ -625,7 +625,7 @@ export default function Products({ setCurrentPage, setSelectedProductId }: Produ
       </Helmet>
       {/* Hero Section - HP Banner only when HP is selected (not in brands view) */}
       {selectedCompany === 'hp' && !showBrandsView && (
-        <section className="relative w-full overflow-hidden">
+        <section className="relative w-full overflow-hidden" style={{ zIndex: 1 }}>
           <div className="relative w-full">
             <img
               src={normalizeImageUrl('/images/prdcts_hero.jpg')}
