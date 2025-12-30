@@ -573,17 +573,18 @@ app.use((err, req, res, next) => {
 
 // Initialize database on startup (only if not in Lambda/Vercel)
 if (process.env.AWS_LAMBDA_FUNCTION_NAME === undefined && process.env.VERCEL === undefined) {
-  initDatabase()
-    .then((result) => {
-      if (!result.success) {
-        // Database initialization failed, but server continues
-        // This is expected if PostgreSQL is not running
-      }
-    })
-    .catch((error) => {
-      // This should not happen with the new implementation, but keep as safety
-      console.error('Unexpected error during database initialization:', error.message);
-    });
+  // Temporarily disabled for local development
+  // initDatabase()
+  //   .then((result) => {
+  //     if (!result.success) {
+  //       // Database initialization failed, but server continues
+  //       // This is expected if PostgreSQL is not running
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     // This should not happen with the new implementation, but keep as safety
+  //     console.error('Unexpected error during database initialization:', error.message);
+  //   });
 }
 
 // For Lambda/Vercel, we export the app, for local we start the server

@@ -236,6 +236,7 @@ const createTables = async () => {
       category_name VARCHAR(100),
       description TEXT,
       specs TEXT,
+      keywords TEXT,
       image_url TEXT,
       catalog_url TEXT,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -381,6 +382,24 @@ const createTables = async () => {
   } catch (error) {
     // Column might already exist, ignore error
     console.log('Note: catalog_url column migration:', error.message);
+  }
+
+  // Add keywords column to products table if it doesn't exist (migration)
+  try {
+    await query(`
+      DO $$ 
+      BEGIN
+        IF NOT EXISTS (
+          SELECT 1 FROM information_schema.columns 
+          WHERE table_name = 'products' AND column_name = 'keywords'
+        ) THEN
+          ALTER TABLE products ADD COLUMN keywords TEXT;
+        END IF;
+      END $$;
+    `);
+  } catch (error) {
+    // Column might already exist, ignore error
+    console.log('Note: keywords column migration:', error.message);
   }
 
   // Add category and images columns to showrooms table if they don't exist (migration)

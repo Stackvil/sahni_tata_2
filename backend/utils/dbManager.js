@@ -25,9 +25,9 @@ export const productsDB = {
 
   create: async (product) => {
     const result = await query(
-      `INSERT INTO products (name, company_key, category_name, description, specs, image_url, catalog_url)
-       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-      [product.name, product.company_key, product.category_name, product.description, product.specs, product.image_url, product.catalog_url || null]
+      `INSERT INTO products (name, company_key, category_name, description, specs, keywords, image_url, catalog_url)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      [product.name, product.company_key, product.category_name, product.description, product.specs, product.keywords || null, product.image_url, product.catalog_url || null]
     );
     return result.rows[0];
   },
@@ -35,10 +35,11 @@ export const productsDB = {
   update: async (id, product) => {
     const result = await query(
       `UPDATE products SET name = $1, company_key = $2, category_name = $3, 
-       description = $4, specs = $5, image_url = COALESCE($6, image_url), 
-       catalog_url = COALESCE($7, catalog_url), updated_at = CURRENT_TIMESTAMP
-       WHERE id = $8 RETURNING *`,
-      [product.name, product.company_key, product.category_name, product.description, product.specs, product.image_url, product.catalog_url, id]
+       description = $4, specs = $5, keywords = COALESCE($6, keywords), 
+       image_url = COALESCE($7, image_url), catalog_url = COALESCE($8, catalog_url), 
+       updated_at = CURRENT_TIMESTAMP
+       WHERE id = $9 RETURNING *`,
+      [product.name, product.company_key, product.category_name, product.description, product.specs, product.keywords, product.image_url, product.catalog_url, id]
     );
     return result.rows[0];
   },

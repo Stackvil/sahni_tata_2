@@ -121,13 +121,28 @@ router.get('/', async (req, res) => {
           console.warn('[Products] Database is empty, falling back to JSON files');
           // Continue to JSON file reading below
         } else if (products.length > 0) {
-          // Apply search filter
+          // Apply search filter (including keywords) - prioritize keyword matches
           if (search) {
-            products = products.filter(p => 
-              p.name?.toLowerCase().includes(search.toLowerCase()) ||
-              p.description?.toLowerCase().includes(search.toLowerCase()) ||
-              p.category_name?.toLowerCase().includes(search.toLowerCase())
-            );
+            const searchLower = search.toLowerCase();
+            products = products
+              .map(p => {
+                // Score products: keyword matches score higher
+                const nameMatch = p.name?.toLowerCase().includes(searchLower);
+                const descMatch = p.description?.toLowerCase().includes(searchLower);
+                const categoryMatch = p.category_name?.toLowerCase().includes(searchLower);
+                const keywordMatch = p.keywords?.toLowerCase().includes(searchLower);
+                
+                const hasMatch = nameMatch || descMatch || categoryMatch || keywordMatch;
+                if (!hasMatch) return null;
+                
+                return {
+                  ...p,
+                  _searchScore: (keywordMatch ? 10 : 0) + (nameMatch ? 5 : 0) + (descMatch ? 3 : 0) + (categoryMatch ? 2 : 0)
+                };
+              })
+              .filter(p => p !== null)
+              .sort((a, b) => b._searchScore - a._searchScore)
+              .map(({ _searchScore, ...p }) => p); // Remove temporary scoring field
           }
 
           // Convert image paths to CloudFront URLs
@@ -138,6 +153,7 @@ router.get('/', async (req, res) => {
             category: product.category_name,
             description: product.description,
             specs: product.specs,
+            keywords: product.keywords || '',
             image: product.image_url ? toCloudFrontUrl(product.image_url) : product.image_url,
             catalog_url: product.catalog_url ? toCloudFrontUrl(product.catalog_url) : product.catalog_url
           }));
@@ -162,13 +178,28 @@ router.get('/', async (req, res) => {
       const data = await readData('products');
       let products = data.products || [];
 
-    // Apply search filter
+    // Apply search filter (including keywords) - prioritize keyword matches
     if (search) {
-      products = products.filter(p => 
-        p.name.toLowerCase().includes(search.toLowerCase()) ||
-        p.description?.toLowerCase().includes(search.toLowerCase()) ||
-        p.category?.toLowerCase().includes(search.toLowerCase())
-      );
+      const searchLower = search.toLowerCase();
+      products = products
+        .map(p => {
+          // Score products: keyword matches score higher
+          const nameMatch = p.name.toLowerCase().includes(searchLower);
+          const descMatch = p.description?.toLowerCase().includes(searchLower);
+          const categoryMatch = p.category?.toLowerCase().includes(searchLower);
+          const keywordMatch = p.keywords?.toLowerCase().includes(searchLower);
+          
+          const hasMatch = nameMatch || descMatch || categoryMatch || keywordMatch;
+          if (!hasMatch) return null;
+          
+          return {
+            ...p,
+            _searchScore: (keywordMatch ? 10 : 0) + (nameMatch ? 5 : 0) + (descMatch ? 3 : 0) + (categoryMatch ? 2 : 0)
+          };
+        })
+        .filter(p => p !== null)
+        .sort((a, b) => b._searchScore - a._searchScore)
+        .map(({ _searchScore, ...p }) => p); // Remove temporary scoring field
     }
 
     const total = products.length;
@@ -254,6 +285,7 @@ router.get('/:id', async (req, res) => {
             category: product.category_name,
             description: product.description,
             specs: product.specs,
+            keywords: product.keywords || '',
             image: product.image_url ? toCloudFrontUrl(product.image_url) : product.image_url,
             catalog_url: product.catalog_url ? toCloudFrontUrl(product.catalog_url) : product.catalog_url
           };
@@ -334,7 +366,7 @@ router.get('/:id', async (req, res) => {
  */
 router.post('/', authenticateToken, upload.single('image'), async (req, res) => {
   try {
-    const { name, company_key, category_name, description, specs } = req.body;
+    const { name, company_key, category_name, description, specs, keywords } = req.body;
     
     if (!name || !company_key || !category_name || !description || !specs) {
       return res.status(400).json({ detail: 'All fields are required' });
@@ -370,6 +402,7 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
           category_name,
           description,
           specs,
+          keywords: keywords || '',
           image_url: imageUrl
         });
 
@@ -380,6 +413,7 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
           category: product.category_name,
           description: product.description,
           specs: product.specs,
+          keywords: product.keywords || '',
           image: product.image_url ? toCloudFrontUrl(product.image_url) : product.image_url
         });
       } catch (dbError) {
@@ -410,6 +444,7 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
         category: category_name,
         description,
         specs,
+        keywords: keywords || '',
         image: imagePath
       };
 
@@ -469,6 +504,7 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
     const category_name = req.body?.category_name || req.query?.category_name;
     const description = req.body?.description !== undefined ? req.body.description : (req.query?.description !== undefined ? req.query.description : undefined);
     const specs = req.body?.specs !== undefined ? req.body.specs : (req.query?.specs !== undefined ? req.query.specs : undefined);
+    const keywords = req.body?.keywords !== undefined ? req.body.keywords : (req.query?.keywords !== undefined ? req.query.keywords : undefined);
     
     // Parse ID - handle both string and number
     const productId = parseInt(req.params.id, 10);
@@ -524,6 +560,7 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
           category_name: category_name !== undefined && category_name !== null && category_name.trim() !== '' ? category_name.trim() : existingProduct.category_name,
           description: description !== undefined ? (description || '') : existingProduct.description,
           specs: specs !== undefined ? (specs || '') : existingProduct.specs,
+          keywords: keywords !== undefined ? (keywords || '') : existingProduct.keywords,
           image_url: imageUrl
         });
 
@@ -534,6 +571,7 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
           category: product.category_name,
           description: product.description,
           specs: product.specs,
+          keywords: product.keywords || '',
           image: product.image_url ? toCloudFrontUrl(product.image_url) : product.image_url
         });
       } catch (dbError) {
@@ -562,6 +600,7 @@ router.put('/:id', authenticateToken, upload.single('image'), async (req, res) =
       if (category_name) products[productIndex].category = category_name;
       if (description !== undefined) products[productIndex].description = description;
       if (specs !== undefined) products[productIndex].specs = specs;
+      if (keywords !== undefined) products[productIndex].keywords = keywords;
       
       if (req.file) {
         // Upload to S3 and get CloudFront URL
