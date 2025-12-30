@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { 
-  ArrowLeft, Car, Zap, Battery, Shield, Gauge, TrendingUp, 
+import {
+  ArrowLeft, Car, Zap, Battery, Shield, Gauge, TrendingUp,
   CheckCircle2, ArrowRight, Phone, Mail, Share2,
   Star, Settings, Users, Droplet, Activity, FileText, Download
 } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { getVehicleById, Vehicle } from '../data/tataVehicles';
 import { normalizeImageUrl } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -416,6 +417,42 @@ export default function VehicleDetail({ vehicleId, onBack }: VehicleDetailProps)
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
+      <Helmet>
+        <title>{vehicle?.name} - Tata Commercial Vehicle | Sahni Auto Group</title>
+        <meta name="description" content={`${vehicle?.name} - ${vehicle?.description || 'Premium commercial vehicle from Tata Motors. Explore features, specifications, and book test drive at Sahni Auto Group.'}`} />
+        <meta name="keywords" content={`${vehicle?.name}, Tata Motors, commercial vehicle, ${vehicle?.category}, Sahni Auto Group, Vijayawada, Andhra Pradesh`} />
+        <meta property="og:title" content={`${vehicle?.name} - Tata Commercial Vehicle | Sahni Auto Group`} />
+        <meta property="og:description" content={`${vehicle?.name} - ${vehicle?.description || 'Premium commercial vehicle from Tata Motors.'}`} />
+        <meta property="og:image" content={vehicle?.images?.[0] ? normalizeImageUrl(vehicle.images[0]) : '/images/logo.jpg'} />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href={window.location.href} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": vehicle?.name,
+            "description": vehicle?.description,
+            "brand": {
+              "@type": "Brand",
+              "name": "Tata Motors"
+            },
+            "manufacturer": {
+              "@type": "Organization",
+              "name": "Tata Motors"
+            },
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "seller": {
+                "@type": "Organization",
+                "name": "Sahni Auto Group"
+              }
+            },
+            "image": vehicle?.images?.map(img => normalizeImageUrl(img)) || []
+          })}
+        </script>
+      </Helmet>
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         {/* Background Gradient */}

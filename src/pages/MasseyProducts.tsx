@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Droplet } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { masseyAPI, normalizeImageUrl } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -309,6 +310,15 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
 
   return (
     <div className="bg-white min-h-screen">
+      <Helmet>
+        <title>Massey Ferguson Tractors | Sahni Auto Group - Vijayawada</title>
+        <meta name="description" content="Massey Ferguson tractors and agricultural equipment at Sahni Auto Group. Authorized dealer for Massey Ferguson tractors in Vijayawada, Andhra Pradesh & Telangana." />
+        <meta name="keywords" content="Massey Ferguson tractors, agricultural equipment, tractors, farming machinery, Sahni Auto Group, Vijayawada" />
+        <meta property="og:title" content="Massey Ferguson Tractors | Sahni Auto Group" />
+        <meta property="og:description" content="Massey Ferguson tractors and agricultural equipment at Sahni Auto Group." />
+        <meta property="og:url" content={window.location.href} />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {/* Header */}
       <section className="bg-gray-900 text-white py-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">

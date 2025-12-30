@@ -1,5 +1,6 @@
 import { X, Phone } from 'lucide-react';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { normalizeImageUrl } from '../services/api';
 
 interface HeaderProps {
@@ -16,6 +17,8 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
   const [businessesDropdownOpen, setBusinessesDropdownOpen] = useState(false);
   const [businessesDropdownTimeout, setBusinessesDropdownTimeout] =
     useState<NodeJS.Timeout | null>(null);
+
+  const navigate = useNavigate();
 
   const navItems = [
     { id: 'products', label: 'OUR BUSINESSES' },
@@ -34,7 +37,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
     
     // Special handling for autocomponents - navigate to home and scroll to aftermarket section
     if (pageId === 'autocomponents') {
-      setCurrentPage('home');
+      navigate('/');
       // Wait for page to render, then scroll to aftermarket section
       setTimeout(() => {
         const aftermarketSection = document.getElementById('aftermarket');
@@ -45,7 +48,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
       return;
     }
     
-    setCurrentPage(pageId);
+    navigate(`/${pageId}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -57,9 +60,9 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
   return (
     <>
       {/* VARUN STYLE STICKY HEADER */}
-        <header className="sticky top-0 z-[100] bg-[#2368a8]">
+        <header className="sticky top-0 z-[100] bg-[#2368a8] overflow-x-hidden w-full">
          {/* adjusted height for requested logo dimensions - responsive */}
-         <div className="flex w-full h-20 sm:h-24 md:h-28 lg:h-[140px]">
+         <div className="flex w-full h-20 sm:h-24 md:h-28 lg:h-[140px] min-w-0">
            {/* LEFT: WHITE CAPSULE WITH FULL-SIZE LOGO (no inner padding) - responsive */}
            <div className="flex items-center">
              <div className="h-full w-32 sm:w-40 md:w-48 lg:w-[250px] bg-white rounded-br-[40px] sm:rounded-br-[60px] lg:rounded-br-[80px] shadow-md flex items-center justify-center overflow-hidden p-0.5 sm:p-1">
@@ -94,14 +97,14 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
            </div>
 
           {/* RIGHT: BLUE NAV BAR */}
-          <div className="flex-1 flex items-center">
+          <div className="flex-1 flex items-center min-w-0">
             {/* DESKTOP NAV (centered, professional) */}
-            <div className="hidden lg:flex flex-1 items-center justify-center h-full">
-              <nav className="flex items-center space-x-12">
+            <div className="hidden lg:flex flex-1 items-center justify-center h-full min-w-0 px-2">
+              <nav className="flex items-center space-x-4 xl:space-x-6 2xl:space-x-8 justify-center max-w-full">
                 {/* HOME */}
                 <button
                   onClick={() => handleNavClick('home')}
-                  className={`relative px-3 py-3 text-[14px] lg:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                  className={`relative px-2 xl:px-3 py-3 text-[13px] lg:text-[14px] xl:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors whitespace-nowrap ${
                     currentPage === 'home'
                       ? 'text-[#ffd54a]'
                       : 'text-white hover:text-[#ffd54a]'
@@ -138,7 +141,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                       >
                         <button
                           onClick={() => handleNavClick(item.id)}
-                            className={`relative px-3 py-3 text-[14px] lg:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                            className={`relative px-2 xl:px-3 py-3 text-[13px] lg:text-[14px] xl:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors whitespace-nowrap ${
                             isActive
                               ? 'text-[#ffd54a]'
                               : 'text-white hover:text-[#ffd54a]'
@@ -264,7 +267,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                       >
                         <button
                           onClick={() => handleNavClick(item.id)}
-                            className={`relative px-3 py-3 text-[14px] lg:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                            className={`relative px-2 xl:px-3 py-3 text-[13px] lg:text-[14px] xl:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors whitespace-nowrap ${
                             isActive
                               ? 'text-[#ffd54a]'
                               : 'text-white hover:text-[#ffd54a]'
@@ -391,7 +394,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                       >
                         <button
                           onClick={() => handleNavClick(item.id)}
-                            className={`relative px-3 py-3 text-[14px] lg:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                            className={`relative px-2 xl:px-3 py-3 text-[13px] lg:text-[14px] xl:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors whitespace-nowrap ${
                             isActive
                               ? 'text-[#ffd54a]'
                               : 'text-white hover:text-[#ffd54a]'
@@ -539,10 +542,17 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                   const isActive = currentPage === item.id;
 
                   return (
-                    <button
+                    <Link
                       key={item.id}
-                      onClick={() => handleNavClick(item.id)}
-                      className={`relative px-3 py-3 text-[14px] lg:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                      to={`/${item.id}`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setAboutDropdownOpen(false);
+                        setVehiclesDropdownOpen(false);
+                        setBusinessesDropdownOpen(false);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className={`relative px-2 xl:px-3 py-3 text-[13px] lg:text-[14px] xl:text-[15px] font-semibold uppercase tracking-[0.18em] transition-colors whitespace-nowrap ${
                         isActive
                           ? 'text-[#ffd54a]'
                           : 'text-white hover:text-[#ffd54a]'
@@ -550,7 +560,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                     >
                       {topBarFor(isActive)}
                       {item.label}
-                    </button>
+                    </Link>
                   );
                 })}
               </nav>

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Droplet, Filter } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { productsAPI, normalizeImageUrl } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -613,6 +614,15 @@ export default function Products({ setCurrentPage, setSelectedProductId }: Produ
 
   return (
     <div className="bg-white pattern-diamond">
+      <Helmet>
+        <title>Lubricants & Automotive Products | Sahni Auto Group</title>
+        <meta name="description" content="Premium lubricants and automotive products from HP, Superline, and other brands. Engine oils, gear oils, brake fluids, and more at Sahni Auto Group." />
+        <meta name="keywords" content="lubricants, engine oil, automotive products, HP lubricants, Superline, brake fluid, gear oil, Sahni Auto Group" />
+        <meta property="og:title" content="Lubricants & Automotive Products | Sahni Auto Group" />
+        <meta property="og:description" content="Premium lubricants and automotive products from leading brands at Sahni Auto Group." />
+        <meta property="og:url" content={window.location.href} />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {/* Hero Section - HP Banner only when HP is selected (not in brands view) */}
       {selectedCompany === 'hp' && !showBrandsView && (
         <section className="relative w-full overflow-hidden">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Droplet, ArrowLeft, Phone, Mail } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { productsAPI, normalizeImageUrl } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -231,6 +232,42 @@ export default function ProductDetail({ productId, onBack }: ProductDetailProps)
 
   return (
     <div className="bg-white">
+      <Helmet>
+        <title>{product?.name} - Lubricant | Sahni Auto Group</title>
+        <meta name="description" content={`${product?.name} - ${product?.description || 'Premium lubricant from Sahni Auto Group. High-quality automotive lubricants for all your vehicle needs.'}`} />
+        <meta name="keywords" content={`${product?.name}, lubricant, ${product?.company}, automotive oil, Sahni Auto Group, Vijayawada`} />
+        <meta property="og:title" content={`${product?.name} - Lubricant | Sahni Auto Group`} />
+        <meta property="og:description" content={`${product?.name} - ${product?.description || 'Premium lubricant from Sahni Auto Group.'}`} />
+        <meta property="og:image" content={product?.image ? normalizeImageUrl(product.image) : '/images/logo.jpg'} />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href={window.location.href} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": product?.name,
+            "description": product?.description,
+            "brand": {
+              "@type": "Brand",
+              "name": product?.company || "Sahni Auto Group"
+            },
+            "manufacturer": {
+              "@type": "Organization",
+              "name": product?.company || "Sahni Auto Group"
+            },
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "seller": {
+                "@type": "Organization",
+                "name": "Sahni Auto Group"
+              }
+            },
+            "image": product?.image ? [normalizeImageUrl(product.image)] : []
+          })}
+        </script>
+      </Helmet>
       {/* Header with Back Button */}
       <section className="bg-gray-900 text-white py-3 sm:py-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

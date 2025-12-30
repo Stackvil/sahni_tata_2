@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Heart, Calendar, MapPin, Users } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { loadVehicles, getCategories, Vehicle } from '../data/tataVehicles';
 import { normalizeImageUrl } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -635,6 +636,15 @@ export default function Vehicles({ setCurrentPage, setSelectedVehicleId }: Vehic
   // Show vehicles page when brand is selected
   return (
     <div className="bg-white">
+      <Helmet>
+        <title>Tata Commercial Vehicles | Sahni Auto Group - Vijayawada</title>
+        <meta name="description" content="Explore Tata commercial vehicles at Sahni Auto Group. Ace, Yodha, trucks, buses, and more. Authorized Tata Motors dealer in Vijayawada, Andhra Pradesh & Telangana." />
+        <meta name="keywords" content="Tata vehicles, Tata Ace, Tata Yodha, commercial vehicles, Tata Motors dealer, Vijayawada, Andhra Pradesh, Sahni Auto Group" />
+        <meta property="og:title" content="Tata Commercial Vehicles | Sahni Auto Group" />
+        <meta property="og:description" content="Explore Tata commercial vehicles at Sahni Auto Group. Authorized dealer in Vijayawada." />
+        <meta property="og:url" content={window.location.href} />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {/* Brand Header with Back to Brand Selection */}
       <section className="bg-gray-900 text-white py-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -966,7 +976,7 @@ export default function Vehicles({ setCurrentPage, setSelectedVehicleId }: Vehic
                           className="w-full h-full object-contain bg-gray-50 group-hover:scale-105 transition-transform duration-500"
                           loading="lazy"
                           decoding="async"
-                          fetchpriority={index < 6 ? "high" : "low"}
+                          fetchPriority={index < 6 ? "high" : "low"}
                           onError={(e) => {
                             // Debug: Log the failed path
                             const target = e.target as HTMLImageElement;
