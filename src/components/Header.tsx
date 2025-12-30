@@ -60,7 +60,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
   return (
     <>
       {/* VARUN STYLE STICKY HEADER */}
-        <header className="sticky top-0 z-[100] bg-[#2368a8] overflow-x-hidden w-full">
+        <header className="sticky top-0 z-[9998] bg-[#2368a8] overflow-x-hidden w-full">
          {/* adjusted height for requested logo dimensions - responsive */}
          <div className="flex w-full h-20 sm:h-24 md:h-28 lg:h-[140px] min-w-0">
            {/* LEFT: WHITE CAPSULE WITH FULL-SIZE LOGO (no inner padding) - responsive */}
