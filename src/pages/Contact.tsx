@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Phone, Mail, MapPin, Send, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
 import { showroomsAPI, normalizeImageUrl } from '../services/api';
 
 interface PrimaryShowroom {
@@ -20,7 +20,14 @@ export default function Contact() {
     message: '',
   });
 
-  const [primaryShowroom, setPrimaryShowroom] = useState<PrimaryShowroom | null>(null);
+  // Updated default details
+  const [primaryShowroom, setPrimaryShowroom] = useState<PrimaryShowroom>({
+    city: 'Vijayawada',
+    address: 'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007',
+    phone: '92810 29456',
+    email: 'info.sahniauto@gmail.com',
+  });
+  
   const [heroImageError, setHeroImageError] = useState(false);
 
   useEffect(() => {
@@ -31,27 +38,20 @@ export default function Contact() {
           ? response
           : (response as any)?.showrooms || (response as any)?.data || [];
 
-        if (!Array.isArray(items) || items.length === 0) {
-          return;
+        if (Array.isArray(items) && items.length > 0) {
+          const main = items.find((s: any) => s.is_main === true || s.isMain === true) || items[0];
+          
+          setPrimaryShowroom({
+            city: main.city || 'Vijayawada',
+            address: main.address || 'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007',
+            phone: main.phone || '92810 29456',
+            email: main.email || 'info.sahniauto@gmail.com',
+            image: main.image || (Array.isArray(main.images) ? main.images[0] : undefined),
+            map_link: main.map_link || undefined,
+          });
         }
-
-        const main =
-          items.find((s: any) => s.is_main === true || s.isMain === true) ||
-          items[0];
-
-        setPrimaryShowroom({
-          city: main.city || 'Vijayawada',
-          address:
-            main.address ||
-            'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007',
-          phone: main.phone || '92810 29456',
-          email: main.email || 'info.sahniauto@gmail.com',
-          image: main.image || (Array.isArray(main.images) ? main.images[0] : undefined),
-          map_link: main.map_link || undefined,
-        });
       } catch (error) {
-        // On error, fall back to static defaults
-        console.warn('[Contact] Failed to load showrooms for contact info:', error);
+        console.warn('[Contact] Using requested default contact info:', error);
       }
     };
 
@@ -60,335 +60,108 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Build WhatsApp message with form data
-    const whatsappMessage = `Hello Sahni Auto Group,
-
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone || 'Not provided'}
-Subject: ${formData.subject || 'General Inquiry'}
-
-Message:
-${formData.message}`;
-    
-    // Encode the message for URL
+    const whatsappMessage = `Hello Sahni Auto Group,\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\nSubject: ${formData.subject || 'General Inquiry'}\n\nMessage:\n${formData.message}`;
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    
-    // Redirect to WhatsApp with pre-filled message
     const whatsappUrl = `https://wa.me/919281029456?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
     
-    // Reset form after a short delay
     setTimeout(() => {
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
     }, 500);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <div className="bg-white pattern-diamond">
+    <div className="bg-white">
       {/* Header Section */}
-      <section className="relative h-[300px] sm:h-[400px] md:h-[500px] bg-gray-900 text-white overflow-hidden" style={{ zIndex: 1 }}>
-        {/* Background Image */}
+      <section className="relative h-[300px] sm:h-[400px] md:h-[500px] bg-gray-900 text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={
-              heroImageError
-                ? 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=1080&fit=crop'
-                : normalizeImageUrl(
-                    'https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/95cdfeef.jpg'
-                  )
-            }
+            src={heroImageError ? 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=1080&fit=crop' : normalizeImageUrl('https://tata-storagebucket.s3.ap-south-1.amazonaws.com/images/95cdfeef.jpg')}
             alt="Contact Us"
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              setHeroImageError(true);
-            }}
+            className="w-full h-full object-cover opacity-60"
+            onError={() => setHeroImageError(true)}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-black/40"></div>
         </div>
-        
-        {/* Content */}
         <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="bg-red-600 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg mb-4 sm:mb-6 inline-block shadow-xl">
-              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white uppercase tracking-wide">Contact Us</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-2 sm:mb-4 text-white px-2">Get In Touch</h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 px-2">We're Here to Help You</p>
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">Get In Touch</h1>
+            <p className="text-xl text-gray-200">We're Here to Help You</p>
           </div>
         </div>
       </section>
 
-      {/* Contact Information and Form */}
-      <section className="py-8 sm:py-12 md:py-16 bg-white">
+      {/* Information Cards */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
-            {/* Contact Information */}
-            <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">Get in Touch</h2>
-              <div className="w-16 sm:w-20 md:w-24 h-1 bg-red-600 mb-4 sm:mb-6"></div>
-              <p className="text-base sm:text-lg text-gray-700 mb-6 sm:mb-8">
-                Have questions about our products or services? Want to explore partnership opportunities? Our team is ready to assist you.
-              </p>
-
-              <div className="space-y-4 sm:space-y-6">
-                <div className="flex items-start bg-gray-50 p-4 sm:p-6 rounded-lg">
-                  <div className="bg-red-600 p-2 sm:p-3 rounded-full mr-3 sm:mr-4 flex-shrink-0">
-                    <Phone className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Phone</h3>
-                    <a
-                      href={`tel:+91${(primaryShowroom?.phone || '92810 29456')
-                        .replace(/\s/g, '')
-                        .replace('+91', '')}`}
-                      className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block break-all"
-                    >
-                      {primaryShowroom?.phone || '92810 29456'}
-                    </a>
-                    <p className="text-sm sm:text-base text-gray-600 mt-1">Mon - Sat: 9:00 AM - 7:00 PM</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start bg-gray-50 p-4 sm:p-6 rounded-lg">
-                  <div className="bg-red-600 p-2 sm:p-3 rounded-full mr-3 sm:mr-4 flex-shrink-0">
-                    <Mail className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Email</h3>
-                    <a
-                      href={`mailto:${primaryShowroom?.email || 'info.sahniauto@gmail.com'}`}
-                      className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block break-all"
-                    >
-                      {primaryShowroom?.email || 'info.sahniauto@gmail.com'}
-                    </a>
-                    <p className="text-sm sm:text-base text-gray-600 mt-1">We'll respond within 24 hours</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start bg-gray-50 p-4 sm:p-6 rounded-lg">
-                  <div className="bg-red-600 p-2 sm:p-3 rounded-full mr-3 sm:mr-4 flex-shrink-0">
-                    <MapPin className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">Head Office</h3>
-                    <a
-                      href={primaryShowroom?.map_link || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                        primaryShowroom?.address ||
-                          'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007'
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 text-base sm:text-lg hover:text-red-600 transition-colors block"
-                    >
-                      {(primaryShowroom?.address ||
-                        'Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007')
-                        .split('\n')
-                        .map((line, idx) => (
-                          <span key={idx}>
-                            {line}
-                            <br />
-                          </span>
-                        ))}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start bg-gray-50 p-4 sm:p-6 rounded-lg">
-                  <div className="bg-red-600 p-2 sm:p-3 rounded-full mr-3 sm:mr-4 flex-shrink-0">
-                    <MessageCircle className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">WhatsApp</h3>
-                    <a
-                      href="https://wa.me/919281029456"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-red-600 hover:text-red-700 transition-colors text-base sm:text-lg font-semibold block"
-                    >
-                      Chat with us on WhatsApp
-                    </a>
-                    <p className="text-sm sm:text-base text-gray-600 mt-1">Quick response for urgent queries</p>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            {/* Phone Card */}
+            <div className="flex flex-col items-center text-center bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-red-600 p-4 rounded-full mb-4">
+                <Phone className="text-white" size={28} />
               </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Phone</h3>
+              <a href="tel:+919281029456" className="text-red-600 text-2xl font-black block">
+                {primaryShowroom.phone}
+              </a>
+              <p className="text-gray-500 mt-2 font-medium">Mon - Sat: 9:00 AM - 7:00 PM</p>
             </div>
 
-            {/* Contact Form */}
-            <div>
-              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-xl border-2 border-blue-100">
-                <h2 className="text-2xl sm:text-3xl font-bold text-blue-900 mb-4 sm:mb-6">Send Us a Message</h2>
-
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600"
-                        placeholder="Your name"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-semibold text-blue-900 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-semibold text-blue-900 mb-2">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
-                        placeholder="+91 XXXXX XXXXX"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-semibold text-blue-900 mb-2">
-                        Subject *
-                      </label>
-                      <select
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
-                      >
-                        <option value="">Select a subject</option>
-                        <option value="fuel-stations">Fuel Stations</option>
-                        <option value="lubricants">Lubricants Distribution</option>
-                        <option value="aftermarket">Aftermarket Sales</option>
-                        <option value="institutional">Institutional Sales</option>
-                        <option value="dealership">Vehicle Dealerships</option>
-                        <option value="partnership">Partnership Opportunities</option>
-                        <option value="other">Other Inquiry</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-semibold text-blue-900 mb-2">
-                        Message *
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows={5}
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
-                        placeholder="Tell us how we can help you..."
-                      ></textarea>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="w-full bg-red-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-bold text-base sm:text-lg hover:bg-red-700 transition-colors flex items-center justify-center min-h-[44px]"
-                    >
-                      <MessageCircle className="mr-2" size={20} />
-                      <span className="text-sm sm:text-base">Send Message via WhatsApp</span>
-                    </button>
-                  </form>
+            {/* Email Card */}
+            <div className="flex flex-col items-center text-center bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-red-600 p-4 rounded-full mb-4">
+                <Mail className="text-white" size={28} />
               </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
+              <a href={`mailto:${primaryShowroom.email}`} className="text-red-600 text-lg font-bold break-all">
+                {primaryShowroom.email}
+              </a>
+              <p className="text-gray-500 mt-2 font-medium">We'll respond within 24 hours</p>
             </div>
+
+            {/* Address Card */}
+            <div className="flex flex-col items-center text-center bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-red-600 p-4 rounded-full mb-4">
+                <MapPin className="text-white" size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Head Office</h3>
+              <address className="not-italic text-gray-700 font-semibold leading-relaxed">
+                {primaryShowroom.address}
+              </address>
+            </div>
+            
           </div>
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 sm:mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Find Us on the Map</h2>
-              <div className="w-16 sm:w-20 md:w-24 h-1 bg-red-600 mx-auto"></div>
-          </div>
-
-          <div className="rounded-lg overflow-hidden shadow-xl border-2 sm:border-4 border-red-600">
-            <iframe
-              src="https://www.google.com/maps?q=Sahni+Complex,+2nd+Cross+Rd,+Auto+Nagar,+Vijayawada,+Andhra+Pradesh+520007&output=embed&hl=en&z=17&ll=16.4984631,80.675735"
-              width="100%"
-              height="300"
-              className="sm:h-[400px] md:h-[450px]"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Sahni Group Head Office Location"
-            ></iframe>
-          </div>
-
-          <div className="mt-4 sm:mt-6 text-center">
-            <a
-              href="https://wa.me/919281029456?text=Hi,%20I%20need%20directions%20to%20your%20location"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 sm:px-8 rounded-lg transition-colors shadow-lg hover:shadow-xl min-h-[44px] text-sm sm:text-base"
-            >
-              <MessageCircle className="mr-2" size={20} />
-              <span className="hidden sm:inline">Get Directions via WhatsApp</span>
-              <span className="sm:hidden">Get Directions</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-8 sm:py-12 md:py-16 bg-gray-800 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">We're Always Available</h2>
-          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 px-2">
-            Whether you have a question, need support, or want to explore business opportunities, the Sahni Group team is here to help.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-            <a
-              href="tel:+919281029456"
-              className="bg-red-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-red-700 transition-colors inline-flex items-center justify-center min-h-[44px]"
-            >
-              <Phone className="mr-2" size={20} />
-              Call Now
-            </a>
-            <a
-              href="https://wa.me/919281029456"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-green-600 transition-colors inline-flex items-center justify-center min-h-[44px]"
-            >
-              <MessageCircle className="mr-2" size={20} />
-              WhatsApp
-            </a>
+      {/* Contact Form Section */}
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4">
+          <div className="bg-white p-8 rounded-2xl shadow-2xl border border-blue-50">
+            <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Send Us a Message</h2>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <input type="text" name="name" placeholder="Full Name *" required value={formData.name} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 outline-none" />
+                <input type="email" name="email" placeholder="Email Address *" required value={formData.email} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 outline-none" />
+              </div>
+              <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 outline-none" />
+              <select name="subject" required value={formData.subject} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 outline-none">
+                <option value="">Select a subject</option>
+                <option value="dealership">Dealership</option>
+                <option value="service">Service</option>
+                <option value="other">Other</option>
+              </select>
+              <textarea name="message" placeholder="Message *" required rows={5} value={formData.message} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 outline-none" />
+              <button type="submit" className="w-full bg-red-600 text-white py-4 rounded-lg font-bold flex items-center justify-center hover:bg-red-700 transition-all text-lg shadow-lg">
+                <MessageCircle size={22} className="mr-3" />
+                Send via WhatsApp
+              </button>
+            </form>
           </div>
         </div>
       </section>
