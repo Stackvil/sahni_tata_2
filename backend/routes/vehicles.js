@@ -167,22 +167,77 @@ router.get('/', async (req, res) => {
 // GET /api/vehicles/:id - Get vehicle by ID
 router.get('/:id', async (req, res) => {
   try {
-    const data = await readData('vehicles');
-    const vehicle = data.vehicles?.find(v => v.id === parseInt(req.params.id));
+    const vehicleId = parseInt(req.params.id);
+
+    const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
     
-    if (!vehicle) {
+    // Try database first on Vercel, fall back to JSON
+    const shouldUseDatabase = () => {
+      const pool = getPool();
+      if (isVercel) {
+        return pool !== null && isDatabaseConnected();
+      }
+      return pool !== null && isDatabaseConnected();
+    };
+
+    if (shouldUseDatabase()) {
+      try {
+        const vehicle = await vehiclesDB.getById(vehicleId);
+        if (vehicle) {
+          // Transform database result to match frontend format
+          const vehicleResponse = {
+            id: vehicle.id,
+            name: vehicle.name,
+            category: vehicle.category,
+            subcategory: vehicle.subcategory,
+            description: vehicle.description,
+            size: vehicle.size,
+            popular: vehicle.popular,
+            specs: typeof vehicle.specs === 'string' ? JSON.parse(vehicle.specs) : vehicle.specs,
+            images: Array.isArray(vehicle.images) ? vehicle.images : [],
+            features: Array.isArray(vehicle.features) ? vehicle.features : [],
+            catalog: vehicle.catalog_url || ''
+          };
+
+          // Convert image paths to CloudFront URLs
+          const vehicleWithCloudFront = {
+            ...vehicleResponse,
+            images: vehicleResponse.images ? toCloudFrontUrls(vehicleResponse.images) : vehicleResponse.images,
+            catalog: vehicleResponse.catalog ? toCloudFrontUrl(vehicleResponse.catalog) : vehicleResponse.catalog
+          };
+
+          return res.json(vehicleWithCloudFront);
+        }
+        // If not found in database, continue to JSON file reading below
+      } catch (dbError) {
+        console.warn('[Vehicles] Database error, falling back to JSON:', dbError.message);
+        // Continue to JSON file reading below
+      }
+    }
+
+    // Read from JSON files (fallback or primary for local)
+    try {
+      const data = await readData('vehicles');
+      const vehicle = data.vehicles?.find(v => v.id === vehicleId);
+      
+      if (!vehicle) {
+        return res.status(404).json({ detail: 'Vehicle not found' });
+      }
+      
+      // Convert image paths to CloudFront URLs
+      const vehicleWithCloudFront = {
+        ...vehicle,
+        images: vehicle.images ? toCloudFrontUrls(vehicle.images) : vehicle.images,
+        catalog: vehicle.catalog ? toCloudFrontUrl(vehicle.catalog) : vehicle.catalog
+      };
+      
+      return res.json(vehicleWithCloudFront);
+    } catch (jsonError) {
+      console.error('[Vehicles] Error reading from JSON:', jsonError.message);
       return res.status(404).json({ detail: 'Vehicle not found' });
     }
-    
-    // Convert image paths to CloudFront URLs
-    const vehicleWithCloudFront = {
-      ...vehicle,
-      images: vehicle.images ? toCloudFrontUrls(vehicle.images) : vehicle.images,
-      catalog: vehicle.catalog ? toCloudFrontUrl(vehicle.catalog) : vehicle.catalog
-    };
-    
-    res.json(vehicleWithCloudFront);
   } catch (error) {
+    console.error('[Vehicles] Unexpected error:', error.message);
     res.status(500).json({ detail: error.message });
   }
 });
