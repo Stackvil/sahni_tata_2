@@ -93,16 +93,8 @@ router.get('/', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 100;
 
-    const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
-    
-    // Try database first on Vercel, fall back to JSON
-    const shouldUseDatabase = () => {
-      const pool = getPool();
-      if (isVercel) {
-        return pool !== null && isDatabaseConnected();
-      }
-      return pool !== null && isDatabaseConnected();
-    };
+    const pool = getPool();
+    const useDatabase = pool !== null && isDatabaseConnected();
 
     if (useDatabase) {
       try {
