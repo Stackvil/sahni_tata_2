@@ -139,6 +139,10 @@ async function migrateProducts() {
       // Convert image path to CloudFront URL
       const imageUrl = convertToCloudFrontUrl(product.image || '');
       
+      // Convert catalog path to CloudFront URL if present
+      const catalogUrl = product.catalog_url ? convertToCloudFrontUrl(product.catalog_url) : 
+                        (product.catalog ? convertToCloudFrontUrl(product.catalog) : '');
+      
       await productsDB.create({
         name: product.name,
         company_key: product.company || 'unknown',
@@ -146,6 +150,7 @@ async function migrateProducts() {
         description: product.description || '',
         specs: product.specs || '',
         image_url: imageUrl,
+        catalog_url: catalogUrl || null,
       });
       migrated++;
     }
