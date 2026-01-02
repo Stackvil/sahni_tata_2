@@ -1,4 +1,4 @@
-import { X, Phone } from 'lucide-react';
+import { X, Phone, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { normalizeImageUrl } from '../services/api';
@@ -17,6 +17,9 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
   const [businessesDropdownOpen, setBusinessesDropdownOpen] = useState(false);
   const [businessesDropdownTimeout, setBusinessesDropdownTimeout] =
     useState<NodeJS.Timeout | null>(null);
+  const [mobileAboutDropdownOpen, setMobileAboutDropdownOpen] = useState(false);
+  const [mobileVehiclesDropdownOpen, setMobileVehiclesDropdownOpen] = useState(false);
+  const [mobileBusinessesDropdownOpen, setMobileBusinessesDropdownOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,6 +37,9 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
     setAboutDropdownOpen(false);
     setVehiclesDropdownOpen(false);
     setBusinessesDropdownOpen(false);
+    setMobileAboutDropdownOpen(false);
+    setMobileVehiclesDropdownOpen(false);
+    setMobileBusinessesDropdownOpen(false);
     
     if (pageId === 'autocomponents') {
       navigate('/');
@@ -230,6 +236,18 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
               </nav>
             </div>
 
+            {/* DESKTOP PHONE BUTTON */}
+            <div className="hidden lg:flex items-center ml-auto mr-4">
+              <a
+                href="tel:+919281029456"
+                className="flex items-center gap-2 px-4 py-2 bg-[#ffd54a] hover:bg-[#ffc107] text-gray-900 font-semibold rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg min-h-[44px]"
+                aria-label="Call us"
+              >
+                <Phone size={18} className="flex-shrink-0" />
+                <span className="text-sm xl:text-base whitespace-nowrap">+91 92810 29456</span>
+              </a>
+            </div>
+
             {/* MOBILE MENU BUTTON */}
             <button
               className="lg:hidden ml-auto mr-2 p-2 rounded-md transition-all duration-300 hover:bg-[#0d46ac] focus:outline-none focus:ring-2 focus:ring-[#ffd54a] min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -259,7 +277,188 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
             </button>
           </div>
           <nav className="flex flex-col py-2 max-h-[calc(100vh-90px)] overflow-y-auto">
-             {/* ... Mobile nav logic remains similar to drawer code provided ... */}
+            {/* Home */}
+            <button
+              onClick={() => handleNavClick('home')}
+              className={`w-full text-left px-4 py-3 text-base font-semibold uppercase tracking-wide transition-colors ${
+                currentPage === 'home' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:bg-gray-50'
+              }`}
+            >
+              HOME
+            </button>
+
+            {/* Navigation Items */}
+            {navItems.map((item) => {
+              // OUR BUSINESSES DROPDOWN (mobile)
+              if (item.id === 'products') {
+                const isActive = ['products', 'vehicles', 'massey-products', 'fuel-stations', 'showrooms', 'institutional-sales'].includes(currentPage);
+                return (
+                  <div key={item.id} className="border-t border-gray-100">
+                    <button
+                      onClick={() => setMobileBusinessesDropdownOpen(!mobileBusinessesDropdownOpen)}
+                      className={`w-full flex items-center justify-between px-4 py-3 text-base font-semibold uppercase tracking-wide transition-colors ${
+                        isActive ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {mobileBusinessesDropdownOpen ? (
+                        <ChevronUp size={20} className="text-gray-500" />
+                      ) : (
+                        <ChevronDown size={20} className="text-gray-500" />
+                      )}
+                    </button>
+                    {mobileBusinessesDropdownOpen && (
+                      <div className="bg-gray-50 border-t border-gray-100">
+                        <button
+                          onClick={() => { handleNavClick('vehicles'); sessionStorage.setItem('sahni_selectedBrand', 'tata'); }}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Sahni Tata Motors
+                        </button>
+                        <button
+                          onClick={() => handleNavClick('massey-products')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Sahni Massey Ferguson
+                        </button>
+                        <button
+                          onClick={() => handleNavClick('fuel-stations')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Sahni Fuel Stations
+                        </button>
+                        <button
+                          onClick={() => handleNavClick('institutional-sales')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Sahni Tata Genuine Parts
+                        </button>
+                        <button
+                          onClick={() => { sessionStorage.setItem('sahni_autoSelectHP', 'true'); handleNavClick('products'); }}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Sahni Lubricants
+                        </button>
+                        <button
+                          onClick={() => handleNavClick('autocomponents')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Sahni Auto Components
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              // ABOUT DROPDOWN (mobile)
+              if (item.id === 'about') {
+                const isActive = ['about', 'management', 'awards', 'promoters'].includes(currentPage);
+                return (
+                  <div key={item.id} className="border-t border-gray-100">
+                    <button
+                      onClick={() => setMobileAboutDropdownOpen(!mobileAboutDropdownOpen)}
+                      className={`w-full flex items-center justify-between px-4 py-3 text-base font-semibold uppercase tracking-wide transition-colors ${
+                        isActive ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {mobileAboutDropdownOpen ? (
+                        <ChevronUp size={20} className="text-gray-500" />
+                      ) : (
+                        <ChevronDown size={20} className="text-gray-500" />
+                      )}
+                    </button>
+                    {mobileAboutDropdownOpen && (
+                      <div className="bg-gray-50 border-t border-gray-100">
+                        <button
+                          onClick={() => handleNavClick('about')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Our Story
+                        </button>
+                        <button
+                          onClick={() => handleNavClick('promoters')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Promoters
+                        </button>
+                        <button
+                          onClick={() => handleNavClick('management')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Management Team
+                        </button>
+                        <button
+                          onClick={() => handleNavClick('awards')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Our Awards
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              // VEHICLES DROPDOWN (mobile)
+              if (item.id === 'vehicles') {
+                const isActive = currentPage === 'vehicles' || currentPage === 'massey-products';
+                return (
+                  <div key={item.id} className="border-t border-gray-100">
+                    <button
+                      onClick={() => setMobileVehiclesDropdownOpen(!mobileVehiclesDropdownOpen)}
+                      className={`w-full flex items-center justify-between px-4 py-3 text-base font-semibold uppercase tracking-wide transition-colors ${
+                        isActive ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {mobileVehiclesDropdownOpen ? (
+                        <ChevronUp size={20} className="text-gray-500" />
+                      ) : (
+                        <ChevronDown size={20} className="text-gray-500" />
+                      )}
+                    </button>
+                    {mobileVehiclesDropdownOpen && (
+                      <div className="bg-gray-50 border-t border-gray-100">
+                        <button
+                          onClick={() => handleNavClick('vehicles')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          All Vehicles
+                        </button>
+                        <button
+                          onClick={() => { handleNavClick('vehicles'); sessionStorage.setItem('sahni_selectedBrand', 'tata'); }}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Tata Motors
+                        </button>
+                        <button
+                          onClick={() => handleNavClick('massey-products')}
+                          className="w-full text-left px-8 py-2.5 text-sm font-semibold uppercase tracking-wide text-gray-700 hover:bg-gray-100 hover:text-red-600"
+                        >
+                          Massey Ferguson
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              // Regular navigation items (no dropdown)
+              const isActive = currentPage === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`w-full text-left px-4 py-3 text-base font-semibold uppercase tracking-wide transition-colors border-t border-gray-100 ${
+                    isActive ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:bg-gray-50'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
           </nav>
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
             <a href="tel:+919281029456" className="w-full bg-red-600 text-white py-3.5 rounded-lg font-semibold flex items-center justify-center shadow-md">
