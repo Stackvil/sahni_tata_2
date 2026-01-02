@@ -226,7 +226,7 @@ function transformBackendVehicle(backendVehicle: any, index: number): Vehicle {
     size: backendVehicle.size || 'medium',
     popular: backendVehicle.popular || false,
     variants: backendVehicle.variants,
-    catalog: backendVehicle.catalog,
+    catalog: backendVehicle.catalog || (backendVehicle.catalog_url ? backendVehicle.catalog_url : ''),
     // Store original UUID for reference
     _uuid: typeof backendVehicle.id === 'string' ? backendVehicle.id : undefined,
   } as Vehicle & { _uuid?: string };
