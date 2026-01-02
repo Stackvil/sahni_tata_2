@@ -110,7 +110,7 @@ router.get('/', async (req, res) => {
           const vehiclesWithCloudFront = vehicles.map(vehicle => ({
             ...vehicle,
             images: vehicle.images ? toCloudFrontUrls(vehicle.images) : vehicle.images,
-            catalog: vehicle.catalog_url ? toCloudFrontUrl(vehicle.catalog_url) : vehicle.catalog_url
+            catalog: vehicle.catalog_url ? toCloudFrontUrl(vehicle.catalog_url) : ''
           }));
 
           return res.json({
