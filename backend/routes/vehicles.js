@@ -180,14 +180,13 @@ router.get('/:id', async (req, res) => {
             specs: typeof vehicle.specs === 'string' ? JSON.parse(vehicle.specs) : vehicle.specs,
             images: Array.isArray(vehicle.images) ? vehicle.images : [],
             features: Array.isArray(vehicle.features) ? vehicle.features : [],
-            catalog: vehicle.catalog_url || ''
+            catalog: vehicle.catalog_url ? toCloudFrontUrl(vehicle.catalog_url) : ''
           };
 
           // Convert image paths to CloudFront URLs
           const vehicleWithCloudFront = {
             ...vehicleResponse,
-            images: vehicleResponse.images ? toCloudFrontUrls(vehicleResponse.images) : vehicleResponse.images,
-            catalog: vehicleResponse.catalog ? toCloudFrontUrl(vehicleResponse.catalog) : vehicleResponse.catalog
+            images: vehicleResponse.images ? toCloudFrontUrls(vehicleResponse.images) : vehicleResponse.images
           };
 
           return res.json(vehicleWithCloudFront);

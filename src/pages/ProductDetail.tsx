@@ -391,11 +391,13 @@ export default function ProductDetail({ productId, onBack }: ProductDetailProps)
                     <a
                       href={(() => {
                         const url = getCatalogUrl(product);
-                        // If URL already starts with http/https, use as-is, otherwise normalize
+                        // Backend already returns CloudFront URLs, so use as-is if it's a full URL
+                        // Only normalize if it's a relative path
                         if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
                           return url;
                         }
-                        return normalizeImageUrl(url);
+                        // If relative path, normalize to CloudFront
+                        return url ? normalizeImageUrl(url) : '';
                       })()}
                       target="_blank"
                       rel="noopener noreferrer"

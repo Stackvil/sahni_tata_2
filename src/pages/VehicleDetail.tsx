@@ -76,21 +76,13 @@ export default function VehicleDetail({ vehicleId, onBack }: VehicleDetailProps)
   // Handle catalog download
   const handleViewCatalog = () => {
     if (vehicle?.catalog) {
-      const pdfPath = vehicle.catalog;
-      // If it's already a full URL, use it directly
-      if (pdfPath.startsWith('http://') || pdfPath.startsWith('https://')) {
-        window.open(pdfPath, '_blank');
+      const catalogUrl = vehicle.catalog;
+      // The catalog URL should already be a CloudFront URL from the backend
+      // Just open it directly
+      if (catalogUrl && catalogUrl.trim() !== '') {
+        window.open(catalogUrl, '_blank');
       } else {
-        // Normalize the path - handle both relative and absolute paths
-        let normalizedPath = pdfPath;
-        if (!pdfPath.startsWith('/')) {
-          normalizedPath = '/' + pdfPath;
-        }
-        // Use the backend URL for serving PDFs
-        // Use localhost for local development
-        const baseUrl = import.meta.env.VITE_API_URL || 'https://qqhxxgscjc.execute-api.ap-south-1.amazonaws.com/prod';
-        const fullUrl = `${baseUrl}${normalizedPath}`;
-        window.open(fullUrl, '_blank');
+        alert('Catalog not available for this vehicle.');
       }
     } else {
       alert('Catalog not available for this vehicle.');
