@@ -54,8 +54,71 @@ const router = express.Router();
  */
 router.get('/', async (req, res) => {
   try {
-    // FORCE JSON AS PRIMARY SOURCE - Read directly from file, skip database entirely
-    console.log('[Showrooms] 📂 Reading showrooms directly from JSON file');
+    const pool = getPool();
+    const useDatabase = pool !== null && isDatabaseConnected();
+    
+    // Try database first, fall back to JSON files
+    if (useDatabase) {
+      try {
+        const showrooms = await showroomsDB.getAll();
+        
+        // If database has data, return it with CloudFront URLs
+        if (showrooms.length > 0) {
+          const showroomsWithCloudFront = showrooms.map(showroom => {
+            // Convert image URL from S3 to CloudFront if needed
+            let imageUrl = showroom.image_url || showroom.image || '';
+            if (imageUrl) {
+              if (imageUrl.includes('s3.amazonaws.com') || imageUrl.includes('tata-storagebucket.s3')) {
+                imageUrl = toCloudFrontUrl(imageUrl);
+              } else if (imageUrl && !imageUrl.startsWith('http')) {
+                // If it's a relative path, convert to CloudFront
+                imageUrl = toCloudFrontUrl(imageUrl);
+              }
+            }
+            
+            // Convert images array URLs
+            let images = showroom.images || undefined;
+            if (images && Array.isArray(images)) {
+              images = images.map(img => {
+                if (img && (img.includes('s3.amazonaws.com') || img.includes('tata-storagebucket.s3'))) {
+                  return toCloudFrontUrl(img);
+                } else if (img && !img.startsWith('http')) {
+                  return toCloudFrontUrl(img);
+                }
+                return img;
+              });
+            }
+            
+            return {
+              id: showroom.id || '',
+              city: showroom.city || '',
+              address: showroom.address || '',
+              phone: showroom.phone || '',
+              sales_phone: showroom.sales_phone || showroom.phone || '',
+              service_phone: showroom.service_phone || showroom.phone || '',
+              email: showroom.email || '',
+              is_main: showroom.is_main || false,
+              image: imageUrl,
+              images: images,
+              category: showroom.category || 'tata',
+              is_branch: showroom.is_branch || false,
+              map_link: showroom.map_link || undefined
+            };
+          });
+          
+          console.log(`[Showrooms] ✅ Returning ${showroomsWithCloudFront.length} showrooms from database with CloudFront URLs`);
+          return res.json(showroomsWithCloudFront);
+        }
+        // Database is empty, fall through to JSON files
+        console.warn('[Showrooms] Database is empty, falling back to JSON files');
+      } catch (dbError) {
+        console.warn('[Showrooms] Database error, falling back to JSON:', dbError.message);
+        // Continue to JSON file reading below
+      }
+    }
+    
+    // Fall back to JSON files
+    console.log('[Showrooms] 📂 Reading showrooms from JSON file');
     
     const fs = await import('fs/promises');
     const path = await import('path');
@@ -103,11 +166,11 @@ router.get('/', async (req, res) => {
         }
       }
       
-      // Convert images array URLs
-      let images = showroom.images || undefined;
-      if (images && Array.isArray(images)) {
+      // Handle images array
+      let images = showroom.images || [];
+      if (Array.isArray(images) && images.length > 0) {
         images = images.map(img => {
-          if (img && (img.includes('s3.amazonaws.com') || img.includes('tata-storagebucket.s3'))) {
+          if (img.includes('s3.amazonaws.com') || img.includes('tata-storagebucket.s3')) {
             return toCloudFrontUrl(img);
           } else if (img && !img.startsWith('http')) {
             return toCloudFrontUrl(img);
@@ -133,7 +196,7 @@ router.get('/', async (req, res) => {
       };
     });
     
-    console.log(`[Showrooms] ✅ Returning ${showroomsWithCloudFront.length} showrooms with CloudFront URLs`);
+    console.log(`[Showrooms] ✅ Returning ${showroomsWithCloudFront.length} showrooms from JSON with CloudFront URLs`);
     return res.json(showroomsWithCloudFront);
   } catch (error) {
     console.error('[Showrooms] ❌ Unexpected error:', error.message);

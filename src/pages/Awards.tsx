@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Award, Trophy, Star, Sparkles } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { normalizeImageUrl } from '../services/api';
+import { normalizeImageUrl, awardsAPI } from '../services/api';
 
 interface AwardsProps {
   setCurrentPage?: (page: string) => void;
@@ -26,19 +26,16 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
   const loadAwards = async () => {
     setLoading(true);
     try {
-      // Load awards directly from JSON file
-      const response = await fetch('/awards.json');
-      if (!response.ok) {
-        throw new Error('Failed to load awards.json');
-      }
-      const data = await response.json();
-      const awardsData = data.awards || [];
+      // Load awards from PostgreSQL database via API
+      console.log('[Awards] Loading awards from PostgreSQL database...');
+      const awardsData = await awardsAPI.getAll();
+      console.log('[Awards] Loaded', awardsData?.length || 0, 'award(s) from PostgreSQL');
       
-      if (awardsData.length > 0) {
-        // Map JSON data to AwardItem format with CloudFront URLs
+      if (awardsData && awardsData.length > 0) {
+        // Map API data to AwardItem format
         const mappedAwards: AwardItem[] = awardsData.map((award: any, index: number) => {
           // Convert image URL to CloudFront URL
-          const imagePath = award.logo_url || award.image || '';
+          const imagePath = award.logo_url || award.logo || award.image || '';
           const normalizedImage = imagePath ? normalizeImageUrl(imagePath) : '';
           
           return {
@@ -51,11 +48,12 @@ const Awards = ({ setCurrentPage: _setCurrentPage }: AwardsProps) => {
         });
         setAwards(mappedAwards);
       } else {
-        // Fallback to static data if JSON is empty
+        // Fallback to static data if database is empty
+        console.warn('[Awards] No awards found in database, using fallback data');
         setAwards(getFallbackAwards());
       }
     } catch (error) {
-      console.error('Failed to load awards:', error);
+      console.error('[Awards] Failed to load awards from PostgreSQL:', error);
       // Fallback to static data on error
       setAwards(getFallbackAwards());
     } finally {

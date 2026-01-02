@@ -371,9 +371,7 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
                   const vehicleId = await findMatchingVehicle(product);
                   if (vehicleId && setSelectedVehicleId) {
                     setSelectedVehicleId(vehicleId);
-                    if (setCurrentPage) {
-                      setCurrentPage('vehicle-detail');
-                    }
+                    // setSelectedVehicleId already handles navigation via React Router
                   } else {
                     alert(`Vehicle details not available for ${product.name}. Please contact us for more information.`);
                   }
@@ -429,9 +427,7 @@ export default function MasseyProducts({ setCurrentPage, setSelectedProductId, s
                       const vehicleId = await findMatchingVehicle(product);
                       if (vehicleId && setSelectedVehicleId) {
                         setSelectedVehicleId(vehicleId);
-                        if (setCurrentPage) {
-                          setCurrentPage('vehicle-detail');
-                        }
+                        // setSelectedVehicleId already handles navigation via React Router
                       } else {
                         alert(`Vehicle details not available for ${product.name}. Please contact us for more information.`);
                       }

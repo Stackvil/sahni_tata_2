@@ -104,7 +104,7 @@ router.get('/', async (req, res) => {
       return pool !== null && isDatabaseConnected();
     };
 
-    if (shouldUseDatabase()) {
+    if (useDatabase) {
       try {
         const result = await vehiclesDB.getAll(page, limit);
         const vehicles = result.vehicles || [];
@@ -169,18 +169,10 @@ router.get('/:id', async (req, res) => {
   try {
     const vehicleId = parseInt(req.params.id);
 
-    const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_URL;
-    
-    // Try database first on Vercel, fall back to JSON
-    const shouldUseDatabase = () => {
-      const pool = getPool();
-      if (isVercel) {
-        return pool !== null && isDatabaseConnected();
-      }
-      return pool !== null && isDatabaseConnected();
-    };
+    const pool = getPool();
+    const useDatabase = pool !== null && isDatabaseConnected();
 
-    if (shouldUseDatabase()) {
+    if (useDatabase) {
       try {
         const vehicle = await vehiclesDB.getById(vehicleId);
         if (vehicle) {

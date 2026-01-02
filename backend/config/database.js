@@ -36,19 +36,10 @@ const getDatabaseConfig = () => {
     config = parseConnectionString(process.env.DATABASE_URL);
   } else if (process.env.POSTGRES_URL) {
     config = parseConnectionString(process.env.POSTGRES_URL);
-  } else if (process.env.PRISMA_DATABASE_URL) {
-    // For Prisma Accelerate, we still need the direct connection
-    // PRISMA_DATABASE_URL is for Prisma Client, but we need direct Postgres connection
-    // So we'll use DATABASE_URL or POSTGRES_URL if available
-    // Otherwise fall back to AWS_RDS_* or defaults
-    if (process.env.DATABASE_URL || process.env.POSTGRES_URL) {
-      // Already handled above
-    } else {
-      // For Prisma Accelerate, we need the direct connection string
-      // The PRISMA_DATABASE_URL is for Prisma Client, not direct connections
-      // So we'll use AWS_RDS_* or defaults
-      config = null;
-    }
+  } else if (process.env.PRISMA_DATABASE_URL && !process.env.PRISMA_DATABASE_URL.startsWith('prisma+')) {
+    // If PRISMA_DATABASE_URL is a direct postgres:// URL (not prisma+), use it
+    // Some setups use PRISMA_DATABASE_URL for direct connections
+    config = parseConnectionString(process.env.PRISMA_DATABASE_URL);
   }
   
   // Fall back to AWS_RDS_* variables if connection string not available
@@ -97,8 +88,10 @@ export const getPool = () => {
       });
 
       pool.on('error', (err) => {
-        console.error('Unexpected error on idle client', err);
-        isDatabaseAvailable = false;
+        // Log error but don't mark database as unavailable
+        // Connection pool will handle reconnections automatically
+        console.warn('Database pool error (connection will be retried):', err.message);
+        // Don't set isDatabaseAvailable = false here - let the pool handle reconnection
       });
     } catch (error) {
       console.error('Failed to create database pool:', error.message);
@@ -114,7 +107,9 @@ export const isDatabaseConnected = () => {
   if (!pool) {
     return false;
   }
-  return isDatabaseAvailable;
+  // If pool exists, assume it's available (pool handles reconnection)
+  // Only check the flag if we explicitly set it to false during initialization
+  return isDatabaseAvailable !== false;
 };
 
 // Track if initialization has been attempted

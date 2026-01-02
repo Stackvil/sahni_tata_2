@@ -3,6 +3,9 @@ import multer from 'multer';
 import { readData, writeData } from '../utils/dataManager.js';
 import { authenticateToken } from '../middleware/auth.js';
 import { uploadFileToS3 } from '../middleware/multer-s3.js';
+import { masseyProductsDB } from '../utils/dbManager.js';
+import { getPool, isDatabaseConnected } from '../config/database.js';
+import { toCloudFrontUrl } from '../utils/imageHelper.js';
 
 // Configure multer for file uploads (memory storage for S3)
 const storage = multer.memoryStorage();
@@ -79,6 +82,40 @@ const router = express.Router();
  */
 router.get('/products', async (req, res) => {
   try {
+    const pool = getPool();
+    const useDatabase = pool !== null && isDatabaseConnected();
+    
+    // Try database first, fall back to JSON files
+    if (useDatabase) {
+      try {
+        const result = await masseyProductsDB.getAll();
+        const products = result.data || [];
+        
+        // If database has data, return it with CloudFront URLs
+        if (products.length > 0) {
+          const productsWithCloudFront = products.map(product => ({
+            ...product,
+            image_url: product.image_url ? toCloudFrontUrl(product.image_url) : product.image_url,
+            catalog_url: product.catalog_url ? toCloudFrontUrl(product.catalog_url) : product.catalog_url
+          }));
+          
+          return res.json({
+            data: productsWithCloudFront,
+            total_count: result.total_count,
+            total_pages: result.total_pages,
+            current_page: result.current_page,
+            per_page: result.per_page
+          });
+        }
+        // Database is empty, fall through to JSON files
+        console.warn('[Massey] Database is empty, falling back to JSON files');
+      } catch (dbError) {
+        console.warn('[Massey] Database error, falling back to JSON:', dbError.message);
+        // Continue to JSON file reading below
+      }
+    }
+    
+    // Fall back to JSON files
     const data = await readData('masseyProducts');
     const products = data.products || [];
 

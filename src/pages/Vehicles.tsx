@@ -472,12 +472,11 @@ export default function Vehicles({ setCurrentPage, setSelectedVehicleId }: Vehic
     if (selectedBrand) {
       saveBrand(selectedBrand);
     }
+    // setSelectedVehicleId already handles navigation via React Router
     if (setSelectedVehicleId) {
       setSelectedVehicleId(vehicleId);
     }
-    if (setCurrentPage) {
-      setCurrentPage('vehicle-detail');
-    }
+    // Don't call setCurrentPage - it causes wrong navigation
   };
 
   const handleBookingNow = () => {
