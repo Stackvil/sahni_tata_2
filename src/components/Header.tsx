@@ -236,18 +236,6 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
               </nav>
             </div>
 
-            {/* DESKTOP PHONE BUTTON */}
-            <div className="hidden lg:flex items-center ml-auto mr-4">
-              <a
-                href="tel:+919281029456"
-                className="flex items-center gap-2 px-4 py-2 bg-[#ffd54a] hover:bg-[#ffc107] text-gray-900 font-semibold rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg min-h-[44px]"
-                aria-label="Call us"
-              >
-                <Phone size={18} className="flex-shrink-0" />
-                <span className="text-sm xl:text-base whitespace-nowrap">+91 92810 29456</span>
-              </a>
-            </div>
-
             {/* MOBILE MENU BUTTON */}
             <button
               className="lg:hidden ml-auto mr-2 p-2 rounded-md transition-all duration-300 hover:bg-[#0d46ac] focus:outline-none focus:ring-2 focus:ring-[#ffd54a] min-w-[44px] min-h-[44px] flex items-center justify-center"

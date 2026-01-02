@@ -669,7 +669,7 @@ export default function Vehicles({ setCurrentPage, setSelectedVehicleId }: Vehic
       </section>
 
       {/* Hero Section - Find a Truck */}
-      <section className="relative bg-white py-6 sm:py-8 md:py-10 lg:py-12">
+      <section className="relative bg-stone-50 py-6 sm:py-8 md:py-10 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
             {/* Left Side - Content */}
