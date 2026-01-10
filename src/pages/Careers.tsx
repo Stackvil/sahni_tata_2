@@ -28,7 +28,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
   const [videoError, setVideoError] = useState(false);
   const [videoLoading, setVideoLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  
+
   // Video sources in order of preference - use CloudFront for S3 videos
   const videoSources = [
     normalizeImageUrl('videos/carrer.mp4'), // CloudFront URL: https://dh0blbvvlqdiy.cloudfront.net/videos/carrer.mp4
@@ -128,7 +128,7 @@ export default function Careers({ setCurrentPage: _setCurrentPage }: CareersProp
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedJob) {
       setSubmitError('Please select a job position');
       return;
@@ -157,13 +157,13 @@ This application was submitted through the Sahni Auto Group careers page.`;
     const subject = encodeURIComponent(`Job Application: ${selectedJob.title}`);
     const body = encodeURIComponent(emailBody);
     const to = encodeURIComponent('info.sahniauto@gmail.com');
-    
+
     // Gmail compose URL
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
-    
+
     // Open Gmail in new tab
     window.open(gmailUrl, '_blank');
-    
+
     // Show success message
     setSubmitSuccess(true);
     setFormData({
@@ -210,7 +210,7 @@ This application was submitted through the Sahni Auto Group careers page.`;
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
           src={currentVideoSrc}
           onLoadedData={() => {
             console.log('[Careers] Video loaded successfully from:', currentVideoSrc);
@@ -276,10 +276,10 @@ This application was submitted through the Sahni Auto Group careers page.`;
                   >
                     {/* Gradient Top Bar */}
                     <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"></div>
-                    
+
                     {/* Hover Effect Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-50/0 via-indigo-50/0 to-purple-50/0 group-hover:from-blue-50/30 group-hover:via-indigo-50/20 group-hover:to-purple-50/30 transition-all duration-500 pointer-events-none"></div>
-                    
+
                     <div className="relative p-6 sm:p-8 flex flex-col flex-1 h-full z-10">
                       {/* Department Badge */}
                       <div className="absolute top-6 right-6 z-20">
@@ -287,7 +287,7 @@ This application was submitted through the Sahni Auto Group careers page.`;
                           {job.department}
                         </span>
                       </div>
-                      
+
                       <div className="mb-6 flex-shrink-0 pr-24">
                         <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors duration-300 min-h-[3rem]">
                           {job.title}
@@ -307,11 +307,11 @@ This application was submitted through the Sahni Auto Group careers page.`;
                           </div>
                         </div>
                       </div>
-                      
+
                       <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
                         {job.description}
                       </p>
-                      
+
                       <div className="mt-auto pt-6 border-t border-gray-100">
                         <button
                           onClick={(e) => {
@@ -342,7 +342,7 @@ This application was submitted through the Sahni Auto Group careers page.`;
           <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[95vh] overflow-y-auto relative shadow-2xl border border-gray-200 animate-scaleIn">
             {/* Gradient Top Bar */}
             <div className="sticky top-0 z-20 h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"></div>
-            
+
             {/* Close Button */}
             <button
               onClick={() => {
