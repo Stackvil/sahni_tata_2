@@ -185,7 +185,7 @@ This application was submitted through the Sahni Auto Group careers page.`;
   return (
     <div className="bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-screen">
       {/* Hero Section - Video Background using S3 KISHORE.mp4 */}
-      <section className="relative w-full overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] bg-black" style={{ zIndex: 1 }}>
+      <section className="relative w-full overflow-hidden md:min-h-[70vh] lg:min-h-[80vh] bg-black" style={{ zIndex: 1 }}>
         {/* Video Background */}
         {videoLoading && !videoError && (
           <div className="absolute inset-0 flex items-center justify-center bg-black z-10">
@@ -210,7 +210,7 @@ This application was submitted through the Sahni Auto Group careers page.`;
           muted
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-auto md:absolute md:inset-0 md:h-full md:object-cover"
           src={currentVideoSrc}
           onLoadedData={() => {
             console.log('[Careers] Video loaded successfully from:', currentVideoSrc);
