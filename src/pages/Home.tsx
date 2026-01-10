@@ -55,7 +55,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
   const [aboutEntries, setAboutEntries] = useState<AboutEntry[]>([]);
   const [loadingAboutEntries, setLoadingAboutEntries] = useState<boolean>(true);
   const [imageError, setImageError] = useState(false);
-  
+
   // Form state for appointment booking
   const [appointmentForm, setAppointmentForm] = useState({
     name: '',
@@ -82,7 +82,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
     const scrollRevealElements = document.querySelectorAll(
       '.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale, .scroll-reveal-fade'
     );
-    
+
     scrollRevealElements.forEach((el) => {
       observer.observe(el);
     });
@@ -143,7 +143,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
           {/* Dark Overlay for Text Readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/55 z-10"></div>
         </div>
-        
+
         {/* Content Layer - Centered */}
         <div className="relative z-20 w-full h-full flex items-center justify-center min-h-[90vh] sm:min-h-[95vh]">
           {/* Hero Text - Professional 2 Lines with light card */}
@@ -158,7 +158,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               </div>
             </div>
           </div>
-          
+
           {/* Scroll Indicator - Professional Chevron */}
           <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-30">
             <div className="animate-bounce">
@@ -181,7 +181,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
             <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
               Trusted partnerships with industry leaders
             </p>
-                </div>
+          </div>
 
           {/* Horizontal Scroll Container */}
           <div className="relative w-full" style={{ overflow: 'hidden' }}>
@@ -193,524 +193,524 @@ export default function Home({ setCurrentPage }: HomeProps) {
             <div className="flex gap-4 sm:gap-5 md:gap-6 pb-4 animate-scroll-left will-change-transform" style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
               {/* First Set */}
               <div className="flex gap-4 sm:gap-5 md:gap-6 flex-shrink-0">
-            {/* HP Lubricants Card */}
-            <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  sessionStorage.setItem('sahni_autoSelectHP', 'true');
-                  setCurrentPage('products');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  {/* Top Section - Logo */}
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
-                <img
-                  src={normalizeImageUrl('/images/sahni verticals/HP_SULLI5.png')}
-                  alt="HP Lubricants"
-                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.hp-logo-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'hp-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-xl sm:text-2xl font-bold';
-                          fallback.textContent = 'HP LUBRICANTS';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-            </div>
-                  {/* Bottom Section - Text */}
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-red-600 mb-2">HP Lubricants</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                  India's No. 1 Lubricants Marketer, offering premium quality engine oils and lubricants for automotive and industrial applications.
-                </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>EXPLORE PRODUCTS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
-                    </div>
-                </div>
-              </div>
-            </button>
-
-            {/* Fuel Stations Card */}
-                    <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('fuel-stations');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  {/* Top Section - Image */}
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
-                <img
-                  src={normalizeImageUrl('/images/sahni verticals/fuel.png')}
-                  alt="Fuel Stations"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent && !parent.querySelector('.fuel-fallback')) {
-                      const fallback = document.createElement('div');
-                          fallback.className = 'fuel-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'FUEL STATIONS';
-                      parent.appendChild(fallback);
+                {/* HP Lubricants Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      sessionStorage.setItem('sahni_autoSelectHP', 'true');
+                      setCurrentPage('products');
                     }
                   }}
-                />
-                </div>
-                  {/* Bottom Section - Text */}
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Fuel Stations</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                  Network of modern fuel stations providing quality fuel, 24/7 service, and convenient payment options across Andhra Pradesh and Telangana.
-                </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>FIND STATIONS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    {/* Top Section - Logo */}
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
+                      <img
+                        src={normalizeImageUrl('/images/sahni verticals/HP_SULLI5.png')}
+                        alt="HP Lubricants"
+                        className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.hp-logo-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'hp-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-xl sm:text-2xl font-bold';
+                            fallback.textContent = 'HP LUBRICANTS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
                     </div>
-                </div>
-              </div>
-                    </button>
-
-              {/* Tata Genuine Parts Card */}
-            <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('institutional-sales');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  {/* Top Section - Logo */}
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
-                <img
-                  src={normalizeImageUrl('/images/3075092_d9300.webp')}
-                  alt="Tata Genuine Parts"
-                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.tata-parts-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'tata-parts-fallback w-full h-full flex items-center justify-center text-blue-600 text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'TATA GENUINE PARTS';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-              </div>
-                  {/* Bottom Section - Text */}
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Tata Genuine Parts</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                  Authentic spare parts and components for Tata Motors vehicles, ensuring optimal performance, reliability, and longevity for your commercial vehicles.
-                </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>EXPLORE SPARE PARTS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                    {/* Bottom Section - Text */}
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-red-600 mb-2">HP Lubricants</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        India's No. 1 Lubricants Marketer, offering premium quality engine oils and lubricants for automotive and industrial applications.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE PRODUCTS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
                     </div>
-              </div>
-              </div>
-            </button>
+                  </div>
+                </button>
 
-            {/* Tata Motors Card */}
-                    <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  sessionStorage.setItem('sahni_selectedBrand', 'tata');
-                  setCurrentPage('vehicles');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  {/* Top Section - Logo */}
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
-                    <img
-                      src={normalizeImageUrl('/images/new-logo.png')}
-                  alt="Tata Motors"
-                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.tata-logo-fallback')) {
-                      const fallback = document.createElement('div');
-                          fallback.className = 'tata-logo-fallback w-full h-full flex items-center justify-center text-blue-600 text-xl sm:text-2xl font-bold';
-                          fallback.textContent = 'TATA MOTORS';
-                      parent.appendChild(fallback);
+                {/* Fuel Stations Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      setCurrentPage('fuel-stations');
                     }
                   }}
-                />
-                  </div>
-                  {/* Bottom Section - Text */}
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Tata Motors</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                  India's leading manufacturer of commercial vehicles, setting industry benchmarks in performance, reliability, and innovation.
-                </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>EXPLORE VEHICLES</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    {/* Top Section - Image */}
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
+                      <img
+                        src={normalizeImageUrl('/images/sahni verticals/fuel.png')}
+                        alt="Fuel Stations"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.fuel-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'fuel-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
+                            fallback.textContent = 'FUEL STATIONS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
                     </div>
-              </div>
-              </div>
-            </button>
-
-            {/* TAFE Card */}
-                    <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('massey-products');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  {/* Top Section - Logo */}
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
-                <img
-                  src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
-                  alt="TAFE"
-                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.tafe-logo-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'tafe-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'TAFE';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-                  </div>
-                  {/* Bottom Section - Text */}
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">TAFE</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                      Premium tractors and agricultural machinery designed for superior performance, durability, and efficiency in farming operations.
-                    </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>EXPLORE TRACTORS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                    {/* Bottom Section - Text */}
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Fuel Stations</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        Network of modern fuel stations providing quality fuel, 24/7 service, and convenient payment options across Andhra Pradesh and Telangana.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>FIND STATIONS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
                     </div>
-                </div>
-              </div>
-            </button>
-
-            {/* Auto Components Card */}
-            <button
-              className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                // Scroll to aftermarket section
-                const aftermarketSection = document.getElementById('aftermarket');
-                if (aftermarketSection) {
-                  aftermarketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
-              <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                {/* Top Section - Image */}
-                <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
-                  <img
-                    src={normalizeImageUrl('/images/AUTO.jpeg')}
-                    alt="Auto Components"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const parent = target.parentElement;
-                      if (parent && !parent.querySelector('.auto-components-fallback')) {
-                        const fallback = document.createElement('div');
-                        fallback.className = 'auto-components-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
-                        fallback.textContent = 'AUTO COMPONENTS';
-                        parent.appendChild(fallback);
-                      }
-                    }}
-                  />
-                </div>
-                {/* Bottom Section - Text */}
-                <div className="bg-white p-4 sm:p-5">
-                  <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Auto Components</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                    We are proud partners of world-renowned automotive component manufacturers, supplying genuine parts and accessories to the aftermarket.
-                  </p>
-                  <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                    <span>EXPLORE COMPONENTS</span>
-                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
-                </div>
-              </div>
-            </button>
+                </button>
+
+                {/* Tata Genuine Parts Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      setCurrentPage('institutional-sales');
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    {/* Top Section - Logo */}
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
+                      <img
+                        src={normalizeImageUrl('/images/3075092_d9300.webp')}
+                        alt="Tata Genuine Parts"
+                        className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.tata-parts-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'tata-parts-fallback w-full h-full flex items-center justify-center text-blue-600 text-lg sm:text-xl font-bold';
+                            fallback.textContent = 'TATA GENUINE PARTS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
+                    {/* Bottom Section - Text */}
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Tata Genuine Parts</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        Authentic spare parts and components for Tata Motors vehicles, ensuring optimal performance, reliability, and longevity for your commercial vehicles.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE SPARE PARTS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* Tata Motors Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      sessionStorage.setItem('sahni_selectedBrand', 'tata');
+                      setCurrentPage('vehicles');
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    {/* Top Section - Logo */}
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
+                      <img
+                        src={normalizeImageUrl('/images/new-logo.png')}
+                        alt="Tata Motors"
+                        className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.tata-logo-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'tata-logo-fallback w-full h-full flex items-center justify-center text-blue-600 text-xl sm:text-2xl font-bold';
+                            fallback.textContent = 'TATA MOTORS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
+                    {/* Bottom Section - Text */}
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Tata Motors</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        India's leading manufacturer of commercial vehicles, setting industry benchmarks in performance, reliability, and innovation.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE VEHICLES</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* TAFE Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      setCurrentPage('massey-products');
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    {/* Top Section - Logo */}
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
+                      <img
+                        src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
+                        alt="TAFE"
+                        className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.tafe-logo-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'tafe-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-lg sm:text-xl font-bold';
+                            fallback.textContent = 'TAFE';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
+                    {/* Bottom Section - Text */}
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">TAFE</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        Premium tractors and agricultural machinery designed for superior performance, durability, and efficiency in farming operations.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE TRACTORS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* Auto Components Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    // Scroll to aftermarket section
+                    const aftermarketSection = document.getElementById('aftermarket');
+                    if (aftermarketSection) {
+                      aftermarketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    {/* Top Section - Image */}
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
+                      <img
+                        src={normalizeImageUrl('/images/AUTO.jpeg')}
+                        alt="Auto Components"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.auto-components-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'auto-components-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
+                            fallback.textContent = 'AUTO COMPONENTS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
+                    {/* Bottom Section - Text */}
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Auto Components</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        We are proud partners of world-renowned automotive component manufacturers, supplying genuine parts and accessories to the aftermarket.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE COMPONENTS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
               </div>
 
               {/* Duplicate Set for Seamless Loop */}
               <div className="flex gap-4 sm:gap-5 md:gap-6 flex-shrink-0" aria-hidden="true">
-            {/* HP Lubricants Card */}
-            <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  sessionStorage.setItem('sahni_autoSelectHP', 'true');
-                  setCurrentPage('products');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
-                <img
-                  src={normalizeImageUrl('/images/sahni verticals/HP_SULLI5.png')}
-                  alt="HP Lubricants"
-                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.hp-logo-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'hp-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-xl sm:text-2xl font-bold';
-                          fallback.textContent = 'HP LUBRICANTS';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-            </div>
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-red-600 mb-2">HP Lubricants</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                  India's No. 1 Lubricants Marketer, offering premium quality engine oils and lubricants for automotive and industrial applications.
-                </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>EXPLORE PRODUCTS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
-                    </div>
-                </div>
-              </div>
-            </button>
-
-            {/* Fuel Stations Card */}
-            <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('fuel-stations');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
-                <img
-                  src={normalizeImageUrl('/images/sahni verticals/fuel.png')}
-                  alt="Fuel Stations"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent && !parent.querySelector('.fuel-fallback')) {
-                      const fallback = document.createElement('div');
-                          fallback.className = 'fuel-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'FUEL STATIONS';
-                      parent.appendChild(fallback);
+                {/* HP Lubricants Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      sessionStorage.setItem('sahni_autoSelectHP', 'true');
+                      setCurrentPage('products');
                     }
                   }}
-                />
-                </div>
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Fuel Stations</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                  Network of modern fuel stations providing quality fuel, 24/7 service, and convenient payment options across Andhra Pradesh and Telangana.
-                </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>FIND STATIONS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
+                      <img
+                        src={normalizeImageUrl('/images/sahni verticals/HP_SULLI5.png')}
+                        alt="HP Lubricants"
+                        className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.hp-logo-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'hp-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-xl sm:text-2xl font-bold';
+                            fallback.textContent = 'HP LUBRICANTS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
                     </div>
-                </div>
-              </div>
-            </button>
-
-              {/* Tata Genuine Parts Card */}
-            <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('institutional-sales');
-                }
-              }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
-                <img
-                  src={normalizeImageUrl('/images/3075092_d9300.webp')}
-                  alt="Tata Genuine Parts"
-                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.tata-parts-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'tata-parts-fallback w-full h-full flex items-center justify-center text-blue-600 text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'TATA GENUINE PARTS';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-                  </div>
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Tata Genuine Parts</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                  Authentic spare parts and components for Tata Motors vehicles, ensuring optimal performance, reliability, and longevity for your commercial vehicles.
-                </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>EXPLORE SPARE PARTS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-red-600 mb-2">HP Lubricants</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        India's No. 1 Lubricants Marketer, offering premium quality engine oils and lubricants for automotive and industrial applications.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE PRODUCTS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
                     </div>
-              </div>
-              </div>
-            </button>
-
-              {/* Tata Motors Card */}
-              <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-                onClick={() => {
-                  if (setCurrentPage) {
-                    sessionStorage.setItem('sahni_selectedBrand', 'tata');
-                    setCurrentPage('vehicles');
-                  }
-                }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
-                    <img
-                      src={normalizeImageUrl('/images/new-logo.png')}
-                      alt="Tata Motors"
-                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.tata-logo-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'tata-logo-fallback w-full h-full flex items-center justify-center text-blue-600 text-xl sm:text-2xl font-bold';
-                          fallback.textContent = 'TATA MOTORS';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
                   </div>
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Tata Motors</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                      India's leading manufacturer of commercial vehicles, setting industry benchmarks in performance, reliability, and innovation.
-                    </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>EXPLORE VEHICLES</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
-                </div>
-                  </div>
-                </div>
-              </button>
+                </button>
 
-              {/* TAFE Card */}
-              <button
-                className="flex-shrink-0 group cursor-pointer text-left"
-                onClick={() => {
-                  if (setCurrentPage) {
-                    setCurrentPage('massey-products');
-                  }
-                }}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                  <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
-                    <img
-                      src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
-                      alt="TAFE"
-                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent && !parent.querySelector('.tafe-logo-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'tafe-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-lg sm:text-xl font-bold';
-                          fallback.textContent = 'TAFE';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-                </div>
-                  <div className="bg-white p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">TAFE</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                      Premium tractors and agricultural machinery designed for superior performance, durability, and efficiency in farming operations.
-                    </p>
-                    <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                      <span>EXPLORE TRACTORS</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                {/* Fuel Stations Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      setCurrentPage('fuel-stations');
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
+                      <img
+                        src={normalizeImageUrl('/images/sahni verticals/fuel.png')}
+                        alt="Fuel Stations"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.fuel-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'fuel-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
+                            fallback.textContent = 'FUEL STATIONS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
                     </div>
-              </div>
-            </div>
-            </button>
-
-            {/* Auto Components Card */}
-            <button
-              className="flex-shrink-0 group cursor-pointer text-left"
-              onClick={() => {
-                // Scroll to aftermarket section
-                const aftermarketSection = document.getElementById('aftermarket');
-                if (aftermarketSection) {
-                  aftermarketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
-              <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
-                {/* Top Section - Image */}
-                <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
-                  <img
-                    src={normalizeImageUrl('/images/AUTO.jpeg')}
-                    alt="Auto Components"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const parent = target.parentElement;
-                      if (parent && !parent.querySelector('.auto-components-fallback')) {
-                        const fallback = document.createElement('div');
-                        fallback.className = 'auto-components-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
-                        fallback.textContent = 'AUTO COMPONENTS';
-                        parent.appendChild(fallback);
-                      }
-                    }}
-                  />
-                </div>
-                {/* Bottom Section - Text */}
-                <div className="bg-white p-4 sm:p-5">
-                  <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Auto Components</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
-                    We are proud partners of world-renowned automotive component manufacturers, supplying genuine parts and accessories to the aftermarket.
-                  </p>
-                  <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
-                    <span>EXPLORE COMPONENTS</span>
-                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Fuel Stations</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        Network of modern fuel stations providing quality fuel, 24/7 service, and convenient payment options across Andhra Pradesh and Telangana.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>FIND STATIONS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </button>
+                </button>
+
+                {/* Tata Genuine Parts Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      setCurrentPage('institutional-sales');
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
+                      <img
+                        src={normalizeImageUrl('/images/3075092_d9300.webp')}
+                        alt="Tata Genuine Parts"
+                        className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.tata-parts-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'tata-parts-fallback w-full h-full flex items-center justify-center text-blue-600 text-lg sm:text-xl font-bold';
+                            fallback.textContent = 'TATA GENUINE PARTS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Tata Genuine Parts</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        Authentic spare parts and components for Tata Motors vehicles, ensuring optimal performance, reliability, and longevity for your commercial vehicles.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE SPARE PARTS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* Tata Motors Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      sessionStorage.setItem('sahni_selectedBrand', 'tata');
+                      setCurrentPage('vehicles');
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
+                      <img
+                        src={normalizeImageUrl('/images/new-logo.png')}
+                        alt="Tata Motors"
+                        className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.tata-logo-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'tata-logo-fallback w-full h-full flex items-center justify-center text-blue-600 text-xl sm:text-2xl font-bold';
+                            fallback.textContent = 'TATA MOTORS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Tata Motors</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        India's leading manufacturer of commercial vehicles, setting industry benchmarks in performance, reliability, and innovation.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE VEHICLES</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* TAFE Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    if (setCurrentPage) {
+                      setCurrentPage('massey-products');
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-white flex items-center justify-center p-4 sm:p-5 relative">
+                      <img
+                        src={normalizeImageUrl('/images/TAFE_Logo.jpg')}
+                        alt="TAFE"
+                        className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.tafe-logo-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'tafe-logo-fallback w-full h-full flex items-center justify-center text-red-600 text-lg sm:text-xl font-bold';
+                            fallback.textContent = 'TAFE';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">TAFE</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        Premium tractors and agricultural machinery designed for superior performance, durability, and efficiency in farming operations.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE TRACTORS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* Auto Components Card */}
+                <button
+                  className="flex-shrink-0 group cursor-pointer text-left"
+                  onClick={() => {
+                    // Scroll to aftermarket section
+                    const aftermarketSection = document.getElementById('aftermarket');
+                    if (aftermarketSection) {
+                      aftermarketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden w-[200px] xs:w-[220px] sm:w-[240px] md:w-[260px] flex-shrink-0">
+                    {/* Top Section - Image */}
+                    <div className="h-40 xs:h-44 sm:h-48 md:h-52 bg-gray-100 overflow-hidden relative">
+                      <img
+                        src={normalizeImageUrl('/images/AUTO.jpeg')}
+                        alt="Auto Components"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent && !parent.querySelector('.auto-components-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'auto-components-fallback w-full h-full flex items-center justify-center bg-blue-600 text-white text-lg sm:text-xl font-bold';
+                            fallback.textContent = 'AUTO COMPONENTS';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
+                    {/* Bottom Section - Text */}
+                    <div className="bg-white p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-black text-gray-900 mb-2">Auto Components</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
+                        We are proud partners of world-renowned automotive component manufacturers, supplying genuine parts and accessories to the aftermarket.
+                      </p>
+                      <div className="flex items-center text-red-600 font-bold text-xs sm:text-sm group-hover:text-red-700 transition-colors uppercase tracking-wide">
+                        <span>EXPLORE COMPONENTS</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
               </div>
             </div>
           </div>
@@ -748,35 +748,50 @@ export default function Home({ setCurrentPage }: HomeProps) {
 
               <div className="space-y-6 sm:space-y-8">
                 {aboutEntries.map((entry, index) => {
-                const hasImage = entry.image && entry.image.trim() !== '';
+                  const hasImage = entry.image && entry.image.trim() !== '';
 
-                return (
-                  <div key={entry.id} className="flex justify-center scroll-reveal" style={{ animationDelay: `${index * 0.1}s` }}>
-                    <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8 max-w-4xl w-full">
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                        {entry.title}
-                      </h3>
+                  return (
+                    <div key={entry.id} className="flex justify-center scroll-reveal" style={{ animationDelay: `${index * 0.1}s` }}>
+                      <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8 max-w-4xl w-full">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                          {entry.title}
+                        </h3>
 
-                      {hasImage ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-4 sm:mb-6 items-start">
-                          <div className="w-full">
-                            <div className="w-full overflow-hidden rounded-lg shadow-md bg-gray-100">
-                              <img
-                                src={entry.image}
-                                alt={entry.title}
-                                className="w-full h-full max-h-72 object-cover block"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.style.display = 'none';
-                                  const parent = target.parentElement;
-                                  if (parent) {
-                                    parent.innerHTML = '<div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-400 rounded-lg text-sm">Image not available</div>';
-                                  }
-                                }}
-                              />
+                        {hasImage ? (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-4 sm:mb-6 items-start">
+                            <div className="w-full">
+                              <div className="w-full overflow-hidden rounded-lg shadow-md bg-gray-100">
+                                <img
+                                  src={entry.image}
+                                  alt={entry.title}
+                                  className="w-full h-full max-h-72 object-cover block"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.style.display = 'none';
+                                    const parent = target.parentElement;
+                                    if (parent) {
+                                      parent.innerHTML = '<div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-400 rounded-lg text-sm">Image not available</div>';
+                                    }
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div className="text-base sm:text-lg text-gray-700 leading-relaxed">
+                              {entry.description.split('\n').filter((p) => p.trim()).length > 1 ? (
+                                entry.description.split('\n').map((paragraph, pIndex) =>
+                                  paragraph.trim() ? (
+                                    <p key={pIndex} className="mb-3 sm:mb-4">
+                                      {paragraph.trim()}
+                                    </p>
+                                  ) : null
+                                )
+                              ) : (
+                                <p>{entry.description}</p>
+                              )}
                             </div>
                           </div>
-                          <div className="text-base sm:text-lg text-gray-700 leading-relaxed">
+                        ) : (
+                          <div className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4 sm:mb-6">
                             {entry.description.split('\n').filter((p) => p.trim()).length > 1 ? (
                               entry.description.split('\n').map((paragraph, pIndex) =>
                                 paragraph.trim() ? (
@@ -789,40 +804,25 @@ export default function Home({ setCurrentPage }: HomeProps) {
                               <p>{entry.description}</p>
                             )}
                           </div>
-                        </div>
-                      ) : (
-                        <div className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4 sm:mb-6">
-                          {entry.description.split('\n').filter((p) => p.trim()).length > 1 ? (
-                            entry.description.split('\n').map((paragraph, pIndex) =>
-                              paragraph.trim() ? (
-                                <p key={pIndex} className="mb-3 sm:mb-4">
-                                  {paragraph.trim()}
-                                </p>
-                              ) : null
-                            )
-                          ) : (
-                            <p>{entry.description}</p>
-                          )}
-                        </div>
-                      )}
+                        )}
 
-                      <button
-                        onClick={() => {
-                          if (setCurrentPage) {
-                            setCurrentPage('about');
-                          }
-                        }}
-                        className="inline-flex items-center text-red-600 font-semibold text-base sm:text-lg hover:text-red-700 transition-colors group"
-                      >
-                        LEARN MORE
-                        <span className="ml-2 group-hover:translate-x-1 transition-transform">
-                          &gt;
-                        </span>
-                      </button>
+                        <button
+                          onClick={() => {
+                            if (setCurrentPage) {
+                              setCurrentPage('about');
+                            }
+                          }}
+                          className="inline-flex items-center text-red-600 font-semibold text-base sm:text-lg hover:text-red-700 transition-colors group"
+                        >
+                          LEARN MORE
+                          <span className="ml-2 group-hover:translate-x-1 transition-transform">
+                            &gt;
+                          </span>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
               </div>
             </>
           ) : null}
@@ -1110,7 +1110,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               { name: 'SBP (SRI BHAVANI CASTINGS PVT LTD)', image: normalizeImageUrl('/images/sahni verticals/SRI-BHAVANI-CASTINGS-LTD-2.jpg') },
               { name: 'GAJRA GEARS', image: normalizeImageUrl('/images/sahni verticals/images.jpg') },
               { name: 'EMBROSS', image: normalizeImageUrl('/images/sahni verticals/2.jpg') },
-              { name: 'ZF WABCO', image: normalizeImageUrl('/images/sahni verticals/f3e5b04c-bcb1-459a-8c47-9535ae88f974.avif')},
+              { name: 'ZF WABCO', image: normalizeImageUrl('/images/sahni verticals/f3e5b04c-bcb1-459a-8c47-9535ae88f974.avif') },
               { name: 'SPICER SELECT', image: normalizeImageUrl('/images/sahni verticals/1.jpg') },
               { name: 'SVL', image: normalizeImageUrl('/images/sahni verticals/dn.jpg') },
               { name: 'RSB', image: normalizeImageUrl('/images/sahni verticals/logo-3.png') },
@@ -1158,7 +1158,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                       +91 93466 99555
                     </a>
                   </div>
-                  
+
                   {/* Addresses */}
                   <div className="mt-6 max-w-5xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -1172,7 +1172,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                           </p>
                         </div>
                       </div>
-                      
+
                       {/* Vijayawada Address */}
                       <div className="flex items-start gap-3 text-left">
                         <MapPin className="w-5 h-5 text-blue-900 mt-1 flex-shrink-0" />
@@ -1194,7 +1194,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                       const lubricantsData = verticals.find(v => v.id === 'lubricants');
                       const retailBrands = lubricantsData?.retailBrands || [];
                       const industrialBrands = lubricantsData?.industrialBrands || [];
-                      
+
                       // Combine all brands, avoiding duplicates (HP Lubricants appears in both)
                       const allBrands = [...retailBrands];
                       industrialBrands.forEach(brand => {
@@ -1203,7 +1203,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                           allBrands.push(brand);
                         }
                       });
-                      
+
                       return allBrands.map((brand, index) => (
                         <div key={index} className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                           <div className="h-32 sm:h-36 md:h-40 bg-white flex items-center justify-center p-3 sm:p-4">
@@ -1262,7 +1262,35 @@ export default function Home({ setCurrentPage }: HomeProps) {
                       </a>
                     </div>
                   )}
+
+                  {/* Addresses */}
+                  <div className="mt-6 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                      {/* Hyderabad Address */}
+                      <div className="flex items-start gap-3 text-left">
+                        <MapPin className="w-5 h-5 text-blue-900 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900 mb-1">Hyderabad</p>
+                          <p className="text-sm sm:text-base text-gray-700">
+                            Sahni Arcade, 4-10-264, PLOT NO15, BLOCK NO12, Auto Nagar, Hyderabad, Rangareddy, Telangana, 500070
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Vijayawada Address */}
+                      <div className="flex items-start gap-3 text-left">
+                        <MapPin className="w-5 h-5 text-blue-900 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900 mb-1">Vijayawada</p>
+                          <p className="text-sm sm:text-base text-gray-700">
+                            Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
 
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
                   {verticals.find(v => v.id === 'aftermarket')?.brands?.map((brand, index) => (
@@ -1304,7 +1332,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     <h2 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase">INSTITUTIONAL & GOVERNMENT SALES</h2>
                   </div>
                   <p className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 px-2">
-                    
+
                   </p>
                   <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto px-2 mb-4">
                     {verticals.find(v => v.id === 'institutional')?.description}
@@ -1322,7 +1350,35 @@ export default function Home({ setCurrentPage }: HomeProps) {
                       </a>
                     </div>
                   )}
+
+                  {/* Addresses */}
+                  <div className="mt-6 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                      {/* Hyderabad Address */}
+                      <div className="flex items-start gap-3 text-left">
+                        <MapPin className="w-5 h-5 text-blue-900 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900 mb-1">Hyderabad</p>
+                          <p className="text-sm sm:text-base text-gray-700">
+                            Sahni Arcade, 4-10-264, PLOT NO15, BLOCK NO12, Auto Nagar, Hyderabad, Rangareddy, Telangana, 500070
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Vijayawada Address */}
+                      <div className="flex items-start gap-3 text-left">
+                        <MapPin className="w-5 h-5 text-blue-900 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900 mb-1">Vijayawada</p>
+                          <p className="text-sm sm:text-base text-gray-700">
+                            Sahni Complex, 2nd Cross Rd, Auto Nagar, Vijayawada, Andhra Pradesh 520007
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                   {verticals.find(v => v.id === 'institutional')?.clients?.map((client, index) => (
@@ -1348,8 +1404,8 @@ export default function Home({ setCurrentPage }: HomeProps) {
               // { number: '60+', label: 'Years Experience', delay: '0s' },
               // { number: '300+', label: 'Skilled Professionals', delay: '0.2s' },
             ].map((stat, index) => (
-                <div
-                  key={index}
+              <div
+                key={index}
                 ref={(el) => (scrollRevealRefs.current[18 + index] = el)}
                 className="scroll-reveal"
               >
@@ -1358,9 +1414,9 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     {stat.number}
                   </div>
                   <div className="text-base sm:text-lg md:text-xl font-semibold text-gray-300 uppercase tracking-wide">{stat.label}</div>
-                  </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -1382,12 +1438,12 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   We are your trusted single-source vehicle customization center. Book your appointment today!
                 </p>
               </div>
-              
-              <form 
+
+              <form
                 className="space-y-4 sm:space-y-5"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  
+
                   // Format message for WhatsApp
                   const message = `*BOOK AN APPOINTMENT REQUEST*\n\n` +
                     `*Name:* ${appointmentForm.name}\n` +
@@ -1395,16 +1451,16 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     (appointmentForm.phone ? `*Contact:* ${appointmentForm.phone}\n` : '') +
                     `*Requirement:*\n${appointmentForm.requirement}\n\n` +
                     `_This message was sent from the Sahni Group website._`;
-                  
+
                   // Encode message for URL
                   const encodedMessage = encodeURIComponent(message);
-                  
+
                   // WhatsApp number: +919281029456
                   const whatsappUrl = `https://wa.me/919281029456?text=${encodedMessage}`;
-                  
+
                   // Open WhatsApp in new tab
                   window.open(whatsappUrl, '_blank');
-                  
+
                   // Reset form
                   setAppointmentForm({
                     name: '',
@@ -1431,7 +1487,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label htmlFor="appointment-email" className="block text-sm font-semibold text-gray-900 mb-2">
                     Email *
@@ -1449,7 +1505,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label htmlFor="appointment-phone" className="block text-sm font-semibold text-gray-900 mb-2">
                     Contact Number
@@ -1466,7 +1522,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label htmlFor="appointment-requirement" className="block text-sm font-semibold text-gray-900 mb-2">
                     Share your requirement with us *
@@ -1484,7 +1540,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                     ></textarea>
                   </div>
                 </div>
-                
+
                 <button
                   type="submit"
                   className="w-full bg-red-600 text-white py-3.5 sm:py-4 px-6 sm:px-8 rounded-lg font-bold text-base sm:text-lg hover:bg-red-700 active:bg-red-800 transition-colors shadow-lg hover:shadow-xl flex items-center justify-center group min-h-[52px] touch-manipulation"
@@ -1494,7 +1550,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 </button>
               </form>
             </div>
-            
+
             {/* Right Side - Contact Information */}
             <div className="flex flex-col justify-center space-y-4 sm:space-y-6">
               {/* Address Card */}
@@ -1516,7 +1572,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   Andhra Pradesh 520007, India
                 </a>
               </div>
-              
+
               {/* Contact Card */}
               <div className="bg-gray-50 rounded-xl p-4 sm:p-6 md:p-8 hover:shadow-lg transition-shadow duration-300 border-l-4 border-blue-600">
                 <div className="flex items-center mb-3 sm:mb-4">
@@ -1542,7 +1598,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
                   </a>
                 </div>
               </div>
-              
+
               {/* Hours Card */}
               <div className="bg-gray-50 rounded-xl p-4 sm:p-6 md:p-8 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-600">
                 <div className="flex items-center mb-3 sm:mb-4">
